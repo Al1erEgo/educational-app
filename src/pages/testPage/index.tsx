@@ -4,6 +4,7 @@ import { SuperCheckbox } from '../../components/c3-SuperCheckbox/SuperCheckbox'
 import { SuperEditableSpan } from '../../components/c4-SuperEditableSpan/SuperEditableSpan'
 import { SuperSelect } from '../../components/c5-SuperSelect/SuperSelect'
 import { SuperRadio } from '../../components/c6-SuperRadio/SuperRadio'
+import { SuperDebouncedInput } from '../../components/c8-SuperDebouncedInput/SuperDebouncedInput'
 
 export const TestPage = () => {
   return (
@@ -14,6 +15,8 @@ export const TestPage = () => {
       <SuperEditableSpan />
       <SuperSelect />
       <SuperRadio />
+      <SuperDebouncedInput />
+      {/*<SuperSort />*/}
     </div>
   )
 }
