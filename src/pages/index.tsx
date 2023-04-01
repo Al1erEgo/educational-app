@@ -15,7 +15,7 @@ export const Pages = () => {
       <Route path={`${MAIN_PATH.Main}`} element={<MainPage />} />
       <Route path={`${MAIN_PATH.Auth}/*`} element={<Auth />} />
       <Route path={`${MAIN_PATH.Cards}`} element={<Cards />} />
-      <Route path={`${MAIN_PATH.Other}`} element={<Error404 />} />
+      <Route path={`${MAIN_PATH.Error}`} element={<Error404 />} />
     </Routes>
   )
 }
