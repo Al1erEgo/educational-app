@@ -1,5 +1,4 @@
 import './App.css'
-
 import { Pages } from '../pages'
 
 function App() {

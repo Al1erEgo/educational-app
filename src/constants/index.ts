@@ -1,1 +1,1 @@
-export { PATH } from './path'
+export { MAIN_PATH } from './path'

@@ -1,10 +1,9 @@
 export enum AUTH_PATH {
   Root = '/',
-  Auth = '/auth',
-  Registration = '/registration',
   Profile = '/profile',
-  SingUp = '/sing-up',
-  SingIn = '/sing-in',
+  SignUp = '/sign-up',
+  SignIn = '/sign-in',
   ResetPassword = '/reset-password',
   NewPassword = '/new-password',
+  Error = '*',
 }

@@ -1,4 +1,4 @@
-export enum PATH {
+export enum MAIN_PATH {
   Root = '/',
   Auth = '/auth',
   Cards = '/cards',
