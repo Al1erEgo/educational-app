@@ -75,7 +75,7 @@ export const {
 type RegisterRequestType = {
   email: string
   password: string
-  rememberMe: boolean
+  confirmPassword: string
 }
 
 type RegisterResponseType = {
