@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 
 import { Navigate, Route, Routes, useResolvedPath } from 'react-router-dom'
 
@@ -13,7 +13,7 @@ import { SignUp } from './signUp'
 
 export const Auth = () => {
   const path = useResolvedPath('')
-  const AUTH_DEFAULT_PAGE = <Navigate to={`${path.pathname}${AUTH_PATH.SignIn}`} />
+  const AUTH_DEFAULT_PAGE = <Navigate to={`${path.pathname}${AUTH_PATH.SignUp}`} />
 
   return (
     <Routes>
