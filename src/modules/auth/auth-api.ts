@@ -83,7 +83,7 @@ export const {
 type RegisterRequestType = {
   email: string
   password: string
-  confirmPassword: string
+  confirm: string
 }
 
 type RegisterResponseType = {

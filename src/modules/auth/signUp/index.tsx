@@ -10,13 +10,21 @@ import { useRegisterMutation } from '../auth-api'
 type SignUpFormInputs = {
   email: string
   password: string
-  confirmPassword: string
+  confirm: string
+  error?: string
 }
 
 const schema = yup
   .object({
     email: yup.string().email().required(),
     password: yup.string().min(6).required(),
+    confirm: yup
+      .string()
+      .min(6)
+      .required()
+      .test('passwords-match', 'Passwords must match', function (value) {
+        return this.parent.password === value
+      }),
   })
   .required()
 
@@ -24,77 +32,81 @@ export const SignUp = () => {
   const {
     handleSubmit,
     control,
+    setError,
     formState: { errors },
   } = useForm<SignUpFormInputs>({ resolver: yupResolver(schema) })
-  const [registerUser, { isLoading, isError, error, data }] = useRegisterMutation()
+  const [registerUser, { isLoading, isError }] = useRegisterMutation()
 
   const onSubmit = async (data: SignUpFormInputs) => {
     try {
       await registerUser(data).unwrap()
     } catch (e: any) {
-      console.log('e', e.data)
+      setError('error', {
+        message: e.data.error,
+      })
     }
   }
 
-  console.log('error', error)
-
   return (
-    <Card
-    /* style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
-        maxWidth: '26rem',
-        margin: '0 auto',
-      }}*/
-    >
+    <Card>
       <StyledTitle>Sign Up</StyledTitle>
 
       <Form onFinish={handleSubmit(onSubmit)}>
         <Form.Item name="email">
-          <Controller
-            name="email"
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => <Input {...field} placeholder="Email" />}
-          />
+          <>
+            <Controller
+              name="email"
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  style={errors.email ? { borderColor: 'red' } : {}}
+                  placeholder="Email"
+                />
+              )}
+            />
+            {errors.email && <StyledSpan>{errors.email.message}</StyledSpan>}
+          </>
         </Form.Item>
-        {errors.email && <p style={{ color: 'red' }}>Email is required</p>}
 
         <Form.Item name="password">
-          <Controller
-            name="password"
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => <Input.Password {...field} placeholder="Password" />}
-          />
+          <>
+            <Controller
+              name="password"
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <Input.Password
+                  {...field}
+                  style={errors.password ? { borderColor: 'red' } : {}}
+                  placeholder="Password"
+                />
+              )}
+            />
+            {errors.password && <StyledSpan>{errors.password.message}</StyledSpan>}
+          </>
         </Form.Item>
-        {errors.password && <p style={{ color: 'red' }}>Password is required</p>}
 
-        <Form.Item name="confirmPassword">
-          <Controller
-            name="confirmPassword"
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => <Input.Password {...field} placeholder="Confirm Password" />}
-          />
+        <Form.Item name="confirm password">
+          <>
+            <Controller
+              name="confirm"
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <Input.Password
+                  {...field}
+                  style={errors.confirm ? { borderColor: 'red' } : {}}
+                  placeholder="Confirm password"
+                />
+              )}
+            />
+            {errors.confirm && <StyledSpan>{errors.confirm.message}</StyledSpan>}
+          </>
         </Form.Item>
-        {errors.confirmPassword && <p style={{ color: 'red' }}>This field is required</p>}
 
-        {/*  {isError && <span>An error occurred: {error?.message}</span>}*/}
-
-        {/*    {isError && (
-              <p style={{ color: 'red' }}>
-                Invalid email or password
-                   {error.status !== 400 ? (error as FetchBaseQueryError).message : error?.data}
-              </p>
-            )}*/}
-
-        {/* {isError && (
-              <p style={{ color: 'red' }}>{error?.data?.error?.message || 'Unknown error'}</p>
-            )}*/}
+        {isError && <StyledSpan>{errors.error?.message}</StyledSpan>}
 
         <Form.Item>
           <StyledButton type="primary" htmlType="submit" loading={isLoading}>
@@ -102,8 +114,10 @@ export const SignUp = () => {
           </StyledButton>
         </Form.Item>
       </Form>
-      <p>Already have an account?</p>
-      <NavLink to="/auth/sign-in">Sign In</NavLink>
+
+      <StyledP>Already have an account?</StyledP>
+
+      <StyledNavLink to="/auth/sign-in">Sign In</StyledNavLink>
     </Card>
   )
 }
@@ -117,6 +131,10 @@ const StyledButton = styled(Button)`
   background-color: #366eff;
   color: white;
   border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  margin-top: 1rem;
 
   &:hover {
     background-color: lightblue;
@@ -128,6 +146,31 @@ const StyledTitle = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 1.5rem;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 1rem;
+`
+
+const StyledSpan = styled.span`
+  color: red;
+`
+
+const StyledP = styled.p`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 0.7rem;
+  line-height: 24px;
+`
+
+const StyledNavLink = styled(NavLink)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  line-height: 24px;
 `
