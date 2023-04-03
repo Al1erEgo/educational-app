@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Button, Card, Form, Input, Layout, Row } from 'antd'
+import { Button, Card, Form, Input } from 'antd'
 import { Controller, useForm } from 'react-hook-form'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
@@ -39,70 +39,62 @@ export const SignUp = () => {
   console.log('error', error)
 
   return (
-    <Layout>
-      <Row
-        justify="center"
-        align="middle"
-        style={{ height: 'calc(100vh - 16px)', justifyContent: 'center' }}
-      >
-        <Card>
-          <h1>Sign Up</h1>
-          <Form onFinish={handleSubmit(onSubmit)}>
-            <Form.Item label="email" name="email">
-              <Controller
-                name="email"
-                control={control}
-                rules={{ required: true }}
-                render={({ field }) => <Input {...field} />}
-              />
-            </Form.Item>
+    <Card>
+      <h1>Sign Up</h1>
+      <Form onFinish={handleSubmit(onSubmit)}>
+        <Form.Item label="email" name="email">
+          <Controller
+            name="email"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => <Input {...field} />}
+          />
+        </Form.Item>
 
-            {errors.email && <p style={{ color: 'red' }}>This field is required</p>}
+        {errors.email && <p style={{ color: 'red' }}>This field is required</p>}
 
-            <Form.Item label="password" name="password">
-              <Controller
-                name="password"
-                control={control}
-                rules={{ required: true }}
-                render={({ field }) => <Input.Password {...field} />}
-              />
-            </Form.Item>
-            {errors.password && <p style={{ color: 'red' }}>This field is required</p>}
+        <Form.Item label="password" name="password">
+          <Controller
+            name="password"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => <Input.Password {...field} />}
+          />
+        </Form.Item>
+        {errors.password && <p style={{ color: 'red' }}>This field is required</p>}
 
-            <Form.Item label="confirm password" name="confirmPassword">
-              <Controller
-                name="confirmPassword"
-                control={control}
-                rules={{ required: true }}
-                render={({ field }) => <Input.Password {...field} />}
-              />
-            </Form.Item>
-            {errors.confirmPassword && <p style={{ color: 'red' }}>This field is required</p>}
+        <Form.Item label="confirm password" name="confirmPassword">
+          <Controller
+            name="confirmPassword"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => <Input.Password {...field} />}
+          />
+        </Form.Item>
+        {errors.confirmPassword && <p style={{ color: 'red' }}>This field is required</p>}
 
-            {/*  {isError && <span>An error occurred: {error?.message}</span>}*/}
+        {/*  {isError && <span>An error occurred: {error?.message}</span>}*/}
 
-            {/*    {isError && (
+        {/*    {isError && (
               <p style={{ color: 'red' }}>
                 Invalid email or password
                    {error.status !== 400 ? (error as FetchBaseQueryError).message : error?.data}
               </p>
             )}*/}
 
-            {/* {isError && (
+        {/* {isError && (
               <p style={{ color: 'red' }}>{error?.data?.error?.message || 'Unknown error'}</p>
             )}*/}
 
-            <Form.Item>
-              <StyledButton type="primary" htmlType="submit" loading={isLoading}>
-                Sign Up
-              </StyledButton>
-            </Form.Item>
-          </Form>
-          <p>Already have an account?</p>
-          <NavLink to="/auth/sign-in">Sign In</NavLink>
-        </Card>
-      </Row>
-    </Layout>
+        <Form.Item>
+          <StyledButton type="primary" htmlType="submit" loading={isLoading}>
+            Sign Up
+          </StyledButton>
+        </Form.Item>
+      </Form>
+      <p>Already have an account?</p>
+      <NavLink to="/auth/sign-in">Sign In</NavLink>
+    </Card>
   )
 }
 
