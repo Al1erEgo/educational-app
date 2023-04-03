@@ -39,36 +39,46 @@ export const SignUp = () => {
   console.log('error', error)
 
   return (
-    <Card>
-      <h1>Sign Up</h1>
+    <Card
+    /* style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        maxWidth: '26rem',
+        margin: '0 auto',
+      }}*/
+    >
+      <StyledTitle>Sign Up</StyledTitle>
+
       <Form onFinish={handleSubmit(onSubmit)}>
-        <Form.Item label="email" name="email">
+        <Form.Item name="email">
           <Controller
             name="email"
             control={control}
             rules={{ required: true }}
-            render={({ field }) => <Input {...field} />}
+            render={({ field }) => <Input {...field} placeholder="Email" />}
           />
         </Form.Item>
+        {errors.email && <p style={{ color: 'red' }}>Email is required</p>}
 
-        {errors.email && <p style={{ color: 'red' }}>This field is required</p>}
-
-        <Form.Item label="password" name="password">
+        <Form.Item name="password">
           <Controller
             name="password"
             control={control}
             rules={{ required: true }}
-            render={({ field }) => <Input.Password {...field} />}
+            render={({ field }) => <Input.Password {...field} placeholder="Password" />}
           />
         </Form.Item>
-        {errors.password && <p style={{ color: 'red' }}>This field is required</p>}
+        {errors.password && <p style={{ color: 'red' }}>Password is required</p>}
 
-        <Form.Item label="confirm password" name="confirmPassword">
+        <Form.Item name="confirmPassword">
           <Controller
             name="confirmPassword"
             control={control}
             rules={{ required: true }}
-            render={({ field }) => <Input.Password {...field} />}
+            render={({ field }) => <Input.Password {...field} placeholder="Confirm Password" />}
           />
         </Form.Item>
         {errors.confirmPassword && <p style={{ color: 'red' }}>This field is required</p>}
@@ -99,12 +109,25 @@ export const SignUp = () => {
 }
 
 const StyledButton = styled(Button)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  height: 40px;
-  background-color: blue;
+  height: 36px;
+  background-color: #366eff;
   color: white;
+  border-radius: 0.5rem;
 
   &:hover {
     background-color: lightblue;
   }
+`
+const StyledTitle = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
 `

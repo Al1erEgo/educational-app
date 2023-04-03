@@ -11,6 +11,7 @@ import { ResetPassword } from './resetPassword'
 import { SignIn } from './signIn'
 import { SignUp } from './signUp'
 import { AuthContainer } from './styles'
+import { FormWrapper } from './styles/auth-style'
 
 export const Auth = () => {
   const path = useResolvedPath('')
@@ -18,15 +19,17 @@ export const Auth = () => {
 
   return (
     <AuthContainer>
-      <Routes>
-        <Route path={`${AUTH_PATH.Root}`} element={AUTH_DEFAULT_PAGE} />
-        <Route path={`${AUTH_PATH.Profile}`} element={<Profile />} />
-        <Route path={`${AUTH_PATH.SignIn}`} element={<SignIn />} />
-        <Route path={`${AUTH_PATH.SignUp}`} element={<SignUp />} />
-        <Route path={`${AUTH_PATH.NewPassword}`} element={<NewPassword />} />
-        <Route path={`${AUTH_PATH.ResetPassword}`} element={<ResetPassword />} />
-        <Route path={AUTH_PATH.Error} element={<Error404 />} />
-      </Routes>
+      <FormWrapper>
+        <Routes>
+          <Route path={`${AUTH_PATH.Root}`} element={AUTH_DEFAULT_PAGE} />
+          <Route path={`${AUTH_PATH.Profile}`} element={<Profile />} />
+          <Route path={`${AUTH_PATH.SignIn}`} element={<SignIn />} />
+          <Route path={`${AUTH_PATH.SignUp}`} element={<SignUp />} />
+          <Route path={`${AUTH_PATH.NewPassword}`} element={<NewPassword />} />
+          <Route path={`${AUTH_PATH.ResetPassword}`} element={<ResetPassword />} />
+          <Route path={AUTH_PATH.Error} element={<Error404 />} />
+        </Routes>
+      </FormWrapper>
     </AuthContainer>
   )
 }
