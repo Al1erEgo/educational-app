@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const authApi = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_BASE_URL,
+    baseUrl: 'https://neko-back.herokuapp.com/2.0/', //import.meta.env.VITE_BASE_URL,
     credentials: 'include',
   }),
 
@@ -26,7 +26,11 @@ export const authApi = createApi({
     }),
 
     authMe: builder.query<AuthMeResponseType, AuthMeRequestType>({
-      query: () => '/me',
+      query: (requestData: LoginRequestType) => ({
+        url: 'auth/me',
+        method: 'POST',
+        body: requestData,
+      }),
     }),
 
     authMeUpdate: builder.mutation<UpdateResponseType, UpdateRequestType>({
@@ -48,7 +52,11 @@ export const authApi = createApi({
       query: (requestData: PasswordResetRequestType) => ({
         url: 'auth/forgot',
         method: 'POST',
-        body: requestData,
+        body: {
+          email: requestData.email,
+          message:
+            'password recovery link: <a href="http://localhost:5173/#/set-new-password/$token$">link</a>',
+        },
       }),
     }),
 
@@ -166,7 +174,7 @@ type LogOutResponseType = {
 
 type PasswordResetRequestType = {
   email: string
-  message: string
+  /*message: string*/
 }
 type PasswordResetResponseType = {
   info: string
@@ -183,3 +191,5 @@ type SetNewPasswordRequestType = {
 type SetNewPasswordResponseType = {
   info: string
 }
+
+//применить утилитные типы omit, pick partial
