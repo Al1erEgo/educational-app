@@ -12,5 +12,5 @@ export const FormWrapper = styled.div`
   max-width: 26rem;
   margin: 0 auto;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(109, 109, 109, 0.3);
 `
