@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import * as yup from 'yup'
 
 import { MAIN_PATH } from '../../../constants'
+import { isErrorWithMessage, isFetchBaseQueryError } from '../../../utils'
 import { useRegisterMutation } from '../auth-api'
 import { AUTH_PATH } from '../constants'
 
@@ -15,6 +16,17 @@ type SignUpFormInputs = {
   'confirm password': string
   error?: string
 }
+
+/*
+type SignUpFormError = {
+  data: {
+    email: string
+    error: string
+    in: string
+  }
+  status: number
+}
+*/
 
 const schema = yup
   .object({
@@ -44,11 +56,19 @@ export const SignUp = () => {
     try {
       await registerUser(data).unwrap()
       navigate(`${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`)
-    } catch (e: any) {
-      if (e.data.error) {
-        setError('error', {
-          message: e.data.error,
-        })
+    } catch (e: unknown) {
+      if (isFetchBaseQueryError(e)) {
+        // you can access all properties of `FetchBaseQueryError` here
+        const errMsg = 'error' in e ? e.error : JSON.stringify(e.data)
+
+        console.log('errMsg', errMsg)
+        console.log('e', e)
+        console.log('e.error', e.data)
+
+        setError('error', { message: errMsg })
+      } else if (isErrorWithMessage(e)) {
+        // you can access a string 'message' property here
+        setError('error', { message: e.message })
       }
     }
   }
