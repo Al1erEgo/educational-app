@@ -1,11 +1,13 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Button, Card, Form, Input } from 'antd'
 import { Controller, useForm } from 'react-hook-form'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import * as yup from 'yup'
 
+import { MAIN_PATH } from '../../../constants'
 import { useRegisterMutation } from '../auth-api'
+import { AUTH_PATH } from '../constants'
 
 type SignUpFormInputs = {
   email: string
@@ -36,10 +38,12 @@ export const SignUp = () => {
     formState: { errors },
   } = useForm<SignUpFormInputs>({ resolver: yupResolver(schema) })
   const [registerUser, { isLoading, isError }] = useRegisterMutation()
+  const navigate = useNavigate()
 
   const onSubmit = async (data: SignUpFormInputs) => {
     try {
       await registerUser(data).unwrap()
+      navigate(`${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`)
     } catch (e: any) {
       if (e.data.error) {
         setError('error', {
@@ -117,7 +121,7 @@ export const SignUp = () => {
 
       <StyledP>Already have an account?</StyledP>
 
-      <StyledNavLink to="/auth/sign-in">Sign In</StyledNavLink>
+      <StyledNavLink to={`${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`}>Sign In</StyledNavLink>
     </Card>
   )
 }
