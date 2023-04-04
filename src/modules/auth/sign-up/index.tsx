@@ -17,17 +17,6 @@ type SignUpFormInputs = {
   error?: string
 }
 
-/*
-type SignUpFormError = {
-  data: {
-    email: string
-    error: string
-    in: string
-  }
-  status: number
-}
-*/
-
 const schema = yup
   .object({
     email: yup.string().email().required(),
@@ -58,7 +47,7 @@ export const SignUp = () => {
       navigate(`${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`)
     } catch (e: unknown) {
       if (isFetchBaseQueryError(e)) {
-        console.log(e.data.error)
+        setError('error', { message: e.data.error })
       }
     }
   }
@@ -75,7 +64,12 @@ export const SignUp = () => {
               control={control}
               rules={{ required: true }}
               render={({ field }) => (
-                <Input {...field} status={errors.email ? 'error' : ''} placeholder="Email" />
+                <Input
+                  {...field}
+                  status={errors.email ? 'error' : ''}
+                  placeholder="Email"
+                  autoComplete="email"
+                />
               )}
             />
             {errors.email && <StyledSpan>{errors.email.message}</StyledSpan>}
@@ -93,6 +87,7 @@ export const SignUp = () => {
                   {...field}
                   status={errors.password ? 'error' : ''}
                   placeholder="Password"
+                  autoComplete="new-password"
                 />
               )}
             />
@@ -111,6 +106,7 @@ export const SignUp = () => {
                   {...field}
                   status={errors['confirm password'] ? 'error' : ''}
                   placeholder="Confirm password"
+                  autoComplete="new-password"
                 />
               )}
             />
