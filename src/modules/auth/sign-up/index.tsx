@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import * as yup from 'yup'
 
 import { MAIN_PATH } from '../../../constants'
-import { isErrorWithMessage, isFetchBaseQueryError } from '../../../utils'
+import { isFetchBaseQueryError } from '../../../utils'
 import { useRegisterMutation } from '../auth-api'
 import { AUTH_PATH } from '../constants'
 
@@ -58,17 +58,7 @@ export const SignUp = () => {
       navigate(`${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`)
     } catch (e: unknown) {
       if (isFetchBaseQueryError(e)) {
-        // you can access all properties of `FetchBaseQueryError` here
-        const errMsg = 'error' in e ? e.error : JSON.stringify(e.data)
-
-        console.log('errMsg', errMsg)
-        console.log('e', e)
-        console.log('e.error', e.data)
-
-        setError('error', { message: errMsg })
-      } else if (isErrorWithMessage(e)) {
-        // you can access a string 'message' property here
-        setError('error', { message: e.message })
+        console.log(e.data.error)
       }
     }
   }

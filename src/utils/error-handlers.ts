@@ -3,8 +3,8 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 /**
  * Type predicate to narrow an unknown error to `FetchBaseQueryError`
  */
-export function isFetchBaseQueryError(error: unknown): error is FetchBaseQueryError {
-  return typeof error === 'object' && error != null && 'status' in error
+export function isFetchBaseQueryError(error: unknown): error is FetchBaseQueryErrorExtended {
+  return typeof error === 'object' && error != null && 'status' in error && 'data' in error
 }
 
 /**
@@ -17,4 +17,9 @@ export function isErrorWithMessage(error: unknown): error is { message: string }
     'message' in error &&
     typeof (error as any).message === 'string'
   )
+}
+
+type FetchBaseQueryErrorExtended = FetchBaseQueryError & {
+  status: number
+  data: { error: string }
 }
