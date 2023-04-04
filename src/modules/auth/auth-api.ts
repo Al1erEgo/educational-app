@@ -1,13 +1,6 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { rootAPI } from '../../store/rootAPI'
 
-export const authApi = createApi({
-  baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_BASE_URL,
-    credentials: 'include',
-  }),
-
-  reducerPath: 'auth',
-  tagTypes: [],
+export const authApi = rootAPI.injectEndpoints({
   endpoints: builder => ({
     register: builder.mutation<RegisterResponseType, RegisterRequestType>({
       query: (requestData: RegisterRequestType) => ({
@@ -26,10 +19,9 @@ export const authApi = createApi({
     }),
 
     authMe: builder.query<AuthMeResponseType, AuthMeRequestType>({
-      query: (requestData: LoginRequestType) => ({
+      query: () => ({
         url: 'auth/me',
         method: 'POST',
-        body: requestData,
       }),
     }),
 
@@ -68,6 +60,7 @@ export const authApi = createApi({
       }),
     }),
   }),
+  overrideExisting: false,
 })
 
 export const {
@@ -125,7 +118,7 @@ type LoginResponseType = {
   error?: string
 }
 
-type AuthMeRequestType = {}
+type AuthMeRequestType = void
 type AuthMeResponseType = {
   _id: string
   email: string
