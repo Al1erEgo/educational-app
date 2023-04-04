@@ -20,7 +20,12 @@ export const Auth = () => {
   const authRoutes = [
     {
       path: AUTH_PATH.Root,
-      element: data ? defaultAuthPage : <Navigate to={`${path.pathname}${AUTH_PATH.SignIn}`} />,
+      element:
+        data === undefined ? (
+          defaultAuthPage
+        ) : (
+          <Navigate to={`${path.pathname}${AUTH_PATH.SignIn}`} />
+        ),
     },
     { path: AUTH_PATH.SignIn, element: <SignIn /> },
     { path: AUTH_PATH.SignUp, element: <SignUp /> },
