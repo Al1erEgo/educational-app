@@ -10,8 +10,7 @@ import { Profile } from './profile'
 import { ResetPassword } from './reset-password'
 import { SignIn } from './sign-in'
 import { SignUp } from './sign-up'
-import { AuthContainer } from './styles'
-import { FormWrapper } from './styles/auth-style'
+import { AuthContainer, FormWrapper } from './styles'
 
 export const Auth = () => {
   const path = useResolvedPath('')

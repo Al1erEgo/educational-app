@@ -1,1 +1,1 @@
-export { AuthContainer } from './auth-style'
+export { AuthContainer, FormWrapper, StyledTitle } from './auth-style'
