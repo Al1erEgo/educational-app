@@ -19,10 +19,9 @@ export const authApi = rootAPI.injectEndpoints({
     }),
 
     authMe: builder.query<AuthMeResponseType, AuthMeRequestType>({
-      query: (requestData: LoginRequestType) => ({
+      query: () => ({
         url: 'auth/me',
         method: 'POST',
-        body: requestData,
       }),
     }),
 
@@ -119,7 +118,7 @@ type LoginResponseType = {
   error?: string
 }
 
-type AuthMeRequestType = {}
+type AuthMeRequestType = void
 type AuthMeResponseType = {
   _id: string
   email: string
