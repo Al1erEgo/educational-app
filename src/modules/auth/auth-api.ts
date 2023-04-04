@@ -1,13 +1,6 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { rootAPI } from '../../store/rootAPI'
 
-export const authApi = createApi({
-  baseQuery: fetchBaseQuery({
-    baseUrl: 'https://neko-back.herokuapp.com/2.0/', //import.meta.env.VITE_BASE_URL,
-    credentials: 'include',
-  }),
-
-  reducerPath: 'auth',
-  tagTypes: [],
+export const authApi = rootAPI.injectEndpoints({
   endpoints: builder => ({
     register: builder.mutation<RegisterResponseType, RegisterRequestType>({
       query: (requestData: RegisterRequestType) => ({
@@ -68,6 +61,7 @@ export const authApi = createApi({
       }),
     }),
   }),
+  overrideExisting: false,
 })
 
 export const {
