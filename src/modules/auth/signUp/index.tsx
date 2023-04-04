@@ -10,7 +10,7 @@ import { useRegisterMutation } from '../auth-api'
 type SignUpFormInputs = {
   email: string
   password: string
-  confirm: string
+  'confirm password': string
   error?: string
 }
 
@@ -18,7 +18,7 @@ const schema = yup
   .object({
     email: yup.string().email().required(),
     password: yup.string().min(6).required(),
-    confirm: yup
+    'confirm password': yup
       .string()
       .min(6)
       .required()
@@ -41,9 +41,11 @@ export const SignUp = () => {
     try {
       await registerUser(data).unwrap()
     } catch (e: any) {
-      setError('error', {
-        message: e.data.error,
-      })
+      if (e.data.error) {
+        setError('error', {
+          message: e.data.error,
+        })
+      }
     }
   }
 
@@ -59,11 +61,7 @@ export const SignUp = () => {
               control={control}
               rules={{ required: true }}
               render={({ field }) => (
-                <Input
-                  {...field}
-                  style={errors.email ? { borderColor: 'red' } : {}}
-                  placeholder="Email"
-                />
+                <Input {...field} status={errors.email ? 'error' : ''} placeholder="Email" />
               )}
             />
             {errors.email && <StyledSpan>{errors.email.message}</StyledSpan>}
@@ -79,7 +77,7 @@ export const SignUp = () => {
               render={({ field }) => (
                 <Input.Password
                   {...field}
-                  style={errors.password ? { borderColor: 'red' } : {}}
+                  status={errors.password ? 'error' : ''}
                   placeholder="Password"
                 />
               )}
@@ -91,18 +89,20 @@ export const SignUp = () => {
         <Form.Item name="confirm password">
           <>
             <Controller
-              name="confirm"
+              name="confirm password"
               control={control}
               rules={{ required: true }}
               render={({ field }) => (
                 <Input.Password
                   {...field}
-                  style={errors.confirm ? { borderColor: 'red' } : {}}
+                  status={errors['confirm password'] ? 'error' : ''}
                   placeholder="Confirm password"
                 />
               )}
             />
-            {errors.confirm && <StyledSpan>{errors.confirm.message}</StyledSpan>}
+            {errors['confirm password'] && (
+              <StyledSpan>{errors['confirm password'].message}</StyledSpan>
+            )}
           </>
         </Form.Item>
 
