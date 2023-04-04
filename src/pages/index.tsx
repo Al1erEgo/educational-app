@@ -4,7 +4,7 @@ import { MAIN_PATH } from '../constants'
 import { Auth, Cards } from '../modules'
 
 import { Error404 } from './error404'
-import { MainPage } from './mainPage'
+import { MainPage } from './main-page'
 
 export const Pages = () => {
   const AUTH_PAGE = <Navigate to={`${MAIN_PATH.Auth}`} />

@@ -1,6 +1,6 @@
-import { rootAPI } from '../../store/rootAPI'
+import { rootApi } from '../../store/root-api'
 
-export const authApi = rootAPI.injectEndpoints({
+export const authApi = rootApi.injectEndpoints({
   endpoints: builder => ({
     register: builder.mutation<RegisterResponseType, RegisterRequestType>({
       query: (requestData: RegisterRequestType) => ({

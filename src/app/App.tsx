@@ -1,4 +1,4 @@
-import { Header } from '../components/c11-Header/Header'
+import { Header } from '../components/Header/Header'
 import { Pages } from '../pages'
 import { GlobalStyle } from '../styles'
 

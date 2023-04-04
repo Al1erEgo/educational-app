@@ -1,4 +1,4 @@
-import { TestPage } from '../testPage'
+import { TestPage } from '../test-page'
 
 export const MainPage = () => {
   return (
