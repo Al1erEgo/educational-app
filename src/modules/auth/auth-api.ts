@@ -23,6 +23,7 @@ export const authApi = rootApi.injectEndpoints({
         url: 'auth/me',
         method: 'POST',
       }),
+      providesTags: ['authMe'],
     }),
 
     authMeUpdate: builder.mutation<UpdateResponseType, UpdateRequestType>({
@@ -38,6 +39,7 @@ export const authApi = rootApi.injectEndpoints({
         url: 'auth/me',
         method: 'DELETE',
       }),
+      invalidatesTags: ['authMe'],
     }),
 
     requestPasswordReset: builder.mutation<PasswordResetResponseType, PasswordResetRequestType>({
