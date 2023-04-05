@@ -1,4 +1,53 @@
-import React from 'react'
+import { Navigate, Route, Routes, useResolvedPath } from 'react-router-dom'
+
+import { MAIN_PATH } from '../../constants'
+import { Error404 } from '../../pages/error404'
+
+import { useAuthMeQuery } from './auth-api'
+import { AUTH_PATH } from './constants'
+import { NewPassword } from './new-password'
+import { Profile } from './profile'
+import { ResetPassword } from './reset-password'
+import { SignIn } from './sign-in'
+import { SignUp } from './sign-up'
+import { AuthContainer } from './styles'
+
+export const Auth = () => {
+  const { data, isLoading, isError } = useAuthMeQuery()
+  const path = useResolvedPath('')
+
+  const defaultAuthPage = <Navigate to={`${path.pathname}${AUTH_PATH.SignUp}`} />
+  const authRoutes = [
+    {
+      path: AUTH_PATH.Root,
+      element:
+        data === undefined ? (
+          defaultAuthPage
+        ) : (
+          <Navigate to={`${path.pathname}${AUTH_PATH.SignIn}`} />
+        ),
+    },
+    { path: AUTH_PATH.SignIn, element: <SignIn /> },
+    { path: AUTH_PATH.SignUp, element: <SignUp /> },
+    { path: AUTH_PATH.NewPassword, element: <NewPassword /> },
+    { path: AUTH_PATH.ResetPassword, element: <ResetPassword /> },
+    { path: AUTH_PATH.Profile, element: <Profile /> },
+    { path: AUTH_PATH.Error, element: <Error404 /> },
+  ]
+
+  return (
+    <AuthContainer>
+      <Routes>
+        {authRoutes.map(route => (
+          <Route key={route.path} path={route.path} element={route.element} />
+        ))}
+        <Route path={`${MAIN_PATH.Error}`} element={<Error404 />} />
+      </Routes>
+    </AuthContainer>
+  )
+}
+
+/*import React from 'react'
 
 import { Navigate, Route, Routes, useResolvedPath } from 'react-router-dom'
 
@@ -31,4 +80,4 @@ export const Auth = () => {
       </FormWrapper>
     </AuthContainer>
   )
-}
+}*/
