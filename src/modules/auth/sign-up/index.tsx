@@ -145,10 +145,6 @@ const StyledButton = styled(Button)`
   font-weight: 500;
   line-height: 1.5;
   margin-top: 1rem;
-
-  &:hover {
-    background-color: lightblue;
-  }
 `
 const StyledTitle = styled.div`
   display: flex;

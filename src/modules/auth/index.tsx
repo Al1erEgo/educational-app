@@ -49,65 +49,6 @@ export const Auth = () => {
   )
 }
 
-/*import { Navigate, Route, Routes, useResolvedPath } from 'react-router-dom'
-
-import { MAIN_PATH } from '../../constants'
-import { Error404 } from '../../pages/error404'
-
-import { useAuthMeQuery } from './auth-api'
-import { AUTH_PATH } from './constants'
-import { NewPassword } from './new-password'
-import { Profile } from './profile'
-import { ResetPassword } from './reset-password'
-import { SignIn } from './sign-in'
-import { SignUp } from './sign-up'
-import { AuthContainer, FormWrapper } from './styles/auth-style'
-
-export const Auth = () => {
-  const { data, isLoading, isError } = useAuthMeQuery()
-  const path = useResolvedPath('')
-  const AUTH_DEFAULT_PAGE = <Navigate to={`${path.pathname}${AUTH_PATH.SignUp}`} />
-  const AUTH_SIGNIN_PAGE = <Navigate to={`${path.pathname}${AUTH_PATH.SignIn}`} />
-
-  console.log('data', data)
-
-  // Render the SignIn component if the user has a cookie
-  if (!data) {
-    return (
-      <AuthContainer>
-        <FormWrapper>
-          <Routes>
-            <Route path={`${AUTH_PATH.Root}`} element={AUTH_SIGNIN_PAGE} />
-            <Route path={`${AUTH_PATH.SignIn}`} element={<SignIn />} />
-            <Route path={`${AUTH_PATH.SignUp}`} element={<SignUp />} />
-            <Route path={`${AUTH_PATH.NewPassword}`} element={<NewPassword />} />
-            <Route path={`${AUTH_PATH.ResetPassword}`} element={<ResetPassword />} />
-            <Route path={`${AUTH_PATH.Profile}`} element={<Profile />} />
-            <Route path={AUTH_PATH.Error} element={<Error404 />} />
-          </Routes>
-        </FormWrapper>
-      </AuthContainer>
-    )
-  }
-
-  // Render the Auth component followed by the SignUp component if the user does not have a cookie
-  return (
-    <AuthContainer>
-      <FormWrapper>
-        <Routes>
-          <Route path={`${AUTH_PATH.Root}`} element={AUTH_DEFAULT_PAGE} />
-          <Route path={`${AUTH_PATH.SignUp}`} element={<SignUp />} />
-          <Route path={`${AUTH_PATH.SignIn}`} element={<SignIn />} />
-          <Route path={`${AUTH_PATH.NewPassword}`} element={<NewPassword />} />
-          <Route path={`${AUTH_PATH.ResetPassword}`} element={<ResetPassword />} />
-          <Route path={`${AUTH_PATH.Profile}`} element={<Profile />} />
-          <Route path={`${MAIN_PATH.Error}`} element={<Error404 />} />
-        </Routes>
-      </FormWrapper>
-    </AuthContainer>
-  )
-}*/
-
 /*import React from 'react'
 
 import { Navigate, Route, Routes, useResolvedPath } from 'react-router-dom'
