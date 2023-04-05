@@ -146,6 +146,7 @@ const StyledButton = styled(Button)`
   line-height: 1.5;
   margin-top: 1rem;
 `
+
 const StyledTitle = styled.div`
   display: flex;
   flex-direction: column;

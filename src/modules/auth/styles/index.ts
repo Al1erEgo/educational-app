@@ -1,1 +1,1 @@
-export { AuthContainer } from './auth-style'
+export * from './auth-styles'
