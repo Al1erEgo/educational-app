@@ -1,98 +1,83 @@
-import { Button, Card, Form, Input, Layout, Row } from 'antd'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { Button, Form, Input, Typography } from 'antd'
 import { Controller, useForm } from 'react-hook-form'
-import { NavLink } from 'react-router-dom'
-import styled from 'styled-components'
+import * as yup from 'yup'
 
+import { MAIN_PATH } from '../../../constants'
 import { useRequestPasswordResetMutation } from '../auth-api'
+import { AUTH_PATH } from '../constants'
+import { cardHeadStyle, StyledCard, StyledNavLink, StyledP, StyledText } from '../styles'
+
+export const { Text } = Typography
 
 type ResetPasswordFormInputs = {
   email: string
-  message: string
+  error?: string
 }
+
+const schema = yup
+  .object({
+    email: yup.string().email().required(),
+  })
+  .required()
 
 export const ResetPassword = () => {
   const {
     handleSubmit,
     control,
+    setError,
     formState: { errors },
-  } = useForm<ResetPasswordFormInputs>()
-  const [
-    resetPassword,
-    {
-      isLoading,
-      isError,
-      error,
-      requestId,
-      endpointName,
-      data,
-      reset,
-      fulfilledTimeStamp,
-      isSuccess,
-      isUninitialized,
-      originalArgs,
-      status,
-    },
-  ] = useRequestPasswordResetMutation()
+  } = useForm<ResetPasswordFormInputs>({ resolver: yupResolver(schema) })
+  const [resetPassword, { isLoading, isError }] = useRequestPasswordResetMutation()
 
   const onSubmit = async (data: ResetPasswordFormInputs) => {
-    await resetPassword(data).unwrap()
-    /*    {!isError && <Navigate to="/auth/check-email" />}*/
+    try {
+      await resetPassword(data).unwrap()
+    } catch (e: any) {
+      if (e.data.error) {
+        setError('error', {
+          message: e.data.error,
+        })
+      }
+    }
   }
-
-  console.log('isLoading', isLoading)
-  console.log('isError', isError)
-  console.log('error', error)
-  console.log('error', error)
-  console.log('requestId', requestId)
-  console.log('endpointName', endpointName)
-  console.log('reset', reset)
-  console.log('fulfilledTimeStamp', fulfilledTimeStamp)
-  console.log('isSuccess', isSuccess)
-  console.log('isUninitialized', isUninitialized)
-  console.log('originalArgs', originalArgs)
-  console.log('status', status)
-  console.log('data', data)
 
   return (
-    <Layout>
-      <Row
-        justify="center"
-        align="middle"
-        style={{ height: 'calc(100vh - 16px)', justifyContent: 'center' }}
-      >
-        <Card>
-          <h1>Forgot your password?</h1>
-          <Form onFinish={handleSubmit(onSubmit)}>
-            <Form.Item label="email" name="email">
-              <Controller
-                name="email"
-                control={control}
-                render={({ field }) => <Input {...field} />}
-              />
-            </Form.Item>
-            {errors.email && <p style={{ color: 'red' }}>This field is required</p>}
+    <StyledCard title={'Forgot your password?'} headStyle={cardHeadStyle}>
+      <Form onFinish={handleSubmit(onSubmit)}>
+        <Form.Item name="email">
+          <Controller
+            name="email"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <Input {...field} status={errors.email ? 'error' : ''} placeholder="Email" />
+            )}
+          />
+          {/* eslint-disable-next-line react/jsx-no-undef */}
+          {errors.email && <Text type="danger">{errors.email.message}</Text>}
+        </Form.Item>
 
-            <Form.Item>
-              <StyledButton type="primary" htmlType="submit" loading={isLoading}>
-                Send Instructions
-              </StyledButton>
-            </Form.Item>
-          </Form>
-          <p>Did you remember your password?</p>
-          <NavLink to="/auth/sign-in">Try logging in</NavLink>
-        </Card>
-      </Row>
-    </Layout>
+        <StyledText type="secondary">
+          Enter your email address and we will send you further instructions
+        </StyledText>
+        {isError && <Text type="danger">{errors.error?.message}</Text>}
+        <Form.Item>
+          <Button
+            type="primary"
+            htmlType="submit"
+            size="large"
+            loading={isLoading}
+            style={{ fontWeight: '500' }}
+            block
+          >
+            Send Instructions
+          </Button>
+        </Form.Item>
+      </Form>
+      <StyledP>Did you remember your password?</StyledP>
+
+      <StyledNavLink to={`${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`}>Try logging in</StyledNavLink>
+    </StyledCard>
   )
 }
-
-const StyledButton = styled(Button)`
-  width: 100%;
-  height: 40px;
-  background-color: blue;
-  color: white;
-
-  &:hover {
-    background-color: lightblue;
-  }
-`
