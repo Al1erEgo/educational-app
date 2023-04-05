@@ -140,6 +140,7 @@ const StyledButton = styled(Button)`
     background-color: lightblue;
   }
 `
+
 const StyledTitle = styled.div`
   display: flex;
   flex-direction: column;

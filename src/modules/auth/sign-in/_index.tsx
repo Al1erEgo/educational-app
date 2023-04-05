@@ -11,7 +11,7 @@ type SignInFormInputs = {
   rememberMe: boolean
 }
 
-export const SignIn = () => {
+export const _SignIn = () => {
   const {
     handleSubmit,
     control,
