@@ -1,14 +1,21 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Button, Card, Form, Input } from 'antd'
+import { Form, Input } from 'antd'
 import { Controller, useForm } from 'react-hook-form'
-import { NavLink, useNavigate } from 'react-router-dom'
-import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
 import * as yup from 'yup'
 
 import { MAIN_PATH } from '../../../constants'
 import { isFetchBaseQueryError } from '../../../utils'
 import { useRegisterMutation } from '../auth-api'
 import { AUTH_PATH } from '../constants'
+import {
+  StyledButton,
+  StyledCard,
+  StyledNavLink,
+  StyledP,
+  StyledSpan,
+  StyledTitle,
+} from '../styles'
 
 type SignUpFormInputs = {
   email: string
@@ -53,7 +60,7 @@ export const SignUp = () => {
   }
 
   return (
-    <Card>
+    <StyledCard>
       <StyledTitle>Sign Up</StyledTitle>
 
       <Form onFinish={handleSubmit(onSubmit)}>
@@ -128,56 +135,6 @@ export const SignUp = () => {
       <StyledP>Already have an account?</StyledP>
 
       <StyledNavLink to={`${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`}>Sign In</StyledNavLink>
-    </Card>
+    </StyledCard>
   )
 }
-
-const StyledButton = styled(Button)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 36px;
-  background-color: #366eff;
-  color: white;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  font-weight: 500;
-  line-height: 1.5;
-  margin-top: 1rem;
-`
-
-const StyledTitle = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-`
-
-const StyledSpan = styled.span`
-  color: red;
-`
-
-const StyledP = styled.p`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: 0.8rem;
-  font-weight: 600;
-  margin-bottom: 0.7rem;
-  line-height: 24px;
-`
-
-const StyledNavLink = styled(NavLink)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  line-height: 24px;
-`

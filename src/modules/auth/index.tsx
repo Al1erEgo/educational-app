@@ -37,14 +37,12 @@ export const Auth = () => {
 
   return (
     <AuthContainer>
-      <FormWrapper>
-        <Routes>
-          {authRoutes.map(route => (
-            <Route key={route.path} path={route.path} element={route.element} />
-          ))}
-          <Route path={`${MAIN_PATH.Error}`} element={<Error404 />} />
-        </Routes>
-      </FormWrapper>
+      <Routes>
+        {authRoutes.map(route => (
+          <Route key={route.path} path={route.path} element={route.element} />
+        ))}
+        <Route path={`${MAIN_PATH.Error}`} element={<Error404 />} />
+      </Routes>
     </AuthContainer>
   )
 }

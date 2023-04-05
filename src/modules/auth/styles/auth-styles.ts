@@ -1,4 +1,4 @@
-import { Button, Checkbox } from 'antd'
+import { Button, Card } from 'antd'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -9,17 +9,18 @@ export const AuthContainer = styled.div`
   margin: 0;
 `
 
-export const FormWrapper = styled.div`
+export const StyledCard = styled(Card)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
   max-width: 26rem;
   margin: 0 auto;
-  border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 `
 
 export const StyledTitle = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   font-size: 1.5rem;
@@ -49,20 +50,15 @@ export const StyledNavLink = styled(NavLink)`
 `
 
 export const StyledButton = styled(Button)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100%;
   height: 36px;
-  background-color: #366eff;
-  color: white;
   border-radius: 0.5rem;
   font-size: 1rem;
   font-weight: 500;
   line-height: 1.5;
   margin-top: 1rem;
+`
 
-  &:hover {
-    background-color: lightblue;
-  }
+export const StyledSpan = styled.span`
+  color: red;
 `
