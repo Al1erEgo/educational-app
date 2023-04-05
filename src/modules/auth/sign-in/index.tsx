@@ -1,11 +1,11 @@
 import { Card, Checkbox, Form, Input } from 'antd'
 
-import { StyledButton, StyledNavLink, StyledP, StyledTitle } from '../styles'
+import { StyledNavLink, StyledP } from '../styles'
 
 export const SignIn = () => {
   return (
     <Card>
-      <StyledTitle>Sign In</StyledTitle>
+      {/*<StyledTitle>Sign In</StyledTitle>*/}
       <Form>
         <Form.Item
           name="username"
@@ -40,9 +40,9 @@ export const SignIn = () => {
           <Checkbox>Remember me</Checkbox>
         </Form.Item>
         <Form.Item>
-          <StyledButton type="primary" htmlType="submit" loading={false}>
-            Sign In
-          </StyledButton>
+          {/*<StyledButton type="primary" htmlType="submit" loading={false}>*/}
+          {/*  Sign In*/}
+          {/*</StyledButton>*/}
         </Form.Item>
       </Form>
       <StyledP>Have no account?</StyledP>

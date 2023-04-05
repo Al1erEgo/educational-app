@@ -115,7 +115,6 @@ export const SignUp = () => {
             )}
           </>
         </Form.Item>
-
         {isError && <Text type="danger">{errors.error?.message}</Text>}
 
         <Form.Item>
