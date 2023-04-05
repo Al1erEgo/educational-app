@@ -1,8 +1,8 @@
-import { Header } from '../components/Header/Header'
+import { Header } from '../components'
 import { Pages } from '../pages'
 import { GlobalStyle } from '../styles'
 
-function App() {
+export const App = () => {
   return (
     <>
       <GlobalStyle />
@@ -11,5 +11,3 @@ function App() {
     </>
   )
 }
-
-export default App

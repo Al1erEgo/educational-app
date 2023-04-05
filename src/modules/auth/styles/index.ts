@@ -1,1 +1,2 @@
-export * from './auth-styles'
+export * from './auth-styled-components'
+export * from './auth-antd-styles'

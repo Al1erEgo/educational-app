@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Form, Input } from 'antd'
+import { Button, Form, Input, Typography } from 'antd'
 import { Controller, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import * as yup from 'yup'
@@ -8,14 +8,7 @@ import { MAIN_PATH } from '../../../constants'
 import { isFetchBaseQueryError } from '../../../utils'
 import { useRegisterMutation } from '../auth-api'
 import { AUTH_PATH } from '../constants'
-import {
-  StyledButton,
-  StyledCard,
-  StyledNavLink,
-  StyledP,
-  StyledSpan,
-  StyledTitle,
-} from '../styles'
+import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../styles'
 
 type SignUpFormInputs = {
   email: string
@@ -23,6 +16,8 @@ type SignUpFormInputs = {
   'confirm password': string
   error?: string
 }
+
+const { Text } = Typography
 
 const schema = yup
   .object({
@@ -60,9 +55,7 @@ export const SignUp = () => {
   }
 
   return (
-    <StyledCard>
-      <StyledTitle>Sign Up</StyledTitle>
-
+    <StyledCard title={'Sign Up'} headStyle={cardHeadStyle}>
       <Form onFinish={handleSubmit(onSubmit)}>
         <Form.Item name="email">
           <>
@@ -79,7 +72,7 @@ export const SignUp = () => {
                 />
               )}
             />
-            {errors.email && <StyledSpan>{errors.email.message}</StyledSpan>}
+            {errors.email && <Text type="danger">{errors.email.message}</Text>}
           </>
         </Form.Item>
 
@@ -98,7 +91,7 @@ export const SignUp = () => {
                 />
               )}
             />
-            {errors.password && <StyledSpan>{errors.password.message}</StyledSpan>}
+            {errors.password && <Text type="danger">{errors.password.message}</Text>}
           </>
         </Form.Item>
 
@@ -118,17 +111,24 @@ export const SignUp = () => {
               )}
             />
             {errors['confirm password'] && (
-              <StyledSpan>{errors['confirm password'].message}</StyledSpan>
+              <Text type="danger">{errors['confirm password'].message}</Text>
             )}
           </>
         </Form.Item>
 
-        {isError && <StyledSpan>{errors.error?.message}</StyledSpan>}
+        {isError && <Text type="danger">{errors.error?.message}</Text>}
 
         <Form.Item>
-          <StyledButton type="primary" htmlType="submit" loading={isLoading}>
+          <Button
+            type="primary"
+            htmlType="submit"
+            size="large"
+            loading={isLoading}
+            style={{ fontWeight: '500' }}
+            block
+          >
             Sign Up
-          </StyledButton>
+          </Button>
         </Form.Item>
       </Form>
 

@@ -10,7 +10,7 @@ import { Profile } from './profile'
 import { ResetPassword } from './reset-password'
 import { SignIn } from './sign-in'
 import { SignUp } from './sign-up'
-import { AuthContainer, FormWrapper } from './styles'
+import { AuthContainer } from './styles'
 
 export const Auth = () => {
   const { data, isLoading, isError } = useAuthMeQuery()
