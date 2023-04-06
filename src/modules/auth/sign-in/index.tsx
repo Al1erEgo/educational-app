@@ -4,6 +4,7 @@ import { Controller, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
 import { MAIN_PATH } from '../../../constants'
+import { useLoginMutation } from '../auth-api'
 import { AUTH_PATH } from '../constants'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../styles'
 
@@ -30,6 +31,7 @@ export const SignIn = () => {
   const {
     control,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm<LoginFormInputs>({
     resolver: yupResolver(loginSchema),
@@ -38,7 +40,21 @@ export const SignIn = () => {
     },
   })
 
-  const onSubmit = () => {}
+  const [login, { isLoading, isError }] = useLoginMutation()
+
+  const onSubmit = async (data: LoginFormInputs) => {
+    try {
+      await login(data).unwrap()
+    } catch (e: any) {
+      console.log(e)
+      if (e.data.error) {
+        setError('error', {
+          message: e.data.error,
+        })
+        console.log(e.data.error)
+      }
+    }
+  }
 
   return (
     <StyledCard title={'Sign In'} headStyle={cardHeadStyle}>
@@ -95,7 +111,7 @@ export const SignIn = () => {
             type="primary"
             htmlType="submit"
             size="large"
-            loading={false}
+            loading={isLoading}
             style={{ fontWeight: '500' }}
             block
           >
