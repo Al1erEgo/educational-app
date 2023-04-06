@@ -1,6 +1,7 @@
-import { Card } from 'antd'
+import { Card, Typography } from 'antd'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
+export const { Text } = Typography
 
 export const AuthContainer = styled.div`
   display: flex;
@@ -33,4 +34,14 @@ export const StyledNavLink = styled(NavLink)`
   font-weight: 600;
   margin-bottom: 1rem;
   line-height: 24px;
+`
+
+export const StyledText = styled(Text)`
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+  line-height: 24px;
+  color: #9d9d9d;
 `
