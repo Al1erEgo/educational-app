@@ -33,6 +33,7 @@ export const SignIn = () => {
     setError,
     formState: { errors },
   } = useForm<LoginFormInputs>({
+    mode: 'onBlur',
     resolver: yupResolver(loginSchema),
     defaultValues: {
       rememberMe: false,
