@@ -54,10 +54,8 @@ export const ResetPassword = () => {
               <Input {...field} status={errors.email ? 'error' : ''} placeholder="Email" />
             )}
           />
-          {/* eslint-disable-next-line react/jsx-no-undef */}
-          {errors.email && <Text type="danger">{errors.email.message}</Text>}
         </Form.Item>
-
+        {errors.email && <Text type="danger">{errors.email.message}</Text>}
         <StyledText type="secondary">
           Enter your email address and we will send you further instructions
         </StyledText>
