@@ -38,10 +38,16 @@ export const StyledNavLink = styled(NavLink)`
 
 export const StyledText = styled(Text)`
   display: flex;
-  justify-content: center;
   text-align: center;
   margin-top: 2rem;
   margin-bottom: 3rem;
   line-height: 24px;
   color: #9d9d9d;
+`
+
+export const StyledErrorText = styled(Text)`
+  display: block;
+  text-align: center;
+  color: #ff4c4c;
+  margin-bottom: 1rem;
 `

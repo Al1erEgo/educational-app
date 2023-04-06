@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Button, Form, Input, Typography } from 'antd'
+import { Button, Form, Input } from 'antd'
 import { Controller, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import * as yup from 'yup'
@@ -8,7 +8,7 @@ import { MAIN_PATH } from '../../../constants'
 import { isFetchBaseQueryError } from '../../../utils'
 import { useRegisterMutation } from '../auth-api'
 import { AUTH_PATH } from '../constants'
-import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../styles'
+import { cardHeadStyle, StyledCard, StyledErrorText, StyledNavLink, StyledP } from '../styles'
 
 type SignUpFormInputs = {
   email: string
@@ -16,8 +16,6 @@ type SignUpFormInputs = {
   'confirm password': string
   error?: string
 }
-
-const { Text } = Typography
 
 const schema = yup
   .object({
@@ -57,7 +55,11 @@ export const SignUp = () => {
   return (
     <StyledCard title={'Sign Up'} headStyle={cardHeadStyle}>
       <Form onFinish={handleSubmit(onSubmit)}>
-        <Form.Item name="email">
+        <Form.Item
+          name="email"
+          validateStatus={errors.email ? 'error' : ''}
+          help={errors.email?.message}
+        >
           <>
             <Controller
               name="email"
@@ -72,11 +74,14 @@ export const SignUp = () => {
                 />
               )}
             />
-            {errors.email && <Text type="danger">{errors.email.message}</Text>}
           </>
         </Form.Item>
 
-        <Form.Item name="password">
+        <Form.Item
+          name="password"
+          validateStatus={errors.password ? 'error' : ''}
+          help={errors.password?.message}
+        >
           <>
             <Controller
               name="password"
@@ -91,11 +96,14 @@ export const SignUp = () => {
                 />
               )}
             />
-            {errors.password && <Text type="danger">{errors.password.message}</Text>}
           </>
         </Form.Item>
 
-        <Form.Item name="confirm password">
+        <Form.Item
+          name="confirm password"
+          validateStatus={errors['confirm password'] ? 'error' : ''}
+          help={errors['confirm password']?.message}
+        >
           <>
             <Controller
               name="confirm password"
@@ -110,13 +118,9 @@ export const SignUp = () => {
                 />
               )}
             />
-            {errors['confirm password'] && (
-              <Text type="danger">{errors['confirm password'].message}</Text>
-            )}
           </>
         </Form.Item>
-        {isError && <Text type="danger">{errors.error?.message}</Text>}
-
+        {isError && <StyledErrorText type="danger">{errors.error?.message}</StyledErrorText>}
         <Form.Item>
           <Button
             type="primary"

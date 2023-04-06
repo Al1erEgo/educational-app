@@ -6,7 +6,14 @@ import * as yup from 'yup'
 import { MAIN_PATH } from '../../../constants'
 import { useRequestPasswordResetMutation } from '../auth-api'
 import { AUTH_PATH } from '../constants'
-import { cardHeadStyle, StyledCard, StyledNavLink, StyledP, StyledText } from '../styles'
+import {
+  cardHeadStyle,
+  StyledCard,
+  StyledErrorText,
+  StyledNavLink,
+  StyledP,
+  StyledText,
+} from '../styles'
 
 export const { Text } = Typography
 
@@ -45,7 +52,11 @@ export const ResetPassword = () => {
   return (
     <StyledCard title={'Forgot your password?'} headStyle={cardHeadStyle}>
       <Form onFinish={handleSubmit(onSubmit)}>
-        <Form.Item name="email">
+        <Form.Item
+          name="email"
+          validateStatus={errors.email ? 'error' : ''}
+          help={errors.email?.message}
+        >
           <Controller
             name="email"
             control={control}
@@ -55,11 +66,10 @@ export const ResetPassword = () => {
             )}
           />
         </Form.Item>
-        {errors.email && <Text type="danger">{errors.email.message}</Text>}
         <StyledText type="secondary">
           Enter your email address and we will send you further instructions
         </StyledText>
-        {isError && <Text type="danger">{errors.error?.message}</Text>}
+        {isError && <StyledErrorText type="danger">{errors.error?.message}</StyledErrorText>}
         <Form.Item>
           <Button
             type="primary"
