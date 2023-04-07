@@ -1,16 +1,18 @@
-import { Header } from '../components'
-import { IsAuthLoader } from '../modules/auth/components'
+import { Header, Loader } from '../components'
+import { useAuthMeQuery } from '../modules/auth/auth-api'
 import { Pages } from '../pages'
 import { GlobalStyle } from '../styles'
 
 export const App = () => {
+  const { isLoading } = useAuthMeQuery()
+
   return (
     <>
-      <GlobalStyle />
-      <Header />
-      <IsAuthLoader>
+      <Loader isLoading={isLoading}>
+        <GlobalStyle />
+        <Header />
         <Pages />
-      </IsAuthLoader>
+      </Loader>
     </>
   )
 }

@@ -3,7 +3,6 @@ import { Navigate, Route, Routes, useResolvedPath } from 'react-router-dom'
 import { MAIN_PATH } from '../../constants'
 import { Error404 } from '../../pages/error404'
 
-import { authApi, useAuthMeQuery } from './auth-api'
 import { AUTH_PATH } from './constants'
 import { NewPassword } from './new-password'
 import { Profile } from './profile'
@@ -13,10 +12,7 @@ import { SignUp } from './sign-up'
 import { AuthContainer } from './styles'
 
 export const Auth = () => {
-  const [result] = authApi.useLazyAuthMeQuery()
   const path = useResolvedPath('')
-
-  console.log(result)
 
   const defaultAuthPage = <Navigate to={`${path.pathname}${AUTH_PATH.SignIn}`} />
   const authRoutes = [

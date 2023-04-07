@@ -15,6 +15,7 @@ export const authApi = rootApi.injectEndpoints({
         url: 'auth/login',
         method: 'POST',
         body: requestData,
+        invalidatesTags: ['authMe'],
       }),
     }),
 

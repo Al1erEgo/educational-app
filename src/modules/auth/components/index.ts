@@ -1,1 +1,1 @@
-export * from './is-auth-loader'
+export * from '../../../components/loader'

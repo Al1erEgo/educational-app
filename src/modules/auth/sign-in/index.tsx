@@ -1,11 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Button, Checkbox, Form, Input } from 'antd'
 import { Controller, useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import * as yup from 'yup'
 
 import { MAIN_PATH } from '../../../constants'
 import { isFetchBaseQueryError } from '../../../utils'
-import { useLoginMutation } from '../auth-api'
+import { authApi, useLoginMutation } from '../auth-api'
 import { AUTH_PATH } from '../constants'
 import { cardHeadStyle, StyledCard, StyledErrorText, StyledNavLink, StyledP } from '../styles'
 
@@ -41,10 +42,15 @@ export const SignIn = () => {
   })
 
   const [login, { isLoading, isError }] = useLoginMutation()
+  const [trigger] = authApi.useLazyAuthMeQuery()
+
+  const navigate = useNavigate()
 
   const onSubmit = async (data: LoginFormInputs) => {
     try {
       await login(data).unwrap()
+      await trigger()
+      navigate(`${MAIN_PATH.Root}`)
     } catch (e: unknown) {
       if (isFetchBaseQueryError(e)) {
         setError('error', { message: e.data.error })
