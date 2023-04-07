@@ -32,6 +32,7 @@ export const authApi = rootApi.injectEndpoints({
         method: 'put',
         body: requestData,
       }),
+      invalidatesTags: ['authMe'],
     }),
 
     authMeLogOut: builder.mutation<LogOutResponseType, LogOutRequestType>({

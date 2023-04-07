@@ -64,12 +64,12 @@ export const SuperEditableSpan: React.FC<SuperEditableSpanType> = ({
         />
       ) : (
         <div className={s.spanBlock}>
-          <img src={editIcon} className={s.pen} alt={'edit'} />
           <span onDoubleClick={onDoubleClickCallBack} className={spanClassName} {...restSpanProps}>
             {/*если нет захардкодженного текста для спана, то значение инпута*/}
 
             {children || restProps.value || defaultText}
           </span>
+          <img src={editIcon} className={s.pen} alt={'edit'} />
         </div>
       )}
     </>

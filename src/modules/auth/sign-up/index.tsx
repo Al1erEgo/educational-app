@@ -20,10 +20,10 @@ type SignUpFormInputs = {
 const schema = yup
   .object({
     email: yup.string().email().required(),
-    password: yup.string().min(6).required(),
+    password: yup.string().min(8).required(),
     'confirm password': yup
       .string()
-      .min(6)
+      .min(8)
       .required()
       .test('passwords-match', 'Passwords must match', function (value) {
         return this.parent.password === value
@@ -37,7 +37,7 @@ export const SignUp = () => {
     control,
     setError,
     formState: { errors },
-  } = useForm<SignUpFormInputs>({ resolver: yupResolver(schema) })
+  } = useForm<SignUpFormInputs>({ mode: 'onBlur', resolver: yupResolver(schema) })
   const [registerUser, { isLoading, isError }] = useRegisterMutation()
   const navigate = useNavigate()
 
@@ -65,14 +65,7 @@ export const SignUp = () => {
               name="email"
               control={control}
               rules={{ required: true }}
-              render={({ field }) => (
-                <Input
-                  {...field}
-                  status={errors.email ? 'error' : ''}
-                  placeholder="Email"
-                  autoComplete="email"
-                />
-              )}
+              render={({ field }) => <Input {...field} placeholder="Email" autoComplete="email" />}
             />
           </>
         </Form.Item>
@@ -88,12 +81,7 @@ export const SignUp = () => {
               control={control}
               rules={{ required: true }}
               render={({ field }) => (
-                <Input.Password
-                  {...field}
-                  status={errors.password ? 'error' : ''}
-                  placeholder="Password"
-                  autoComplete="new-password"
-                />
+                <Input.Password {...field} placeholder="Password" autoComplete="new-password" />
               )}
             />
           </>
@@ -112,7 +100,6 @@ export const SignUp = () => {
               render={({ field }) => (
                 <Input.Password
                   {...field}
-                  status={errors['confirm password'] ? 'error' : ''}
                   placeholder="Confirm password"
                   autoComplete="new-password"
                 />

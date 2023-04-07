@@ -1,6 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Button, Checkbox, Form, Input } from 'antd'
 import { Controller, useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import * as yup from 'yup'
 
 import { MAIN_PATH } from '../../../constants'
@@ -41,10 +42,12 @@ export const SignIn = () => {
   })
 
   const [login, { isLoading, isError }] = useLoginMutation()
+  const navigate = useNavigate()
 
   const onSubmit = async (data: LoginFormInputs) => {
     try {
       await login(data).unwrap()
+      navigate(`${MAIN_PATH.Auth}${AUTH_PATH.Profile}`)
     } catch (e: unknown) {
       if (isFetchBaseQueryError(e)) {
         setError('error', { message: e.data.error })

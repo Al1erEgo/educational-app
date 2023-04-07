@@ -14,6 +14,7 @@ import { AuthContainer } from './styles'
 
 export const Auth = () => {
   const { data, isLoading, isError } = useAuthMeQuery()
+
   const path = useResolvedPath('')
 
   const defaultAuthPage = <Navigate to={`${path.pathname}${AUTH_PATH.SignUp}`} />
