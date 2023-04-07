@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Button, Form, Input, Typography } from 'antd'
+import { Button, Form, Input } from 'antd'
 import { Controller, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
@@ -15,7 +15,7 @@ import {
   StyledText,
 } from '../styles'
 
-export const { Text } = Typography
+import { CheckEmail } from './check-email'
 
 type ResetPasswordFormInputs = {
   email: string
@@ -35,7 +35,7 @@ export const ResetPassword = () => {
     setError,
     formState: { errors },
   } = useForm<ResetPasswordFormInputs>({ resolver: yupResolver(schema) })
-  const [resetPassword, { isLoading, isError }] = useRequestPasswordResetMutation()
+  const [resetPassword, { isLoading, isError, isSuccess }] = useRequestPasswordResetMutation()
 
   const onSubmit = async (data: ResetPasswordFormInputs) => {
     try {
@@ -47,6 +47,10 @@ export const ResetPassword = () => {
         })
       }
     }
+  }
+
+  if (isSuccess) {
+    return <CheckEmail />
   }
 
   return (
