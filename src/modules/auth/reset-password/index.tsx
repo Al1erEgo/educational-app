@@ -34,7 +34,7 @@ export const ResetPassword = () => {
     control,
     setError,
     formState: { errors },
-  } = useForm<ResetPasswordFormInputs>({ resolver: yupResolver(schema) })
+  } = useForm<ResetPasswordFormInputs>({ mode: 'onBlur', resolver: yupResolver(schema) })
   const [resetPassword, { isLoading, isError }] = useRequestPasswordResetMutation()
 
   const onSubmit = async (data: ResetPasswordFormInputs) => {
@@ -61,9 +61,7 @@ export const ResetPassword = () => {
             name="email"
             control={control}
             rules={{ required: true }}
-            render={({ field }) => (
-              <Input {...field} status={errors.email ? 'error' : ''} placeholder="Email" />
-            )}
+            render={({ field }) => <Input {...field} placeholder="Email" autoComplete="email" />}
           />
         </Form.Item>
         <StyledText type="secondary">
