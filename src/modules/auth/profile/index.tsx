@@ -3,8 +3,9 @@ import { Avatar, Upload } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
 import arrowBack from '../../../assets/arrow-back.svg'
+import { ErrorServerHandler } from '../../../components/error-handler/error-server-handler'
 import { MAIN_PATH } from '../../../constants'
-import { isErrorWithMessage, isFetchBaseQueryError } from '../../../utils'
+import { isFetchBaseQueryError } from '../../../utils'
 import {
   useAuthMeLogOutMutation,
   useAuthMeQuery,
@@ -78,9 +79,7 @@ export const Profile = () => {
             {userName}
           </StyledProfileParagraph>
 
-          {isFetchBaseQueryError(updateUserNameError) && (
-            <StyledErrorText>{updateUserNameError.data.error}</StyledErrorText>
-          )}
+          <ErrorServerHandler error={updateUserNameError} />
 
           <StyledProfileText>{userEmail}</StyledProfileText>
 

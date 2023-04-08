@@ -300,3 +300,8 @@ const StyledProfileButton = styled(Button)`
  <StyledErrorText>{updateUserNameError?.data?.error}</StyledErrorText>
  )}
 */
+
+/*   {isFetchBaseQueryError(updateUserNameError) && (
+ <StyledErrorText>{updateUserNameError.data.error}</StyledErrorText>
+ )}
+ */
