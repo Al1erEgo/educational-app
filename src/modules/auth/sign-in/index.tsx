@@ -6,7 +6,7 @@ import * as yup from 'yup'
 
 import { MAIN_PATH } from '../../../constants'
 import { isFetchBaseQueryError } from '../../../utils'
-import { useLoginMutation } from '../auth-api'
+import { authApi, useLoginMutation } from '../auth-api'
 import { AUTH_PATH } from '../constants'
 import { cardHeadStyle, StyledCard, StyledErrorText, StyledNavLink, StyledP } from '../styles'
 
@@ -42,12 +42,15 @@ export const SignIn = () => {
   })
 
   const [login, { isLoading, isError }] = useLoginMutation()
+  const [trigger] = authApi.useLazyAuthMeQuery()
+
   const navigate = useNavigate()
 
   const onSubmit = async (data: LoginFormInputs) => {
     try {
       await login(data).unwrap()
-      navigate(`${MAIN_PATH.Auth}${AUTH_PATH.Profile}`)
+      await trigger()
+      navigate(`${MAIN_PATH.Root}`)
     } catch (e: unknown) {
       if (isFetchBaseQueryError(e)) {
         setError('error', { message: e.data.error })
