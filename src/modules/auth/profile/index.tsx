@@ -1,28 +1,65 @@
 import { UserOutlined, LogoutOutlined } from '@ant-design/icons'
-import { Avatar, Badge, Button, Space, Typography } from 'antd'
-import { useNavigate } from 'react-router-dom'
+import { Avatar, Button, notification, Typography, Upload } from 'antd'
+import { NavLink, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { MAIN_PATH } from '../../../constants'
-import { useAuthMeLogOutMutation, useAuthMeQuery, useAuthMeUpdateMutation } from '../auth-api'
+import { isFetchBaseQueryError } from '../../../utils'
+import {
+  useAuthMeLogOutMutation,
+  useAuthMeQuery,
+  useAuthMeUpdateMutation,
+  useLazyAuthMeQuery,
+} from '../auth-api'
 import { AUTH_PATH } from '../constants'
 import { cardHeadStyle, StyledCard } from '../styles'
 
-import icon from './photo-icon.svg'
+import arrow from './arrow-back.svg'
 
 export const { Text, Paragraph } = Typography
 
 export const Profile = () => {
-  const { data: userData, isLoading, isError, isSuccess, isFetching } = useAuthMeQuery()
-  const [updateUserName, { data: updateUserData, isLoading: isUpdating }] =
-    useAuthMeUpdateMutation()
-  const [logout, { isLoading: isLoggingOut }] = useAuthMeLogOutMutation()
+  const { data: userData, isFetching, error: userQueryError } = useAuthMeQuery()
+  const [
+    updateUserName,
+    { data: updatedUserData, isLoading: isUpdating, error: updateUserNameError },
+  ] = useAuthMeUpdateMutation()
+  const [logout, { isLoading: isLoggingOut, error: logoutError }] = useAuthMeLogOutMutation()
+  const [trigger, { isLoading: prodLoading, error: prodError, data: prodData }] =
+    useLazyAuthMeQuery()
   const navigate = useNavigate()
 
-  console.log('updateUserData', updateUserData)
+  let someError
   const handleUserNameChange = async (value: string) => {
-    await updateUserName({ name: value })
-    console.log(value)
+    try {
+      await updateUserName({ name: value }).unwrap()
+    } catch (e: unknown) {
+      if (isFetchBaseQueryError(updateUserNameError)) {
+        someError = updateUserNameError.data.error
+      }
+
+      /*if (userQueryError || updateUserNameError || logoutError) {
+        if (isFetchBaseQueryError(userQueryError)) {
+          console.log('userQueryError', userQueryError)
+          notification.error({
+            message: userQueryError.data.error,
+            placement: 'top',
+          })
+        }
+        if (isFetchBaseQueryError(updateUserNameError)) {
+          notification.error({
+            message: updateUserNameError.data.error,
+            placement: 'top',
+          })
+        }
+        if (isFetchBaseQueryError(logoutError)) {
+          notification.error({
+            message: logoutError.data.error,
+            placement: 'top',
+          })
+        }
+      }*/
+    }
   }
 
   const handleLogout = async () => {
@@ -30,98 +67,98 @@ export const Profile = () => {
     navigate(`${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`)
   }
 
-  const userName = userData?.name
-  const userEmail = userData?.email
+  const userName = userData?.name ?? ''
+  const userEmail = userData?.email ?? ''
 
-  console.log('isLoading', isLoading)
-  console.log(userData)
+  if (!userData) navigate(`${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`)
 
   return (
-    <StyledCard title={'Personal information'} headStyle={cardHeadStyle}>
-      <StyledContent>
-        <AvatarWrapper>
-          <Avatar
-            size={96}
-            style={{ backgroundColor: '#42b72a', position: 'relative', zIndex: 1 }}
-            icon={<UserOutlined />}
+    <>
+      <StyledBackToCardLink to={`${MAIN_PATH.Cards}`}>
+        {someError && <div>{someError}</div>}
+        <StyledProfileImg src={arrow} alt="arrow-back" />
+        Back to card pack
+      </StyledBackToCardLink>
+      <StyledCard title={'Personal information'} headStyle={cardHeadStyle}>
+        <StyledProfileContent>
+          <StylesAvatarGroup>
+            <Avatar shape="square" size={96} icon={<UserOutlined />} />
+            <Upload></Upload>
+          </StylesAvatarGroup>
+
+          <StyledProfileParagraph
+            editable={{ onChange: handleUserNameChange }}
+            disabled={isFetching || isUpdating}
           >
-            {'user'}
-          </Avatar>
-          <Avatar src={icon} style={{ position: 'absolute', bottom: 0, right: 0, zIndex: 2 }} />
-        </AvatarWrapper>
+            {userName}
+          </StyledProfileParagraph>
 
-        {/*       <Avatar.Group style={{ position: 'relative', marginBottom: '24px' }}>
-          <Avatar shape="square" size={96} icon={<UserOutlined />}>
-            {'user'}
-          </Avatar>
-          <Avatar src={icon} style={{ position: 'absolute', bottom: -5, right: -5 }} />
-        </Avatar.Group>
+          <StyledProfileText>{userEmail}</StyledProfileText>
 
-        <Badge dot={true} style={{ position: 'absolute', bottom: 0, right: 0, zIndex: 2 }}>
-          <Avatar
-            shape="square"
-            size={96}
-            icon={<UserOutlined />}
-            style={{ position: 'relative', zIndex: 1 }}
-          />
-        </Badge>*/}
-
-        <StyledParagraph
-          editable={{ onChange: handleUserNameChange }}
-          disabled={isFetching || isUpdating}
-        >
-          {userName}
-        </StyledParagraph>
-
-        <StyledProfileText>{userEmail}</StyledProfileText>
-
-        <StyledProfileButton
-          onClick={handleLogout}
-          loading={isLoggingOut}
-          icon={<LogoutOutlined />}
-        >
-          Log out
-        </StyledProfileButton>
-      </StyledContent>
-    </StyledCard>
+          <StyledProfileButton
+            onClick={handleLogout}
+            loading={isLoggingOut}
+            icon={<LogoutOutlined />}
+          >
+            Log out
+          </StyledProfileButton>
+        </StyledProfileContent>
+      </StyledCard>
+    </>
   )
 }
 
-const StyledContent = styled.div`
+const StyledBackToCardLink = styled(NavLink)`
+  display: block;
+  text-align: start;
+  text-decoration: none;
+  color: black;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 500;
+  margin-left: 5rem;
+
+  &:hover {
+    color: black;
+    opacity: 0.7;
+  }
+`
+
+const StyledProfileImg = styled.img`
+  margin-right: 0.5rem;
+`
+
+const StyledProfileContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
 `
 
-const AvatarWrapper = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const StylesAvatarGroup = styled(Avatar.Group)`
   margin-bottom: 24px;
 `
 
-const StyledParagraph = styled(Paragraph)`
-  margin-top: 14px;
+const StyledProfileParagraph = styled(Paragraph)`
+  margin-top: 0.9rem;
   font-size: 1rem;
   font-weight: 400;
-  line-height: 24px;
+  line-height: 1.7rem;
   text-align: center;
   width: 90%;
-  margin-left: 1.2rem;
+  margin-left: 1.4rem;
 `
 
 const StyledProfileText = styled(Text)`
-  margin-top: 14px;
-  font-size: 0.8rem;
+  margin-top: 0.9rem;
+  font-size: 0.9rem;
   font-weight: 400;
-  line-height: 24px;
+  line-height: 1.7rem;
   color: #c2c2c2;
 `
 
 const StyledProfileButton = styled(Button)`
-  margin-top: 29px;
-  margin-bottom: 12px;
+  margin-top: 1.8rem;
+  margin-bottom: 1.7rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 `

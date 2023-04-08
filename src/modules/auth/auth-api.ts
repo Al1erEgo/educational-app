@@ -42,7 +42,7 @@ export const authApi = rootApi.injectEndpoints({
       }),
       invalidatesTags: ['authMe'],
     }),
-
+    // TODO: change localhost to ...github.io
     requestPasswordReset: builder.mutation<PasswordResetResponseType, PasswordResetRequestType>({
       query: (requestData: PasswordResetRequestType) => ({
         url: 'auth/forgot',
@@ -70,6 +70,7 @@ export const {
   useRegisterMutation,
   useLoginMutation,
   useAuthMeQuery,
+  useLazyAuthMeQuery,
   useAuthMeUpdateMutation,
   useAuthMeLogOutMutation,
   useRequestPasswordResetMutation,
@@ -170,7 +171,6 @@ type LogOutResponseType = {
 
 type PasswordResetRequestType = {
   email: string
-  /*message: string*/
 }
 type PasswordResetResponseType = {
   info: string
@@ -188,4 +188,4 @@ type SetNewPasswordResponseType = {
   info: string
 }
 
-//применить утилитные типы omit, pick partial
+// TODO: add utils types (omit, pick, partial)
