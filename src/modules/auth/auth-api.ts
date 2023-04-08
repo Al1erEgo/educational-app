@@ -50,7 +50,7 @@ export const authApi = rootApi.injectEndpoints({
         body: {
           email: requestData.email,
           message:
-            'password recovery link: <a href="http://localhost:5173/#/set-new-password/$token$">link</a>',
+            'password recovery link: <a href="http://localhost:5173/#/auth/set-new-password/$token$">link</a>',
         },
       }),
     }),

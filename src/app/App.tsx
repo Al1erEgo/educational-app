@@ -7,12 +7,10 @@ export const App = () => {
   const { isLoading } = useAuthMeQuery()
 
   return (
-    <>
-      <Loader isLoading={isLoading}>
-        <GlobalStyle />
-        <Header />
-        <Pages />
-      </Loader>
-    </>
+    <Loader isLoading={isLoading}>
+      <GlobalStyle />
+      <Header />
+      <Pages />
+    </Loader>
   )
 }
