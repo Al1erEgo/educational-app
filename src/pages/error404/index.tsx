@@ -5,7 +5,7 @@ import { MAIN_PATH } from '../../constants'
 
 export const Error404 = () => {
   const navigate = useNavigate()
-  const onClickNavigateToMain = () => navigate(`${MAIN_PATH.Main}`)
+  const onClickNavigateToMain = () => navigate(`${MAIN_PATH.Root}`)
 
   return (
     <Result

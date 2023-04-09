@@ -4,7 +4,7 @@ import { Pages } from '../pages'
 import { GlobalStyle } from '../styles'
 
 export const App = () => {
-  const { isLoading } = useAuthMeQuery()
+  const { isLoading } = useAuthMeQuery('auth')
 
   return (
     <>

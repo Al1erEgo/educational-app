@@ -3,18 +3,14 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { AuthProvider } from '../components'
 import { MAIN_PATH } from '../constants'
 import { Auth, Cards } from '../modules'
-import { authApi } from '../modules/auth/auth-api'
+import { useAuthorised } from '../modules/auth/hooks'
 
 import { Error404 } from './error404'
 
 export const Pages = () => {
-  const [, response] = authApi.useLazyAuthMeQuery()
-  const authQueryResult = authApi.endpoints.authMe.useQueryState()
+  const { isAuthorised } = useAuthorised()
 
-  console.log('query result', authQueryResult)
-  console.log('response', response)
-
-  const DEFAULT_PAGE = response ? (
+  const DEFAULT_PAGE = isAuthorised ? (
     <Navigate to={`${MAIN_PATH.Cards}`} />
   ) : (
     <Navigate to={`${MAIN_PATH.Auth}`} />

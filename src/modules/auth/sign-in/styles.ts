@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 export const ForgotPasswordLink = styled(NavLink)`
   display: block;
-  text-align: end;
+  margin-left: 65%;
   color: black;
   font-size: 0.85rem;
   font-weight: 500;

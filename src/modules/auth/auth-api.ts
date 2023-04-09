@@ -15,13 +15,17 @@ export const authApi = rootApi.injectEndpoints({
         url: 'auth/login',
         method: 'POST',
         body: requestData,
-        //invalidatesTags: ['authMe'],
-        // async onQueryStarted({}, { dispatch, queryFulfilled }) {
-        //   const { data } = await queryFulfilled
-        //
-        //   dispatch(authApi.util.upsertQueryData('authMe', undefined, data))
-        // },
+        invalidatesTags: ['authMe'],
       }),
+      onQueryStarted: async ({}: any, { dispatch, queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled
+
+          dispatch(authApi.util.upsertQueryData('authMe', 'login', data))
+        } catch (e) {
+          return
+        }
+      },
     }),
 
     authMe: builder.query<AuthMeResponseType, AuthMeRequestType>({

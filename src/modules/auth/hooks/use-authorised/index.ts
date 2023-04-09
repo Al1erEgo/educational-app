@@ -1,10 +1,8 @@
-import { useAuthMeQuery } from '../../auth-api'
+import { authApi } from '../../auth-api'
 
 export const useAuthorised = () => {
-  const { isLoading, isFetching, isSuccess } = useAuthMeQuery()
+  const authLoginResult = authApi.endpoints.authMe.useQueryState('login')
+  const authQueryResult = authApi.endpoints.authMe.useQueryState('auth')
 
-  return {
-    isLoading: isLoading || isFetching,
-    isSuccess,
-  }
+  return { isAuthorised: (authLoginResult.status || authQueryResult.status) === 'fulfilled' }
 }

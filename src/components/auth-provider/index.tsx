@@ -3,10 +3,10 @@ import React from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 
 import { MAIN_PATH } from '../../constants'
-import { authApi, useAuthMeQuery } from '../../modules/auth/auth-api'
+import { useAuthorised } from '../../modules/auth/hooks'
 
 export const AuthProvider: React.FC = () => {
-  const { isSuccess } = useAuthMeQuery()
+  const { isAuthorised } = useAuthorised()
 
-  return isSuccess ? <Outlet /> : <Navigate to={`${MAIN_PATH.Auth}`} />
+  return isAuthorised ? <Outlet /> : <Navigate to={`${MAIN_PATH.Auth}`} />
 }
