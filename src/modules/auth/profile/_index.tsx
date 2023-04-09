@@ -1,24 +1,16 @@
 import { useState } from 'react'
 
-import {
-  UserOutlined,
-  LogoutOutlined,
-  ArrowLeftOutlined,
-  LoadingOutlined,
-  PlusOutlined,
-} from '@ant-design/icons'
-import { Avatar, Button, message, Typography, Upload, UploadFile, UploadProps } from 'antd'
+import { LogoutOutlined, LoadingOutlined, PlusOutlined } from '@ant-design/icons'
+import { Button, message, Typography, Upload, UploadFile, UploadProps } from 'antd'
 import { RcFile, UploadChangeParam } from 'antd/es/upload'
 import { NavLink, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
+import arrow from '../../../assets/arrow-back.svg'
 import { MAIN_PATH } from '../../../constants'
 import { useAuthMeLogOutMutation, useAuthMeQuery, useAuthMeUpdateMutation } from '../auth-api'
 import { AUTH_PATH } from '../constants'
 import { cardHeadStyle, StyledCard } from '../styles'
-
-import arrow from './arrow-back.svg'
-import icon from './photo-icon.svg'
 
 export const { Text, Paragraph } = Typography
 
@@ -258,3 +250,58 @@ const StyledProfileButton = styled(Button)`
  }*/
 
 /*  if (!userData) navigate(`${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`)*/
+
+/*      if (userQueryError || updateUserNameError || logoutError) {
+ if (isFetchBaseQueryError(userQueryError)) {
+ console.log('userQueryError', userQueryError)
+ notification.error({
+ message: userQueryError.data.error,
+ placement: 'top',
+ })
+ }
+ if (isFetchBaseQueryError(updateUserNameError)) {
+ notification.error({
+ message: updateUserNameError.data.error,
+ placement: 'top',
+ })
+ }
+ if (isFetchBaseQueryError(logoutError)) {
+ notification.error({
+ message: logoutError.data.error,
+ placement: 'top',
+ })
+ }
+ }*/
+
+/*
+ const InputField = ({ name, label, rules, placeholder, ...rest }) => (
+ <Form.Item name={name} label={label} rules={rules} autoComplete="on">
+ <Controller
+ name={name}
+ control={rest.control}
+ render={({ field }) => <Input {...field} placeholder={placeholder} />}
+ />
+ </Form.Item>
+ );*/
+
+/*  */
+
+/*const handleUserNameChange = async (value: string) => {
+  try {
+    await updateUserName({ name: value }).unwrap()
+    await trigger()
+  } catch (error: unknown) {
+    if ('data' in error && isFetchBaseQueryError(error)) {
+      console.error(error)
+    }
+  }
+}
+ {updateUserNameError && (
+ <StyledErrorText>{updateUserNameError?.data?.error}</StyledErrorText>
+ )}
+*/
+
+/*   {isFetchBaseQueryError(updateUserNameError) && (
+ <StyledErrorText>{updateUserNameError.data.error}</StyledErrorText>
+ )}
+ */
