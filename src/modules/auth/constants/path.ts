@@ -4,6 +4,6 @@ export enum AUTH_PATH {
   SignUp = '/sign-up',
   SignIn = '/sign-in',
   ResetPassword = '/reset-password',
-  NewPassword = '/set-new-password/*',
+  NewPassword = '/set-new-password/:token',
   Error = '*',
 }

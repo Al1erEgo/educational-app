@@ -181,7 +181,7 @@ type PasswordResetResponseType = {
   error?: string
 }
 
-type SetNewPasswordRequestType = {
+export type SetNewPasswordRequestType = {
   password: string
   resetPasswordToken: string
 }
