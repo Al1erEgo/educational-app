@@ -1,12 +1,17 @@
 import { yupResolver } from '@hookform/resolvers/yup'
+import { AnyAction } from '@reduxjs/toolkit'
 import { Button, Checkbox, Form, Input } from 'antd'
 import { Controller, useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { ThunkDispatch } from 'redux-thunk'
 import * as yup from 'yup'
 
 import { MAIN_PATH } from '../../../constants'
+import { AppRootStateType } from '../../../store'
+import { rootApi } from '../../../store/root-api'
 import { isFetchBaseQueryError } from '../../../utils'
-import { authApi, useLoginMutation } from '../auth-api'
+import { authApi, useAuthMeQuery, useLoginMutation } from '../auth-api'
 import { AUTH_PATH } from '../constants'
 import { cardHeadStyle, StyledCard, StyledErrorText, StyledNavLink, StyledP } from '../styles'
 
@@ -42,14 +47,19 @@ export const SignIn = () => {
   })
 
   const [login, { isLoading, isError }] = useLoginMutation()
-  const [trigger] = authApi.useLazyAuthMeQuery()
-
+  const [trigger, response] = authApi.useLazyAuthMeQuery()
   const navigate = useNavigate()
+
+  type AppDispatch = ThunkDispatch<AppRootStateType, unknown, AnyAction>
+  const dispatch = useDispatch<AppDispatch>()
 
   const onSubmit = async (data: LoginFormInputs) => {
     try {
-      await login(data).unwrap()
+      const res = await login(data).unwrap()
+
+      //dispatch(authApi.util.upsertQueryData('authMe', undefined, res))
       await trigger()
+      //console.log('res', response)
       navigate(`${MAIN_PATH.Root}`)
     } catch (e: unknown) {
       if (isFetchBaseQueryError(e)) {

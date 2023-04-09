@@ -9,6 +9,9 @@ import { Error404 } from './error404'
 
 export const Pages = () => {
   const [, response] = authApi.useLazyAuthMeQuery()
+  const authQueryResult = authApi.endpoints.authMe.useQueryState()
+
+  console.log(authQueryResult)
 
   const DEFAULT_PAGE = response ? (
     <Navigate to={`${MAIN_PATH.Cards}`} />

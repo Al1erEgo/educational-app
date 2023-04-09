@@ -15,7 +15,12 @@ export const authApi = rootApi.injectEndpoints({
         url: 'auth/login',
         method: 'POST',
         body: requestData,
-        invalidatesTags: ['authMe'],
+        //invalidatesTags: ['authMe'],
+        // async onQueryStarted({}, { dispatch, queryFulfilled }) {
+        //   const { data } = await queryFulfilled
+        //
+        //   dispatch(authApi.util.upsertQueryData('authMe', undefined, data))
+        // },
       }),
     }),
 
@@ -123,7 +128,7 @@ type LoginResponseType = {
   error?: string
 }
 
-type AuthMeRequestType = void
+type AuthMeRequestType = void | string
 type AuthMeResponseType = {
   _id: string
   email: string
