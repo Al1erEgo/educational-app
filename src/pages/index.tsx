@@ -11,7 +11,8 @@ export const Pages = () => {
   const [, response] = authApi.useLazyAuthMeQuery()
   const authQueryResult = authApi.endpoints.authMe.useQueryState()
 
-  console.log(authQueryResult)
+  console.log('query result', authQueryResult)
+  console.log('response', response)
 
   const DEFAULT_PAGE = response ? (
     <Navigate to={`${MAIN_PATH.Cards}`} />
