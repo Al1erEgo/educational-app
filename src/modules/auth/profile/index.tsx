@@ -6,14 +6,10 @@ import arrowBack from '../../../assets/arrow-back.svg'
 import { ErrorServerHandler } from '../../../components/error-handler/error-server-handler'
 import { MAIN_PATH } from '../../../constants'
 import { isFetchBaseQueryError } from '../../../utils'
-import {
-  useAuthMeLogOutMutation,
-  useAuthMeQuery,
-  useAuthMeUpdateMutation,
-  useLazyAuthMeQuery,
-} from '../auth-api'
+import { useAuthMeLogOutMutation, useAuthMeUpdateMutation } from '../auth-api'
 import { AUTH_PATH } from '../constants'
-import { cardHeadStyle, StyledCard, StyledErrorText } from '../styles'
+import { useAuthorised } from '../hooks'
+import { cardHeadStyle, StyledCard } from '../styles'
 
 import {
   StyledBackToCardLink,
@@ -26,10 +22,10 @@ import {
 } from './styles'
 
 export const Profile = () => {
-  console.log('profile')
   const navigate = useNavigate()
 
-  const { data: userData, isFetching, error: userQueryError } = useAuthMeQuery()
+  const { data: userData } = useAuthorised()
+
   const { name: userName = '', email: userEmail = '' } = userData ?? {}
 
   const [
@@ -37,15 +33,11 @@ export const Profile = () => {
     { data: updatedUserData, isLoading: isUpdating, error: updateUserNameError },
   ] = useAuthMeUpdateMutation()
 
-  const [logout, { isLoading: isLoggingOut, error: logoutError }] = useAuthMeLogOutMutation()
-
-  const [trigger, { isLoading: isLazyAuthMeLoading, error: lazyAuthMeError, data: lazyUserData }] =
-    useLazyAuthMeQuery()
+  const [logout, { isLoading: isLoggingOut }] = useAuthMeLogOutMutation()
 
   const handleUserNameChange = async (value: string) => {
     try {
       await updateUserName({ name: value }).unwrap()
-      await trigger()
     } catch (e: unknown) {
       if (isFetchBaseQueryError(e)) {
         return e
@@ -74,9 +66,9 @@ export const Profile = () => {
 
           <StyledProfileParagraph
             editable={{ onChange: handleUserNameChange }}
-            disabled={isFetching || isUpdating}
+            disabled={isUpdating}
           >
-            {userName}
+            {updatedUserData?.updatedUser.name ?? userName}
           </StyledProfileParagraph>
 
           <ErrorServerHandler error={updateUserNameError} />
