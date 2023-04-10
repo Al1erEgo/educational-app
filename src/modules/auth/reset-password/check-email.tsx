@@ -9,7 +9,9 @@ import { MAIN_PATH } from '../../../constants'
 import { AUTH_PATH } from '../constants'
 import { cardHeadStyle, StyledCard, StyledText } from '../styles'
 
-export const CheckEmail = () => {
+type CheckEmailPropsType = { email: string }
+
+export const CheckEmail = (props: CheckEmailPropsType) => {
   const navigate = useNavigate()
   const goToLogin = () => {
     navigate(`${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`)
@@ -18,10 +20,12 @@ export const CheckEmail = () => {
   return (
     <StyledCard title={'Check Email'} headStyle={cardHeadStyle}>
       <ImgWrapper>
-        <img src={checkEmailImage} alt="" />
+        <Div>
+          <img src={checkEmailImage} alt="" />
+        </Div>
       </ImgWrapper>
       <StyledText type="secondary">
-        We’ve sent an Email with instructions to example@mail.com
+        We’ve sent an Email with instructions to {props.email}
       </StyledText>
       <Form.Item>
         <Button
@@ -42,4 +46,9 @@ export const CheckEmail = () => {
 export const ImgWrapper = styled(Form.Item)`
   display: flex;
   justify-content: center;
+`
+
+const Div = styled.div`
+  width: 110px;
+  height: 110px;
 `

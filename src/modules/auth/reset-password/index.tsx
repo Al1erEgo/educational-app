@@ -29,14 +29,10 @@ const schema = yup
   .required()
 
 export const ResetPassword = () => {
-  const {
-    handleSubmit,
-    control,
-    setError,
-    formState: { errors },
-  } = useForm<ResetPasswordFormInputs>({ resolver: yupResolver(schema) })
+  const { handleSubmit, control, setError, formState, watch } = useForm<ResetPasswordFormInputs>({
+    resolver: yupResolver(schema),
+  })
   const [resetPassword, { isLoading, isError, isSuccess }] = useRequestPasswordResetMutation()
-
   const onSubmit = async (data: ResetPasswordFormInputs) => {
     try {
       await resetPassword(data).unwrap()
@@ -50,7 +46,7 @@ export const ResetPassword = () => {
   }
 
   if (isSuccess) {
-    return <CheckEmail />
+    return <CheckEmail email={watch().email} />
   }
 
   return (
@@ -58,8 +54,8 @@ export const ResetPassword = () => {
       <Form onFinish={handleSubmit(onSubmit)}>
         <Form.Item
           name="email"
-          validateStatus={errors.email ? 'error' : ''}
-          help={errors.email?.message}
+          validateStatus={formState.errors.email ? 'error' : ''}
+          help={formState.errors.email?.message}
         >
           <Controller
             name="email"
@@ -71,7 +67,9 @@ export const ResetPassword = () => {
         <StyledText type="secondary">
           Enter your email address and we will send you further instructions
         </StyledText>
-        {isError && <StyledErrorText type="danger">{errors.error?.message}</StyledErrorText>}
+        {isError && (
+          <StyledErrorText type="danger">{formState.errors.error?.message}</StyledErrorText>
+        )}
         <Form.Item>
           <Button
             type="primary"

@@ -13,6 +13,7 @@ export const HeaderStyled = styled.div`
 export const Logo = styled.img`
   color: white;
   width: 140px;
+  height: 30px;
   margin-left: 10%;
   margin-bottom: 15px;
   margin-top: 15px;
