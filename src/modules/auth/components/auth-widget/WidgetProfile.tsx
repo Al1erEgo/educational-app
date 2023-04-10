@@ -4,7 +4,7 @@ import { UserOutlined } from '@ant-design/icons'
 import styled from 'styled-components'
 
 type WidgetProfilePropsType = {
-  userName: string
+  userName: string | undefined
 }
 
 export const WidgetProfile = (props: WidgetProfilePropsType) => {

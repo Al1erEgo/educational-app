@@ -15,7 +15,6 @@ export const AuthWidget = () => {
   const [logout, { isLoading: isLoggingOut }] = useAuthMeLogOutMutation()
   const navigate = useNavigate()
   const { isAuthorised, data: userData } = useAuthorised()
-  //const { data: userData, isFetching, error: userQueryError } = useAuthMeQuery()
 
   const goToSignInHandler = () => {
     navigate(`${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`)
