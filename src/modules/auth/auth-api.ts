@@ -21,7 +21,7 @@ export const authApi = rootApi.injectEndpoints({
         try {
           const { data } = await queryFulfilled
 
-          dispatch(authApi.util.upsertQueryData('authMe', 'login', data))
+          dispatch(authApi.util.upsertQueryData('authMe', 'auth', data))
         } catch (e) {
           return
         }
@@ -48,7 +48,7 @@ export const authApi = rootApi.injectEndpoints({
         try {
           const { data } = await queryFulfilled
 
-          dispatch(authApi.util.upsertQueryData('authMe', 'update', data.updatedUser))
+          dispatch(authApi.util.upsertQueryData('authMe', 'auth', data.updatedUser))
         } catch (e) {
           return
         }

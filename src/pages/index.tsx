@@ -10,8 +10,6 @@ import { Error404 } from './error404'
 export const Pages = () => {
   const { isAuthorised } = useAuthorised()
 
-  console.log('isAuth', isAuthorised)
-
   const DEFAULT_PAGE = isAuthorised ? (
     <Navigate to={`${MAIN_PATH.Cards}`} />
   ) : (

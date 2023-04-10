@@ -28,10 +28,8 @@ export const Profile = () => {
 
   const { name: userName = '', email: userEmail = '' } = userData ?? {}
 
-  const [
-    updateUserName,
-    { data: updatedUserData, isLoading: isUpdating, error: updateUserNameError },
-  ] = useAuthMeUpdateMutation()
+  const [updateUserName, { isLoading: isUpdating, error: updateUserNameError }] =
+    useAuthMeUpdateMutation()
 
   const [logout, { isLoading: isLoggingOut }] = useAuthMeLogOutMutation()
 
@@ -68,7 +66,8 @@ export const Profile = () => {
             editable={{ onChange: handleUserNameChange }}
             disabled={isUpdating}
           >
-            {updatedUserData?.updatedUser.name ?? userName}
+            {/*{updatedUserData?.updatedUser.name ?? userName}*/}
+            {userName}
           </StyledProfileParagraph>
 
           <ErrorServerHandler error={updateUserNameError} />
