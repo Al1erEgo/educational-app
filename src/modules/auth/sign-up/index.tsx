@@ -4,11 +4,12 @@ import { Controller, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import * as yup from 'yup'
 
+import { ErrorServerHandler } from '../../../components/error-handler/error-server-handler'
 import { MAIN_PATH } from '../../../constants'
 import { isFetchBaseQueryError } from '../../../utils'
 import { useRegisterMutation } from '../auth-api'
 import { AUTH_PATH } from '../constants'
-import { cardHeadStyle, StyledCard, StyledErrorText, StyledNavLink, StyledP } from '../styles'
+import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../styles'
 
 type SignUpFormInputs = {
   email: string
@@ -35,10 +36,9 @@ export const SignUp = () => {
   const {
     handleSubmit,
     control,
-    setError,
     formState: { errors },
   } = useForm<SignUpFormInputs>({ mode: 'onBlur', resolver: yupResolver(schema) })
-  const [registerUser, { isLoading, isError }] = useRegisterMutation()
+  const [registerUser, { isLoading, error }] = useRegisterMutation()
   const navigate = useNavigate()
 
   const onSubmit = async (data: SignUpFormInputs) => {
@@ -47,7 +47,7 @@ export const SignUp = () => {
       navigate(`${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`)
     } catch (e: unknown) {
       if (isFetchBaseQueryError(e)) {
-        setError('error', { message: e.data.error })
+        return e
       }
     }
   }
@@ -107,7 +107,9 @@ export const SignUp = () => {
             />
           </>
         </Form.Item>
-        {isError && <StyledErrorText type="danger">{errors.error?.message}</StyledErrorText>}
+
+        <ErrorServerHandler error={error} />
+
         <Form.Item>
           <Button
             type="primary"
