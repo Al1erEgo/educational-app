@@ -4,5 +4,8 @@ export const useAuthorised = () => {
   const authLoginResult = authApi.endpoints.authMe.useQueryState('login')
   const authQueryResult = authApi.endpoints.authMe.useQueryState('auth')
 
-  return { isAuthorised: (authLoginResult.status || authQueryResult.status) === 'fulfilled' }
+  return {
+    isAuthorised: authLoginResult.status === 'fulfilled' || authQueryResult.status === 'fulfilled',
+    data: authLoginResult.data || authQueryResult.data || undefined,
+  }
 }
