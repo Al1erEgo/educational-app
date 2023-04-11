@@ -3,10 +3,10 @@ import { rootApi } from '../../store/root-api'
 export const cardsApi = rootApi.injectEndpoints({
   endpoints: builder => ({
     cardPacks: builder.query<CardPacksResponseType, CardPacksRequestType>({
-      query: (requestData: CardPacksRequestType) => ({
+      query: (params: CardPacksRequestType) => ({
         url: 'cards/pack',
-        method: 'POST',
-        body: requestData,
+        method: 'GET',
+        params,
       }),
     }),
     newCardsPack: builder.mutation<{}, NewCardPacksRequestType>({
@@ -31,10 +31,10 @@ export const cardsApi = rootApi.injectEndpoints({
       }),
     }),
     cards: builder.query<CardsResponseType, CardsRequestType>({
-      query: (requestData: CardsRequestType) => ({
+      query: (params: CardsRequestType) => ({
         url: 'cards/card',
-        method: 'POST',
-        body: requestData,
+        method: 'GET',
+        params,
       }),
     }),
     newCard: builder.mutation<{}, NewCardsRequestType>({
@@ -140,7 +140,7 @@ type CardsResponseType = {
 type CardsRequestType = {
   cardAnswer?: string
   cardQuestion?: string
-  cardsPack_id: number
+  cardsPack_id: string
   min?: number
   max?: number
   sortCards?: number
