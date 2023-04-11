@@ -5,11 +5,12 @@ import styled from 'styled-components'
 
 type WidgetProfilePropsType = {
   userName: string | undefined
+  onClick: () => void
 }
 
 export const WidgetProfile = (props: WidgetProfilePropsType) => {
   return (
-    <Wrapper>
+    <Wrapper onClick={props.onClick}>
       <Name>{props.userName}</Name>
       <UserIconWidget />
     </Wrapper>
@@ -21,6 +22,7 @@ const Wrapper = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `
 const Name = styled.span`
   border-bottom: 1px dashed #1677ff;
