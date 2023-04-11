@@ -9,7 +9,7 @@ import { MAIN_PATH } from '../../../constants'
 import { isFetchBaseQueryError } from '../../../utils'
 import { useRegisterMutation } from '../auth-api'
 import { FormInput } from '../components/form-input'
-import { AUTH_PATH } from '../constants'
+import { AUTH_PATH, inputs } from '../constants'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../styles'
 
 export type SignUpFormInputs = {
@@ -56,34 +56,21 @@ export const SignUp = () => {
   return (
     <StyledCard title={'Sign Up'} headStyle={cardHeadStyle}>
       <Form onFinish={handleSubmit(onSubmit)}>
-        <FormInput
-          name="email"
-          control={control}
-          rules={{ required: true }}
-          placeholder="Email"
-          autoComplete="email"
-          error={errors.email}
-        />
-
-        <FormInput
-          name="password"
-          type="password"
-          control={control}
-          rules={{ required: true }}
-          placeholder="Password"
-          autoComplete="new-password"
-          error={errors.password}
-        />
-
-        <FormInput
-          name="confirm password"
-          type="password"
-          control={control}
-          rules={{ required: true }}
-          placeholder="Confirm password"
-          autoComplete="new-password"
-          error={errors['confirm password']}
-        />
+        {Object.values(inputs).map(
+          ({ name, controlName, type, rules, placeholder, autoComplete }) =>
+            (name === 'email' || name === 'password' || name === 'confirm password') && (
+              <FormInput
+                key={name}
+                name={name}
+                type={type}
+                control={control}
+                rules={rules}
+                placeholder={placeholder}
+                autoComplete={autoComplete}
+                error={errors[controlName]}
+              />
+            )
+        )}
 
         <ErrorServerHandler error={error} />
 

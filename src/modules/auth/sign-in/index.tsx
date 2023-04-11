@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Button, Checkbox, Form, Input } from 'antd'
+import { Button, Checkbox, Form } from 'antd'
 import { Controller, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import * as yup from 'yup'
@@ -8,12 +8,13 @@ import { ErrorServerHandler } from '../../../components/error-handler/error-serv
 import { MAIN_PATH } from '../../../constants'
 import { isFetchBaseQueryError } from '../../../utils'
 import { useLoginMutation } from '../auth-api'
-import { AUTH_PATH } from '../constants'
+import { FormInput } from '../components/form-input'
+import { AUTH_PATH, inputs } from '../constants'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../styles'
 
 import { ForgotPasswordLink } from './styles'
 
-type LoginFormInputs = {
+export type LoginFormInputs = {
   email: string
   password: string
   rememberMe: boolean
@@ -58,32 +59,22 @@ export const SignIn = () => {
   return (
     <StyledCard title={'Sign In'} headStyle={cardHeadStyle}>
       <Form onFinish={handleSubmit(onSubmit)}>
-        <Form.Item
-          name="email"
-          validateStatus={errors.email ? 'error' : ''}
-          help={errors.email?.message}
-        >
-          <Controller
-            name="email"
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => <Input {...field} placeholder="Email" autoComplete="email" />}
-          />
-        </Form.Item>
-        <Form.Item
-          name="password"
-          validateStatus={errors.password ? 'error' : ''}
-          help={errors.password?.message}
-        >
-          <Controller
-            name="password"
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => (
-              <Input.Password {...field} placeholder="Password" autoComplete="password" />
-            )}
-          />
-        </Form.Item>
+        {Object.values(inputs).map(
+          ({ name, controlName, type, rules, placeholder, autoComplete }) =>
+            (name === 'email' || name === 'password') && (
+              <FormInput
+                key={name}
+                name={name}
+                type={type}
+                control={control}
+                rules={rules}
+                placeholder={placeholder}
+                autoComplete={autoComplete}
+                error={errors[controlName]}
+              />
+            )
+        )}
+
         <Form.Item
           name="rememberMe"
           valuePropName="checked"

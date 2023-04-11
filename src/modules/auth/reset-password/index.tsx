@@ -1,12 +1,13 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Button, Form, Input } from 'antd'
-import { Controller, useForm } from 'react-hook-form'
+import { Button, Form } from 'antd'
+import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
 import { ErrorServerHandler } from '../../../components/error-handler/error-server-handler'
 import { MAIN_PATH } from '../../../constants'
 import { isFetchBaseQueryError } from '../../../utils'
 import { useRequestPasswordResetMutation } from '../auth-api'
+import { FormInput } from '../components/form-input'
 import { AUTH_PATH } from '../constants'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP, StyledText } from '../styles'
 
@@ -24,7 +25,12 @@ const schema = yup
   .required()
 
 export const ResetPassword = () => {
-  const { handleSubmit, control, formState, watch } = useForm<ResetPasswordFormInputs>({
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+    watch,
+  } = useForm<ResetPasswordFormInputs>({
     resolver: yupResolver(schema),
   })
   const [resetPassword, { isLoading, isSuccess, error }] = useRequestPasswordResetMutation()
@@ -45,18 +51,14 @@ export const ResetPassword = () => {
   return (
     <StyledCard title={'Forgot your password?'} headStyle={cardHeadStyle}>
       <Form onFinish={handleSubmit(onSubmit)}>
-        <Form.Item
+        <FormInput
           name="email"
-          validateStatus={formState.errors.email ? 'error' : ''}
-          help={formState.errors.email?.message}
-        >
-          <Controller
-            name="email"
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => <Input {...field} placeholder="Email" autoComplete="email" />}
-          />
-        </Form.Item>
+          control={control}
+          rules={{ required: true }}
+          placeholder="Email"
+          autoComplete="email"
+          error={errors.email}
+        />
         <StyledText type="secondary">
           Enter your email address and we will send you further instructions
         </StyledText>
