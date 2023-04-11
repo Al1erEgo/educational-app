@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 
 import { UserOutlined } from '@ant-design/icons'
 import styled from 'styled-components'
@@ -8,10 +8,10 @@ type WidgetProfilePropsType = {
   onClick: () => void
 }
 
-export const WidgetProfile = (props: WidgetProfilePropsType) => {
+export const WidgetProfile: FC<WidgetProfilePropsType> = ({ onClick, userName }) => {
   return (
-    <Wrapper onClick={props.onClick}>
-      <Name>{props.userName}</Name>
+    <Wrapper onClick={onClick}>
+      <Name>{userName}</Name>
       <UserIconWidget />
     </Wrapper>
   )

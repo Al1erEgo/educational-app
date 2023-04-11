@@ -32,7 +32,7 @@ export const AuthWidget = () => {
       <>
         <WidgetProfile onClick={goToProfileHanler} userName={userData?.name} />
         <WidgetButton onClick={goToLogoutHandler} name={'Log out'} loading={isLoggingOut}>
-          {<LogoutOutlined />}
+          <LogoutOutlined />
         </WidgetButton>
       </>
     )

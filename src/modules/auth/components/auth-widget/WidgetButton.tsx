@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 
 import { Button } from 'antd'
 import styled from 'styled-components'
@@ -11,15 +11,16 @@ type WidgetButtonPropsType = {
   name: string
 }
 
-export const WidgetButton = (props: WidgetButtonPropsType) => {
+export const WidgetButton: FC<WidgetButtonPropsType> = ({
+  type,
+  name,
+  children,
+  onClick,
+  loading,
+}) => {
   return (
-    <StyledButton
-      type={props.type}
-      onClick={props.onClick}
-      icon={props.children}
-      loading={props.loading}
-    >
-      {props.name}
+    <StyledButton type={type} onClick={onClick} icon={children} loading={loading}>
+      {name}
     </StyledButton>
   )
 }
