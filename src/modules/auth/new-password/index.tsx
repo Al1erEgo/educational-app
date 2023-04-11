@@ -1,8 +1,8 @@
 import React from 'react'
 
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Button, Form, Input } from 'antd'
-import { Controller, useForm } from 'react-hook-form'
+import { Button, Form } from 'antd'
+import { useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
 import * as yup from 'yup'
 
@@ -10,6 +10,7 @@ import { ErrorServerHandler } from '../../../components/error-handler/error-serv
 import { MAIN_PATH } from '../../../constants'
 import { isFetchBaseQueryError } from '../../../utils'
 import { useSetNewPasswordMutation } from '../auth-api'
+import { FormInput } from '../components/form-input'
 import { AUTH_PATH } from '../constants'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledText } from '../styles'
 
@@ -61,20 +62,15 @@ export const NewPassword = () => {
   return (
     <StyledCard title={'Create new Password'} headStyle={cardHeadStyle}>
       <Form onFinish={handleSubmit(onSubmit)}>
-        <Form.Item
+        <FormInput
           name="password"
-          validateStatus={errors.password ? 'error' : ''}
-          help={errors.password?.message}
-        >
-          <Controller
-            name="password"
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => (
-              <Input.Password {...field} placeholder="Password" autoComplete="password" />
-            )}
-          />
-        </Form.Item>
+          type="password"
+          control={control}
+          rules={{ required: true }}
+          placeholder="Password"
+          autoComplete="new-password"
+          error={errors.password}
+        />
         <StyledText type="secondary">
           Create new password and we will send you further instructions to email
         </StyledText>

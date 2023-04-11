@@ -9,7 +9,7 @@ import { MAIN_PATH } from '../../../constants'
 import { isFetchBaseQueryError } from '../../../utils'
 import { useRegisterMutation } from '../auth-api'
 import { FormInput } from '../components/form-input'
-import { AUTH_PATH } from '../constants'
+import { AUTH_PATH, inputs } from '../constants'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../styles'
 
 export type SignUpFormInputs = {
@@ -32,41 +32,6 @@ const schema = yup
       }),
   })
   .required()
-
-const inputs = {
-  email: {
-    name: 'email' as const,
-    controlName: 'email' as const,
-    type: undefined,
-    rules: { required: true },
-    placeholder: 'Email',
-    autoComplete: 'email',
-  },
-  password: {
-    name: 'password' as const,
-    controlName: 'password' as const,
-    type: 'password',
-    rules: { required: true },
-    placeholder: 'Password',
-    autoComplete: 'new-password',
-  },
-  confirmPassword: {
-    name: 'confirm password' as const,
-    controlName: 'confirm password' as const,
-    type: 'password',
-    rules: { required: true },
-    placeholder: 'Confirm password',
-    autoComplete: 'new-password',
-  },
-  /*  checkbox: {
-    name: 'checkbox' as const,
-    controlName: 'checkbox' as const,
-    type: 'checkbox',
-    rules: { required: false },
-    placeholder: 'Remember me',
-    autoComplete: 'off',
-  },*/
-}
 
 export const SignUp = () => {
   const {

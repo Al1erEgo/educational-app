@@ -1,8 +1,6 @@
 import { Form, Input } from 'antd'
 import { Control, Controller, FieldError } from 'react-hook-form'
 
-import { SignUpFormInputs } from '../../sign-up'
-
 type ValidationRule = {
   required?: boolean
 }
@@ -15,7 +13,6 @@ type FormInputProps = {
   placeholder?: string
   autoComplete?: string
   error?: FieldError | undefined
-  checkbox?: boolean
 }
 
 const inputPropsByFieldName = {
@@ -35,10 +32,6 @@ const inputPropsByFieldName = {
     type: undefined,
     placeholder: '',
   },
-  /*  checkbox: {
-    type: 'checkbox',
-    placeholder: 'Remember me',
-  },*/
 }
 
 export const FormInput = ({ name, control, rules, autoComplete, error }: FormInputProps) => {
