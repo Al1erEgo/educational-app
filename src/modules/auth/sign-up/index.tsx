@@ -1,15 +1,14 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Button, Form } from 'antd'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
 import * as yup from 'yup'
 
 import { ErrorServerHandler } from '../../../components/error-handler/error-server-handler'
 import { MAIN_PATH } from '../../../constants'
-import { isFetchBaseQueryError } from '../../../utils'
 import { useRegisterMutation } from '../auth-api'
 import { FormInput } from '../components/form-input'
 import { AUTH_PATH } from '../constants'
+import { useSubmit } from '../hooks/use-submit'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../styles'
 
 export type SignUpFormInputs = {
@@ -40,18 +39,8 @@ export const SignUp = () => {
     formState: { errors },
   } = useForm<SignUpFormInputs>({ mode: 'onBlur', resolver: yupResolver(schema) })
   const [registerUser, { isLoading, error }] = useRegisterMutation()
-  const navigate = useNavigate()
 
-  const onSubmit = async (data: SignUpFormInputs) => {
-    try {
-      await registerUser(data).unwrap()
-      navigate(`${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`)
-    } catch (e: unknown) {
-      if (isFetchBaseQueryError(e)) {
-        return e
-      }
-    }
-  }
+  const onSubmit = useSubmit(registerUser, `${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`)
 
   return (
     <StyledCard title={'Sign Up'} headStyle={cardHeadStyle}>

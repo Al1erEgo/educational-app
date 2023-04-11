@@ -1,14 +1,13 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Button, Checkbox, Form, Input } from 'antd'
 import { Controller, useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
 import * as yup from 'yup'
 
 import { ErrorServerHandler } from '../../../components/error-handler/error-server-handler'
 import { MAIN_PATH } from '../../../constants'
-import { isFetchBaseQueryError } from '../../../utils'
 import { useLoginMutation } from '../auth-api'
 import { AUTH_PATH } from '../constants'
+import { useSubmit } from '../hooks/use-submit'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../styles'
 
 import { ForgotPasswordLink } from './styles'
@@ -42,18 +41,8 @@ export const SignIn = () => {
   })
 
   const [login, { isLoading, error }] = useLoginMutation()
-  const navigate = useNavigate()
 
-  const onSubmit = async (data: LoginFormInputs) => {
-    try {
-      await login(data).unwrap()
-      navigate(`${MAIN_PATH.Root}`)
-    } catch (e: unknown) {
-      if (isFetchBaseQueryError(e)) {
-        return e
-      }
-    }
-  }
+  const onSubmit = useSubmit(login, `${MAIN_PATH.Root}`)
 
   return (
     <StyledCard title={'Sign In'} headStyle={cardHeadStyle}>

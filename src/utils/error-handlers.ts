@@ -19,7 +19,7 @@ export function isErrorWithMessage(error: unknown): error is { message: string }
   )
 }
 
-type FetchBaseQueryErrorExtended = FetchBaseQueryError & {
+export type FetchBaseQueryErrorExtended = FetchBaseQueryError & {
   status: number
   data: { error: string }
 }

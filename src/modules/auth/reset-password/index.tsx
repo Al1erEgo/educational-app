@@ -5,9 +5,9 @@ import * as yup from 'yup'
 
 import { ErrorServerHandler } from '../../../components/error-handler/error-server-handler'
 import { MAIN_PATH } from '../../../constants'
-import { isFetchBaseQueryError } from '../../../utils'
 import { useRequestPasswordResetMutation } from '../auth-api'
 import { AUTH_PATH } from '../constants'
+import { useSubmit } from '../hooks/use-submit'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP, StyledText } from '../styles'
 
 import { CheckEmail } from './check-email'
@@ -28,15 +28,7 @@ export const ResetPassword = () => {
     resolver: yupResolver(schema),
   })
   const [resetPassword, { isLoading, isSuccess, error }] = useRequestPasswordResetMutation()
-  const onSubmit = async (data: ResetPasswordFormInputs) => {
-    try {
-      await resetPassword(data).unwrap()
-    } catch (e: unknown) {
-      if (isFetchBaseQueryError(e)) {
-        return e
-      }
-    }
-  }
+  const onSubmit = useSubmit(resetPassword)
 
   if (isSuccess) {
     return <CheckEmail email={watch().email} />
