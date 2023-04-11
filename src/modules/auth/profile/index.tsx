@@ -1,14 +1,13 @@
 import { UserOutlined, LogoutOutlined } from '@ant-design/icons'
 import { Avatar, Upload } from 'antd'
-import { useNavigate } from 'react-router-dom'
 
 import arrowBack from '../../../assets/arrow-back.svg'
 import { ErrorServerHandler } from '../../../components/error-handler/error-server-handler'
 import { MAIN_PATH } from '../../../constants'
-import { isFetchBaseQueryError } from '../../../utils'
 import { useAuthMeLogOutMutation, useAuthMeUpdateMutation } from '../auth-api'
 import { AUTH_PATH } from '../constants'
 import { useAuthorised } from '../hooks'
+import { useSubmit } from '../hooks/use-submit'
 import { cardHeadStyle, StyledCard } from '../styles'
 
 import {
@@ -22,8 +21,6 @@ import {
 } from './styles'
 
 export const Profile = () => {
-  const navigate = useNavigate()
-
   const { data: userData } = useAuthorised()
 
   const { name: userName = '', email: userEmail = '' } = userData ?? {}
@@ -33,20 +30,13 @@ export const Profile = () => {
 
   const [logout, { isLoading: isLoggingOut }] = useAuthMeLogOutMutation()
 
+  const onSubmit = useSubmit(updateUserName)
+
   const handleUserNameChange = async (value: string) => {
-    try {
-      await updateUserName({ name: value }).unwrap()
-    } catch (e: unknown) {
-      if (isFetchBaseQueryError(e)) {
-        return e
-      }
-    }
+    await onSubmit({ name: value })
   }
 
-  const handleLogout = async () => {
-    await logout({})
-    navigate(`${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`)
-  }
+  const handleLogout = useSubmit(logout, `${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`)
 
   return (
     <>

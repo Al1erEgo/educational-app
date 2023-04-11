@@ -3,15 +3,15 @@ import React from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Button, Form } from 'antd'
 import { useForm } from 'react-hook-form'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import * as yup from 'yup'
 
 import { ErrorServerHandler } from '../../../components/error-handler/error-server-handler'
 import { MAIN_PATH } from '../../../constants'
-import { isFetchBaseQueryError } from '../../../utils'
 import { useSetNewPasswordMutation } from '../auth-api'
 import { FormInput } from '../components/form-input'
 import { AUTH_PATH } from '../constants'
+import { useSubmit } from '../hooks/use-submit'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledText } from '../styles'
 
 type NewPasswordFormInputs = {
@@ -39,29 +39,21 @@ export const NewPassword = () => {
   })
 
   const { token } = useParams()
-  const navigate = useNavigate()
 
-  const onSubmit = async (data: NewPasswordFormInputs) => {
-    try {
-      if (!token) {
-        setError('error', { message: 'Something wrong with token' })
+  const onSubmit = useSubmit(newPassword, `${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`)
 
-        return
-      }
-      const payload = { password: data.password, resetPasswordToken: token }
+  const handleNewPasswordSubmit = async (data: NewPasswordFormInputs) => {
+    if (!token) {
+      setError('error', { message: 'Something wrong with token' })
 
-      await newPassword(payload).unwrap()
-      navigate(`${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`)
-    } catch (e: unknown) {
-      if (isFetchBaseQueryError(e)) {
-        setError('error', { message: e.data.error })
-      }
+      return
     }
+    await onSubmit({ ...data, resetPasswordToken: token })
   }
 
   return (
     <StyledCard title={'Create new Password'} headStyle={cardHeadStyle}>
-      <Form onFinish={handleSubmit(onSubmit)}>
+      <Form onFinish={handleSubmit(handleNewPasswordSubmit)}>
         <FormInput
           name="password"
           type="password"

@@ -119,13 +119,13 @@ type RegisterResponseType = {
   error?: string
 }
 
-type LoginRequestType = {
+export type LoginRequestType = {
   email: string
   password: string
   rememberMe: boolean
 }
 
-type LoginResponseType = {
+export type LoginResponseType = {
   _id: string
   email: string
   rememberMe: boolean
@@ -183,7 +183,7 @@ type UpdateResponseType = {
   error?: string
 }
 
-type LogOutRequestType = {}
+type LogOutRequestType = {} | void
 type LogOutResponseType = {
   info: string
   error?: string
@@ -207,5 +207,13 @@ export type SetNewPasswordRequestType = {
 type SetNewPasswordResponseType = {
   info: string
 }
+
+export type AuthApiResponseTypes =
+  | RegisterResponseType
+  | LoginResponseType
+  | UpdateResponseType
+  | LogOutResponseType
+  | PasswordResetResponseType
+  | SetNewPasswordResponseType
 
 // TODO: add utils types (omit, pick, partial)
