@@ -4,17 +4,18 @@ import { Control, Controller, FieldError } from 'react-hook-form'
 import { SignUpFormInputs } from '../../sign-up'
 
 type ValidationRule = {
-  required: boolean
+  required?: boolean
 }
 
 type FormInputProps = {
   name: keyof typeof inputPropsByFieldName
   type?: string
-  control: Control<SignUpFormInputs>
+  control: Control<any>
   rules: ValidationRule
-  placeholder: string
-  autoComplete: string
-  error: FieldError | undefined
+  placeholder?: string
+  autoComplete?: string
+  error?: FieldError | undefined
+  checkbox?: boolean
 }
 
 const inputPropsByFieldName = {
@@ -34,6 +35,10 @@ const inputPropsByFieldName = {
     type: undefined,
     placeholder: '',
   },
+  /*  checkbox: {
+    type: 'checkbox',
+    placeholder: 'Remember me',
+  },*/
 }
 
 export const FormInput = ({ name, control, rules, autoComplete, error }: FormInputProps) => {

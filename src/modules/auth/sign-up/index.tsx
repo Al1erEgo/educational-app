@@ -58,6 +58,14 @@ const inputs = {
     placeholder: 'Confirm password',
     autoComplete: 'new-password',
   },
+  /*  checkbox: {
+    name: 'checkbox' as const,
+    controlName: 'checkbox' as const,
+    type: 'checkbox',
+    rules: { required: false },
+    placeholder: 'Remember me',
+    autoComplete: 'off',
+  },*/
 }
 
 export const SignUp = () => {
@@ -84,18 +92,19 @@ export const SignUp = () => {
     <StyledCard title={'Sign Up'} headStyle={cardHeadStyle}>
       <Form onFinish={handleSubmit(onSubmit)}>
         {Object.values(inputs).map(
-          ({ name, controlName, type, rules, placeholder, autoComplete }) => (
-            <FormInput
-              key={name}
-              name={name}
-              type={type}
-              control={control}
-              rules={rules}
-              placeholder={placeholder}
-              autoComplete={autoComplete}
-              error={errors[controlName]}
-            />
-          )
+          ({ name, controlName, type, rules, placeholder, autoComplete }) =>
+            (name === 'email' || name === 'password' || name === 'confirm password') && (
+              <FormInput
+                key={name}
+                name={name}
+                type={type}
+                control={control}
+                rules={rules}
+                placeholder={placeholder}
+                autoComplete={autoComplete}
+                error={errors[controlName]}
+              />
+            )
         )}
 
         <ErrorServerHandler error={error} />
