@@ -8,7 +8,6 @@ import {
 } from '@reduxjs/toolkit/query'
 import { useNavigate } from 'react-router-dom'
 
-import { isFetchBaseQueryError } from '../../../../utils'
 import { AuthApiResponseTypes } from '../../auth-api'
 
 type CustomMutationTriggerType<T> = MutationTrigger<
@@ -21,24 +20,16 @@ type CustomMutationTriggerType<T> = MutationTrigger<
   >
 >
 
-type SetErrorType = (name: 'error', data: { message: string }) => void
-
-//Hook get trigger from mutation hook, setError function from React Hook Form and path to redirect after successful mutation.
-export const useSubmit = <T>(
-  trigger: CustomMutationTriggerType<T>,
-  setError: SetErrorType,
-  path?: string
-) => {
+//Hook get trigger from mutation hook and path to redirect after successful mutation.
+export const useSubmit = <T>(trigger: CustomMutationTriggerType<T>, path?: string) => {
   const navigate = useNavigate()
 
   return async (data: T) => {
     try {
-      await trigger(data)
+      await trigger(data).unwrap()
       if (path) navigate(path)
     } catch (e: unknown) {
-      if (isFetchBaseQueryError(e)) {
-        setError('error', { message: e.data.error })
-      }
+      return
     }
   }
 }

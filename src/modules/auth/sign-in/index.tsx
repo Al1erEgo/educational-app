@@ -32,7 +32,6 @@ export const SignIn = () => {
   const {
     control,
     handleSubmit,
-    setError,
     formState: { errors },
   } = useForm<LoginFormInputs>({
     mode: 'onBlur',
@@ -44,7 +43,7 @@ export const SignIn = () => {
 
   const [login, { isLoading, error }] = useLoginMutation()
 
-  const onSubmit = useSubmit(login, setError, `${MAIN_PATH.Root}`)
+  const onSubmit = useSubmit(login, `${MAIN_PATH.Root}`)
 
   return (
     <StyledCard title={'Sign In'} headStyle={cardHeadStyle}>
@@ -88,7 +87,6 @@ export const SignIn = () => {
         </ForgotPasswordLink>
 
         <ErrorServerHandler error={error} />
-        <div></div>
 
         <Form.Item>
           <Button
