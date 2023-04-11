@@ -66,7 +66,6 @@ export const Profile = () => {
             editable={{ onChange: handleUserNameChange }}
             disabled={isUpdating}
           >
-            {/*{updatedUserData?.updatedUser.name ?? userName}*/}
             {userName}
           </StyledProfileParagraph>
 

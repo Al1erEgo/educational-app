@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Button, Form, Input } from 'antd'
-import { Controller, useForm } from 'react-hook-form'
+import { Button, Form } from 'antd'
+import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import * as yup from 'yup'
 
@@ -8,10 +8,11 @@ import { ErrorServerHandler } from '../../../components/error-handler/error-serv
 import { MAIN_PATH } from '../../../constants'
 import { isFetchBaseQueryError } from '../../../utils'
 import { useRegisterMutation } from '../auth-api'
+import { FormInput } from '../components/form-input'
 import { AUTH_PATH } from '../constants'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../styles'
 
-type SignUpFormInputs = {
+export type SignUpFormInputs = {
   email: string
   password: string
   'confirm password': string
@@ -55,58 +56,34 @@ export const SignUp = () => {
   return (
     <StyledCard title={'Sign Up'} headStyle={cardHeadStyle}>
       <Form onFinish={handleSubmit(onSubmit)}>
-        <Form.Item
+        <FormInput
           name="email"
-          validateStatus={errors.email ? 'error' : ''}
-          help={errors.email?.message}
-        >
-          <>
-            <Controller
-              name="email"
-              control={control}
-              rules={{ required: true }}
-              render={({ field }) => <Input {...field} placeholder="Email" autoComplete="email" />}
-            />
-          </>
-        </Form.Item>
+          control={control}
+          rules={{ required: true }}
+          placeholder="Email"
+          autoComplete="email"
+          error={errors.email}
+        />
 
-        <Form.Item
+        <FormInput
           name="password"
-          validateStatus={errors.password ? 'error' : ''}
-          help={errors.password?.message}
-        >
-          <>
-            <Controller
-              name="password"
-              control={control}
-              rules={{ required: true }}
-              render={({ field }) => (
-                <Input.Password {...field} placeholder="Password" autoComplete="new-password" />
-              )}
-            />
-          </>
-        </Form.Item>
+          type="password"
+          control={control}
+          rules={{ required: true }}
+          placeholder="Password"
+          autoComplete="new-password"
+          error={errors.password}
+        />
 
-        <Form.Item
+        <FormInput
           name="confirm password"
-          validateStatus={errors['confirm password'] ? 'error' : ''}
-          help={errors['confirm password']?.message}
-        >
-          <>
-            <Controller
-              name="confirm password"
-              control={control}
-              rules={{ required: true }}
-              render={({ field }) => (
-                <Input.Password
-                  {...field}
-                  placeholder="Confirm password"
-                  autoComplete="new-password"
-                />
-              )}
-            />
-          </>
-        </Form.Item>
+          type="password"
+          control={control}
+          rules={{ required: true }}
+          placeholder="Confirm password"
+          autoComplete="new-password"
+          error={errors['confirm password']}
+        />
 
         <ErrorServerHandler error={error} />
 

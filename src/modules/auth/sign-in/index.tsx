@@ -4,11 +4,12 @@ import { Controller, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import * as yup from 'yup'
 
+import { ErrorServerHandler } from '../../../components/error-handler/error-server-handler'
 import { MAIN_PATH } from '../../../constants'
 import { isFetchBaseQueryError } from '../../../utils'
 import { useLoginMutation } from '../auth-api'
 import { AUTH_PATH } from '../constants'
-import { cardHeadStyle, StyledCard, StyledErrorText, StyledNavLink, StyledP } from '../styles'
+import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../styles'
 
 import { ForgotPasswordLink } from './styles'
 
@@ -31,7 +32,6 @@ export const SignIn = () => {
   const {
     control,
     handleSubmit,
-    setError,
     formState: { errors },
   } = useForm<LoginFormInputs>({
     mode: 'onBlur',
@@ -41,7 +41,7 @@ export const SignIn = () => {
     },
   })
 
-  const [login, { isLoading, isError }] = useLoginMutation()
+  const [login, { isLoading, error }] = useLoginMutation()
   const navigate = useNavigate()
 
   const onSubmit = async (data: LoginFormInputs) => {
@@ -50,7 +50,7 @@ export const SignIn = () => {
       navigate(`${MAIN_PATH.Root}`)
     } catch (e: unknown) {
       if (isFetchBaseQueryError(e)) {
-        setError('error', { message: e.data.error })
+        return e
       }
     }
   }
@@ -105,7 +105,9 @@ export const SignIn = () => {
         <ForgotPasswordLink to={`${MAIN_PATH.Auth}${AUTH_PATH.ResetPassword}`}>
           Forgot password?
         </ForgotPasswordLink>
-        {isError && <StyledErrorText type="danger">{errors.error?.message}</StyledErrorText>}
+
+        <ErrorServerHandler error={error} />
+
         <Form.Item>
           <Button
             type="primary"

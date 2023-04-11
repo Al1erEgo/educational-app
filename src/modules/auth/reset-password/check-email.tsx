@@ -21,7 +21,7 @@ export const CheckEmail = (props: CheckEmailPropsType) => {
     <StyledCard title={'Check Email'} headStyle={cardHeadStyle}>
       <ImgWrapper>
         <Div>
-          <img src={checkEmailImage} alt="" />
+          <img src={checkEmailImage} alt="checkEmail" />
         </Div>
       </ImgWrapper>
       <StyledText type="secondary">

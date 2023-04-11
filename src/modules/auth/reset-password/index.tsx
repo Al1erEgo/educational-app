@@ -3,17 +3,12 @@ import { Button, Form, Input } from 'antd'
 import { Controller, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
+import { ErrorServerHandler } from '../../../components/error-handler/error-server-handler'
 import { MAIN_PATH } from '../../../constants'
+import { isFetchBaseQueryError } from '../../../utils'
 import { useRequestPasswordResetMutation } from '../auth-api'
 import { AUTH_PATH } from '../constants'
-import {
-  cardHeadStyle,
-  StyledCard,
-  StyledErrorText,
-  StyledNavLink,
-  StyledP,
-  StyledText,
-} from '../styles'
+import { cardHeadStyle, StyledCard, StyledNavLink, StyledP, StyledText } from '../styles'
 
 import { CheckEmail } from './check-email'
 
@@ -29,18 +24,16 @@ const schema = yup
   .required()
 
 export const ResetPassword = () => {
-  const { handleSubmit, control, setError, formState, watch } = useForm<ResetPasswordFormInputs>({
+  const { handleSubmit, control, formState, watch } = useForm<ResetPasswordFormInputs>({
     resolver: yupResolver(schema),
   })
-  const [resetPassword, { isLoading, isError, isSuccess }] = useRequestPasswordResetMutation()
+  const [resetPassword, { isLoading, isSuccess, error }] = useRequestPasswordResetMutation()
   const onSubmit = async (data: ResetPasswordFormInputs) => {
     try {
       await resetPassword(data).unwrap()
-    } catch (e: any) {
-      if (e.data.error) {
-        setError('error', {
-          message: e.data.error,
-        })
+    } catch (e: unknown) {
+      if (isFetchBaseQueryError(e)) {
+        return e
       }
     }
   }
@@ -67,9 +60,9 @@ export const ResetPassword = () => {
         <StyledText type="secondary">
           Enter your email address and we will send you further instructions
         </StyledText>
-        {isError && (
-          <StyledErrorText type="danger">{formState.errors.error?.message}</StyledErrorText>
-        )}
+
+        <ErrorServerHandler error={error} />
+
         <Form.Item>
           <Button
             type="primary"
