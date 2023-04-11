@@ -4,7 +4,7 @@ import { LogoutOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 
 import { MAIN_PATH } from '../../../../constants'
-import { useAuthMeLogOutMutation, useAuthMeQuery } from '../../auth-api'
+import { useAuthMeLogOutMutation } from '../../auth-api'
 import { AUTH_PATH } from '../../constants'
 import { useAuthorised } from '../../hooks'
 
@@ -16,6 +16,9 @@ export const AuthWidget = () => {
   const navigate = useNavigate()
   const { isAuthorised, data: userData } = useAuthorised()
 
+  const goToProfileHanler = () => {
+    navigate(`${MAIN_PATH.Auth}${AUTH_PATH.Profile}`)
+  }
   const goToSignInHandler = () => {
     navigate(`${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`)
   }
@@ -27,17 +30,15 @@ export const AuthWidget = () => {
   if (isAuthorised) {
     return (
       <>
-        <WidgetProfile userName={userData?.name} />
-        <WidgetButton onClick={goToLogoutHandler} icon={<LogoutOutlined />} loading={isLoggingOut}>
-          {'Log out'}
+        <WidgetProfile onClick={goToProfileHanler} userName={userData?.name} />
+        <WidgetButton onClick={goToLogoutHandler} name={'Log out'} loading={isLoggingOut}>
+          {<LogoutOutlined />}
         </WidgetButton>
       </>
     )
   } else {
     return (
-      <WidgetButton type={'primary'} onClick={goToSignInHandler}>
-        {'Sign In'}
-      </WidgetButton>
+      <WidgetButton name={'Sign in'} type={'primary'} onClick={goToSignInHandler}/>
     )
   }
 }

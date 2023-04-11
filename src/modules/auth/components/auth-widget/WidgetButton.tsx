@@ -7,8 +7,8 @@ type WidgetButtonPropsType = {
   onClick: () => void
   type?: 'link' | 'text' | 'ghost' | 'default' | 'primary' | 'dashed' | undefined
   loading?: boolean
-  children: string
-  icon?: React.ReactNode
+  children?: React.ReactNode
+  name: string
 }
 
 export const WidgetButton = (props: WidgetButtonPropsType) => {
@@ -16,10 +16,10 @@ export const WidgetButton = (props: WidgetButtonPropsType) => {
     <StyledButton
       type={props.type}
       onClick={props.onClick}
-      icon={props.icon}
+      icon={props.children}
       loading={props.loading}
     >
-      {props.children}
+      {props.name}
     </StyledButton>
   )
 }
