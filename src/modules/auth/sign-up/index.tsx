@@ -33,6 +33,33 @@ const schema = yup
   })
   .required()
 
+const inputs = {
+  email: {
+    name: 'email' as const,
+    controlName: 'email' as const,
+    type: undefined,
+    rules: { required: true },
+    placeholder: 'Email',
+    autoComplete: 'email',
+  },
+  password: {
+    name: 'password' as const,
+    controlName: 'password' as const,
+    type: 'password',
+    rules: { required: true },
+    placeholder: 'Password',
+    autoComplete: 'new-password',
+  },
+  confirmPassword: {
+    name: 'confirm password' as const,
+    controlName: 'confirm password' as const,
+    type: 'password',
+    rules: { required: true },
+    placeholder: 'Confirm password',
+    autoComplete: 'new-password',
+  },
+}
+
 export const SignUp = () => {
   const {
     handleSubmit,
@@ -56,34 +83,20 @@ export const SignUp = () => {
   return (
     <StyledCard title={'Sign Up'} headStyle={cardHeadStyle}>
       <Form onFinish={handleSubmit(onSubmit)}>
-        <FormInput
-          name="email"
-          control={control}
-          rules={{ required: true }}
-          placeholder="Email"
-          autoComplete="email"
-          error={errors.email}
-        />
-
-        <FormInput
-          name="password"
-          type="password"
-          control={control}
-          rules={{ required: true }}
-          placeholder="Password"
-          autoComplete="new-password"
-          error={errors.password}
-        />
-
-        <FormInput
-          name="confirm password"
-          type="password"
-          control={control}
-          rules={{ required: true }}
-          placeholder="Confirm password"
-          autoComplete="new-password"
-          error={errors['confirm password']}
-        />
+        {Object.values(inputs).map(
+          ({ name, controlName, type, rules, placeholder, autoComplete }) => (
+            <FormInput
+              key={name}
+              name={name}
+              type={type}
+              control={control}
+              rules={rules}
+              placeholder={placeholder}
+              autoComplete={autoComplete}
+              error={errors[controlName]}
+            />
+          )
+        )}
 
         <ErrorServerHandler error={error} />
 
