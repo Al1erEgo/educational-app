@@ -1,12 +1,12 @@
 import React from 'react'
 
-import { Navigate, Route, Routes, useResolvedPath } from 'react-router-dom'
+import { Route, Routes, useResolvedPath } from 'react-router-dom'
 
 import { AuthProvider } from '../../components'
 import { Error404 } from '../../components/error404'
+import { useDefaultPage } from '../../hooks'
 
 import { AUTH_PATH } from './constants'
-import { useAuthorised } from './hooks'
 import { NewPassword } from './new-password'
 import { Profile } from './profile'
 import { ResetPassword } from './reset-password'
@@ -16,17 +16,16 @@ import { AuthContainer } from './styles'
 
 export const Auth = () => {
   const path = useResolvedPath('')
-  const { isAuthorised } = useAuthorised()
-  const AUTH_DEFAULT_PAGE = isAuthorised ? (
-    <Navigate to={`${path.pathname}${AUTH_PATH.Profile}`} />
-  ) : (
-    <Navigate to={`${path.pathname}${AUTH_PATH.SignIn}`} />
+
+  const { defaultPage } = useDefaultPage(
+    `${path.pathname}${AUTH_PATH.Profile}`,
+    `${path.pathname}${AUTH_PATH.SignIn}`
   )
 
   return (
     <AuthContainer>
       <Routes>
-        <Route path={`${AUTH_PATH.Root}`} element={AUTH_DEFAULT_PAGE} />
+        <Route path={`${AUTH_PATH.Root}`} element={defaultPage} />
         <Route element={<AuthProvider />}>
           <Route path={`${AUTH_PATH.Profile}`} element={<Profile />} />
         </Route>
