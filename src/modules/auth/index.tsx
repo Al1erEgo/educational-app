@@ -3,7 +3,7 @@ import React from 'react'
 import { Navigate, Route, Routes, useResolvedPath } from 'react-router-dom'
 
 import { AuthProvider } from '../../components'
-import { Error404 } from '../../pages/error404'
+import { Error404 } from '../../components/error404'
 
 import { AUTH_PATH } from './constants'
 import { useAuthorised } from './hooks'
