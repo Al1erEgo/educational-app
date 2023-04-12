@@ -12,9 +12,10 @@ export enum MAIN_PATH {
 
 export const CARDS_ROUTES = {
   ROOT_ROUTE: [{ path: MAIN_PATH.Root }],
-  PRIVATE_ROUTES: [{ path: MAIN_PATH.Cards, element: <Cards /> }],
-  GUEST_ROUTES: [
+  MAIN_ROUTES: [
     { path: `${MAIN_PATH.Auth}/*`, element: <Auth /> },
     { path: MAIN_PATH.Error, element: <Error404 /> },
   ],
+  PRIVATE_ROUTES: [{ path: MAIN_PATH.Cards, element: <Cards /> }],
+  GUEST_ROUTES: [],
 } as const

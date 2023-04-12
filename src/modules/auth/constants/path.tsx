@@ -19,12 +19,12 @@ export enum AUTH_PATH {
 
 export const AUTH_ROUTES = {
   ROOT_ROUTE: [{ path: AUTH_PATH.Root }],
+  MAIN_ROUTES: [{ path: AUTH_PATH.Error, element: <Error404 /> }],
   PRIVATE_ROUTES: [{ path: AUTH_PATH.Profile, element: <Profile /> }],
   GUEST_ROUTES: [
     { path: AUTH_PATH.SignIn, element: <SignIn /> },
     { path: AUTH_PATH.SignUp, element: <SignUp /> },
     { path: AUTH_PATH.NewPassword, element: <NewPassword /> },
     { path: AUTH_PATH.ResetPassword, element: <ResetPassword /> },
-    { path: AUTH_PATH.Error, element: <Error404 /> },
   ],
 } as const

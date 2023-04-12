@@ -1,10 +1,6 @@
-import { Route, Routes } from 'react-router-dom'
-
-import { AuthProvider, Header, Loader } from '../components'
-import { Error404 } from '../components/error404'
+import { Header, Loader } from '../components'
 import { CARDS_ROUTES, MAIN_PATH } from '../constants'
 import { useCardsRoutes, useDefaultPage } from '../hooks'
-import { Auth, Cards } from '../modules'
 import { useAuthMeQuery } from '../modules/auth/auth-api'
 import { GlobalStyle } from '../styles'
 

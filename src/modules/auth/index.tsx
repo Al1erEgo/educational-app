@@ -17,8 +17,6 @@ export const Auth = () => {
     `${path.pathname}${AUTH_PATH.SignIn}`
   )
 
-  console.log(defaultPage)
-
   const routes = useCardsRoutes(AUTH_ROUTES, defaultPage)
 
   return <AuthContainer>{routes}</AuthContainer>

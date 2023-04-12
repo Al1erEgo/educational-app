@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { RouteObject, useResolvedPath, useRoutes } from 'react-router-dom'
+import { RouteObject, useRoutes } from 'react-router-dom'
 
 import { AuthProvider } from '../../components'
 import { useAuthorised } from '../../modules/auth/hooks'
@@ -26,6 +26,7 @@ export const useCardsRoutes: UseGuestRoutesType = (routes, navigateToDefaultPage
   let prepareRoutes: RouteType[] = [
     { ...routes.ROOT_ROUTE[0], element: navigateToDefaultPage },
     { element: <AuthProvider />, children: routes.PRIVATE_ROUTES },
+    ...routes.MAIN_ROUTES,
   ]
 
   if (!isAuthorised) {
