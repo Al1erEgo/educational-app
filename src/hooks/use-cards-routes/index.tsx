@@ -1,12 +1,18 @@
 import React from 'react'
 
-import { RouteObject, useRoutes } from 'react-router-dom'
+import { RouteObject, useResolvedPath, useRoutes } from 'react-router-dom'
 
 import { AuthProvider } from '../../components'
 import { useAuthorised } from '../../modules/auth/hooks'
 
+type RouteType = {
+  path?: string
+  element?: React.ReactElement
+  children?: readonly RouteType[]
+}
+
 type RoutesType = {
-  [routes: string]: RouteObject[]
+  [routes: string]: readonly RouteType[]
 }
 
 type UseGuestRoutesType = (
@@ -17,7 +23,7 @@ type UseGuestRoutesType = (
 export const useCardsRoutes: UseGuestRoutesType = (routes, navigateToDefaultPage) => {
   const { isAuthorised } = useAuthorised()
 
-  let prepareRoutes: RouteObject[] = [
+  let prepareRoutes: RouteType[] = [
     { ...routes.ROOT_ROUTE[0], element: navigateToDefaultPage },
     { element: <AuthProvider />, children: routes.PRIVATE_ROUTES },
   ]
@@ -26,7 +32,5 @@ export const useCardsRoutes: UseGuestRoutesType = (routes, navigateToDefaultPage
     prepareRoutes = [...prepareRoutes, ...routes.GUEST_ROUTES]
   }
 
-  const returnRoutes = useRoutes(prepareRoutes)
-
-  return returnRoutes
+  return useRoutes(prepareRoutes as RouteObject[])
 }

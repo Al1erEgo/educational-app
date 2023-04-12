@@ -18,16 +18,7 @@ export const App = () => {
     <>
       <GlobalStyle />
       <Header />
-      <Loader isLoading={isLoading}>
-        <Routes>
-          <Route path={MAIN_PATH.Root} element={defaultPage} />
-          <Route path={`${MAIN_PATH.Auth}/*`} element={<Auth />} />
-          <Route element={<AuthProvider />}>
-            <Route path={MAIN_PATH.Cards} element={<Cards />} />
-          </Route>
-          <Route path={MAIN_PATH.Error} element={<Error404 />} />
-        </Routes>
-      </Loader>
+      <Loader isLoading={isLoading}>{routes}</Loader>
     </>
   )
 }
