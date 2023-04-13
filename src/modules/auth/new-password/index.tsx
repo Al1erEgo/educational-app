@@ -1,42 +1,18 @@
-import React from 'react'
-
-import { yupResolver } from '@hookform/resolvers/yup'
 import { Button, Form } from 'antd'
-import { useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
-import * as yup from 'yup'
 
 import { ErrorServerHandler } from '../../../components/error-handler/error-server-handler'
 import { MAIN_PATH } from '../../../constants'
 import { useSetNewPasswordMutation } from '../auth-api'
 import { FormInput } from '../components/form-input'
 import { AUTH_PATH } from '../constants'
+import { NewPasswordFormInputs, useNewPasswordForm } from '../hooks'
 import { useSubmit } from '../hooks/use-submit'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledText } from '../styles'
 
-type NewPasswordFormInputs = {
-  password: string
-  error?: string
-}
-
-const newPasswordSchema = yup
-  .object({
-    password: yup.string().min(8).required(),
-  })
-  .required()
-
 export const NewPassword = () => {
+  const { handleSubmit, control, setError, errors } = useNewPasswordForm()
   const [newPassword, { isLoading, error }] = useSetNewPasswordMutation()
-
-  const {
-    control,
-    handleSubmit,
-    setError,
-    formState: { errors },
-  } = useForm<NewPasswordFormInputs>({
-    mode: 'onBlur',
-    resolver: yupResolver(newPasswordSchema),
-  })
 
   const { token } = useParams()
 
