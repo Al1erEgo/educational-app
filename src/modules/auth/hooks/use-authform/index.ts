@@ -20,7 +20,7 @@ export type ResetPasswordFormInputs = Omit<FormInputs, 'password'>
 
 export type NewPasswordFormInputs = Omit<FormInputs, 'email'>
 
-const emailSchema = yup.string().required()
+const emailSchema = yup.string().email().required()
 const passwordSchema = yup.string().min(8).required()
 
 const commonSchema = yup.object({
@@ -40,7 +40,7 @@ export const signUpSchema = commonSchema
 
 export const loginSchema = commonSchema
   .shape({
-    rememberMe: yup.boolean(),
+    rememberMe: yup.boolean().default(false),
   })
   .required()
 
@@ -74,12 +74,7 @@ export const useSignUpForm = () => {
 }
 
 export const useLoginForm = () => {
-  const { handleSubmit, control, errors, watch } =
-    useFormWithValidation<LoginFormInputs>(loginSchema)
-
-  const rememberMe = watch('rememberMe')
-
-  return { control, handleSubmit, errors, rememberMe }
+  return useFormWithValidation<LoginFormInputs>(loginSchema)
 }
 
 export const useResetPasswordForm = () => {
