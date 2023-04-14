@@ -8,26 +8,25 @@ const commonSchema = yup.object({
   password: passwordSchema,
 })
 
-export const signUpSchema = commonSchema
-  .shape({
-    'confirm password': passwordSchema
-      .test('passwords-match', 'Passwords must match', function (value) {
-        return this.parent.password === value
-      })
-      .required(),
-  })
-  .required()
-
-export const loginSchema = commonSchema
-  .shape({
-    rememberMe: yup.boolean().default(false),
-  })
-  .required()
-
-export const resetPasswordSchema = yup.object({
-  email: emailSchema,
-})
-
-export const newPasswordSchema = yup.object({
-  password: passwordSchema,
-})
+export const schemaMap = {
+  signup: commonSchema
+    .shape({
+      'confirm password': passwordSchema
+        .test('passwords-match', 'Passwords must match', function (value) {
+          return this.parent.password === value
+        })
+        .required(),
+    })
+    .required(),
+  login: commonSchema
+    .shape({
+      rememberMe: yup.boolean().default(false),
+    })
+    .required(),
+  resetPassword: yup.object({
+    email: emailSchema,
+  }),
+  newPassword: yup.object({
+    password: passwordSchema,
+  }),
+}

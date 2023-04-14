@@ -6,16 +6,17 @@ import { MAIN_PATH } from '../../../constants'
 import { useLoginMutation } from '../auth-api'
 import { FormInput } from '../components/form-input'
 import { AUTH_PATH, inputs } from '../constants'
-import { useLoginForm } from '../hooks'
+import { useFormWithValidation } from '../hooks'
+import { LoginFormInputs } from '../hooks/use-authform/types'
 import { useSubmit } from '../hooks/use-submit'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../styles'
 
 import { ForgotPasswordLink } from './styles'
 
 export const SignIn = () => {
-  const [login, { isLoading, error }] = useLoginMutation()
+  const { handleSubmit, control, errors } = useFormWithValidation<LoginFormInputs>('login')
 
-  const { control, handleSubmit, errors } = useLoginForm()
+  const [login, { isLoading, error }] = useLoginMutation()
 
   const onSubmit = useSubmit(login, `${MAIN_PATH.Root}`)
 

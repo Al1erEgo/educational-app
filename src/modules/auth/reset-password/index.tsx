@@ -5,16 +5,18 @@ import { MAIN_PATH } from '../../../constants'
 import { useRequestPasswordResetMutation } from '../auth-api'
 import { FormInput } from '../components/form-input'
 import { AUTH_PATH } from '../constants'
-import { useResetPasswordForm } from '../hooks'
+import { useFormWithValidation } from '../hooks'
+import { ResetPasswordFormInputs } from '../hooks/use-authform/types'
 import { useSubmit } from '../hooks/use-submit'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP, StyledText } from '../styles'
 
 import { CheckEmail } from './check-email'
 
 export const ResetPassword = () => {
-  const [resetPassword, { isLoading, isSuccess, error }] = useRequestPasswordResetMutation()
+  const { handleSubmit, control, errors, watch } =
+    useFormWithValidation<ResetPasswordFormInputs>('resetPassword')
 
-  const { control, handleSubmit, errors, watch } = useResetPasswordForm()
+  const [resetPassword, { isLoading, isSuccess, error }] = useRequestPasswordResetMutation()
 
   const onSubmit = useSubmit(resetPassword)
 

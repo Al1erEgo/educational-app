@@ -6,13 +6,15 @@ import { MAIN_PATH } from '../../../constants'
 import { useSetNewPasswordMutation } from '../auth-api'
 import { FormInput } from '../components/form-input'
 import { AUTH_PATH } from '../constants'
-import { useNewPasswordForm } from '../hooks'
+import { useFormWithValidation } from '../hooks'
 import { NewPasswordFormInputs } from '../hooks/use-authform/types'
 import { useSubmit } from '../hooks/use-submit'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledText } from '../styles'
 
 export const NewPassword = () => {
-  const { handleSubmit, control, setError, errors } = useNewPasswordForm()
+  const { handleSubmit, control, setError, errors } =
+    useFormWithValidation<NewPasswordFormInputs>('newPassword')
+
   const [newPassword, { isLoading, error }] = useSetNewPasswordMutation()
 
   const { token } = useParams()

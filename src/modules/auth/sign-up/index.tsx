@@ -5,12 +5,13 @@ import { MAIN_PATH } from '../../../constants'
 import { useRegisterMutation } from '../auth-api'
 import { FormInput } from '../components/form-input'
 import { AUTH_PATH, inputs } from '../constants'
-import { useSignUpForm } from '../hooks'
+import { useFormWithValidation } from '../hooks'
+import { SignUpFormInputs } from '../hooks/use-authform/types'
 import { useSubmit } from '../hooks/use-submit'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../styles'
 
 export const SignUp = () => {
-  const { handleSubmit, control, errors } = useSignUpForm()
+  const { handleSubmit, control, errors } = useFormWithValidation<SignUpFormInputs>('signup')
 
   const [registerUser, { isLoading, error }] = useRegisterMutation()
 

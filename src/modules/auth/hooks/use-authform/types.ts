@@ -15,3 +15,5 @@ export type LoginFormInputs = FormInputs & {
 export type ResetPasswordFormInputs = Omit<FormInputs, 'password'>
 
 export type NewPasswordFormInputs = Omit<FormInputs, 'email'>
+
+export type FormType = 'signup' | 'login' | 'resetPassword' | 'newPassword'
