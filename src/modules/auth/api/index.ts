@@ -1,6 +1,6 @@
 import { rootApi } from '../../../store/root-api'
 
-export const index = rootApi.injectEndpoints({
+export const authApi = rootApi.injectEndpoints({
   endpoints: builder => ({
     register: builder.mutation<RegisterResponseType, RegisterRequestType>({
       query: (requestData: RegisterRequestType) => ({
@@ -21,7 +21,7 @@ export const index = rootApi.injectEndpoints({
         try {
           const { data } = await queryFulfilled
 
-          dispatch(index.util.upsertQueryData('authMe', 'auth', data))
+          dispatch(authApi.util.upsertQueryData('authMe', 'auth', data))
         } catch (e) {
           return
         }
@@ -48,7 +48,7 @@ export const index = rootApi.injectEndpoints({
         try {
           const { data } = await queryFulfilled
 
-          dispatch(index.util.upsertQueryData('authMe', 'auth', data.updatedUser))
+          dispatch(authApi.util.upsertQueryData('authMe', 'auth', data.updatedUser))
         } catch (e) {
           return
         }
@@ -95,7 +95,7 @@ export const {
   useAuthMeLogOutMutation,
   useRequestPasswordResetMutation,
   useSetNewPasswordMutation,
-} = index
+} = authApi
 
 type RegisterRequestType = {
   email: string

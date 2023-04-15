@@ -2,20 +2,16 @@ import { Form } from 'antd'
 
 import { ErrorServerHandler } from '../../../components/error-handler/error-server-handler'
 import { MAIN_PATH } from '../../../constants'
-import { useRequestPasswordResetMutation } from '../api'
 import { FormButton, FormInput } from '../components'
 import { AUTH_PATH } from '../constants'
-import { useFormWithValidation, useSubmit } from '../hooks'
-import { ResetPasswordFormInputs } from '../hooks/use-authform/types'
+import { useFormData } from '../hooks/use-form-data'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP, StyledText } from '../styles'
 
 import { CheckEmail } from './components/check-email'
 
 export const ResetPassword = () => {
-  const { handleSubmit, control, errors, watch } =
-    useFormWithValidation<ResetPasswordFormInputs>('resetPassword')
-  const [resetPassword, { isLoading, isSuccess, error }] = useRequestPasswordResetMutation()
-  const onSubmit = useSubmit(resetPassword)
+  const [{ handleSubmit, control, errors, watch }, { isLoading, isSuccess, error }, onSubmit] =
+    useFormData('resetPassword')
 
   if (isSuccess) {
     return <CheckEmail email={watch().email} />

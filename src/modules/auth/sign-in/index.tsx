@@ -3,19 +3,17 @@ import { Controller } from 'react-hook-form'
 
 import { ErrorServerHandler } from '../../../components/error-handler/error-server-handler'
 import { MAIN_PATH } from '../../../constants'
-import { useLoginMutation } from '../api'
 import { FormButton, FormInput } from '../components'
 import { AUTH_PATH } from '../constants'
-import { useFormWithValidation, useSubmit } from '../hooks'
 import { LoginFormInputs } from '../hooks/use-authform/types'
+import { useFormData } from '../hooks/use-form-data'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../styles'
 
 import { ForgotPasswordLink } from './styles'
 
 export const SignIn = () => {
-  const { handleSubmit, control, errors } = useFormWithValidation<LoginFormInputs>('login')
-  const [login, { isLoading, error }] = useLoginMutation()
-  const onSubmit = useSubmit(login, `${MAIN_PATH.Root}`)
+  const [{ handleSubmit, control, errors }, { isLoading, error }, onSubmit] =
+    useFormData<LoginFormInputs>('login')
 
   return (
     <StyledCard title={'Sign In'} headStyle={cardHeadStyle}>

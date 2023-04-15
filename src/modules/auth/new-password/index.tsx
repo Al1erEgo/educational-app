@@ -3,19 +3,17 @@ import { useParams } from 'react-router-dom'
 
 import { ErrorServerHandler } from '../../../components/error-handler/error-server-handler'
 import { MAIN_PATH } from '../../../constants'
-import { useSetNewPasswordMutation } from '../api'
 import { FormButton, FormInput } from '../components'
 import { AUTH_PATH } from '../constants'
-import { useFormWithValidation, useSubmit } from '../hooks'
 import { NewPasswordFormInputs } from '../hooks/use-authform/types'
+import { useFormData } from '../hooks/use-form-data'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledText } from '../styles'
 
 export const NewPassword = () => {
-  const { handleSubmit, control, setError, errors } =
-    useFormWithValidation<NewPasswordFormInputs>('newPassword')
-  const [newPassword, { isLoading, error }] = useSetNewPasswordMutation()
   const { token } = useParams()
-  const onSubmit = useSubmit(newPassword, `${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`)
+  const [{ handleSubmit, control, setError, errors }, { isLoading, error }, onSubmit] =
+    useFormData('newPassword')
+
   const handleNewPasswordSubmit = async (data: NewPasswordFormInputs) => {
     if (!token) {
       setError('error', { message: 'Something wrong with token' })
