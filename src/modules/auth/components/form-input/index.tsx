@@ -1,11 +1,12 @@
 import { Form, Input } from 'antd'
 import { Controller } from 'react-hook-form'
 
-import { inputPropsByFieldName } from './constants'
+import { inputs } from '../../constants'
+
 import { FormInputProps } from './types'
 
-export const FormInput = ({ name, control, rules, autoComplete, error }: FormInputProps) => {
-  const { type, placeholder } = inputPropsByFieldName[name]
+export const FormInput = ({ name, control, error }: FormInputProps) => {
+  const { type, placeholder, rules, autoComplete } = inputs[name]
 
   return (
     <Form.Item validateStatus={error ? 'error' : ''} help={error?.message}>

@@ -15,7 +15,7 @@ export const inputs = {
     placeholder: 'Password',
     autoComplete: 'new-password',
   },
-  confirmPassword: {
+  'confirm password': {
     name: 'confirm password' as const,
     controlName: 'confirm password' as const,
     type: 'password',

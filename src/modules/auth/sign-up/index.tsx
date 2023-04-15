@@ -4,9 +4,9 @@ import { ErrorServerHandler } from '../../../components/error-handler/error-serv
 import { MAIN_PATH } from '../../../constants'
 import { useRegisterMutation } from '../api'
 import { FormInput } from '../components/form-input'
-import { AUTH_PATH, inputs } from '../constants'
+import { AUTH_PATH } from '../constants'
 import { useFormWithValidation, useSubmit } from '../hooks'
-import { SignUpFormInputs } from '../hooks/use-authform/types/types'
+import { SignUpFormInputs } from '../hooks/use-authform/types'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../styles'
 
 export const SignUp = () => {
@@ -19,21 +19,9 @@ export const SignUp = () => {
   return (
     <StyledCard title={'Sign Up'} headStyle={cardHeadStyle}>
       <Form onFinish={handleSubmit(onSubmit)}>
-        {Object.values(inputs).map(
-          ({ name, controlName, type, rules, placeholder, autoComplete }) =>
-            (name === 'email' || name === 'password' || name === 'confirm password') && (
-              <FormInput
-                key={name}
-                name={name}
-                type={type}
-                control={control}
-                rules={rules}
-                placeholder={placeholder}
-                autoComplete={autoComplete}
-                error={errors[controlName]}
-              />
-            )
-        )}
+        <FormInput name="email" control={control} error={errors.email} />
+        <FormInput name="password" control={control} error={errors.password} />
+        <FormInput name="confirm password" control={control} error={errors['confirm password']} />
 
         <ErrorServerHandler error={error} />
 

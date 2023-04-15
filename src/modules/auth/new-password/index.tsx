@@ -32,15 +32,7 @@ export const NewPassword = () => {
   return (
     <StyledCard title={'Create new Password'} headStyle={cardHeadStyle}>
       <Form onFinish={handleSubmit(handleNewPasswordSubmit)}>
-        <FormInput
-          name="password"
-          type="password"
-          control={control}
-          rules={{ required: true }}
-          placeholder="Password"
-          autoComplete="new-password"
-          error={errors.password}
-        />
+        <FormInput name="password" control={control} error={errors.password} />
         <StyledText type="secondary">
           Create new password and we will send you further instructions to email
         </StyledText>

@@ -23,18 +23,10 @@ export const ResetPassword = () => {
     return <CheckEmail email={watch().email} />
   }
 
-  //TODO refactor FormInput call after FormInput refactor
   return (
     <StyledCard title={'Forgot your password?'} headStyle={cardHeadStyle}>
       <Form onFinish={handleSubmit(onSubmit)}>
-        <FormInput
-          name="email"
-          control={control}
-          rules={{ required: true }}
-          placeholder="Email"
-          autoComplete="email"
-          error={errors.email}
-        />
+        <FormInput name="email" control={control} error={errors.email} />
         <StyledText type="secondary">
           Enter your email address and we will send you further instructions
         </StyledText>

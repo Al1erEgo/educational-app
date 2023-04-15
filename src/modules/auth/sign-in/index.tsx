@@ -5,7 +5,7 @@ import { ErrorServerHandler } from '../../../components/error-handler/error-serv
 import { MAIN_PATH } from '../../../constants'
 import { useLoginMutation } from '../api'
 import { FormInput } from '../components/form-input'
-import { AUTH_PATH, inputs } from '../constants'
+import { AUTH_PATH } from '../constants'
 import { useFormWithValidation, useSubmit } from '../hooks'
 import { LoginFormInputs } from '../hooks/use-authform/types'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../styles'
@@ -22,18 +22,8 @@ export const SignIn = () => {
   return (
     <StyledCard title={'Sign In'} headStyle={cardHeadStyle}>
       <Form onFinish={handleSubmit(onSubmit)}>
-        {Object.values(inputs).map(
-          inputs =>
-            (inputs.name === 'email' || inputs.name === 'password') && (
-              <FormInput
-                key={inputs.name}
-                {...inputs}
-                control={control}
-                error={errors[inputs.controlName]}
-              />
-            )
-        )}
-
+        <FormInput name="email" control={control} error={errors.email} />
+        <FormInput name="password" control={control} error={errors.password} />
         <Form.Item
           name="rememberMe"
           valuePropName="checked"
