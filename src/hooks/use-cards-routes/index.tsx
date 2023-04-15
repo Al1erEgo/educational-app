@@ -12,7 +12,7 @@ A hook that prepares and returns the routes based on user authorization status.
 @param {Object} routes - An object containing all the routes information.
 @param {string} userRoute - A string representing the route for authenticated users.
 @param {string} guestRoute - A string representing the route for unauthenticated users.
-@returns {Object} - An object containing the prepared routes for displaying Cards component.
+@returns {Object} - An object containing the prepared routes for displaying Tree components.
 */
 export const useCardsRoutes: UseGuestRoutesType = (routes, userRoute, guestRoute) => {
   const { isAuthorised } = useAuthorised()

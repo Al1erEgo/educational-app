@@ -23,17 +23,13 @@ export const SignIn = () => {
     <StyledCard title={'Sign In'} headStyle={cardHeadStyle}>
       <Form onFinish={handleSubmit(onSubmit)}>
         {Object.values(inputs).map(
-          ({ name, controlName, type, rules, placeholder, autoComplete }) =>
-            (name === 'email' || name === 'password') && (
+          inputs =>
+            (inputs.name === 'email' || inputs.name === 'password') && (
               <FormInput
-                key={name}
-                name={name}
-                type={type}
+                key={inputs.name}
+                {...inputs}
                 control={control}
-                rules={rules}
-                placeholder={placeholder}
-                autoComplete={autoComplete}
-                error={errors[controlName]}
+                error={errors[inputs.controlName]}
               />
             )
         )}
