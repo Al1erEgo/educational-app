@@ -7,7 +7,7 @@ import { useLoginMutation } from '../api'
 import { FormInput } from '../components/form-input'
 import { AUTH_PATH, inputs } from '../constants'
 import { useFormWithValidation, useSubmit } from '../hooks'
-import { LoginFormInputs } from '../hooks/use-authform/types/types'
+import { LoginFormInputs } from '../hooks/use-authform/types'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../styles'
 
 import { ForgotPasswordLink } from './styles'
