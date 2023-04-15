@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Error404 } from '../components/error404'
+import { Error404 } from '../components'
 import { Auth, Cards } from '../modules'
 
 import { MAIN_PATH } from './path'

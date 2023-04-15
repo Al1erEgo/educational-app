@@ -11,7 +11,7 @@ import { useAuthMeLogOutMutation } from '../../api'
 import { AUTH_PATH } from '../../constants'
 import { useAuthorised, useSubmit } from '../../hooks'
 
-import { WidgetProfile } from './WidgetProfile'
+import { WidgetProfile } from './components/widget-profile'
 
 export const AuthWidget = () => {
   const [logout] = useAuthMeLogOutMutation()

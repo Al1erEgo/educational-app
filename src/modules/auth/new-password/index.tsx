@@ -1,7 +1,7 @@
 import { Form } from 'antd'
 import { useParams } from 'react-router-dom'
 
-import { ErrorServerHandler } from '../../../components/error-handler/error-server-handler'
+import { ErrorServerHandler } from '../../../components/'
 import { MAIN_PATH } from '../../../constants'
 import { FormButton, FormInput } from '../components'
 import { AUTH_PATH } from '../constants'

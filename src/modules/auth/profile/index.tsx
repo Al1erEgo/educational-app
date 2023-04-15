@@ -2,7 +2,7 @@ import { UserOutlined, LogoutOutlined } from '@ant-design/icons'
 import { Avatar, Upload } from 'antd'
 
 import arrowBack from '../../../assets/arrow-back.svg'
-import { ErrorServerHandler } from '../../../components/error-handler/error-server-handler'
+import { ErrorServerHandler } from '../../../components/error-server-handler/error-server-handler'
 import { MAIN_PATH } from '../../../constants'
 import { useAuthMeLogOutMutation, useAuthMeUpdateMutation } from '../api'
 import { AUTH_PATH } from '../constants'

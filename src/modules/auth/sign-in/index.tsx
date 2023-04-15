@@ -1,7 +1,7 @@
 import { Checkbox, Form } from 'antd'
 import { Controller } from 'react-hook-form'
 
-import { ErrorServerHandler } from '../../../components/error-handler/error-server-handler'
+import { ErrorServerHandler } from '../../../components/error-server-handler/error-server-handler'
 import { MAIN_PATH } from '../../../constants'
 import { FormButton, FormInput } from '../components'
 import { AUTH_PATH } from '../constants'
