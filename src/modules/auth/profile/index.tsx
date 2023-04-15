@@ -42,7 +42,7 @@ export const Profile = () => {
     <>
       <StyledBackToCardLink to={`${MAIN_PATH.Cards}`}>
         <StyledProfileImg src={arrowBack} alt="arrow-back" />
-        Back to card pack
+        Back to cars
       </StyledBackToCardLink>
       <StyledCard title={'Personal information'} headStyle={cardHeadStyle}>
         <StyledProfileContainer>

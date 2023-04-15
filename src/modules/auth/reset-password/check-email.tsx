@@ -19,11 +19,7 @@ export const CheckEmail = (props: CheckEmailPropsType) => {
 
   return (
     <StyledCard title={'Check Email'} headStyle={cardHeadStyle}>
-      <ImgWrapper>
-        <Div>
-          <img src={checkEmailImage} alt="checkEmail" />
-        </Div>
-      </ImgWrapper>
+      <CheckEmailStyledImage src={checkEmailImage} alt="checkEmail" />
       <StyledText type="secondary">
         We’ve sent an Email with instructions to {props.email}
       </StyledText>
@@ -43,12 +39,9 @@ export const CheckEmail = (props: CheckEmailPropsType) => {
   )
 }
 
-export const ImgWrapper = styled(Form.Item)`
+const CheckEmailStyledImage = styled.img`
   display: flex;
   justify-content: center;
-`
-
-const Div = styled.div`
-  width: 110px;
+  width: 100%;
   height: 110px;
 `
