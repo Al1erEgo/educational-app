@@ -8,11 +8,13 @@ export const StyledBackToCardLink = styled(NavLink)`
   display: block;
   text-align: start;
   text-decoration: none;
+  position: absolute;
+  top: 100px;
   color: black;
   font-size: 1rem;
   line-height: 1.5rem;
   font-weight: 500;
-  margin-left: 5rem;
+  left: 14%;
 
   &:hover {
     color: black;

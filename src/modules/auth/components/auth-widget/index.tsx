@@ -1,36 +1,53 @@
 import React from 'react'
 
 import { LogoutOutlined } from '@ant-design/icons'
+import { Button } from 'antd'
+import { useLocation, useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 
 import { MAIN_PATH } from '../../../../constants'
-import { useNavigateToOnclick } from '../../../../hooks'
-import { useAuthMeLogOutMutation } from '../../api'
+import { useAuthMeLogOutMutation } from '../../auth-api'
 import { AUTH_PATH } from '../../constants'
 import { useAuthorised, useSubmit } from '../../hooks'
 
-import { WidgetButton } from './WidgetButton'
 import { WidgetProfile } from './WidgetProfile'
 
 export const AuthWidget = () => {
-  const [logout, { isLoading: isLoggingOut }] = useAuthMeLogOutMutation()
-
+  const [logout] = useAuthMeLogOutMutation()
+  const navigate = useNavigate()
   const { isAuthorised, data: userData } = useAuthorised()
 
-  const goToProfileHandler = useNavigateToOnclick(`${MAIN_PATH.Auth}${AUTH_PATH.Profile}`)
-  const goToSignInHandler = useNavigateToOnclick(`${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`)
+  const goToProfileHandler = () => {
+    navigate(`${MAIN_PATH.Auth}${AUTH_PATH.Profile}`)
+  }
+  const goToSignInHandler = () => {
+    navigate(`${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`)
+  }
+  const goToSignUpHandler = () => {
+    navigate(`${MAIN_PATH.Auth}${AUTH_PATH.SignUp}`)
+  }
 
   const goToLogoutHandler = useSubmit(logout, `${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`)
 
-  if (isAuthorised) {
-    return (
-      <>
-        <WidgetProfile onClick={goToProfileHandler} userName={userData?.name} />
-        <WidgetButton onClick={goToLogoutHandler} name={'Log out'} loading={isLoggingOut}>
-          <LogoutOutlined />
-        </WidgetButton>
-      </>
-    )
-  } else {
-    return <WidgetButton name={'Sign in'} type={'primary'} onClick={goToSignInHandler} />
-  }
+  const location = useLocation()
+
+  const buttonProps =
+    location.pathname === '/auth/sign-up'
+      ? { children: 'Sign in', onClick: goToSignInHandler }
+      : { children: 'Sign up', onClick: goToSignUpHandler }
+
+  return isAuthorised ? (
+    <>
+      <WidgetProfile onClick={goToProfileHandler} userName={userData?.name} />
+      <StyledButton icon={<LogoutOutlined />} onClick={goToLogoutHandler}>
+        Log out
+      </StyledButton>
+    </>
+  ) : (
+    <StyledButton type={'primary'} {...buttonProps} />
+  )
 }
+const StyledButton = styled(Button)`
+  width: 100px;
+  height: 35px;
+`
