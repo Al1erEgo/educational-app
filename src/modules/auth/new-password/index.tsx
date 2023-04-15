@@ -3,12 +3,11 @@ import { useParams } from 'react-router-dom'
 
 import { ErrorServerHandler } from '../../../components/error-handler/error-server-handler'
 import { MAIN_PATH } from '../../../constants'
-import { useSetNewPasswordMutation } from '../auth-api'
+import { useSetNewPasswordMutation } from '../api'
 import { FormInput } from '../components/form-input'
 import { AUTH_PATH } from '../constants'
-import { useFormWithValidation } from '../hooks'
+import { useFormWithValidation, useSubmit } from '../hooks'
 import { NewPasswordFormInputs } from '../hooks/use-authform/types'
-import { useSubmit } from '../hooks/use-submit'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledText } from '../styles'
 
 export const NewPassword = () => {

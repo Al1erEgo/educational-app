@@ -2,12 +2,11 @@ import { Button, Form } from 'antd'
 
 import { ErrorServerHandler } from '../../../components/error-handler/error-server-handler'
 import { MAIN_PATH } from '../../../constants'
-import { useRegisterMutation } from '../auth-api'
+import { useRegisterMutation } from '../api'
 import { FormInput } from '../components/form-input'
 import { AUTH_PATH, inputs } from '../constants'
-import { useFormWithValidation } from '../hooks'
-import { SignUpFormInputs } from '../hooks/use-authform/types'
-import { useSubmit } from '../hooks/use-submit'
+import { useFormWithValidation, useSubmit } from '../hooks'
+import { SignUpFormInputs } from '../hooks/use-authform/types/types'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../styles'
 
 export const SignUp = () => {

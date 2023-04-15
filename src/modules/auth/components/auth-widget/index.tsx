@@ -1,28 +1,23 @@
 import React from 'react'
 
 import { LogoutOutlined } from '@ant-design/icons'
-import { useNavigate } from 'react-router-dom'
 
 import { MAIN_PATH } from '../../../../constants'
-import { useAuthMeLogOutMutation } from '../../auth-api'
+import { useNavigateToOnclick } from '../../../../hooks'
+import { useAuthMeLogOutMutation } from '../../api'
 import { AUTH_PATH } from '../../constants'
-import { useAuthorised } from '../../hooks'
-import { useSubmit } from '../../hooks/use-submit'
+import { useAuthorised, useSubmit } from '../../hooks'
 
 import { WidgetButton } from './WidgetButton'
 import { WidgetProfile } from './WidgetProfile'
 
 export const AuthWidget = () => {
   const [logout, { isLoading: isLoggingOut }] = useAuthMeLogOutMutation()
-  const navigate = useNavigate()
+
   const { isAuthorised, data: userData } = useAuthorised()
 
-  const goToProfileHandler = () => {
-    navigate(`${MAIN_PATH.Auth}${AUTH_PATH.Profile}`)
-  }
-  const goToSignInHandler = () => {
-    navigate(`${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`)
-  }
+  const goToProfileHandler = useNavigateToOnclick(`${MAIN_PATH.Auth}${AUTH_PATH.Profile}`)
+  const goToSignInHandler = useNavigateToOnclick(`${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`)
 
   const goToLogoutHandler = useSubmit(logout, `${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`)
 

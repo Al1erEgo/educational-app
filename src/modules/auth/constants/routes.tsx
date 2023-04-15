@@ -7,15 +7,7 @@ import { ResetPassword } from '../reset-password'
 import { SignIn } from '../sign-in'
 import { SignUp } from '../sign-up'
 
-export enum AUTH_PATH {
-  Root = '/',
-  Profile = '/profile',
-  SignUp = '/sign-up',
-  SignIn = '/sign-in',
-  ResetPassword = '/reset-password',
-  NewPassword = '/set-new-password/:token',
-  Error = '*',
-}
+import { AUTH_PATH } from './path'
 
 export const AUTH_ROUTES = {
   ROOT_ROUTE: [{ path: AUTH_PATH.Root }],

@@ -2,15 +2,14 @@ import { Button, Form } from 'antd'
 
 import { ErrorServerHandler } from '../../../components/error-handler/error-server-handler'
 import { MAIN_PATH } from '../../../constants'
-import { useRequestPasswordResetMutation } from '../auth-api'
+import { useRequestPasswordResetMutation } from '../api'
 import { FormInput } from '../components/form-input'
 import { AUTH_PATH } from '../constants'
-import { useFormWithValidation } from '../hooks'
-import { ResetPasswordFormInputs } from '../hooks/use-authform/types'
-import { useSubmit } from '../hooks/use-submit'
+import { useFormWithValidation, useSubmit } from '../hooks'
+import { ResetPasswordFormInputs } from '../hooks/use-authform/types/types'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP, StyledText } from '../styles'
 
-import { CheckEmail } from './check-email'
+import { CheckEmail } from './components/check-email/check-email'
 
 export const ResetPassword = () => {
   const { handleSubmit, control, errors, watch } =

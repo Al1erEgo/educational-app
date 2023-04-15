@@ -1,7 +1,7 @@
-import { Header, Loader } from '../components'
+import { Loader, Header } from '../components'
 import { CARDS_ROUTES, MAIN_PATH } from '../constants'
 import { useCardsRoutes } from '../hooks'
-import { useAuthMeQuery } from '../modules/auth/auth-api'
+import { useAuthMeQuery } from '../modules/auth/api'
 import { GlobalStyle } from '../styles'
 
 export const App = () => {

@@ -1,6 +1,6 @@
-import { rootApi } from '../../store/root-api'
+import { rootApi } from '../../../store/root-api'
 
-export const cardsApi = rootApi.injectEndpoints({
+export const index = rootApi.injectEndpoints({
   endpoints: builder => ({
     cardPacks: builder.query<CardPacksResponseType, CardPacksRequestType>({
       query: (params: CardPacksRequestType) => ({
@@ -71,7 +71,7 @@ export const {
   useNewCardMutation,
   useDeletedCardMutation,
   useUpdatedCardMutation,
-} = cardsApi
+} = index
 
 type CardPacksResponseType = {
   cardPacks: [

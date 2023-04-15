@@ -1,3 +1,3 @@
-export * from './Header/Header'
+export * from './header'
 export * from './loader'
 export * from './auth-provider'

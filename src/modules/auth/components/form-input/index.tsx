@@ -1,38 +1,8 @@
 import { Form, Input } from 'antd'
-import { Control, Controller, FieldError } from 'react-hook-form'
+import { Controller } from 'react-hook-form'
 
-type ValidationRule = {
-  required?: boolean
-}
-
-type FormInputProps = {
-  name: keyof typeof inputPropsByFieldName
-  type?: string
-  control: Control<any>
-  rules: ValidationRule
-  placeholder?: string
-  autoComplete?: string
-  error?: FieldError | undefined
-}
-
-const inputPropsByFieldName = {
-  email: {
-    type: undefined,
-    placeholder: 'Email',
-  },
-  password: {
-    type: 'password',
-    placeholder: 'Password',
-  },
-  'confirm password': {
-    type: 'password',
-    placeholder: 'Confirm password',
-  },
-  error: {
-    type: undefined,
-    placeholder: '',
-  },
-}
+import { inputPropsByFieldName } from './constants'
+import { FormInputProps } from './types'
 
 export const FormInput = ({ name, control, rules, autoComplete, error }: FormInputProps) => {
   const { type, placeholder } = inputPropsByFieldName[name]

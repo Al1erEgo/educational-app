@@ -1,11 +1,10 @@
 import { Button, Result } from 'antd'
-import { useNavigate } from 'react-router-dom'
 
 import { MAIN_PATH } from '../../constants'
+import { useNavigateToOnclick } from '../../hooks'
 
 export const Error404 = () => {
-  const navigate = useNavigate()
-  const onClickNavigateToMain = () => navigate(`${MAIN_PATH.Root}`)
+  const onClickNavigateToMain = useNavigateToOnclick(MAIN_PATH.Root)
 
   return (
     <Result

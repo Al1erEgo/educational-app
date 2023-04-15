@@ -1,7 +1,7 @@
-import { authApi } from '../../auth-api'
+import { index } from '../../api'
 
 export const useAuthorised = () => {
-  const authQueryResult = authApi.endpoints.authMe.useQueryState('auth')
+  const authQueryResult = index.endpoints.authMe.useQueryState('auth')
 
   return {
     isAuthorised: authQueryResult.status === 'fulfilled',

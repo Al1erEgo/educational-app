@@ -1,2 +1,3 @@
-export { AUTH_PATH } from './path'
-export { inputs } from './inputs'
+export * from './path'
+export * from './inputs'
+export * from './routes'
