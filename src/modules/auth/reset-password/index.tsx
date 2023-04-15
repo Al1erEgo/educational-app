@@ -6,10 +6,10 @@ import { useRequestPasswordResetMutation } from '../api'
 import { FormInput } from '../components/form-input'
 import { AUTH_PATH } from '../constants'
 import { useFormWithValidation, useSubmit } from '../hooks'
-import { ResetPasswordFormInputs } from '../hooks/use-authform/types/types'
+import { ResetPasswordFormInputs } from '../hooks/use-authform/types'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP, StyledText } from '../styles'
 
-import { CheckEmail } from './components/check-email/check-email'
+import { CheckEmail } from './components/check-email'
 
 export const ResetPassword = () => {
   const { handleSubmit, control, errors, watch } =
@@ -23,6 +23,7 @@ export const ResetPassword = () => {
     return <CheckEmail email={watch().email} />
   }
 
+  //TODO refactor FormInput call after FormInput refactor
   return (
     <StyledCard title={'Forgot your password?'} headStyle={cardHeadStyle}>
       <Form onFinish={handleSubmit(onSubmit)}>
