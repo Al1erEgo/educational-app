@@ -1,21 +1,19 @@
 import React from 'react'
 
 import { LogoutOutlined } from '@ant-design/icons'
+import { Button } from 'antd'
 import { useLocation, useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 
 import { MAIN_PATH } from '../../../../constants'
 import { useAuthMeLogOutMutation } from '../../auth-api'
 import { AUTH_PATH } from '../../constants'
-import { useAuthorised } from '../../hooks'
-import { useSubmit } from '../../hooks/use-submit'
+import { useAuthorised, useSubmit } from '../../hooks'
 
-// import { WidgetButton } from './WidgetButton'
 import { WidgetProfile } from './WidgetProfile'
-import styled from "styled-components";
-import {Button} from "antd";
 
 export const AuthWidget = () => {
-  const [logout, { isLoading: isLoggingOut }] = useAuthMeLogOutMutation()
+  const [logout] = useAuthMeLogOutMutation()
   const navigate = useNavigate()
   const { isAuthorised, data: userData } = useAuthorised()
 
@@ -33,20 +31,22 @@ export const AuthWidget = () => {
 
   const location = useLocation()
 
-  const buttonProps = location.pathname === '/auth/sign-up' ?
-      { name: 'Sign in', onClick: goToSignInHandler} :
-      { name: 'Sign up', onClick: goToSignUpHandler}
+  const buttonProps =
+    location.pathname === '/auth/sign-up'
+      ? { children: 'Sign in', onClick: goToSignInHandler }
+      : { children: 'Sign up', onClick: goToSignUpHandler }
 
-
-    return (
-        isAuthorised ?
-      <>
-        <WidgetProfile onClick={goToProfileHandler} userName={userData?.name} />
-        <StyledButton icon={<LogoutOutlined />} onClick={goToLogoutHandler} >Log out</StyledButton>
-      </> :
-            <StyledButton type={'primary'} {...buttonProps} >{buttonProps.name}</StyledButton>
-    )
-  }
+  return isAuthorised ? (
+    <>
+      <WidgetProfile onClick={goToProfileHandler} userName={userData?.name} />
+      <StyledButton icon={<LogoutOutlined />} onClick={goToLogoutHandler}>
+        Log out
+      </StyledButton>
+    </>
+  ) : (
+    <StyledButton type={'primary'} {...buttonProps} />
+  )
+}
 const StyledButton = styled(Button)`
   width: 100px;
   height: 35px;
