@@ -1,45 +1,20 @@
-import { yupResolver } from '@hookform/resolvers/yup'
 import { Button, Checkbox, Form } from 'antd'
-import { Controller, useForm } from 'react-hook-form'
-import * as yup from 'yup'
+import { Controller } from 'react-hook-form'
 
 import { ErrorServerHandler } from '../../../components/error-handler/error-server-handler'
 import { MAIN_PATH } from '../../../constants'
 import { useLoginMutation } from '../auth-api'
 import { FormInput } from '../components/form-input'
 import { AUTH_PATH, inputs } from '../constants'
+import { useFormWithValidation } from '../hooks'
+import { LoginFormInputs } from '../hooks/use-authform/types'
 import { useSubmit } from '../hooks/use-submit'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../styles'
 
 import { ForgotPasswordLink } from './styles'
 
-export type LoginFormInputs = {
-  email: string
-  password: string
-  rememberMe: boolean
-  error?: string
-}
-
-const loginSchema = yup
-  .object({
-    email: yup.string().email().required(),
-    password: yup.string().min(8).required(),
-    rememberMe: yup.boolean(),
-  })
-  .required()
-
 export const SignIn = () => {
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<LoginFormInputs>({
-    mode: 'onBlur',
-    resolver: yupResolver(loginSchema),
-    defaultValues: {
-      rememberMe: false,
-    },
-  })
+  const { handleSubmit, control, errors } = useFormWithValidation<LoginFormInputs>('login')
 
   const [login, { isLoading, error }] = useLoginMutation()
 

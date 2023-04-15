@@ -1,39 +1,23 @@
-import { yupResolver } from '@hookform/resolvers/yup'
 import { Button, Form } from 'antd'
-import { useForm } from 'react-hook-form'
-import * as yup from 'yup'
 
 import { ErrorServerHandler } from '../../../components/error-handler/error-server-handler'
 import { MAIN_PATH } from '../../../constants'
 import { useRequestPasswordResetMutation } from '../auth-api'
 import { FormInput } from '../components/form-input'
 import { AUTH_PATH } from '../constants'
+import { useFormWithValidation } from '../hooks'
+import { ResetPasswordFormInputs } from '../hooks/use-authform/types'
 import { useSubmit } from '../hooks/use-submit'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP, StyledText } from '../styles'
 
 import { CheckEmail } from './check-email'
 
-type ResetPasswordFormInputs = {
-  email: string
-  error?: string
-}
-
-const schema = yup
-  .object({
-    email: yup.string().email().required(),
-  })
-  .required()
-
 export const ResetPassword = () => {
-  const {
-    handleSubmit,
-    control,
-    formState: { errors },
-    watch,
-  } = useForm<ResetPasswordFormInputs>({
-    resolver: yupResolver(schema),
-  })
+  const { handleSubmit, control, errors, watch } =
+    useFormWithValidation<ResetPasswordFormInputs>('resetPassword')
+
   const [resetPassword, { isLoading, isSuccess, error }] = useRequestPasswordResetMutation()
+
   const onSubmit = useSubmit(resetPassword)
 
   if (isSuccess) {

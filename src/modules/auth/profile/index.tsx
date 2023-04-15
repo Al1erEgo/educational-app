@@ -6,8 +6,7 @@ import { ErrorServerHandler } from '../../../components/error-handler/error-serv
 import { MAIN_PATH } from '../../../constants'
 import { useAuthMeLogOutMutation, useAuthMeUpdateMutation } from '../auth-api'
 import { AUTH_PATH } from '../constants'
-import { useAuthorised } from '../hooks'
-import { useSubmit } from '../hooks/use-submit'
+import { useAuthorised, useSubmit } from '../hooks'
 import { cardHeadStyle, StyledCard } from '../styles'
 
 import {
