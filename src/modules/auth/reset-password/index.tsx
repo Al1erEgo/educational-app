@@ -1,9 +1,9 @@
-import { Button, Form } from 'antd'
+import { Form } from 'antd'
 
 import { ErrorServerHandler } from '../../../components/error-handler/error-server-handler'
 import { MAIN_PATH } from '../../../constants'
 import { useRequestPasswordResetMutation } from '../api'
-import { FormInput } from '../components/form-input'
+import { FormButton, FormInput } from '../components'
 import { AUTH_PATH } from '../constants'
 import { useFormWithValidation, useSubmit } from '../hooks'
 import { ResetPasswordFormInputs } from '../hooks/use-authform/types'
@@ -14,9 +14,7 @@ import { CheckEmail } from './components/check-email'
 export const ResetPassword = () => {
   const { handleSubmit, control, errors, watch } =
     useFormWithValidation<ResetPasswordFormInputs>('resetPassword')
-
   const [resetPassword, { isLoading, isSuccess, error }] = useRequestPasswordResetMutation()
-
   const onSubmit = useSubmit(resetPassword)
 
   if (isSuccess) {
@@ -33,18 +31,7 @@ export const ResetPassword = () => {
 
         <ErrorServerHandler error={error} />
 
-        <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            size="large"
-            loading={isLoading}
-            style={{ fontWeight: '500' }}
-            block
-          >
-            Send Instructions
-          </Button>
-        </Form.Item>
+        <FormButton loading={isLoading}>Send Instructions</FormButton>
       </Form>
       <StyledP>Did you remember your password?</StyledP>
 

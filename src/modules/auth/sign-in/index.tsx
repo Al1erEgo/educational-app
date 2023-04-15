@@ -1,10 +1,10 @@
-import { Button, Checkbox, Form } from 'antd'
+import { Checkbox, Form } from 'antd'
 import { Controller } from 'react-hook-form'
 
 import { ErrorServerHandler } from '../../../components/error-handler/error-server-handler'
 import { MAIN_PATH } from '../../../constants'
 import { useLoginMutation } from '../api'
-import { FormInput } from '../components/form-input'
+import { FormButton, FormInput } from '../components'
 import { AUTH_PATH } from '../constants'
 import { useFormWithValidation, useSubmit } from '../hooks'
 import { LoginFormInputs } from '../hooks/use-authform/types'
@@ -14,9 +14,7 @@ import { ForgotPasswordLink } from './styles'
 
 export const SignIn = () => {
   const { handleSubmit, control, errors } = useFormWithValidation<LoginFormInputs>('login')
-
   const [login, { isLoading, error }] = useLoginMutation()
-
   const onSubmit = useSubmit(login, `${MAIN_PATH.Root}`)
 
   return (
@@ -48,18 +46,7 @@ export const SignIn = () => {
 
         <ErrorServerHandler error={error} />
 
-        <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            size="large"
-            loading={isLoading}
-            style={{ fontWeight: '500' }}
-            block
-          >
-            Sign In
-          </Button>
-        </Form.Item>
+        <FormButton loading={isLoading}>Sign In</FormButton>
       </Form>
       <StyledP>Have no account?</StyledP>
 
