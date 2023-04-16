@@ -20,9 +20,9 @@ export const Profile = () => {
   const { data: userData } = useAuthorised()
   const { name: userName = '', email: userEmail = '' } = userData ?? {}
 
-  const [{ isLoading: isUpdating, error: updateUserNameError }, onSubmit] =
+  const [onSubmit, { isLoading: isUpdating, error: updateUserNameError }] =
     useMutation('updateUserName')
-  const [{ isLoading: isLoggingOut }, handleLogout] = useMutation('logout')
+  const [handleLogout, { isLoading: isLoggingOut }] = useMutation('logout')
 
   const handleUserNameChange = async (value: string) => {
     await onSubmit({ name: value })

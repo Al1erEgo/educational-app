@@ -4,14 +4,14 @@ import { useParams } from 'react-router-dom'
 import { ErrorServerHandler } from '../../../components/'
 import { FormButton, FormInput } from '../components'
 import { ABSOLUTE_AUTH_PATH } from '../constants'
-import { NewPasswordFormInputs, ResetPasswordFormInputs } from '../hooks/use-authform/types'
+import { NewPasswordFormInputs } from '../hooks/use-authform/types'
 import { useFormData } from '../hooks/use-form-data'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledText } from '../styles'
 
 export const NewPassword = () => {
   const { token } = useParams()
   const [{ handleSubmit, control, setError, errors }, { isLoading, error }, onSubmit] =
-    useFormData<ResetPasswordFormInputs>('newPassword')
+    useFormData<NewPasswordFormInputs>('newPassword')
 
   const handleNewPasswordSubmit = async (data: NewPasswordFormInputs) => {
     if (!token) {

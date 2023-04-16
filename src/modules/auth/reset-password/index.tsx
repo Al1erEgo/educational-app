@@ -3,6 +3,7 @@ import { Form } from 'antd'
 import { ErrorServerHandler } from '../../../components'
 import { FormButton, FormInput } from '../components'
 import { ABSOLUTE_AUTH_PATH } from '../constants'
+import { ResetPasswordFormInputs } from '../hooks/use-authform/types'
 import { useFormData } from '../hooks/use-form-data'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP, StyledText } from '../styles'
 
@@ -10,7 +11,7 @@ import { CheckEmail } from './components/check-email'
 
 export const ResetPassword = () => {
   const [{ handleSubmit, control, errors, watch }, { isLoading, isSuccess, error }, onSubmit] =
-    useFormData('resetPassword')
+    useFormData<ResetPasswordFormInputs>('resetPassword')
 
   if (isSuccess) {
     return <CheckEmail email={watch().email} />

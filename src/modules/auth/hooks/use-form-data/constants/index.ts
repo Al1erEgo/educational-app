@@ -5,6 +5,7 @@ import {
   useLoginMutation,
   useRegisterMutation,
   useRequestPasswordResetMutation,
+  useSetNewPasswordMutation,
 } from '../../../api'
 import { ABSOLUTE_AUTH_PATH } from '../../../constants'
 
@@ -29,7 +30,7 @@ export const mutationAndPathByForm: mutationAndPathByFormType = {
     mutation: useRequestPasswordResetMutation,
   },
   newPassword: {
-    mutation: useRequestPasswordResetMutation,
+    mutation: useSetNewPasswordMutation,
   },
   updateUserName: {
     mutation: useAuthMeUpdateMutation,
