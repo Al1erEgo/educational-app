@@ -17,8 +17,8 @@ export const useFormData = <T extends FieldValues>(formType: FormType): any => {
   const [onSubmit, { trigger, isLoading, isSuccess, error }] = useMutation(formType)
 
   return [
+    onSubmit,
     { handleSubmit, control, setError, errors, watch },
     { trigger, isLoading, isSuccess, error },
-    onSubmit,
   ]
 }

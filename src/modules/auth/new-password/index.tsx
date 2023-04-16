@@ -10,7 +10,7 @@ import { cardHeadStyle, StyledCard, StyledNavLink, StyledText } from '../styles'
 
 export const NewPassword = () => {
   const { token } = useParams()
-  const [{ handleSubmit, control, setError, errors }, { isLoading, error }, onSubmit] =
+  const [onSubmit, { handleSubmit, control, setError, errors }, { isLoading, error }] =
     useFormData<NewPasswordFormInputs>('newPassword')
 
   const handleNewPasswordSubmit = async (data: NewPasswordFormInputs) => {

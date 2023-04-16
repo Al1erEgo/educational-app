@@ -8,7 +8,7 @@ import { useFormData } from '../hooks/use-form-data'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../styles'
 
 export const SignUp = () => {
-  const [{ handleSubmit, control, errors }, { isLoading, error }, onSubmit] =
+  const [onSubmit, { handleSubmit, control, errors }, { isLoading, error }] =
     useFormData<SignUpFormInputs>('signup')
 
   return (

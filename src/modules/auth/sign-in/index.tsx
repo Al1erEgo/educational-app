@@ -11,7 +11,7 @@ import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../styles'
 import { ForgotPasswordLink } from './styles'
 
 export const SignIn = () => {
-  const [{ handleSubmit, control, errors }, { isLoading, error }, onSubmit] =
+  const [onSubmit, { handleSubmit, control, errors }, { isLoading, error }] =
     useFormData<LoginFormInputs>('login')
 
   return (

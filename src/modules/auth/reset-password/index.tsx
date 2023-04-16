@@ -10,7 +10,7 @@ import { cardHeadStyle, StyledCard, StyledNavLink, StyledP, StyledText } from '.
 import { CheckEmail } from './components/check-email'
 
 export const ResetPassword = () => {
-  const [{ handleSubmit, control, errors, watch }, { isLoading, isSuccess, error }, onSubmit] =
+  const [onSubmit, { handleSubmit, control, errors, watch }, { isLoading, isSuccess, error }] =
     useFormData<ResetPasswordFormInputs>('resetPassword')
 
   if (isSuccess) {
