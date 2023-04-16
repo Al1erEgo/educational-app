@@ -1,22 +1,19 @@
+import { useState } from 'react'
+
 import { DeleteOutlined, EditOutlined, InfoCircleOutlined, FilterOutlined } from '@ant-design/icons'
-import {
-  Button,
-  Input,
-  Pagination,
-  PaginationProps,
-  Slider,
-  Space,
-  Table,
-  Tooltip,
-  Typography,
-} from 'antd'
+import { Button, Input, Slider, Space, Table, Tooltip, Typography } from 'antd'
 import styled from 'styled-components'
 const { Text, Title } = Typography
 
 import { useCardPacksQuery } from './cards-api'
 
 export const Cards = () => {
-  const { data, isLoading, isError } = useCardPacksQuery({})
+  const [currentPage, setCurrentPage] = useState(1)
+  const pageCount = 10
+  const { data, isLoading, isError } = useCardPacksQuery({
+    page: currentPage,
+    pageCount: pageCount,
+  })
 
   console.log('data', data)
 
@@ -39,8 +36,8 @@ export const Cards = () => {
     console.log('record', record)
   }
 
-  const onChange: PaginationProps['onChange'] = pageNumber => {
-    console.log('Page: ', pageNumber)
+  const handlePageChange = (pageNumber: any) => {
+    setCurrentPage(pageNumber)
   }
 
   const columns: any = [
@@ -164,8 +161,18 @@ export const Cards = () => {
           <FilterOutlined onClick={handleFilter} />
         </div>
 
-        <StyledCardTable columns={columns} dataSource={formattedData} pagination={false} />
-        <Pagination showQuickJumper defaultCurrent={2} total={5000} onChange={onChange} />
+        <StyledCardTable
+          columns={columns}
+          dataSource={formattedData}
+          pagination={{
+            showQuickJumper: true,
+            onChange: handlePageChange,
+            total: data?.cardPacksTotalCount || 0,
+            pageSize: pageCount,
+            current: currentPage,
+          }}
+          scroll={{ y: 500 }}
+        />
       </CardContainer>
     </>
   )
