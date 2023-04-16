@@ -7,7 +7,7 @@ import {
   MutationDefinition,
 } from '@reduxjs/toolkit/query'
 
-import { AuthApiResponseTypes } from '../../../api'
+import { AuthApiResponseTypes } from '../../../api/types'
 
 export type CustomMutationTriggerType<T> = MutationTrigger<
   MutationDefinition<

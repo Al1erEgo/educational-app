@@ -1,5 +1,22 @@
 import { rootApi } from '../../../store/root-api'
 
+import {
+  AuthMeRequestType,
+  AuthMeResponseType,
+  LoginRequestType,
+  LoginResponseType,
+  LogOutRequestType,
+  LogOutResponseType,
+  PasswordResetRequestType,
+  PasswordResetResponseType,
+  RegisterRequestType,
+  RegisterResponseType,
+  SetNewPasswordRequestType,
+  SetNewPasswordResponseType,
+  UpdateRequestType,
+  UpdateResponseType,
+} from './types'
+
 export const authApi = rootApi.injectEndpoints({
   endpoints: builder => ({
     register: builder.mutation<RegisterResponseType, RegisterRequestType>({
@@ -62,7 +79,7 @@ export const authApi = rootApi.injectEndpoints({
       }),
       invalidatesTags: ['authMe'],
     }),
-    // TODO: change localhost to ...github.io
+
     requestPasswordReset: builder.mutation<PasswordResetResponseType, PasswordResetRequestType>({
       query: (requestData: PasswordResetRequestType) => ({
         url: 'auth/forgot',
@@ -96,124 +113,3 @@ export const {
   useRequestPasswordResetMutation,
   useSetNewPasswordMutation,
 } = authApi
-
-type RegisterRequestType = {
-  email: string
-  password: string
-  'confirm password': string
-}
-
-type RegisterResponseType = {
-  addedUser: {
-    _id: string
-    email: string
-    rememberMe: boolean
-    name: string
-    publicCardPacksCount: number
-    created: Date
-    updated: Date
-    isAdmin: boolean
-    verified: boolean
-    __v: number
-  }
-  error?: string
-}
-
-export type LoginRequestType = {
-  email: string
-  password: string
-  rememberMe: boolean
-}
-
-export type LoginResponseType = {
-  _id: string
-  email: string
-  rememberMe: boolean
-  isAdmin: boolean
-  name: string
-  verified: boolean
-  publicCardPacksCount: number
-  created: Date
-  updated: Date
-  __v: number
-  token: string
-  tokenDeathTime: number
-  avatar?: string
-  error?: string
-}
-
-type AuthMeRequestType = void | string
-type AuthMeResponseType = {
-  _id: string
-  email: string
-  rememberMe: boolean
-  name: string
-  publicCardPacksCount: number
-  created: Date
-  updated: Date
-  verified: boolean
-  __v: number
-  token: string
-  tokenDeathTime: number
-  error?: string
-}
-
-type UpdateRequestType = {
-  name: string
-  avatar?: string
-}
-type UpdateResponseType = {
-  updatedUser: {
-    _id: string
-    email: string
-    rememberMe: boolean
-    isAdmin: boolean
-    name: string
-    verified: boolean
-    publicCardPacksCount: number
-    created: Date
-    updated: Date
-    __v: number
-    token: string
-    tokenDeathTime: number
-    avatar?: string
-  }
-  token: string
-  tokenDeathTime: number
-  error?: string
-}
-
-type LogOutRequestType = {} | void
-type LogOutResponseType = {
-  info: string
-  error?: string
-}
-
-type PasswordResetRequestType = {
-  email: string
-}
-type PasswordResetResponseType = {
-  info: string
-  success: boolean
-  answer: string
-  html: boolean
-  error?: string
-}
-
-export type SetNewPasswordRequestType = {
-  password: string
-  resetPasswordToken: string
-}
-type SetNewPasswordResponseType = {
-  info: string
-}
-
-export type AuthApiResponseTypes =
-  | RegisterResponseType
-  | LoginResponseType
-  | UpdateResponseType
-  | LogOutResponseType
-  | PasswordResetResponseType
-  | SetNewPasswordResponseType
-
-// TODO: add utils types (omit, pick, partial)
