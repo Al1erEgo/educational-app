@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Error404 } from '../components'
+import { Error404 } from '../components/error404'
 import { RoutesType } from '../hooks/use-cards-routes/types'
 import { Auth, Cards } from '../modules'
 

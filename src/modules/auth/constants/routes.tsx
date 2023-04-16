@@ -21,7 +21,6 @@ An object containing the routes used for the Authentication feature in the appli
 */
 export const AUTH_ROUTES: RoutesType = {
   ROOT_ROUTE: [{ path: AUTH_PATH.Root }],
-  // MAIN_ROUTES: [{ path: AUTH_PATH.Error, element: <Error404 /> }],
   MAIN_ROUTES: [{ path: AUTH_PATH.Error, element: <Error404 /> }],
   PRIVATE_ROUTES: [{ path: AUTH_PATH.Profile, element: <Profile /> }],
   GUEST_ROUTES: [
