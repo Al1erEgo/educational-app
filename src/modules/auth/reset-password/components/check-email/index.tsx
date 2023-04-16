@@ -3,9 +3,8 @@ import { FC } from 'react'
 import { Button, Form } from 'antd'
 
 import checkEmailImage from '../../../../../assets/check-email-image.svg'
-import { MAIN_PATH } from '../../../../../constants'
 import { useNavigateToOnclick } from '../../../../../hooks'
-import { AUTH_PATH } from '../../../constants'
+import { ABSOLUTE_AUTH_PATH } from '../../../constants'
 import { cardHeadStyle, StyledCard, StyledText } from '../../../styles'
 
 import { CheckEmailStyledImage } from './styles'
@@ -13,7 +12,7 @@ import { CheckEmailStyledImage } from './styles'
 type CheckEmailPropsType = { email: string }
 
 export const CheckEmail: FC<CheckEmailPropsType> = ({ email }) => {
-  const goToLogin = useNavigateToOnclick(`${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`)
+  const goToLogin = useNavigateToOnclick(ABSOLUTE_AUTH_PATH.SignIn)
 
   const buttonProps = {
     onClick: goToLogin,

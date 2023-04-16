@@ -1,9 +1,8 @@
 import { Form } from 'antd'
 
-import { ErrorServerHandler } from '../../../components/error-server-handler/error-server-handler'
-import { MAIN_PATH } from '../../../constants'
+import { ErrorServerHandler } from '../../../components'
 import { FormButton, FormInput } from '../components'
-import { AUTH_PATH } from '../constants'
+import { ABSOLUTE_AUTH_PATH } from '../constants'
 import { useFormData } from '../hooks/use-form-data'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP, StyledText } from '../styles'
 
@@ -31,7 +30,7 @@ export const ResetPassword = () => {
       </Form>
       <StyledP>Did you remember your password?</StyledP>
 
-      <StyledNavLink to={`${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`}>Try logging in</StyledNavLink>
+      <StyledNavLink to={ABSOLUTE_AUTH_PATH.SignIn}>Try logging in</StyledNavLink>
     </StyledCard>
   )
 }

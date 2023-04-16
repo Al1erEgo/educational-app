@@ -2,8 +2,9 @@ import React from 'react'
 
 import { useResolvedPath } from 'react-router-dom'
 
+import { useCardsRoutes } from '../../hooks'
+
 import { AUTH_PATH, AUTH_ROUTES } from './constants'
-import { useCardsRoutes } from './hooks'
 import { AuthContainer } from './styles'
 
 export const Auth = () => {

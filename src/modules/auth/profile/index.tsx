@@ -1,41 +1,32 @@
-import { UserOutlined, LogoutOutlined } from '@ant-design/icons'
-import { Avatar, Upload } from 'antd'
+import { LogoutOutlined } from '@ant-design/icons'
 
 import arrowBack from '../../../assets/arrow-back.svg'
-import { ErrorServerHandler } from '../../../components/error-server-handler/error-server-handler'
+import { ErrorServerHandler } from '../../../components'
 import { MAIN_PATH } from '../../../constants'
-import { useAuthMeLogOutMutation, useAuthMeUpdateMutation } from '../api'
-import { AUTH_PATH } from '../constants'
-import { useAuthorised, useSubmit } from '../hooks'
+import { useAuthorised, useMutation } from '../hooks'
 import { cardHeadStyle, StyledCard } from '../styles'
 
+import { ProfileAvatar } from './components/profile-avatar'
 import {
   StyledBackToCardLink,
   StyledProfileContainer,
   StyledProfileImg,
   StyledProfileParagraph,
   StyledProfileText,
-  StylesAvatarGroup,
   StyledProfileLogOutButton,
 } from './styles'
 
 export const Profile = () => {
   const { data: userData } = useAuthorised()
-
   const { name: userName = '', email: userEmail = '' } = userData ?? {}
 
-  const [updateUserName, { isLoading: isUpdating, error: updateUserNameError }] =
-    useAuthMeUpdateMutation()
-
-  const [logout, { isLoading: isLoggingOut }] = useAuthMeLogOutMutation()
-
-  const onSubmit = useSubmit(updateUserName)
+  const [{ isLoading: isUpdating, error: updateUserNameError }, onSubmit] =
+    useMutation('updateUserName')
+  const [{ isLoading: isLoggingOut }, handleLogout] = useMutation('logout')
 
   const handleUserNameChange = async (value: string) => {
     await onSubmit({ name: value })
   }
-
-  const handleLogout = useSubmit(logout, `${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`)
 
   return (
     <>
@@ -45,11 +36,7 @@ export const Profile = () => {
       </StyledBackToCardLink>
       <StyledCard title={'Personal information'} headStyle={cardHeadStyle}>
         <StyledProfileContainer>
-          <StylesAvatarGroup>
-            <Upload showUploadList={false} beforeUpload={() => false} accept="image/*">
-              <Avatar shape="square" size={96} icon={<UserOutlined />} />
-            </Upload>
-          </StylesAvatarGroup>
+          <ProfileAvatar />
 
           <StyledProfileParagraph
             editable={{ onChange: handleUserNameChange }}

@@ -10,7 +10,7 @@ export type RoutesType = {
   [routes: string]: readonly RouteType[]
 }
 
-export type UseGuestRoutesType = (
+export type UseRoutesType = (
   routes: RoutesType,
   userRoute: string,
   guestRoute: string

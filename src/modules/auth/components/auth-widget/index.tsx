@@ -5,23 +5,19 @@ import { Button } from 'antd'
 import { useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { MAIN_PATH } from '../../../../constants'
 import { useNavigateToOnclick } from '../../../../hooks'
-import { useAuthMeLogOutMutation } from '../../api'
-import { AUTH_PATH } from '../../constants'
-import { useAuthorised, useSubmit } from '../../hooks'
+import { ABSOLUTE_AUTH_PATH } from '../../constants'
+import { useAuthorised, useMutation } from '../../hooks'
 
 import { WidgetProfile } from './components/widget-profile'
 
 export const AuthWidget = () => {
-  const [logout] = useAuthMeLogOutMutation()
   const { isAuthorised, data: userData } = useAuthorised()
+  const [goToLogoutHandler] = useMutation('logout')
 
-  const goToProfileHandler = useNavigateToOnclick(`${MAIN_PATH.Auth}${AUTH_PATH.Profile}`)
-  const goToSignInHandler = useNavigateToOnclick(`${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`)
-  const goToSignUpHandler = useNavigateToOnclick(`${MAIN_PATH.Auth}${AUTH_PATH.SignUp}`)
-
-  const goToLogoutHandler = useSubmit(logout, `${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`)
+  const goToProfileHandler = useNavigateToOnclick(ABSOLUTE_AUTH_PATH.Profile)
+  const goToSignInHandler = useNavigateToOnclick(ABSOLUTE_AUTH_PATH.SignIn)
+  const goToSignUpHandler = useNavigateToOnclick(ABSOLUTE_AUTH_PATH.SignUp)
 
   const location = useLocation()
 

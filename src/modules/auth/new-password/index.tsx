@@ -2,17 +2,16 @@ import { Form } from 'antd'
 import { useParams } from 'react-router-dom'
 
 import { ErrorServerHandler } from '../../../components/'
-import { MAIN_PATH } from '../../../constants'
 import { FormButton, FormInput } from '../components'
-import { AUTH_PATH } from '../constants'
-import { NewPasswordFormInputs } from '../hooks/use-authform/types'
+import { ABSOLUTE_AUTH_PATH } from '../constants'
+import { NewPasswordFormInputs, ResetPasswordFormInputs } from '../hooks/use-authform/types'
 import { useFormData } from '../hooks/use-form-data'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledText } from '../styles'
 
 export const NewPassword = () => {
   const { token } = useParams()
   const [{ handleSubmit, control, setError, errors }, { isLoading, error }, onSubmit] =
-    useFormData('newPassword')
+    useFormData<ResetPasswordFormInputs>('newPassword')
 
   const handleNewPasswordSubmit = async (data: NewPasswordFormInputs) => {
     if (!token) {
@@ -33,9 +32,7 @@ export const NewPassword = () => {
         <ErrorServerHandler error={error} />
         <FormButton loading={isLoading}>Create new Password</FormButton>
       </Form>
-      <StyledNavLink to={`${MAIN_PATH.Auth}${AUTH_PATH.ResetPassword}`}>
-        Back to Send Email form
-      </StyledNavLink>
+      <StyledNavLink to={ABSOLUTE_AUTH_PATH.ResetPassword}>Back to Send Email form</StyledNavLink>
     </StyledCard>
   )
 }

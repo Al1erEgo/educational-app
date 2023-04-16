@@ -33,7 +33,7 @@ export const StyledProfileContainer = styled.div`
   width: 100%;
 `
 
-export const StylesAvatarGroup = styled(Avatar.Group)`
+export const StyledAvatarGroup = styled(Avatar.Group)`
   margin-bottom: 1.7rem;
 `
 

@@ -1,16 +1,15 @@
 import { MAIN_PATH } from '../../../../../constants'
 import {
+  useAuthMeLogOutMutation,
+  useAuthMeUpdateMutation,
   useLoginMutation,
   useRegisterMutation,
   useRequestPasswordResetMutation,
 } from '../../../api'
-import { AUTH_PATH } from '../../../constants'
+import { ABSOLUTE_AUTH_PATH } from '../../../constants'
 
 type mutationAndPathByFormType = {
-  login: { mutation: any; path: string }
-  signup: { mutation: any; path: string }
-  resetPassword: { mutation: any; path?: string }
-  newPassword: { mutation: any; path?: string }
+  [key: string]: { mutation: any; path?: string }
 }
 
 export const mutationAndPathByForm: mutationAndPathByFormType = {
@@ -18,9 +17,13 @@ export const mutationAndPathByForm: mutationAndPathByFormType = {
     mutation: useLoginMutation,
     path: MAIN_PATH.Root,
   },
+  logout: {
+    mutation: useAuthMeLogOutMutation,
+    path: ABSOLUTE_AUTH_PATH.SignIn,
+  },
   signup: {
     mutation: useRegisterMutation,
-    path: `${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`,
+    path: ABSOLUTE_AUTH_PATH.SignIn,
   },
   resetPassword: {
     mutation: useRequestPasswordResetMutation,
@@ -28,4 +31,7 @@ export const mutationAndPathByForm: mutationAndPathByFormType = {
   newPassword: {
     mutation: useRequestPasswordResetMutation,
   },
-}
+  updateUserName: {
+    mutation: useAuthMeUpdateMutation,
+  },
+} as const

@@ -2,17 +2,11 @@ import { FC, PropsWithChildren } from 'react'
 
 import { Button, Form } from 'antd'
 
+import { buttonProps } from './constants'
+
 type FormButtonPropsType = {
   loading: boolean
 }
-
-const buttonProps = {
-  type: 'primary',
-  htmlType: 'submit',
-  size: 'large',
-  style: { fontWeight: '500' },
-  block: true,
-} as const
 
 export const FormButton: FC<PropsWithChildren<FormButtonPropsType>> = ({ loading, children }) => {
   return (

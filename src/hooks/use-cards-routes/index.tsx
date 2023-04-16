@@ -5,8 +5,7 @@ import { Navigate, RouteObject, useRoutes } from 'react-router-dom'
 import { AuthProvider } from '../../components'
 import { useAuthorised } from '../../modules/auth/hooks'
 
-import { RouteType, UseGuestRoutesType } from './types'
-
+import { RouteType, UseRoutesType } from './types'
 /**
 A hook that prepares and returns the routes based on user authorization status.
 @param {Object} routes - An object containing all the routes information.
@@ -14,12 +13,10 @@ A hook that prepares and returns the routes based on user authorization status.
 @param {string} guestRoute - A string representing the route for unauthenticated users.
 @returns {Object} - An object containing the prepared routes for displaying Tree components.
 */
-export const useCardsRoutes: UseGuestRoutesType = (routes, userRoute, guestRoute) => {
+export const useCardsRoutes: UseRoutesType = (routes, userRoute, guestRoute) => {
   const { isAuthorised } = useAuthorised()
-
   // Default page to be shown based on user authorization status
   const defaultPage = isAuthorised ? <Navigate to={userRoute} /> : <Navigate to={guestRoute} />
-
   // Preparing routes
   let prepareRoutes: RouteType[] = [
     { ...routes.ROOT_ROUTE[0], element: defaultPage },
