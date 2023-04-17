@@ -14,7 +14,7 @@ export const GoToLoginMessage = () => {
   useEffect(() => {
     let timeOut = setTimeout(() => {
       navigate(`${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`)
-    }, 2000)
+    }, 3000)
 
     return () => {
       clearTimeout(timeOut)
