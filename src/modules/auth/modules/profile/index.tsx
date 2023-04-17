@@ -1,10 +1,10 @@
 import { LogoutOutlined } from '@ant-design/icons'
 
-import arrowBack from '../../../assets/arrow-back.svg'
-import { ErrorServerHandler } from '../../../components'
-import { MAIN_PATH } from '../../../constants'
-import { useAuthorised, useMutation } from '../hooks'
-import { cardHeadStyle, StyledCard } from '../styles'
+import arrowBack from '../../../../assets/arrow-back.svg'
+import { ErrorServerHandler } from '../../../../components'
+import { MAIN_PATH } from '../../../../constants'
+import { useAuthorised, useMutation } from '../../hooks'
+import { cardHeadStyle, StyledCard } from '../../styles'
 
 import { ProfileAvatar } from './components/profile-avatar'
 import {

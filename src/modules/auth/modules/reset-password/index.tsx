@@ -1,11 +1,11 @@
 import { Form } from 'antd'
 
-import { ErrorServerHandler } from '../../../components'
-import { FormButton, FormInput } from '../components'
-import { ABSOLUTE_AUTH_PATH } from '../constants'
-import { ResetPasswordFormInputs } from '../hooks/use-authform/types'
-import { useFormData } from '../hooks/use-form-data'
-import { cardHeadStyle, StyledCard, StyledNavLink, StyledP, StyledText } from '../styles'
+import { ErrorServerHandler } from '../../../../components'
+import { FormButton, FormInput } from '../../components'
+import { ABSOLUTE_AUTH_PATH } from '../../constants'
+import { ResetPasswordFormInputs } from '../../hooks/use-authform/types'
+import { useFormData } from '../../hooks/use-form-data'
+import { cardHeadStyle, StyledCard, StyledNavLink, StyledP, StyledText } from '../../styles'
 
 import { CheckEmail } from './components/check-email'
 

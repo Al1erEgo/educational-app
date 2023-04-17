@@ -2,10 +2,10 @@ import { FC } from 'react'
 
 import { Button, Form } from 'antd'
 
-import checkEmailImage from '../../../../../assets/check-email-image.svg'
-import { useNavigateToOnclick } from '../../../../../hooks'
-import { ABSOLUTE_AUTH_PATH } from '../../../constants'
-import { cardHeadStyle, StyledCard, StyledText } from '../../../styles'
+import checkEmailImage from '../../../../../../assets/check-email-image.svg'
+import { useNavigateToOnclick } from '../../../../../../hooks'
+import { ABSOLUTE_AUTH_PATH } from '../../../../constants'
+import { cardHeadStyle, StyledCard, StyledText } from '../../../../styles'
 
 import { CheckEmailStyledImage } from './styles'
 

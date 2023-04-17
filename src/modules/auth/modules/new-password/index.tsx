@@ -1,12 +1,12 @@
 import { Form } from 'antd'
 import { useParams } from 'react-router-dom'
 
-import { ErrorServerHandler } from '../../../components/'
-import { FormButton, FormInput } from '../components'
-import { ABSOLUTE_AUTH_PATH } from '../constants'
-import { NewPasswordFormInputs } from '../hooks/use-authform/types'
-import { useFormData } from '../hooks/use-form-data'
-import { cardHeadStyle, StyledCard, StyledNavLink, StyledText } from '../styles'
+import { ErrorServerHandler } from '../../../../components'
+import { FormButton, FormInput } from '../../components'
+import { ABSOLUTE_AUTH_PATH } from '../../constants'
+import { NewPasswordFormInputs } from '../../hooks/use-authform/types'
+import { useFormData } from '../../hooks/use-form-data'
+import { cardHeadStyle, StyledCard, StyledNavLink, StyledText } from '../../styles'
 
 export const NewPassword = () => {
   const { token } = useParams()

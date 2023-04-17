@@ -2,11 +2,11 @@ import React from 'react'
 
 import { Error404 } from '../../../components'
 import { RoutesType } from '../../../hooks/use-cards-routes/types'
-import { NewPassword } from '../new-password'
-import { Profile } from '../profile'
-import { ResetPassword } from '../reset-password'
-import { SignIn } from '../sign-in'
-import { SignUp } from '../sign-up'
+import { NewPassword } from '../modules/new-password'
+import { Profile } from '../modules/profile'
+import { ResetPassword } from '../modules/reset-password'
+import { SignIn } from '../modules/sign-in'
+import { SignUp } from '../modules/sign-up'
 
 import { AUTH_PATH } from './paths'
 

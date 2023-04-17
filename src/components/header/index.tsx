@@ -1,7 +1,7 @@
 import React from 'react'
 
 import logo from '../../assets/incubator-logo.png'
-import { AuthWidget } from '../../modules/auth/components/auth-widget'
+import { AuthWidget } from '../../modules/auth/modules/auth-widget'
 
 import { AuthWrapper, Logo, HeaderStyled } from './styles'
 
