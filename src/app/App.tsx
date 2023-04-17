@@ -11,6 +11,8 @@ export const App = () => {
   const { isLoading } = useAuthMeQuery('auth')
   const { defaultPage } = useDefaultPage(MAIN_PATH.Cards, MAIN_PATH.Auth)
 
+  console.log('app rendered')
+
   return (
     <>
       <GlobalStyle />
