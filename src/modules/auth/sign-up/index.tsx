@@ -10,12 +10,18 @@ import { SignUpFormInputs } from '../hooks/use-authform/types'
 import { useSubmit } from '../hooks/use-submit'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../styles'
 
+import { GoToLoginMessage } from './message-after-sign-up'
+
 export const SignUp = () => {
   const { handleSubmit, control, errors } = useFormWithValidation<SignUpFormInputs>('signup')
 
-  const [registerUser, { isLoading, error }] = useRegisterMutation()
+  const [registerUser, { isLoading, error, isSuccess }] = useRegisterMutation()
 
-  const onSubmit = useSubmit(registerUser, `${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`)
+  const onSubmit = useSubmit(registerUser)
+
+  if (isSuccess) {
+    return <GoToLoginMessage />
+  }
 
   return (
     <StyledCard title={'Sign Up'} headStyle={cardHeadStyle}>
