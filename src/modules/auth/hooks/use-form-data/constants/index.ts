@@ -24,7 +24,6 @@ export const mutationAndPathByForm: mutationAndPathByFormType = {
   },
   signup: {
     mutation: useRegisterMutation,
-    path: ABSOLUTE_AUTH_PATH.SignIn,
   },
   resetPassword: {
     mutation: useRequestPasswordResetMutation,

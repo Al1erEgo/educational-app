@@ -3,10 +3,10 @@ import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
-import successRegistrationImage from '../../../assets/success-registration.png'
-import { MAIN_PATH } from '../../../constants'
-import { AUTH_PATH } from '../constants'
-import { cardHeadStyle, StyledCard, StyledText } from '../styles'
+import successRegistrationImage from '../../../../../../assets/success-registration.png'
+import { MAIN_PATH } from '../../../../../../constants'
+import { AUTH_PATH } from '../../../../constants'
+import { cardHeadStyle, StyledCard, StyledText } from '../../../../styles'
 
 export const GoToLoginMessage = () => {
   const navigate = useNavigate()

@@ -7,9 +7,15 @@ import { SignUpFormInputs } from '../../hooks/use-authform/types'
 import { useFormData } from '../../hooks/use-form-data'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../../styles'
 
+import { GoToLoginMessage } from './components'
+
 export const SignUp = () => {
-  const [onSubmit, { handleSubmit, control, errors }, { isLoading, error }] =
+  const [onSubmit, { handleSubmit, control, errors }, { isLoading, isSuccess, error }] =
     useFormData<SignUpFormInputs>('signup')
+
+  if (isSuccess) {
+    return <GoToLoginMessage />
+  }
 
   return (
     <StyledCard title={'Sign Up'} headStyle={cardHeadStyle}>
