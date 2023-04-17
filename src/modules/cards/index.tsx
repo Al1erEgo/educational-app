@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { DeleteOutlined, EditOutlined, InfoCircleOutlined, FilterOutlined } from '@ant-design/icons'
 import { Button, Input, Slider, Space, Table, Tooltip, Typography } from 'antd'
@@ -9,6 +9,7 @@ import { useCardPacksQuery } from './cards-api'
 
 export const Cards = () => {
   const [currentPage, setCurrentPage] = useState(1)
+  const [currentHeight, setCurrentHeight] = useState(window.innerHeight / 2)
   const pageCount = 10
   const { data, isLoading, isError } = useCardPacksQuery({
     page: currentPage,
@@ -16,6 +17,10 @@ export const Cards = () => {
   })
 
   console.log('data', data)
+
+  window.addEventListener('resize', () => {
+    setCurrentHeight(window.innerHeight / 2)
+  })
 
   const handleLearn = (record: any) => {
     console.log('record', record)
@@ -134,7 +139,11 @@ export const Cards = () => {
         >
           <div style={{ marginRight: '10px', flexBasis: '40%' }}>
             <StyledCardText>Search</StyledCardText>
-            <Input.Search />
+            <Input.Search
+              onChange={() => {
+                console.log('v')
+              }}
+            />
           </div>
 
           <div style={{ marginRight: '10px' }}>
@@ -171,7 +180,7 @@ export const Cards = () => {
             pageSize: pageCount,
             current: currentPage,
           }}
-          scroll={{ y: 500 }}
+          scroll={{ y: currentHeight }}
         />
       </CardContainer>
     </>
@@ -181,7 +190,7 @@ export const Cards = () => {
 export const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 40px 136px;
+  padding: 40px 10%;
   margin: 0;
 `
 
