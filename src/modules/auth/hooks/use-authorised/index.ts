@@ -1,4 +1,4 @@
-import { authApi } from '../../auth-api'
+import { authApi } from '../../api'
 
 export const useAuthorised = () => {
   const authQueryResult = authApi.endpoints.authMe.useQueryState('auth')
