@@ -82,6 +82,7 @@ type CardPacksResponseType = {
       cardsCount: number
       created: string
       updated: string
+      user_name: string
     }
   ]
   cardPacksTotalCount: number
