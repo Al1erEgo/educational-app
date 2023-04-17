@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 
-import { Navigate, RouteObject, useRoutes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 
 import { AuthProvider } from '../../components'
 import { useAuthorised } from '../../modules/auth/hooks'
@@ -29,6 +29,18 @@ export const useCardsRoutes: UseRoutesType = (routes, userRoute, guestRoute) => 
     prepareRoutes = [...prepareRoutes, ...routes.GUEST_ROUTES]
   }
 
+  //Map prepared routes object into routes components
+  const readyRoutes = useMemo(() => {
+    return prepareRoutes.map((route, index) => (
+      <Route key={index} path={route.path} element={route.element}>
+        {route.children &&
+          route.children.map((route, index) => (
+            <Route key={index} path={route.path} element={route.element} />
+          ))}
+      </Route>
+    ))
+  }, [isAuthorised])
+
   // Return the prepared routes for displaying Cards component
-  return useRoutes(prepareRoutes as RouteObject[])
+  return <Routes>{readyRoutes}</Routes>
 }

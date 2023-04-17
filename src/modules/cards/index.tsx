@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { DeleteOutlined, EditOutlined, InfoCircleOutlined, FilterOutlined } from '@ant-design/icons'
 import { Button, Input, Slider, Space, Table, Tooltip, Typography } from 'antd'
 import styled from 'styled-components'
 const { Text, Title } = Typography
 
-import { useCardPacksQuery } from './cards-api'
+import { useCardPacksQuery } from './api'
 
 export const Cards = () => {
   const [currentPage, setCurrentPage] = useState(1)
