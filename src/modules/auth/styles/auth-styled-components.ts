@@ -6,7 +6,7 @@ export const { Text } = Typography
 export const AuthContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 10% 5%;
+  padding: 80px 5%;
   margin: 0;
 `
 
