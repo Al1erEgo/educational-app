@@ -4,6 +4,8 @@ import { DeleteOutlined, EditOutlined, InfoCircleOutlined, FilterOutlined } from
 import { Button, Input, Slider, Space, Table, Tooltip, Typography } from 'antd'
 import styled from 'styled-components'
 
+import { Loader } from '../../components'
+
 import { useCardPacksQuery } from './api'
 const { Text, Title } = Typography
 
@@ -113,7 +115,7 @@ export const Cards = () => {
   ]
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <Loader isLoading={isLoading} />
   }
 
   if (isError) {
