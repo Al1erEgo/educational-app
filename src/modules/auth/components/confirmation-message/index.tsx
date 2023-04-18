@@ -2,12 +2,12 @@ import { FC, useEffect } from 'react'
 
 import { Button, Form } from 'antd'
 
-import { useNavigateToOnclick } from '../../../../../../hooks'
-import { cardHeadStyle, StyledCard, StyledText } from '../../../../styles'
+import { useNavigateToOnclick } from '../../../../hooks'
+import { cardHeadStyle, StyledCard, StyledText } from '../../styles'
 
 import { CheckEmailStyledImage } from './styles'
 
-type CheckEmailPropsType = {
+type ConfirmationMessagePropsType = {
   title: string
   text: string
   propsPath: string
@@ -15,16 +15,14 @@ type CheckEmailPropsType = {
   timer?: boolean
 }
 
-export const ConfirmationMessage: FC<CheckEmailPropsType> = ({
+export const ConfirmationMessage: FC<ConfirmationMessagePropsType> = ({
   title,
   text,
   image,
   propsPath,
   timer,
 }) => {
-  const redirect = ((path: string) => {
-    return useNavigateToOnclick(path)
-  })(propsPath)
+  const redirect = useNavigateToOnclick(propsPath)
 
   const buttonProps = {
     onClick: redirect,
@@ -36,12 +34,14 @@ export const ConfirmationMessage: FC<CheckEmailPropsType> = ({
   } as const
 
   useEffect(() => {
-    let timeOut = setTimeout(() => {
-      redirect()
-    }, 3000)
+    if (timer) {
+      let timeOut = setTimeout(() => {
+        redirect()
+      }, 3000)
 
-    return () => {
-      clearTimeout(timeOut)
+      return () => {
+        clearTimeout(timeOut)
+      }
     }
   }, [timer])
 
