@@ -1,20 +1,31 @@
 import { Form } from 'antd'
 
+import successRegistrationImage from '../../../../assets/success-registration.png'
 import { ErrorServerHandler } from '../../../../components'
 import { FormButton, FormInput } from '../../components'
 import { ABSOLUTE_AUTH_PATH } from '../../constants'
 import { SignUpFormInputs } from '../../hooks/use-authform/types'
 import { useFormData } from '../../hooks/use-form-data'
+// eslint-disable-next-line import/order
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../../styles'
 
-import { GoToLoginMessage } from './components'
+// import { GoToLoginMessage } from './components'
+import { ConfirmationMessage } from '../reset-password/components/check-email'
 
 export const SignUp = () => {
   const [onSubmit, { handleSubmit, control, errors }, { isLoading, isSuccess, error }] =
     useFormData<SignUpFormInputs>('signup')
 
   if (isSuccess) {
-    return <GoToLoginMessage />
+    return (
+      <ConfirmationMessage
+        title={'Thank you for registering!'}
+        text={'We’ve successfully registered you, please go through the authorization'}
+        propsPath={ABSOLUTE_AUTH_PATH.SignIn}
+        image={successRegistrationImage}
+        timer={true}
+      />
+    )
   }
 
   return (

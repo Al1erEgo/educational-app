@@ -1,21 +1,33 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 
 import { Button, Form } from 'antd'
 
-import checkEmailImage from '../../../../../../assets/check-email-image.svg'
 import { useNavigateToOnclick } from '../../../../../../hooks'
-import { ABSOLUTE_AUTH_PATH } from '../../../../constants'
 import { cardHeadStyle, StyledCard, StyledText } from '../../../../styles'
 
 import { CheckEmailStyledImage } from './styles'
 
-type CheckEmailPropsType = { email: string }
+type CheckEmailPropsType = {
+  title: string
+  text: string
+  propsPath: string
+  image?: string
+  timer?: boolean
+}
 
-export const CheckEmail: FC<CheckEmailPropsType> = ({ email }) => {
-  const goToLogin = useNavigateToOnclick(ABSOLUTE_AUTH_PATH.SignIn)
+export const ConfirmationMessage: FC<CheckEmailPropsType> = ({
+  title,
+  text,
+  image,
+  propsPath,
+  timer,
+}) => {
+  const redirect = ((path: string) => {
+    return useNavigateToOnclick(path)
+  })(propsPath)
 
   const buttonProps = {
-    onClick: goToLogin,
+    onClick: redirect,
     type: 'primary',
     htmlType: 'submit',
     size: 'large',
@@ -23,13 +35,25 @@ export const CheckEmail: FC<CheckEmailPropsType> = ({ email }) => {
     block: true,
   } as const
 
+  useEffect(() => {
+    let timeOut = setTimeout(() => {
+      redirect()
+    }, 3000)
+
+    return () => {
+      clearTimeout(timeOut)
+    }
+  }, [timer])
+
   return (
-    <StyledCard title={'Check Email'} headStyle={cardHeadStyle}>
-      <CheckEmailStyledImage src={checkEmailImage} alt="checkEmail" />
-      <StyledText type="secondary">We’ve sent an Email with instructions to {email}</StyledText>
-      <Form.Item>
-        <Button {...buttonProps}>Back to login</Button>
-      </Form.Item>
+    <StyledCard title={title} headStyle={cardHeadStyle}>
+      <CheckEmailStyledImage src={image} alt="image" />
+      <StyledText type="secondary">{text}</StyledText>
+      {!timer && (
+        <Form.Item>
+          <Button {...buttonProps}>Back to login</Button>
+        </Form.Item>
+      )}
     </StyledCard>
   )
 }
