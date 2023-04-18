@@ -1,20 +1,20 @@
 import { useEffect, useState } from 'react'
 
 import { DeleteOutlined, EditOutlined, InfoCircleOutlined, FilterOutlined } from '@ant-design/icons'
-import { Button, Input, Slider, Space, Table, Tooltip, Typography } from 'antd'
-import styled from 'styled-components'
+import { Button, Input, Slider, Space, Tooltip, Typography } from 'antd'
 
 import { Loader } from '../../components'
 import { useAuthorised } from '../auth/hooks'
 
 import { useCardPacksQuery } from './api'
-const { Text, Title } = Typography
+import { PacksButton } from './modules/packs/components/button-group'
+import { PacksButtonContainer, PacksContainer, StyledCardTable, StyledCardText } from './styles'
+const { Title } = Typography
 
 export const Cards = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [pageCount, setPageCount] = useState(10)
   const [currentHeight, setCurrentHeight] = useState(window.innerHeight * 0.53)
-  const [showAllPacks, setShowAllPacks] = useState(false)
   const [activeButton, setActiveButton] = useState('All')
 
   const { data: userData } = useAuthorised()
@@ -55,10 +55,7 @@ export const Cards = () => {
     console.log('record', record)
   }
 
-  const handleShowPacks = (event: any) => {
-    setShowAllPacks(!showAllPacks)
-    const buttonName = event.currentTarget.textContent
-
+  const handleShowPacks = (buttonName: string) => {
     setActiveButton(buttonName)
   }
 
@@ -181,20 +178,8 @@ export const Cards = () => {
           <PacksButtonContainer>
             <StyledCardText>Show packs</StyledCardText>
             <Space.Compact block>
-              <Button
-                type={showAllPacks ? 'primary' : 'default'}
-                style={{ width: '100px' }}
-                onClick={handleShowPacks}
-              >
-                My
-              </Button>
-              <Button
-                type={showAllPacks ? 'default' : 'primary'}
-                style={{ width: '100px' }}
-                onClick={handleShowPacks}
-              >
-                All
-              </Button>
+              <PacksButton text="My" isActive={activeButton === 'My'} onClick={handleShowPacks} />
+              <PacksButton text="All" isActive={activeButton === 'All'} onClick={handleShowPacks} />
             </Space.Compact>
           </PacksButtonContainer>
 
@@ -229,32 +214,9 @@ export const Cards = () => {
               showSizeChanger: true,
             }}
             scroll={{ y: currentHeight }}
-          />
+          ></StyledCardTable>
         </>
       </PacksContainer>
     </>
   )
 }
-
-export const PacksContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 0 10%;
-  margin: 0;
-`
-
-export const PacksButtonContainer = styled.div`
-  width: 14%;
-  max-width: 200px;
-  margin-right: 14px;
-`
-
-export const StyledCardText = styled(Text)`
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 17px;
-`
-
-export const StyledCardTable = styled(Table)`
-  margin-bottom: 24px;
-`
