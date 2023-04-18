@@ -3,24 +3,36 @@ import { useEffect, useState } from 'react'
 import { DeleteOutlined, EditOutlined, InfoCircleOutlined, FilterOutlined } from '@ant-design/icons'
 import { Button, Input, Slider, Space, Table, Tooltip, Typography } from 'antd'
 import styled from 'styled-components'
-const { Text, Title } = Typography
 
-import { useCardPacksQuery } from './cards-api'
+import { useCardPacksQuery } from './api'
+const { Text, Title } = Typography
 
 export const Cards = () => {
   const [currentPage, setCurrentPage] = useState(1)
-  const [currentHeight, setCurrentHeight] = useState(window.innerHeight / 2)
-  const pageCount = 10
+  const [pageCount, setPageCount] = useState(10)
+  const [currentHeight, setCurrentHeight] = useState(window.innerHeight * 0.4)
+
   const { data, isLoading, isError } = useCardPacksQuery({
     page: currentPage,
     pageCount: pageCount,
   })
 
+  const minCount = data?.minCardsCount ?? 0
+  const maxCount = data?.maxCardsCount ?? 110
+
   console.log('data', data)
 
-  window.addEventListener('resize', () => {
-    setCurrentHeight(window.innerHeight / 2)
-  })
+  const handleResize = () => {
+    setCurrentHeight(window.innerHeight * 0.4)
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [window.innerHeight])
 
   const handleLearn = (record: any) => {
     console.log('record', record)
@@ -41,8 +53,19 @@ export const Cards = () => {
     console.log('record', record)
   }
 
-  const handlePageChange = (pageNumber: any) => {
-    setCurrentPage(pageNumber)
+  const handlePageChange = (page: number, pageCount?: number) => {
+    setCurrentPage(page)
+    if (pageCount) {
+      setPageCount(pageCount)
+    }
+  }
+
+  const onChange = (value: number | [number, number]) => {
+    console.log('onChange: ', value)
+  }
+
+  const onAfterChange = (value: number | [number, number]) => {
+    console.log('onAfterChange: ', value)
   }
 
   const columns: any = [
@@ -107,7 +130,7 @@ export const Cards = () => {
 
   return (
     <>
-      <CardContainer>
+      <PacksContainer>
         <div
           style={{
             display: 'flex',
@@ -137,7 +160,7 @@ export const Cards = () => {
             marginBottom: '24px',
           }}
         >
-          <div style={{ marginRight: '10px', flexBasis: '40%' }}>
+          <div style={{ width: '35%', maxWidth: '500px', marginRight: '10px' }}>
             <StyledCardText>Search</StyledCardText>
             <Input.Search
               onChange={() => {
@@ -146,7 +169,7 @@ export const Cards = () => {
             />
           </div>
 
-          <div style={{ marginRight: '10px' }}>
+          <div style={{ width: '14%', maxWidth: '200px', marginRight: '10px' }}>
             <StyledCardText>Show packs</StyledCardText>
             <Space.Compact block>
               <Button type="primary" style={{ width: '100px' }} onClick={handleShowPacks}>
@@ -158,39 +181,48 @@ export const Cards = () => {
             </Space.Compact>
           </div>
 
-          <div style={{ marginRight: '10px' }}>
+          <div style={{ width: '25%', maxWidth: '370px', marginRight: '10px' }}>
             <StyledCardText>Number of cards</StyledCardText>
             <Slider
+              max={maxCount}
               range={{ draggableTrack: true }}
-              defaultValue={[0, 100]}
-              style={{ width: '200px' }}
+              defaultValue={[minCount, maxCount]}
+              /* tooltip={{ open: false }}*/
+              /*  marks={{ [minCount]: minCount, [maxCount]: maxCount }}*/
+              step={1}
+              onChange={onChange}
+              onAfterChange={onAfterChange}
             />
           </div>
 
           <FilterOutlined onClick={handleFilter} />
         </div>
-
-        <StyledCardTable
-          columns={columns}
-          dataSource={formattedData}
-          pagination={{
-            showQuickJumper: true,
-            onChange: handlePageChange,
-            total: data?.cardPacksTotalCount || 0,
-            pageSize: pageCount,
-            current: currentPage,
-          }}
-          scroll={{ y: currentHeight }}
-        />
-      </CardContainer>
+        <>
+          <StyledCardTable
+            size={'middle'}
+            columns={columns}
+            dataSource={formattedData}
+            pagination={{
+              pageSizeOptions: ['10', '20', '50'],
+              showQuickJumper: true,
+              onChange: handlePageChange,
+              total: data?.cardPacksTotalCount || 0,
+              current: currentPage,
+              pageSize: pageCount,
+              showSizeChanger: true,
+            }}
+            scroll={{ y: currentHeight }}
+          />
+        </>
+      </PacksContainer>
     </>
   )
 }
 
-export const CardContainer = styled.div`
+export const PacksContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 40px 10%;
+  padding: 0 10%;
   margin: 0;
 `
 
