@@ -1,5 +1,6 @@
 import { Form } from 'antd'
 
+import checkEmailImage from '../../../../assets/check-email-image.svg'
 import { ErrorServerHandler } from '../../../../components'
 import { FormButton, FormInput } from '../../components'
 import { ABSOLUTE_AUTH_PATH } from '../../constants'
@@ -7,14 +8,21 @@ import { ResetPasswordFormInputs } from '../../hooks/use-authform/types'
 import { useFormData } from '../../hooks/use-form-data'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP, StyledText } from '../../styles'
 
-import { CheckEmail } from './components/check-email'
+import { ConfirmationMessage } from './components/check-email'
 
 export const ResetPassword = () => {
   const [onSubmit, { handleSubmit, control, errors, watch }, { isLoading, isSuccess, error }] =
     useFormData<ResetPasswordFormInputs>('resetPassword')
 
   if (isSuccess) {
-    return <CheckEmail email={watch().email} />
+    return (
+      <ConfirmationMessage
+        title={'Check Email'}
+        text={`We’ve sent an Email with instructions to ${watch().email}`}
+        propsPath={ABSOLUTE_AUTH_PATH.SignIn}
+        image={checkEmailImage}
+      />
+    )
   }
 
   return (
