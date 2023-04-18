@@ -5,6 +5,7 @@ import { Button, Input, Slider, Space, Table, Tooltip, Typography } from 'antd'
 import styled from 'styled-components'
 
 import { Loader } from '../../components'
+import { useAuthorised } from '../auth/hooks'
 
 import { useCardPacksQuery } from './api'
 const { Text, Title } = Typography
@@ -12,11 +13,18 @@ const { Text, Title } = Typography
 export const Cards = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [pageCount, setPageCount] = useState(10)
-  const [currentHeight, setCurrentHeight] = useState(window.innerHeight * 0.4)
+  const [currentHeight, setCurrentHeight] = useState(window.innerHeight * 0.53)
+  const [showAllPacks, setShowAllPacks] = useState(false)
+  const [activeButton, setActiveButton] = useState('All')
+
+  const { data: userData } = useAuthorised()
+
+  const user_id = userData?._id
 
   const { data, isLoading, isError } = useCardPacksQuery({
     page: currentPage,
     pageCount: pageCount,
+    user_id: activeButton === 'My' ? user_id : undefined,
   })
 
   const minCount = data?.minCardsCount ?? 0
@@ -25,11 +33,11 @@ export const Cards = () => {
   console.log('data', data)
 
   const handleResize = () => {
-    setCurrentHeight(window.innerHeight * 0.4)
+    setCurrentHeight(window.innerHeight * 0.53)
   }
 
   useEffect(() => {
-    window.addEventListener('resize', handleResize)
+    window.addEventListener('resize', handleResize, { passive: true })
 
     return () => {
       window.removeEventListener('resize', handleResize)
@@ -47,8 +55,11 @@ export const Cards = () => {
     console.log('record', record)
   }
 
-  const handleShowPacks = (e: any) => {
-    console.log('e', e)
+  const handleShowPacks = (event: any) => {
+    setShowAllPacks(!showAllPacks)
+    const buttonName = event.currentTarget.textContent
+
+    setActiveButton(buttonName)
   }
 
   const handleFilter = (record: any) => {
@@ -138,7 +149,7 @@ export const Cards = () => {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            marginBottom: '40px',
+            marginBottom: '20px',
           }}
         >
           <Title level={2}>Packs list</Title>
@@ -164,24 +175,28 @@ export const Cards = () => {
         >
           <div style={{ width: '35%', maxWidth: '500px', marginRight: '10px' }}>
             <StyledCardText>Search</StyledCardText>
-            <Input.Search
-              onChange={() => {
-                console.log('v')
-              }}
-            />
+            <Input.Search />
           </div>
 
-          <div style={{ width: '14%', maxWidth: '200px', marginRight: '10px' }}>
+          <PacksButtonContainer>
             <StyledCardText>Show packs</StyledCardText>
             <Space.Compact block>
-              <Button type="primary" style={{ width: '100px' }} onClick={handleShowPacks}>
+              <Button
+                type={showAllPacks ? 'primary' : 'default'}
+                style={{ width: '100px' }}
+                onClick={handleShowPacks}
+              >
                 My
               </Button>
-              <Button style={{ width: '100px' }} onClick={handleShowPacks}>
+              <Button
+                type={showAllPacks ? 'default' : 'primary'}
+                style={{ width: '100px' }}
+                onClick={handleShowPacks}
+              >
                 All
               </Button>
             </Space.Compact>
-          </div>
+          </PacksButtonContainer>
 
           <div style={{ width: '25%', maxWidth: '370px', marginRight: '10px' }}>
             <StyledCardText>Number of cards</StyledCardText>
@@ -201,7 +216,7 @@ export const Cards = () => {
         </div>
         <>
           <StyledCardTable
-            size={'middle'}
+            size={'small'}
             columns={columns}
             dataSource={formattedData}
             pagination={{
@@ -226,6 +241,12 @@ export const PacksContainer = styled.div`
   flex-direction: column;
   padding: 0 10%;
   margin: 0;
+`
+
+export const PacksButtonContainer = styled.div`
+  width: 14%;
+  max-width: 200px;
+  margin-right: 14px;
 `
 
 export const StyledCardText = styled(Text)`
