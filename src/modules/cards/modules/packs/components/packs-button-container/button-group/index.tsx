@@ -1,3 +1,4 @@
+/*
 import { FC } from 'react'
 
 import { Button } from 'antd'
@@ -16,3 +17,6 @@ export const ButtonGroup: FC<PacksButtonProps> = ({ text, isActive, onClick }) =
     {text}
   </Button>
 )
+*/
+
+export {}

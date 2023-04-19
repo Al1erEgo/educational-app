@@ -1,17 +1,17 @@
 import { FC } from 'react'
 
-import { Space } from 'antd'
+import { Button, Space } from 'antd'
+import styled from 'styled-components'
 
+import { ALL_BUTTON_NAME, MY_BUTTON_NAME } from '../../../../constants'
 import { StyledCardText, StyledPacksButton } from '../../../../styles'
-
-import { ButtonGroup } from './button-group'
 
 type PacksButtonsContainerProps = {
   activeButton: string
   setActiveButton: (buttonName: string) => void
 }
 export const PacksButton: FC<PacksButtonsContainerProps> = ({ activeButton, setActiveButton }) => {
-  const handleShowPacks = (buttonName: string) => {
+  const setActiveButtonName = (buttonName: string) => {
     setActiveButton(buttonName)
   }
 
@@ -19,9 +19,23 @@ export const PacksButton: FC<PacksButtonsContainerProps> = ({ activeButton, setA
     <StyledPacksButton>
       <StyledCardText>Show packs</StyledCardText>
       <Space.Compact block>
-        <ButtonGroup text="My" isActive={activeButton === 'My'} onClick={handleShowPacks} />
-        <ButtonGroup text="All" isActive={activeButton === 'All'} onClick={handleShowPacks} />
+        <StyledButton
+          type={activeButton === MY_BUTTON_NAME ? 'primary' : 'default'}
+          onClick={() => setActiveButtonName(MY_BUTTON_NAME)}
+        >
+          My
+        </StyledButton>
+        <StyledButton
+          type={activeButton === ALL_BUTTON_NAME ? 'primary' : 'default'}
+          onClick={() => setActiveButtonName(ALL_BUTTON_NAME)}
+        >
+          All
+        </StyledButton>
       </Space.Compact>
     </StyledPacksButton>
   )
 }
+
+const StyledButton = styled(Button)`
+  width: 100px;
+`
