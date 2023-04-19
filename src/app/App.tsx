@@ -1,10 +1,11 @@
 import { Route, Routes } from 'react-router-dom'
 
-import { Loader, Header, AuthProvider, Error404 } from '../components'
+import { Loader, Header, Error404 } from '../components'
 import { MAIN_PATH } from '../constants'
 import { useDefaultPage } from '../hooks/use-main-page'
 import { Auth, Cards } from '../modules'
 import { useAuthMeQuery } from '../modules/auth/api'
+import { AuthProvider } from '../modules/auth/components'
 import { GlobalStyle } from '../styles'
 
 export const App = () => {

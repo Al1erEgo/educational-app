@@ -6,10 +6,7 @@ import { FormButton, FormInput } from '../../components'
 import { ABSOLUTE_AUTH_PATH } from '../../constants'
 import { SignUpFormInputs } from '../../hooks/use-authform/types'
 import { useFormData } from '../../hooks/use-form-data'
-// eslint-disable-next-line import/order
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../../styles'
-
-// import { GoToLoginMessage } from './components'
 import { ConfirmationMessage } from '../reset-password/components/check-email'
 
 export const SignUp = () => {
