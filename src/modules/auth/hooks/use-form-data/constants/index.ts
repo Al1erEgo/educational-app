@@ -30,7 +30,6 @@ export const mutationAndPathByForm: mutationAndPathByFormType = {
   },
   newPassword: {
     mutation: useSetNewPasswordMutation,
-    path: ABSOLUTE_AUTH_PATH.SignIn,
   },
   updateUserName: {
     mutation: useAuthMeUpdateMutation,

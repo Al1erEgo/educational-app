@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 
 import { ErrorServerHandler } from '../../../../components'
 import { FormButton, FormInput } from '../../components'
+import { ConfirmationMessage } from '../../components/confirmation-message'
 import { ABSOLUTE_AUTH_PATH } from '../../constants'
 import { NewPasswordFormInputs } from '../../hooks/use-authform/types'
 import { useFormData } from '../../hooks/use-form-data'
@@ -10,7 +11,7 @@ import { cardHeadStyle, StyledCard, StyledNavLink, StyledText } from '../../styl
 
 export const NewPassword = () => {
   const { token } = useParams()
-  const [onSubmit, { handleSubmit, control, setError, errors }, { isLoading, error }] =
+  const [onSubmit, { handleSubmit, control, setError, errors }, { isLoading, error, isSuccess }] =
     useFormData<NewPasswordFormInputs>('newPassword')
 
   const handleNewPasswordSubmit = async (data: NewPasswordFormInputs) => {
@@ -20,6 +21,10 @@ export const NewPassword = () => {
       return
     }
     await onSubmit({ ...data, resetPasswordToken: token })
+  }
+
+  if (isSuccess) {
+    return <ConfirmationMessage variant={'newPassword'} />
   }
 
   return (

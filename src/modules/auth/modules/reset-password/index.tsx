@@ -3,19 +3,17 @@ import { Form } from 'antd'
 import { ErrorServerHandler } from '../../../../components'
 import { FormButton, FormInput } from '../../components'
 import { ConfirmationMessage } from '../../components/confirmation-message'
-import { confirmationMessageArguments } from '../../components/confirmation-message/constants'
 import { ABSOLUTE_AUTH_PATH } from '../../constants'
 import { ResetPasswordFormInputs } from '../../hooks/use-authform/types'
 import { useFormData } from '../../hooks/use-form-data'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP, StyledText } from '../../styles'
 
 export const ResetPassword = () => {
-  const [onSubmit, { handleSubmit, control, errors }, { isLoading, isSuccess, error }] =
+  const [onSubmit, { handleSubmit, watch, control, errors }, { isLoading, isSuccess, error }] =
     useFormData<ResetPasswordFormInputs>('resetPassword')
-  const { title, text, propsPath, image } = confirmationMessageArguments.resetPassword
 
   if (isSuccess) {
-    return <ConfirmationMessage title={title} text={text} propsPath={propsPath} image={image} />
+    return <ConfirmationMessage variant={'resetPassword'} email={watch().email} />
   }
 
   return (

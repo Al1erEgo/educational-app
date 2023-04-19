@@ -5,23 +5,16 @@ import { Button, Form } from 'antd'
 import { useNavigateToOnclick } from '../../../../hooks'
 import { cardHeadStyle, StyledCard, StyledText } from '../../styles'
 
+import { confirmationMessageArguments } from './constants'
 import { CheckEmailStyledImage } from './styles'
 
-type ConfirmationMessagePropsType = {
-  title: string
-  text: string
-  propsPath: string
-  image?: string
-  timer?: boolean
+type PropsType = {
+  variant: keyof typeof confirmationMessageArguments
+  email?: string
 }
 
-export const ConfirmationMessage: FC<ConfirmationMessagePropsType> = ({
-  title,
-  text,
-  image,
-  propsPath,
-  timer,
-}) => {
+export const ConfirmationMessage: FC<PropsType> = ({ variant, email }) => {
+  const { title, propsPath, timer, image, text } = confirmationMessageArguments[variant]
   const redirect = useNavigateToOnclick(propsPath)
 
   const buttonProps = {
@@ -48,7 +41,7 @@ export const ConfirmationMessage: FC<ConfirmationMessagePropsType> = ({
   return (
     <StyledCard title={title} headStyle={cardHeadStyle}>
       <CheckEmailStyledImage src={image} alt="image" />
-      <StyledText type="secondary">{text}</StyledText>
+      <StyledText type="secondary">{`${text} ${email}`}</StyledText>
       {!timer && (
         <Form.Item>
           <Button {...buttonProps}>Back to login</Button>

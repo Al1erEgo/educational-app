@@ -1,6 +1,5 @@
 import { Form } from 'antd'
 
-import successRegistrationImage from '../../../../assets/success-registration.png'
 import { ErrorServerHandler } from '../../../../components'
 import { FormButton, FormInput } from '../../components'
 import { ConfirmationMessage } from '../../components/confirmation-message'
@@ -14,15 +13,7 @@ export const SignUp = () => {
     useFormData<SignUpFormInputs>('signup')
 
   if (isSuccess) {
-    return (
-      <ConfirmationMessage
-        title={'Thank you for registering!'}
-        text={'We’ve successfully registered you, please go through the authorization'}
-        propsPath={ABSOLUTE_AUTH_PATH.SignIn}
-        image={successRegistrationImage}
-        timer={true}
-      />
-    )
+    return <ConfirmationMessage variant={'signUp'} />
   }
 
   return (
