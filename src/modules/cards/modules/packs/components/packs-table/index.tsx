@@ -3,7 +3,7 @@ import { FC, useEffect, useState } from 'react'
 import { DeleteOutlined, EditOutlined, InfoCircleOutlined } from '@ant-design/icons'
 import { Space, Tooltip } from 'antd'
 
-import { Loader } from '../../../../../../components'
+import { ErrorServerHandler, Loader } from '../../../../../../components'
 import { useAuthorised } from '../../../../../auth/hooks'
 import { useCardPacksQuery } from '../../../../api'
 import { StyledCardTable } from '../../../../styles'
@@ -21,7 +21,7 @@ export const PacksTable: FC<PacksTableProps> = ({ activeButton }) => {
 
   const user_id = userData?._id
 
-  const { data, isLoading, isError } = useCardPacksQuery({
+  const { data, isLoading, isError, error } = useCardPacksQuery({
     page: currentPage,
     pageCount: pageCount,
     user_id: activeButton === 'My' ? user_id : undefined,
@@ -49,18 +49,6 @@ export const PacksTable: FC<PacksTableProps> = ({ activeButton }) => {
       window.removeEventListener('resize', handleResize)
     }
   }, [window.innerHeight])
-
-  useEffect(() => {
-    const scrollableElement = document.getElementById('.ant-table-body')
-
-    scrollableElement?.addEventListener('wheel', handleScroll, { passive: true })
-
-    return () => scrollableElement?.removeEventListener('wheel', handleScroll)
-  }, [])
-
-  const handleScroll = () => {
-    console.log('Scrolled')
-  }
 
   const handlePageChange = (page: number, pageCount?: number) => {
     setCurrentPage(page)
@@ -98,15 +86,7 @@ export const PacksTable: FC<PacksTableProps> = ({ activeButton }) => {
       title: 'Actions',
       dataIndex: 'actions',
       render: (text: any, record: any) => {
-        if (activeButton === 'My') {
-          return (
-            <Tooltip title="Learn">
-              <InfoCircleOutlined onClick={() => handleLearn(record)} />
-            </Tooltip>
-          )
-        }
-
-        return (
+        return activeButton === 'My' || record?.createdBy === userData?.name ? (
           <Space size="middle">
             <Tooltip title="Learn">
               <InfoCircleOutlined onClick={() => handleLearn(record)} />
@@ -118,6 +98,10 @@ export const PacksTable: FC<PacksTableProps> = ({ activeButton }) => {
               <DeleteOutlined onClick={() => handleDelete(record)} />
             </Tooltip>
           </Space>
+        ) : (
+          <Tooltip title="Learn">
+            <InfoCircleOutlined onClick={() => handleLearn(record)} />
+          </Tooltip>
         )
       },
     },
@@ -128,7 +112,7 @@ export const PacksTable: FC<PacksTableProps> = ({ activeButton }) => {
   }
 
   if (isError) {
-    return <div>Error fetching data</div>
+    return <ErrorServerHandler error={error} />
   }
 
   const formattedData = data?.cardPacks.map((card: any) => ({
@@ -140,25 +124,23 @@ export const PacksTable: FC<PacksTableProps> = ({ activeButton }) => {
   }))
 
   return (
-    <>
-      <StyledCardTable
-        size={'small'}
-        columns={columns}
-        dataSource={formattedData}
-        pagination={{
-          pageSizeOptions: ['10', '20', '50'],
-          showQuickJumper: true,
-          onChange: handlePageChange,
-          total: data?.cardPacksTotalCount || 0,
-          current: currentPage,
-          pageSize: pageCount,
-          showSizeChanger: true,
-        }}
-        scroll={{
-          y: currentHeight,
-          scrollToFirstRowOnChange: true,
-        }}
-      />
-    </>
+    <StyledCardTable
+      size={'small'}
+      columns={columns}
+      dataSource={formattedData}
+      pagination={{
+        pageSizeOptions: ['10', '20', '50'],
+        showQuickJumper: true,
+        onChange: handlePageChange,
+        total: data?.cardPacksTotalCount || 0,
+        current: currentPage,
+        pageSize: pageCount,
+        showSizeChanger: true,
+      }}
+      scroll={{
+        y: currentHeight,
+        scrollToFirstRowOnChange: true,
+      }}
+    />
   )
 }

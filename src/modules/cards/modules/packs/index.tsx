@@ -16,16 +16,12 @@ import {
 export const Packs = () => {
   const [activeButton, setActiveButton] = useState('All')
 
-  const { data, isLoading, isError } = useCardPacksQuery({})
+  const { data, isLoading } = useCardPacksQuery({})
 
   console.log('data', data)
 
   if (isLoading) {
     return <Loader isLoading={isLoading} />
-  }
-
-  if (isError) {
-    return <div>Error fetching data</div>
   }
 
   return (
