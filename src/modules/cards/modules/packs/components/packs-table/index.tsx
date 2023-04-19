@@ -6,9 +6,8 @@ import { Space, Tooltip } from 'antd'
 import { ErrorServerHandler, Loader } from '../../../../../../components'
 import { useAuthorised } from '../../../../../auth/hooks'
 import { useCardPacksQuery } from '../../../../api'
+import { MY_BUTTON_NAME, windowHeight } from '../../../../constants'
 import { StyledCardTable } from '../../../../styles'
-
-const windowHeight = window.innerHeight * 0.53
 
 type PacksTableProps = {
   activeButton: string
@@ -24,7 +23,7 @@ export const PacksTable: FC<PacksTableProps> = ({ activeButton }) => {
   const { data, isLoading, isError, error } = useCardPacksQuery({
     page: currentPage,
     pageCount: pageCount,
-    user_id: activeButton === 'My' ? user_id : undefined,
+    user_id: activeButton === MY_BUTTON_NAME ? user_id : undefined,
   })
 
   const handleLearn = (record: any) => {
@@ -86,7 +85,7 @@ export const PacksTable: FC<PacksTableProps> = ({ activeButton }) => {
       title: 'Actions',
       dataIndex: 'actions',
       render: (text: any, record: any) => {
-        return activeButton === 'My' || record?.createdBy === userData?.name ? (
+        return activeButton === MY_BUTTON_NAME || record?.createdBy === userData?.name ? (
           <Space size="middle">
             <Tooltip title="Learn">
               <InfoCircleOutlined onClick={() => handleLearn(record)} />
