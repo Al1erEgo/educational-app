@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { DeleteOutlined, EditOutlined, InfoCircleOutlined, FilterOutlined } from '@ant-design/icons'
 import { Button, Input, Slider, Space, Tooltip, Typography } from 'antd'
+import * as detectIt from 'detect-it'
 
 import { Loader } from '../../components'
 import { useAuthorised } from '../auth/hooks'
@@ -37,12 +38,24 @@ export const Cards = () => {
   }
 
   useEffect(() => {
-    window.addEventListener('resize', handleResize, { passive: true })
+    window.addEventListener('resize', handleResize)
 
     return () => {
       window.removeEventListener('resize', handleResize)
     }
   }, [window.innerHeight])
+
+  useEffect(() => {
+    const scrollableElement = document.getElementById('.ant-table-body')
+
+    scrollableElement?.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => scrollableElement?.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const handleScroll = () => {
+    console.log('Scrolled')
+  }
 
   const handleLearn = (record: any) => {
     console.log('record', record)
@@ -106,19 +119,29 @@ export const Cards = () => {
     {
       title: 'Actions',
       dataIndex: 'actions',
-      render: (text: any, record: any) => (
-        <Space size="middle">
-          <Tooltip title="Learn">
-            <InfoCircleOutlined onClick={() => handleLearn(record)} />
-          </Tooltip>
-          <Tooltip title="Edit">
-            <EditOutlined onClick={() => handleEdit(record)} />
-          </Tooltip>
-          <Tooltip title="Delete">
-            <DeleteOutlined onClick={() => handleDelete(record)} />
-          </Tooltip>
-        </Space>
-      ),
+      render: (text: any, record: any) => {
+        if (activeButton === 'My') {
+          return (
+            <Tooltip title="Learn">
+              <InfoCircleOutlined onClick={() => handleLearn(record)} />
+            </Tooltip>
+          )
+        }
+
+        return (
+          <Space size="middle">
+            <Tooltip title="Learn">
+              <InfoCircleOutlined onClick={() => handleLearn(record)} />
+            </Tooltip>
+            <Tooltip title="Edit">
+              <EditOutlined onClick={() => handleEdit(record)} />
+            </Tooltip>
+            <Tooltip title="Delete">
+              <DeleteOutlined onClick={() => handleDelete(record)} />
+            </Tooltip>
+          </Space>
+        )
+      },
     },
   ]
 
@@ -213,8 +236,11 @@ export const Cards = () => {
               pageSize: pageCount,
               showSizeChanger: true,
             }}
-            scroll={{ y: currentHeight }}
-          ></StyledCardTable>
+            scroll={{
+              y: currentHeight,
+              scrollToFirstRowOnChange: true,
+            }}
+          />
         </>
       </PacksContainer>
     </>
