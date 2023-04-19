@@ -27,7 +27,11 @@ export const StyledPacksToolbar = styled.div`
   justify-content: space-between;
   margin-bottom: 24px;
 `
-
+export const PacksSearchWrapper = styled.div`
+  width: 35%;
+  max-width: 500px;
+  margin-right: 10px;
+`
 export const StyledPacksButton = styled.div`
   width: 14%;
   max-width: 200px;

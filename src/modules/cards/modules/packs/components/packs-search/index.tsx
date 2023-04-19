@@ -1,11 +1,11 @@
 import { Input } from 'antd'
 
-import { StyledCardText } from '../../../../styles'
+import { PacksSearchWrapper, StyledCardText } from '../../../../styles'
 export const PacksSearch = () => {
   return (
-    <div style={{ width: '35%', maxWidth: '500px', marginRight: '10px' }}>
+    <PacksSearchWrapper>
       <StyledCardText>Search</StyledCardText>
       <Input.Search />
-    </div>
+    </PacksSearchWrapper>
   )
 }
