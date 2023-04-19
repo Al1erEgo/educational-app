@@ -1,15 +1,34 @@
-import { Table, Typography } from 'antd'
+import { Button, Table, Typography } from 'antd'
 import styled from 'styled-components'
 const { Text } = Typography
 
-export const PacksContainer = styled.div`
+export const StyledPacksContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 10%;
   margin: 0;
 `
+export const StyledPacksHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+`
 
-export const PacksButtonContainer = styled.div`
+export const StyledPacksTitleButton = styled(Button)`
+  font-weight: 500;
+  margin-left: 10px;
+  width: 200px;
+`
+
+export const StyledPacksToolbar = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+`
+
+export const StyledPacksButton = styled.div`
   width: 14%;
   max-width: 200px;
   margin-right: 14px;
