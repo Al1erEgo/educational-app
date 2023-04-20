@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { redirect } from 'react-router-dom'
 
 import { mutationAndPathByForm } from '../use-form-data/constants'
 
@@ -11,14 +11,13 @@ A hook that returns a mutation trigger function and a form submission function f
 export const useMutation = (mutationType: MutationType): any => {
   //Get mutation and path to redirect(if provided) from defined object by specified key
   const { mutation, path } = mutationAndPathByForm[mutationType]
-  const navigate = useNavigate()
   // Get mutation trigger and status using the useMutation hook
   const [trigger, { isLoading, isSuccess, error }] = mutation()
   // Define a form submission function that will trigger the mutation and navigate to a specified path (if provided)
   const onSubmit = async <T>(data?: T) => {
     try {
       await trigger(data).unwrap()
-      if (path) navigate(path)
+      if (path) redirect(path)
     } catch (e: unknown) {
       return
     }
