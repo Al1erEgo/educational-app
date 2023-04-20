@@ -29,12 +29,12 @@ export const ProfileName: FC<ProfileNamePropsType> = ({ userName }) => {
 
       return
     }
-    //field.onBlur()
+    if (value === userName) return
+    field.onBlur()
     field.onChange(value)
     handleSubmit(onSubmit)(value)
   }
 
-  console.log(errors)
   useEffect(() => setValue('name', userName), [])
 
   return (
