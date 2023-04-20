@@ -11,9 +11,11 @@ const commonSchema = yup.object({
 })
 
 export const schemaMap = {
-  updateUserName: yup.object({
-    name: nameSchema,
-  }),
+  updateUserName: yup
+    .object({
+      name: nameSchema,
+    })
+    .required(),
   signup: commonSchema
     .shape({
       'confirm password': passwordSchema
