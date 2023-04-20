@@ -18,10 +18,6 @@ export const Packs = () => {
 
   const { isLoading } = useCardPacksQuery({})
 
-  /*  if (isLoading) {
-    return <Loader isLoading={isLoading} />
-  }*/
-
   return (
     <StyledPacksContainer>
       <PacksHeader isLoading={isLoading} />
