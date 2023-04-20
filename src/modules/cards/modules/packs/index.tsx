@@ -20,8 +20,9 @@ export const Packs = () => {
 
   return (
     <StyledPacksContainer>
-      <PacksHeader isLoading={isLoading} />
       <Loader isLoading={isLoading}>
+        <PacksHeader isLoading={isLoading} />
+
         <StyledPacksToolbar>
           <PacksSearch />
           <PacksButton activeButton={activeButton} setActiveButton={setActiveButton} />

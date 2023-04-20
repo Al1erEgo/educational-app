@@ -2,15 +2,46 @@ import { FC, useEffect, useState } from 'react'
 
 import { DeleteOutlined, EditOutlined, InfoCircleOutlined } from '@ant-design/icons'
 import { Space, Tooltip, Skeleton } from 'antd'
+import { FilterValue, SorterResult } from 'antd/es/table/interface'
+import { TablePaginationConfig } from 'antd/lib'
 
 import { ErrorServerHandler } from '../../../../../../components'
 import { useAuthorised } from '../../../../../auth/hooks'
-import { useCardPacksQuery } from '../../../../api'
+import { useCardPacksQuery, useDeleteCardsPackMutation } from '../../../../api'
 import { MY_BUTTON_NAME, windowHeight } from '../../../../constants'
 import { StyledCardTable } from '../../../../styles'
 
 type PacksTableProps = {
   activeButton: string
+}
+
+type TableDataType = {
+  title: string
+  dataIndex: string
+  sorter?: boolean
+  render?: (text: string, record: any) => JSX.Element
+  user_name?: string
+}
+
+type FormattedPacksType = {
+  id: string
+  name: string
+  cardsCount: number
+  updated: string
+  user_name: string
+}
+
+type PackType = {
+  _id: string
+  name: string
+  cardsCount: number
+  updated: string
+  user_name: string
+}
+
+type SorterType = {
+  field?: string
+  order?: 'ascend' | 'descend'
 }
 
 export const PacksTable: FC<PacksTableProps> = ({ activeButton }) => {
@@ -23,14 +54,24 @@ export const PacksTable: FC<PacksTableProps> = ({ activeButton }) => {
 
   const user_id = userData?._id
 
-  const { data, isLoading, isError, error } = useCardPacksQuery({
+  const { data, isLoading, isError, error, refetch, isFetching } = useCardPacksQuery({
     page: currentPage,
     pageCount: pageCount,
     user_id: activeButton === MY_BUTTON_NAME ? user_id : undefined,
     sortPacks: sortPacks || undefined,
   })
 
-  const handleSortChange = (pagination: any, filter: any, sorter: any) => {
+  const [deleteCard, { isLoading: isLoadingWhenDelete, data: mutationData }] =
+    useDeleteCardsPackMutation()
+
+  console.log('mutationData', mutationData)
+
+  const handleSortChange = (
+    pagination: TablePaginationConfig,
+    filter: Record<string, FilterValue | null>,
+    sorter: SorterResult<SorterType> | SorterResult<SorterType>[]
+  ) => {
+    if (Array.isArray(sorter)) return
     if (sorter.field) {
       if (sorter.order === 'ascend') {
         setSortPacks(`1${sorter.field}`)
@@ -48,8 +89,9 @@ export const PacksTable: FC<PacksTableProps> = ({ activeButton }) => {
   const handleEdit = (record: any) => {
     console.log('record', record)
   }
-  const handleDelete = (record: any) => {
-    console.log('record', record)
+  const handleDelete = async (record: FormattedPacksType) => {
+    await deleteCard({ id: record.id })
+    await refetch()
   }
 
   const handleResize = () => {
@@ -71,7 +113,7 @@ export const PacksTable: FC<PacksTableProps> = ({ activeButton }) => {
     }
   }
 
-  const columns: any = [
+  const columns: TableDataType[] = [
     {
       title: 'Name',
       dataIndex: 'name',
@@ -95,7 +137,7 @@ export const PacksTable: FC<PacksTableProps> = ({ activeButton }) => {
     {
       title: 'Actions',
       dataIndex: 'actions',
-      render: (text: any, record: any) => {
+      render: (text: string, record: any) => {
         return activeButton === MY_BUTTON_NAME || record?.user_name === userData?.name ? (
           <Space size="middle">
             <Tooltip title="Learn">
@@ -121,17 +163,19 @@ export const PacksTable: FC<PacksTableProps> = ({ activeButton }) => {
     return <ErrorServerHandler error={error} />
   }
 
-  const formattedData = data?.cardPacks.map((card: any) => ({
-    key: card._id,
-    name: card.name,
-    cardsCount: card.cardsCount,
-    updated: new Date(card.updated).toLocaleDateString('ru-RU'),
-    user_name: card.user_name,
-  }))
+  const formattedData: FormattedPacksType[] =
+    data?.cardPacks.map((pack: PackType) => ({
+      key: pack._id,
+      id: pack._id,
+      name: pack.name,
+      cardsCount: pack.cardsCount,
+      updated: new Date(pack.updated).toLocaleDateString('ru-RU'),
+      user_name: pack.user_name,
+    })) || []
 
   return (
     <>
-      {isLoading ? (
+      {isLoading || isLoadingWhenDelete || isFetching ? (
         <Skeleton paragraph={{ rows: pageCount }} active />
       ) : (
         <StyledCardTable

@@ -16,13 +16,13 @@ export const cardsApi = rootApi.injectEndpoints({
         body: requestData,
       }),
     }),
-    deletedCardsPack: builder.mutation<{}, DeletedCardsPackRequestType>({
-      query: (requestData: DeletedCardsPackRequestType) => ({
-        url: 'cards/pack',
+    deleteCardsPack: builder.mutation<{}, DeletedCardsPackRequestType>({
+      query: ({ id }: DeletedCardsPackRequestType) => ({
+        url: `cards/pack?id=${id}`,
         method: 'DELETE',
-        body: requestData,
       }),
     }),
+
     updatedCardsPack: builder.mutation<{}, UpdatedCardsPackRequestType>({
       query: (requestData: UpdatedCardsPackRequestType) => ({
         url: 'cards/pack',
@@ -65,7 +65,7 @@ export const cardsApi = rootApi.injectEndpoints({
 export const {
   useCardPacksQuery,
   useNewCardsPackMutation,
-  useDeletedCardsPackMutation,
+  useDeleteCardsPackMutation,
   useUpdatedCardsPackMutation,
   useCardsQuery,
   useNewCardMutation,
