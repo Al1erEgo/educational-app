@@ -12,10 +12,11 @@ export const useFormWithValidation = <T extends FieldValues>(formType: FormType)
     formState: { errors },
     setError,
     watch,
+    setValue,
   } = useForm<T>({
     mode: 'onBlur',
     resolver: yupResolver(schema),
   })
 
-  return { handleSubmit, control, errors, setError, watch }
+  return { handleSubmit, control, errors, setError, watch, setValue }
 }

@@ -12,13 +12,14 @@ A hook that returns the necessary form data and functions required for form subm
 */
 export const useFormData = <T extends FieldValues>(formType: FormType): any => {
   // Get necessary form data and functions using the useFormWithValidation hook
-  const { handleSubmit, control, setError, errors, watch } = useFormWithValidation<T>(formType)
+  const { handleSubmit, control, setError, errors, watch, setValue } =
+    useFormWithValidation<T>(formType)
   // Get mutation trigger and status using the useMutation hook
   const [onSubmit, { trigger, isLoading, isSuccess, error }] = useMutation(formType)
 
   return [
     onSubmit,
-    { handleSubmit, control, setError, errors, watch },
+    { handleSubmit, control, setError, errors, watch, setValue },
     { trigger, isLoading, isSuccess, error },
   ]
 }
