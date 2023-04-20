@@ -2,6 +2,8 @@ import * as yup from 'yup'
 
 const emailSchema = yup.string().email().required()
 const passwordSchema = yup.string().min(8).required()
+const nameSchema = yup.string().min(1).required()
+const rememberMeSchema = yup.boolean().default(false)
 
 const commonSchema = yup.object({
   email: emailSchema,
@@ -9,6 +11,9 @@ const commonSchema = yup.object({
 })
 
 export const schemaMap = {
+  updateUserName: yup.object({
+    name: nameSchema,
+  }),
   signup: commonSchema
     .shape({
       'confirm password': passwordSchema
@@ -20,7 +25,7 @@ export const schemaMap = {
     .required(),
   login: commonSchema
     .shape({
-      rememberMe: yup.boolean().default(false),
+      rememberMe: rememberMeSchema,
     })
     .required(),
   resetPassword: yup.object({
