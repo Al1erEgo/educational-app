@@ -1,11 +1,10 @@
 import { Form } from 'antd'
 
 import { ErrorServerHandler } from '../../../../components'
-import { FormButton, FormInput } from '../../components'
-import { FormCheckbox } from '../../components/form-checkbox'
+import { FormButton, FormInput, FormCheckbox } from '../../components'
 import { ABSOLUTE_AUTH_PATH } from '../../constants'
+import { useFormData } from '../../hooks'
 import { LoginFormInputs } from '../../hooks/use-authform/types'
-import { useFormData } from '../../hooks/use-form-data'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../../styles'
 
 import { ForgotPasswordLink } from './styles'

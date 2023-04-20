@@ -3,16 +3,11 @@ import React from 'react'
 import { Route, Routes, useResolvedPath } from 'react-router-dom'
 
 import { Error404 } from '../../components'
-import { useDefaultPage } from '../../hooks/use-main-page'
+import { useDefaultPage } from '../../hooks'
 
-import { AuthProvider } from './components'
-import { GuestProvider } from './components/guest-provider'
+import { AuthProvider, GuestProvider } from './components'
 import { AUTH_PATH } from './constants'
-import { NewPassword } from './modules/new-password'
-import { Profile } from './modules/profile'
-import { ResetPassword } from './modules/reset-password'
-import { SignIn } from './modules/sign-in'
-import { SignUp } from './modules/sign-up'
+import { NewPassword, Profile, ResetPassword, SignIn, SignUp } from './modules'
 import { AuthContainer } from './styles'
 
 export const Auth = () => {
