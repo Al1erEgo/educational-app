@@ -16,7 +16,7 @@ type ProfileNamePropsType = {
 export const ProfileName: FC<ProfileNamePropsType> = ({ userName }) => {
   const [
     onSubmit,
-    { handleSubmit, control, errors, setValue },
+    { handleSubmit, control, errors, setValue, setError },
     { isLoading: isUpdating, error: updateUserNameError },
   ] = useFormData<UpdateUserNameType>('updateUserName')
 
@@ -24,11 +24,17 @@ export const ProfileName: FC<ProfileNamePropsType> = ({ userName }) => {
     value: string,
     field: ControllerRenderProps<FieldValues, 'name'>
   ) => {
-    field.onBlur()
+    if (!value) {
+      setError('name', { type: 'custom', message: 'Name should be at least 1 character length' })
+
+      return
+    }
+    //field.onBlur()
     field.onChange(value)
     handleSubmit(onSubmit)(value)
   }
 
+  console.log(errors)
   useEffect(() => setValue('name', userName), [])
 
   return (
