@@ -6,6 +6,7 @@ import { Error404 } from '../../components'
 
 import { CARD_PATH } from './constants'
 import { CardsPack } from './modules/cards-pack'
+import { Packs } from './modules/packs'
 
 export const Cards = () => {
   const path = useResolvedPath('')
