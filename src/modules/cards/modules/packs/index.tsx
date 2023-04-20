@@ -16,26 +16,25 @@ import {
 export const Packs = () => {
   const [activeButton, setActiveButton] = useState('All')
 
-  const { data, isLoading } = useCardPacksQuery({})
+  const { isLoading } = useCardPacksQuery({})
 
-  console.log('data', data)
-
-  if (isLoading) {
+  /*  if (isLoading) {
     return <Loader isLoading={isLoading} />
-  }
+  }*/
 
   return (
     <StyledPacksContainer>
       <PacksHeader isLoading={isLoading} />
+      <Loader isLoading={isLoading}>
+        <StyledPacksToolbar>
+          <PacksSearch />
+          <PacksButton activeButton={activeButton} setActiveButton={setActiveButton} />
+          <PacksSlider />
+          <PacksFilter />
+        </StyledPacksToolbar>
 
-      <StyledPacksToolbar>
-        <PacksSearch />
-        <PacksButton activeButton={activeButton} setActiveButton={setActiveButton} />
-        <PacksSlider />
-        <PacksFilter />
-      </StyledPacksToolbar>
-
-      <PacksTable activeButton={activeButton} />
+        <PacksTable activeButton={activeButton} />
+      </Loader>
     </StyledPacksContainer>
   )
 }

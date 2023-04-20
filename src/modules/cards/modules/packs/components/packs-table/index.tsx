@@ -12,10 +12,16 @@ import { StyledCardTable } from '../../../../styles'
 type PacksTableProps = {
   activeButton: string
 }
+
+type SortDirections = {
+  [key: string]: string
+}
 export const PacksTable: FC<PacksTableProps> = ({ activeButton }) => {
   const [currentPage, setCurrentPage] = useState(1)
   const [pageCount, setPageCount] = useState(10)
   const [currentHeight, setCurrentHeight] = useState(windowHeight)
+  const [sortPacks, setSortPacks] = useState('1updated')
+
   const { data: userData } = useAuthorised()
 
   const user_id = userData?._id
@@ -24,7 +30,24 @@ export const PacksTable: FC<PacksTableProps> = ({ activeButton }) => {
     page: currentPage,
     pageCount: pageCount,
     user_id: activeButton === MY_BUTTON_NAME ? user_id : undefined,
+    sortPacks: sortPacks || undefined,
   })
+
+  const handleSortChange = (pagination: any, filter: any, sorter: any) => {
+    console.log('sorter', sorter.field, sorter.order)
+    if (sorter.field) {
+      const sortDirections: SortDirections = {
+        ascend: '0', // по возрастанию
+        descend: '1', // по убыванию
+      }
+      const sortColumn = sorter.field
+      const sortDirection = sortDirections[sorter.order]
+      const currentSortPacks = `${sortDirection}${sortColumn}`
+      const newSortPacks = currentSortPacks === '0lastUpdated' ? '1lastUpdated' : currentSortPacks
+
+      setSortPacks(`${sortDirection}${sortColumn}`)
+    }
+  }
 
   const handleLearn = (record: any) => {
     console.log('record', record)
@@ -32,7 +55,6 @@ export const PacksTable: FC<PacksTableProps> = ({ activeButton }) => {
   const handleEdit = (record: any) => {
     console.log('record', record)
   }
-
   const handleDelete = (record: any) => {
     console.log('record', record)
   }
@@ -60,26 +82,28 @@ export const PacksTable: FC<PacksTableProps> = ({ activeButton }) => {
     {
       title: 'Name',
       dataIndex: 'name',
-      sorter: (a: any, b: any) => a.name.localeCompare(b.name),
-      sortDirections: ['ascend', 'descend'],
+      sorter: true,
+      /* sorter: (a: any, b: any) => a.name.localeCompare(b.name),
+      sortDirections: ['ascend', 'descend'],*/
     },
     {
       title: 'Cards',
       dataIndex: 'cards',
-      sorter: (a: any, b: any) => a.cards - b.cards,
-      sortDirections: ['ascend', 'descend'],
+      sorter: true,
+      /*  sorter: (a: any, b: any) => a.cards - b.cards,
+      sortDirections: ['ascend', 'descend'],*/
     },
     {
       title: 'Last Updated',
       dataIndex: 'lastUpdated',
-      sorter: (a: any, b: any) => a.lastUpdated - b.lastUpdated,
-      sortDirections: ['ascend', 'descend'],
+      sorter: true,
     },
     {
       title: 'Created By',
       dataIndex: 'createdBy',
-      sorter: (a: any, b: any) => a.createdBy.localeCompare(b.createdBy),
-      sortDirections: ['ascend', 'descend'],
+      sorter: true,
+      /* sorter: (a: any, b: any) => a.createdBy.localeCompare(b.createdBy),
+      sortDirections: ['ascend', 'descend'],*/
     },
     {
       title: 'Actions',
@@ -106,9 +130,9 @@ export const PacksTable: FC<PacksTableProps> = ({ activeButton }) => {
     },
   ]
 
-  if (isLoading) {
+  /*  if (isLoading) {
     return <Loader isLoading={isLoading} />
-  }
+  }*/
 
   if (isError) {
     return <ErrorServerHandler error={error} />
@@ -123,23 +147,26 @@ export const PacksTable: FC<PacksTableProps> = ({ activeButton }) => {
   }))
 
   return (
-    <StyledCardTable
-      size={'small'}
-      columns={columns}
-      dataSource={formattedData}
-      pagination={{
-        pageSizeOptions: ['10', '20', '50'],
-        showQuickJumper: true,
-        onChange: handlePageChange,
-        total: data?.cardPacksTotalCount || 0,
-        current: currentPage,
-        pageSize: pageCount,
-        showSizeChanger: true,
-      }}
-      scroll={{
-        y: currentHeight,
-        scrollToFirstRowOnChange: true,
-      }}
-    />
+    <Loader isLoading={isLoading}>
+      <StyledCardTable
+        size={'small'}
+        columns={columns}
+        dataSource={formattedData}
+        onChange={handleSortChange}
+        pagination={{
+          pageSizeOptions: ['10', '20', '50'],
+          showQuickJumper: true,
+          onChange: handlePageChange,
+          total: data?.cardPacksTotalCount || 0,
+          current: currentPage,
+          pageSize: pageCount,
+          showSizeChanger: true,
+        }}
+        scroll={{
+          y: currentHeight,
+          scrollToFirstRowOnChange: true,
+        }}
+      />
+    </Loader>
   )
 }

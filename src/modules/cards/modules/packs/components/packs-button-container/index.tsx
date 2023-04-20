@@ -11,23 +11,19 @@ type PacksButtonsContainerProps = {
   setActiveButton: (buttonName: string) => void
 }
 export const PacksButton: FC<PacksButtonsContainerProps> = ({ activeButton, setActiveButton }) => {
-  const setActiveButtonName = (buttonName: string) => {
-    setActiveButton(buttonName)
-  }
-
   return (
     <StyledPacksButton>
       <StyledCardText>Show packs</StyledCardText>
       <Space.Compact block>
         <StyledButton
           type={activeButton === MY_BUTTON_NAME ? 'primary' : 'default'}
-          onClick={() => setActiveButtonName(MY_BUTTON_NAME)}
+          onClick={() => setActiveButton(MY_BUTTON_NAME)}
         >
           My
         </StyledButton>
         <StyledButton
           type={activeButton === ALL_BUTTON_NAME ? 'primary' : 'default'}
-          onClick={() => setActiveButtonName(ALL_BUTTON_NAME)}
+          onClick={() => setActiveButton(ALL_BUTTON_NAME)}
         >
           All
         </StyledButton>
