@@ -30,9 +30,9 @@ export const Profile = () => {
 
   return (
     <>
-      <StyledBackToCardLink to={`${MAIN_PATH.Cards}`}>
+      <StyledBackToCardLink to={MAIN_PATH.Cards}>
         <StyledProfileImg src={arrowBack} alt="arrow-back" />
-        Back to cars
+        Go to cards
       </StyledBackToCardLink>
       <StyledCard title={'Personal information'} headStyle={cardHeadStyle}>
         <StyledProfileContainer>
