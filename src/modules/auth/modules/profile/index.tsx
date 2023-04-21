@@ -1,17 +1,15 @@
 import { LogoutOutlined } from '@ant-design/icons'
 
 import arrowBack from '../../../../assets/arrow-back.svg'
-import { ErrorServerHandler } from '../../../../components'
 import { MAIN_PATH } from '../../../../constants'
 import { useAuthorised, useMutation } from '../../hooks'
 import { cardHeadStyle, StyledCard } from '../../styles'
 
-import { ProfileAvatar } from './components/profile-avatar'
+import { ProfileAvatar, ProfileName } from './components'
 import {
   StyledBackToCardLink,
   StyledProfileContainer,
   StyledProfileImg,
-  StyledProfileParagraph,
   StyledProfileText,
   StyledProfileLogOutButton,
 } from './styles'
@@ -20,32 +18,18 @@ export const Profile = () => {
   const { data: userData } = useAuthorised()
   const { name: userName = '', email: userEmail = '' } = userData ?? {}
 
-  const [onSubmit, { isLoading: isUpdating, error: updateUserNameError }] =
-    useMutation('updateUserName')
   const [handleLogout, { isLoading: isLoggingOut }] = useMutation('logout')
-
-  const handleUserNameChange = async (value: string) => {
-    await onSubmit({ name: value })
-  }
 
   return (
     <>
-      <StyledBackToCardLink to={`${MAIN_PATH.Cards}`}>
+      <StyledBackToCardLink to={MAIN_PATH.Cards}>
         <StyledProfileImg src={arrowBack} alt="arrow-back" />
-        Back to cars
+        Go to cards
       </StyledBackToCardLink>
       <StyledCard title={'Personal information'} headStyle={cardHeadStyle}>
         <StyledProfileContainer>
           <ProfileAvatar />
-
-          <StyledProfileParagraph
-            editable={{ onChange: handleUserNameChange }}
-            disabled={isUpdating}
-          >
-            {userName}
-          </StyledProfileParagraph>
-
-          <ErrorServerHandler error={updateUserNameError} />
+          <ProfileName userName={userName} />
 
           <StyledProfileText>{userEmail}</StyledProfileText>
 

@@ -38,13 +38,9 @@ export const StyledAvatarGroup = styled(Avatar.Group)`
 `
 
 export const StyledProfileParagraph = styled(Paragraph)`
-  margin-top: 0.9rem;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.7rem;
-  text-align: center;
-  width: 90%;
-  margin-left: 1.4rem;
 `
 
 export const StyledProfileText = styled(Text)`
