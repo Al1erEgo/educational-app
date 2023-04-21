@@ -7,5 +7,5 @@ export const rootApi = createApi({
   }),
   endpoints: () => ({}),
   reducerPath: 'cards',
-  tagTypes: ['authMe'],
+  tagTypes: ['authMe', 'pack'],
 })

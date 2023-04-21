@@ -52,10 +52,7 @@ export const PacksTable: FC<PacksTableProps> = ({ activeButton }) => {
     sortPacks: sortPacks || undefined,
   })
 
-  const [deleteCard, { isLoading: isLoadingWhenDelete, data: mutationData }] =
-    useDeleteCardsPackMutation()
-
-  console.log('mutationData', mutationData)
+  const [deleteCard, { isLoading: isDeleteLoading }] = useDeleteCardsPackMutation()
 
   const handleSortChange = (
     pagination: TablePaginationConfig,
@@ -166,8 +163,8 @@ export const PacksTable: FC<PacksTableProps> = ({ activeButton }) => {
 
   return (
     <>
-      {isLoading || isLoadingWhenDelete || isFetching ? (
-        <Skeleton paragraph={{ rows: pageCount }} active />
+      {isLoading || isDeleteLoading || isFetching ? (
+        <Skeleton paragraph={{ rows: 10 }} active />
       ) : (
         <StyledCardTable
           size={'small'}

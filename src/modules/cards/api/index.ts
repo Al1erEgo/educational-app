@@ -8,6 +8,7 @@ export const cardsApi = rootApi.injectEndpoints({
         method: 'GET',
         params,
       }),
+      providesTags: ['pack'],
     }),
     newCardsPack: builder.mutation<{}, NewCardPacksRequestType>({
       query: (requestData: NewCardPacksRequestType) => ({
@@ -20,7 +21,17 @@ export const cardsApi = rootApi.injectEndpoints({
       query: ({ id }: DeletedCardsPackRequestType) => ({
         url: `cards/pack?id=${id}`,
         method: 'DELETE',
+        invalidatesTags: ['pack'],
       }),
+      /*     onQueryStarted: async ({}: any, { dispatch, queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled
+
+          dispatch(cardsApi.util.upsertQueryData('cardPacks', 'pack', data.id))
+        } catch (e) {
+          return
+        }
+      },*/
     }),
 
     updatedCardsPack: builder.mutation<{}, UpdatedCardsPackRequestType>({
@@ -102,10 +113,12 @@ type CardPacksRequestType = {
   block?: boolean
 }
 
-type NewCardPacksRequestType = {
-  name?: string
-  deckCover?: string
-  private?: boolean
+export type NewCardPacksRequestType = {
+  cardsPack: {
+    name?: string
+    deckCover?: string
+    private?: boolean
+  }
 }
 
 type DeletedCardsPackRequestType = {
