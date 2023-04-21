@@ -2,16 +2,15 @@ import { useState } from 'react'
 
 import { Loader } from '../../../../components'
 import { useCardPacksQuery } from '../../api'
-import { StyledPacksContainer, StyledPacksToolbar } from '../../styles'
-
+import { CardsHeader } from '../../components'
 import {
-  PacksButton,
-  PacksFilter,
-  PacksHeader,
-  PacksSearch,
-  PacksSlider,
-  PacksTable,
-} from './components'
+  StyledCardsTitleButton,
+  StyledPacksContainer,
+  StyledPacksTitleButton,
+  StyledPacksToolbar,
+} from '../../styles'
+
+import { PacksButton, PacksFilter, PacksSearch, PacksSlider, PacksTable } from './components'
 
 export const Packs = () => {
   const [activeButton, setActiveButton] = useState('All')
@@ -24,7 +23,9 @@ export const Packs = () => {
 
   return (
     <StyledPacksContainer>
-      <PacksHeader isLoading={isLoading} />
+      <CardsHeader title={'Packs list'}>
+        <StyledCardsTitleButton loading={isLoading}>Add new pack</StyledCardsTitleButton>
+      </CardsHeader>
       <Loader isLoading={isLoading}>
         <StyledPacksToolbar>
           <PacksSearch />

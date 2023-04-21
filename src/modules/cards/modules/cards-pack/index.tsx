@@ -1,7 +1,18 @@
 import { useParams } from 'react-router-dom'
 
-export const CardsPack = () => {
-  const params = useParams()
+import { useCardsQuery } from '../../api'
+import { CardsHeader } from '../../components'
+import { StyledPacksContainer } from '../../styles'
 
-  return <div>{params.packId}</div>
+export const CardsPack = () => {
+  const { packId } = useParams()
+  const { data, isLoading } = useCardsQuery({ cardsPack_id: packId + '' })
+
+  console.log(data)
+
+  return (
+    <StyledPacksContainer>
+      <CardsHeader title={'Pack'} />
+    </StyledPacksContainer>
+  )
 }

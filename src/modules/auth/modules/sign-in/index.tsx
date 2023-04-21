@@ -13,8 +13,6 @@ export const SignIn = () => {
   const [onSubmit, { handleSubmit, control, errors }, { isLoading, error }] =
     useFormData<LoginFormInputs>('login')
 
-  console.log(errors)
-
   return (
     <StyledCard title={'Sign In'} headStyle={cardHeadStyle}>
       <Form onFinish={handleSubmit(onSubmit)}>
