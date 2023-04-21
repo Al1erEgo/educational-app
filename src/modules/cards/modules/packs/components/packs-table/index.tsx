@@ -20,15 +20,6 @@ type TableDataType = {
   dataIndex: string
   sorter?: boolean
   render?: (text: string, record: any) => JSX.Element
-  user_name?: string
-}
-
-type FormattedPacksType = {
-  id: string
-  name: string
-  cardsCount: number
-  updated: string
-  user_name: string
 }
 
 type PackType = {
@@ -89,8 +80,8 @@ export const PacksTable: FC<PacksTableProps> = ({ activeButton }) => {
   const handleEdit = (record: any) => {
     console.log('record', record)
   }
-  const handleDelete = async (record: FormattedPacksType) => {
-    await deleteCard({ id: record.id })
+  const handleDelete = async (record: PackType) => {
+    await deleteCard({ id: record._id })
     await refetch()
   }
 
@@ -137,7 +128,7 @@ export const PacksTable: FC<PacksTableProps> = ({ activeButton }) => {
     {
       title: 'Actions',
       dataIndex: 'actions',
-      render: (text: string, record: any) => {
+      render: (text: string, record: PackType) => {
         return activeButton === MY_BUTTON_NAME || record?.user_name === userData?.name ? (
           <Space size="middle">
             <Tooltip title="Learn">
@@ -163,10 +154,10 @@ export const PacksTable: FC<PacksTableProps> = ({ activeButton }) => {
     return <ErrorServerHandler error={error} />
   }
 
-  const formattedData: FormattedPacksType[] =
+  const formattedData: PackType[] =
     data?.cardPacks.map((pack: PackType) => ({
       key: pack._id,
-      id: pack._id,
+      _id: pack._id,
       name: pack.name,
       cardsCount: pack.cardsCount,
       updated: new Date(pack.updated).toLocaleDateString('ru-RU'),
