@@ -1,16 +1,23 @@
-import { FC } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Input } from 'antd'
+import { useDebounce } from 'usehooks-ts'
 
 import { CardsSearchWrapper, StyledCardsText } from '../../styles'
 
-type CardsSearchType = {
-  handleSearch: (value: any) => void
-  searchValue: any
-  setSearchValue: (e: any) => void
-}
+export const CardsSearch = ({ onSearch }: { onSearch: (value: string) => void }) => {
+  const [searchValue, setSearchValue] = useState('')
 
-export const CardsSearch: FC<CardsSearchType> = ({ handleSearch, searchValue, setSearchValue }) => {
+  const debouncedValue = useDebounce(searchValue, 500)
+
+  useEffect(() => {
+    onSearch(debouncedValue)
+  }, [debouncedValue, onSearch])
+
+  const handleSearch = (value: string) => {
+    setSearchValue(value)
+  }
+
   return (
     <CardsSearchWrapper>
       <StyledCardsText>Search</StyledCardsText>

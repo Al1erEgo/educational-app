@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import { FilterValue, SorterResult } from 'antd/es/table/interface'
 import { TablePaginationConfig } from 'antd/lib'
-import { useDebounce } from 'usehooks-ts'
 
 import { useAuthorised } from '../../../auth/hooks'
 import { useCardPacksQuery, useDeleteCardsPackMutation, useNewCardsPackMutation } from '../../api'
@@ -26,12 +25,18 @@ type SorterType = {
 }
 export const Packs = () => {
   const [activeButton, setActiveButton] = useState('All')
-  const [currentPage, setCurrentPage] = useState(1)
-  const [pageCount, setPageCount] = useState(10)
-  const [currentHeight, setCurrentHeight] = useState(windowHeight)
-  const [sortPacks, setSortPacks] = useState('')
-  const [searchValue, setSearchValue] = useState('')
-  const debouncedValue = useDebounce<string>(searchValue, 500)
+
+  const [state, setState] = useState({
+    currentPage: 1,
+    pageCount: 10,
+    currentHeight: windowHeight,
+    sortPacks: '',
+    searchValue: '',
+  })
+
+  console.log('pack render')
+
+  const { currentPage, pageCount, currentHeight, sortPacks, searchValue } = state
 
   const [addNewCardPack, { isLoading: isAddNewPackLoading }] = useNewCardsPackMutation()
 
@@ -44,7 +49,7 @@ export const Packs = () => {
     pageCount: pageCount,
     user_id: activeButton === MY_BUTTON_NAME ? user_id : undefined,
     sortPacks: sortPacks || undefined,
-    searchValue: debouncedValue || undefined,
+    searchValue: searchValue || undefined,
   })
 
   const { data, isLoading, isError, error, refetch, isFetching } = useCardPacksQuery({
@@ -52,14 +57,17 @@ export const Packs = () => {
     pageCount: pageCount,
     user_id: activeButton === MY_BUTTON_NAME ? user_id : undefined,
     sortPacks: sortPacks || undefined,
-    packName: debouncedValue || undefined,
+    packName: searchValue || undefined,
   })
 
-  const [deleteCard, { isLoading: isDeleteLoading }] = useDeleteCardsPackMutation()
+  const handleSearch = useCallback(
+    (value: string) => {
+      setState(prevState => ({ ...prevState, searchValue: value }))
+    },
+    [setState]
+  )
 
-  const handleSearch = (value: any) => {
-    setSearchValue(value)
-  }
+  const [deleteCard, { isLoading: isDeleteLoading }] = useDeleteCardsPackMutation()
 
   const handleSortChange = (
     pagination: TablePaginationConfig,
@@ -69,11 +77,11 @@ export const Packs = () => {
     if (Array.isArray(sorter)) return
     if (sorter.field) {
       if (sorter.order === 'ascend') {
-        setSortPacks(`1${sorter.field}`)
+        setState(prevState => ({ ...prevState, sortPacks: `1${sorter.field}` }))
       } else if (sorter.order === 'descend') {
-        setSortPacks(`0${sorter.field}`)
+        setState(prevState => ({ ...prevState, sortPacks: `0${sorter.field}` }))
       } else {
-        setSortPacks('')
+        setState(prevState => ({ ...prevState, sortPacks: '' }))
       }
     }
   }
@@ -90,7 +98,7 @@ export const Packs = () => {
   }
 
   const handleResize = () => {
-    setCurrentHeight(windowHeight)
+    setState(prevState => ({ ...prevState, currentHeight: windowHeight }))
   }
 
   useEffect(() => {
@@ -102,9 +110,9 @@ export const Packs = () => {
   }, [window.innerHeight])
 
   const handlePageChange = (page: number, pageCount?: number) => {
-    setCurrentPage(page)
+    setState(prevState => ({ ...prevState, currentPage: page }))
     if (pageCount) {
-      setPageCount(pageCount)
+      setState(prevState => ({ ...prevState, pageCount: pageCount }))
     }
   }
 
@@ -128,11 +136,7 @@ export const Packs = () => {
       </CardsHeader>
 
       <StyledCardsToolbar>
-        <CardsSearch
-          handleSearch={handleSearch}
-          searchValue={searchValue}
-          setSearchValue={setSearchValue}
-        />
+        <CardsSearch onSearch={handleSearch} />
         <PacksButton activeButton={activeButton} setActiveButton={setActiveButton} />
         <PacksSlider />
         <PacksFilter />

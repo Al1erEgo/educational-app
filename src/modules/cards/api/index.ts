@@ -27,7 +27,7 @@ export const cardsApi = rootApi.injectEndpoints({
         url: `cards/pack?id=${id}`,
         method: 'DELETE',
       }),
-      /*invalidatesTags: ['pack'],*/
+      invalidatesTags: ['pack'],
     }),
 
     updatedCardsPack: builder.mutation<{}, UpdatedCardsPackRequestType>({
