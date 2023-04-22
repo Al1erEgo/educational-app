@@ -1,21 +1,15 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { FilterValue, SorterResult } from 'antd/es/table/interface'
 import { TablePaginationConfig } from 'antd/lib'
 
 import { useAuthorised } from '../../../auth/hooks'
 import { useCardPacksQuery, useDeleteCardsPackMutation, useNewCardsPackMutation } from '../../api'
+import { CardsHeader, CardsSearch } from '../../components'
 import { MY_BUTTON_NAME, windowHeight } from '../../constants'
-import { StyledPacksContainer, StyledPacksToolbar } from '../../styles'
+import { StyledCardsTitleButton, StyledCardsToolbar, StyledPacksContainer } from '../../styles'
 
-import {
-  PacksButton,
-  PacksFilter,
-  PacksHeader,
-  PacksSearch,
-  PacksSlider,
-  PacksTable,
-} from './components'
+import { PacksButton, PacksFilter, PacksSlider, PacksTable } from './components'
 
 type PackType = {
   _id: string
@@ -40,6 +34,13 @@ export const Packs = () => {
   const { data: userData } = useAuthorised()
 
   const user_id = userData?._id
+
+  console.log({
+    page: currentPage,
+    pageCount: pageCount,
+    user_id: activeButton === MY_BUTTON_NAME ? user_id : undefined,
+    sortPacks: sortPacks || undefined,
+  })
 
   const { data, isLoading, isError, error, refetch, isFetching } = useCardPacksQuery({
     page: currentPage,
@@ -112,14 +113,18 @@ export const Packs = () => {
 
   return (
     <StyledPacksContainer>
-      <PacksHeader handleAddNewPack={handleAddNewPack} isAddNewPackLoading={isAddNewPackLoading} />
+      <CardsHeader title={'Packs list'}>
+        <StyledCardsTitleButton loading={isAddNewPackLoading} onClick={handleAddNewPack}>
+          Add new pack
+        </StyledCardsTitleButton>
+      </CardsHeader>
 
-      <StyledPacksToolbar>
-        <PacksSearch />
+      <StyledCardsToolbar>
+        <CardsSearch />
         <PacksButton activeButton={activeButton} setActiveButton={setActiveButton} />
         <PacksSlider />
         <PacksFilter />
-      </StyledPacksToolbar>
+      </StyledCardsToolbar>
 
       <PacksTable
         activeButton={activeButton}

@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom'
 
 import { useAuthorised } from '../../../auth/hooks'
 import { useCardsQuery } from '../../api'
-import { CardsHeader, PacksSearch } from '../../components'
+import { CardsHeader, CardsSearch } from '../../components'
 import { StyledCardsTitleButton, StyledCardsToolbar, StyledPacksContainer } from '../../styles'
 
 import { PackTable } from './components'
@@ -21,7 +21,7 @@ export const CardsPack = () => {
         <StyledCardsTitleButton loading={isLoading}>{titleButtonName}</StyledCardsTitleButton>
       </CardsHeader>
       <StyledCardsToolbar>
-        <PacksSearch />
+        <CardsSearch />
       </StyledCardsToolbar>
       <PackTable data={data} />
     </StyledPacksContainer>

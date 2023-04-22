@@ -4,7 +4,7 @@ import { TablePaginationConfig } from 'antd/es/table/InternalTable'
 import { CardsResponseType } from '../../../../../api'
 
 export type PackTablePropsType = {
-  data: CardsResponseType
+  data: CardsResponseType | undefined
 }
 
 export type PackDataTableType = {

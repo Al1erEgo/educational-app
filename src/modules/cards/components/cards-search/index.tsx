@@ -1,7 +1,7 @@
 import { Input } from 'antd'
 
 import { CardsSearchWrapper, StyledCardsText } from '../../styles'
-export const PacksSearch = () => {
+export const CardsSearch = () => {
   return (
     <CardsSearchWrapper>
       <StyledCardsText>Search</StyledCardsText>
