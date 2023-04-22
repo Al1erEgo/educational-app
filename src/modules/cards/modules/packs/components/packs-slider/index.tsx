@@ -1,7 +1,7 @@
 import { Slider } from 'antd'
 
 import { useCardPacksQuery } from '../../../../api'
-import { StyledCardText } from '../../../../styles'
+import { StyledCardsText } from '../../../../styles'
 
 export const PacksSlider = () => {
   const { data } = useCardPacksQuery({})
@@ -19,7 +19,7 @@ export const PacksSlider = () => {
 
   return (
     <div style={{ width: '25%', maxWidth: '370px', marginRight: '10px' }}>
-      <StyledCardText>Number of cards</StyledCardText>
+      <StyledCardsText>Number of cards</StyledCardsText>
       <Slider
         max={maxCount}
         range={{ draggableTrack: true }}

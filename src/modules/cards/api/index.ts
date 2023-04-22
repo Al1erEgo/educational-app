@@ -123,7 +123,7 @@ type UpdatedCardsPackRequestType = {
   name?: string
 }
 
-type CardsResponseType = {
+export type CardsResponseType = {
   cards: [
     {
       answer: string

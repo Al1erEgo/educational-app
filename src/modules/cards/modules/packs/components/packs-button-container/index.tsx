@@ -4,7 +4,7 @@ import { Button, Space } from 'antd'
 import styled from 'styled-components'
 
 import { ALL_BUTTON_NAME, MY_BUTTON_NAME } from '../../../../constants'
-import { StyledCardText, StyledPacksButton } from '../../../../styles'
+import { StyledCardsText, StyledPacksButton } from '../../../../styles'
 
 type PacksButtonsContainerProps = {
   activeButton: string
@@ -13,7 +13,7 @@ type PacksButtonsContainerProps = {
 export const PacksButton: FC<PacksButtonsContainerProps> = ({ activeButton, setActiveButton }) => {
   return (
     <StyledPacksButton>
-      <StyledCardText>Show packs</StyledCardText>
+      <StyledCardsText>Show packs</StyledCardsText>
       <Space.Compact block>
         <StyledButton
           type={activeButton === MY_BUTTON_NAME ? 'primary' : 'default'}

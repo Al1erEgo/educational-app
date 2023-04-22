@@ -1,11 +1,10 @@
 import { Form } from 'antd'
 
 import { ErrorServerHandler } from '../../../../components'
-import { FormButton, FormInput } from '../../components'
-import { ConfirmationMessage } from '../../components/confirmation-message'
+import { FormButton, FormInput, ConfirmationMessage } from '../../components'
 import { ABSOLUTE_AUTH_PATH } from '../../constants'
+import { useFormData } from '../../hooks'
 import { ResetPasswordFormInputs } from '../../hooks/use-authform/types'
-import { useFormData } from '../../hooks/use-form-data'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP, StyledText } from '../../styles'
 
 export const ResetPassword = () => {

@@ -4,11 +4,11 @@ import { Spin } from 'antd'
 
 import { LoaderContainer } from './styles'
 
-type Props = {
+type LoaderPropsType = {
   isLoading: boolean
 }
 
-export const Loader: React.FC<PropsWithChildren<Props>> = ({ isLoading, children }) => {
+export const Loader: React.FC<PropsWithChildren<LoaderPropsType>> = ({ isLoading, children }) => {
   return isLoading ? (
     <LoaderContainer>
       <Spin tip="Loading" size="large" />
