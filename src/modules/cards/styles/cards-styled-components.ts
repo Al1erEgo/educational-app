@@ -15,12 +15,6 @@ export const StyledPacksHeader = styled.div`
   margin-bottom: 20px;
 `
 
-export const StyledPacksTitleButton = styled(Button)`
-  font-weight: 500;
-  margin-left: 10px;
-  width: 200px;
-`
-
 export const StyledCardsTitleButton = styled(Button).attrs(props => ({
   type: 'primary',
   htmlType: 'submit',
@@ -32,24 +26,22 @@ export const StyledCardsTitleButton = styled(Button).attrs(props => ({
   width: 200px;
 `
 
-export const StyledPacksToolbar = styled.div`
+export const StyledCardsToolbar = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 24px;
 `
-export const PacksSearchWrapper = styled.div`
-  width: 35%;
-  max-width: 500px;
-  margin-right: 10px;
+export const CardsSearchWrapper = styled.div`
+  flex: 2 2;
 `
 export const StyledPacksButton = styled.div`
   width: 14%;
   max-width: 200px;
-  margin-right: 14px;
+  margin: 0 14px;
 `
 
-export const StyledCardText = styled(Text)`
+export const StyledCardsText = styled(Text)`
   font-size: 14px;
   font-weight: 500;
   line-height: 17px;
