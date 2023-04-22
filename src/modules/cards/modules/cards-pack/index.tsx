@@ -5,7 +5,7 @@ import { useCardsQuery } from '../../api'
 import { CardsHeader, PacksSearch } from '../../components'
 import { StyledCardsTitleButton, StyledCardsToolbar, StyledPacksContainer } from '../../styles'
 
-import { PacksTable } from './components'
+import { PackTable } from './components'
 
 export const CardsPack = () => {
   const { packId } = useParams()
@@ -23,7 +23,7 @@ export const CardsPack = () => {
       <StyledCardsToolbar>
         <PacksSearch />
       </StyledCardsToolbar>
-      <PacksTable />
+      <PackTable data={data} />
     </StyledPacksContainer>
   )
 }

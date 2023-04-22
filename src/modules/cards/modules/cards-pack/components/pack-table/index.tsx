@@ -1,5 +1,10 @@
-import React from 'react'
+import React, { FC } from 'react'
 
-export const PacksTable = () => {
-  return <div>Table</div>
+import { Table } from 'antd'
+
+import { PackTableColumns } from './constants'
+import { PackTablePropsType } from './types'
+
+export const PackTable: FC<PackTablePropsType> = ({ data }) => {
+  return <Table size={'small'} columns={PackTableColumns} dataSource={data.cards} />
 }
