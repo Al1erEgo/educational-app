@@ -4,7 +4,9 @@ import { useCardPacksQuery } from '../../../../api'
 import { StyledCardsText } from '../../../../styles'
 
 export const PacksSlider = () => {
-  const { data } = useCardPacksQuery({})
+  //const { data } = useCardPacksQuery({})
+  //TODO заглушка - исправить
+  const data = { minCardsCount: 0, maxCardsCount: 110 }
 
   const minCount = data?.minCardsCount ?? 0
   const maxCount = data?.maxCardsCount ?? 110

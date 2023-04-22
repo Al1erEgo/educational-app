@@ -35,7 +35,7 @@ export const Packs = () => {
 
   const user_id = userData?._id
 
-  console.log({
+  console.log('query args', {
     page: currentPage,
     pageCount: pageCount,
     user_id: activeButton === MY_BUTTON_NAME ? user_id : undefined,
