@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { FC } from 'react'
 
 import { DeleteOutlined, EditOutlined, InfoCircleOutlined } from '@ant-design/icons'
 import { Space, Tooltip, Skeleton } from 'antd'
@@ -6,13 +6,31 @@ import { FilterValue, SorterResult } from 'antd/es/table/interface'
 import { TablePaginationConfig } from 'antd/lib'
 
 import { ErrorServerHandler } from '../../../../../../components'
-import { useAuthorised } from '../../../../../auth/hooks'
-import { useCardPacksQuery, useDeleteCardsPackMutation } from '../../../../api'
-import { MY_BUTTON_NAME, windowHeight } from '../../../../constants'
+import { MY_BUTTON_NAME } from '../../../../constants'
 import { StyledCardTable } from '../../../../styles'
 
 type PacksTableProps = {
   activeButton: string
+  currentHeight: number
+  handlePageChange: (page: number, pageCount?: number) => void
+  handleSortChange: (
+    pagination: TablePaginationConfig,
+    filter: Record<string, FilterValue | null>,
+    sorter: SorterResult<SorterType> | SorterResult<SorterType>[]
+  ) => void
+  sortPacks: string
+  handleLearn: (record: PackType) => void
+  handleEdit: (record: PackType) => void
+  handleDelete: (record: PackType) => void
+  isDeleteLoading: boolean
+  currentPage: number
+  pageCount: number
+  userData: any
+  isError: boolean
+  error: any
+  data: any
+  isLoading: boolean
+  isFetching: boolean
 }
 
 type TableDataType = {
@@ -35,72 +53,24 @@ type SorterType = {
   order?: 'ascend' | 'descend'
 }
 
-export const PacksTable: FC<PacksTableProps> = ({ activeButton }) => {
-  const [currentPage, setCurrentPage] = useState(1)
-  const [pageCount, setPageCount] = useState(10)
-  const [currentHeight, setCurrentHeight] = useState(windowHeight)
-  const [sortPacks, setSortPacks] = useState('')
-
-  const { data: userData } = useAuthorised()
-
-  const user_id = userData?._id
-
-  const { data, isLoading, isError, error, refetch, isFetching } = useCardPacksQuery({
-    page: currentPage,
-    pageCount: pageCount,
-    user_id: activeButton === MY_BUTTON_NAME ? user_id : undefined,
-    sortPacks: sortPacks || undefined,
-  })
-
-  const [deleteCard, { isLoading: isDeleteLoading }] = useDeleteCardsPackMutation()
-
-  const handleSortChange = (
-    pagination: TablePaginationConfig,
-    filter: Record<string, FilterValue | null>,
-    sorter: SorterResult<SorterType> | SorterResult<SorterType>[]
-  ) => {
-    if (Array.isArray(sorter)) return
-    if (sorter.field) {
-      if (sorter.order === 'ascend') {
-        setSortPacks(`1${sorter.field}`)
-      } else if (sorter.order === 'descend') {
-        setSortPacks(`0${sorter.field}`)
-      } else {
-        setSortPacks('')
-      }
-    }
-  }
-
-  const handleLearn = (record: any) => {
-    console.log('record', record)
-  }
-  const handleEdit = (record: any) => {
-    console.log('record', record)
-  }
-  const handleDelete = async (record: PackType) => {
-    await deleteCard({ id: record._id })
-    await refetch()
-  }
-
-  const handleResize = () => {
-    setCurrentHeight(windowHeight)
-  }
-
-  useEffect(() => {
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [window.innerHeight])
-
-  const handlePageChange = (page: number, pageCount?: number) => {
-    setCurrentPage(page)
-    if (pageCount) {
-      setPageCount(pageCount)
-    }
-  }
-
+export const PacksTable: FC<PacksTableProps> = ({
+  activeButton,
+  currentHeight,
+  handlePageChange,
+  handleSortChange,
+  handleLearn,
+  handleEdit,
+  handleDelete,
+  isDeleteLoading,
+  currentPage,
+  pageCount,
+  userData,
+  isError,
+  error,
+  data,
+  isLoading,
+  isFetching,
+}) => {
   const columns: TableDataType[] = [
     {
       title: 'Name',

@@ -7,6 +7,7 @@ export const cardsApi = rootApi.injectEndpoints({
         url: 'cards/pack',
         method: 'GET',
         params,
+        cacheTime: 1,
       }),
       providesTags: ['pack'],
     }),
@@ -16,22 +17,14 @@ export const cardsApi = rootApi.injectEndpoints({
         method: 'POST',
         body: requestData,
       }),
+      invalidatesTags: ['pack'],
     }),
     deleteCardsPack: builder.mutation<{}, DeletedCardsPackRequestType>({
       query: ({ id }: DeletedCardsPackRequestType) => ({
         url: `cards/pack?id=${id}`,
         method: 'DELETE',
-        invalidatesTags: ['pack'],
       }),
-      /*     onQueryStarted: async ({}: any, { dispatch, queryFulfilled }) => {
-        try {
-          const { data } = await queryFulfilled
-
-          dispatch(cardsApi.util.upsertQueryData('cardPacks', 'pack', data.id))
-        } catch (e) {
-          return
-        }
-      },*/
+      /*invalidatesTags: ['pack'],*/
     }),
 
     updatedCardsPack: builder.mutation<{}, UpdatedCardsPackRequestType>({
