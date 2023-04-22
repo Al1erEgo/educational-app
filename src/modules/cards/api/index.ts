@@ -150,7 +150,7 @@ type CardsRequestType = {
   cardsPack_id: string
   min?: number
   max?: number
-  sortCards?: number
+  sortCards?: string
   page?: number
   pageCount?: number
 }

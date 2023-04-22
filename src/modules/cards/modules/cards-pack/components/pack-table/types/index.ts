@@ -1,28 +1,38 @@
-import { SorterResult } from 'antd/es/table/interface'
+import { FilterValue, SorterResult } from 'antd/es/table/interface'
 import { TablePaginationConfig } from 'antd/es/table/InternalTable'
 
 import { CardsResponseType } from '../../../../../api'
 
-export type PackTableType = {
+export type HandleTableChangeType = (
+  pagination: TablePaginationConfig,
+  filters: Record<string, FilterValue | null>,
+  sorter: SorterResult<TableCardType> | SorterResult<TableCardType>[]
+) => void
+
+export type PackTablePropsType = {
   data: CardsResponseType | undefined
-  tableParams: PackTableParams
+  tableParams: PackTableParamsType
   isLoading: boolean
-  onTableChange: (pagination: TablePaginationConfig, sorter: SorterResult<TableCardType>) => void
+  onTableChange: HandleTableChangeType
 }
 
 export type PackTableColumnsType = {
+  title: string
+  dataIndex: string
+  sorter?: boolean
+}
+
+export type CardType = {
   question: string
   answer: string
   updated: string
   grade: number
 }
 
-export type PackTableParams = {
+export type PackTableParamsType = SorterResult<TableCardType> & {
   pagination?: TablePaginationConfig
-  sortField?: string
-  sortOrder?: string
 }
 
-export type TableCardType = PackTableColumnsType & {
+export type TableCardType = CardType & {
   key: string
 }
