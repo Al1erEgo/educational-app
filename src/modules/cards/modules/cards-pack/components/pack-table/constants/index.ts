@@ -1,8 +1,8 @@
 import { ColumnsType } from 'antd/es/table'
 
-import { PackDataTableType } from '../types'
+import { PackTableColumnsType } from '../types'
 
-export const PackTableColumns: ColumnsType<PackDataTableType> = [
+export const PackTableColumns: ColumnsType<PackTableColumnsType> = [
   {
     title: 'Question',
     dataIndex: 'question',

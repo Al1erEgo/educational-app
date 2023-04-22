@@ -35,13 +35,6 @@ export const Packs = () => {
 
   const user_id = userData?._id
 
-  console.log('query args', {
-    page: currentPage,
-    pageCount: pageCount,
-    user_id: activeButton === MY_BUTTON_NAME ? user_id : undefined,
-    sortPacks: sortPacks || undefined,
-  })
-
   const { data, isLoading, isError, error, refetch, isFetching } = useCardPacksQuery({
     page: currentPage,
     pageCount: pageCount,
