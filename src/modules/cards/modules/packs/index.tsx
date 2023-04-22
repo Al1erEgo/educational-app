@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { FilterValue, SorterResult } from 'antd/es/table/interface'
 import { TablePaginationConfig } from 'antd/lib'
+import { useDebounce } from 'usehooks-ts'
 
 import { useAuthorised } from '../../../auth/hooks'
 import { useCardPacksQuery, useDeleteCardsPackMutation, useNewCardsPackMutation } from '../../api'
@@ -29,6 +30,9 @@ export const Packs = () => {
   const [pageCount, setPageCount] = useState(10)
   const [currentHeight, setCurrentHeight] = useState(windowHeight)
   const [sortPacks, setSortPacks] = useState('')
+  const [searchValue, setSearchValue] = useState('')
+  const debouncedValue = useDebounce<string>(searchValue, 500)
+
   const [addNewCardPack, { isLoading: isAddNewPackLoading }] = useNewCardsPackMutation()
 
   const { data: userData } = useAuthorised()
@@ -40,6 +44,7 @@ export const Packs = () => {
     pageCount: pageCount,
     user_id: activeButton === MY_BUTTON_NAME ? user_id : undefined,
     sortPacks: sortPacks || undefined,
+    searchValue: debouncedValue || undefined,
   })
 
   const { data, isLoading, isError, error, refetch, isFetching } = useCardPacksQuery({
@@ -47,11 +52,14 @@ export const Packs = () => {
     pageCount: pageCount,
     user_id: activeButton === MY_BUTTON_NAME ? user_id : undefined,
     sortPacks: sortPacks || undefined,
+    packName: debouncedValue || undefined,
   })
 
-  console.log('data', data)
-
   const [deleteCard, { isLoading: isDeleteLoading }] = useDeleteCardsPackMutation()
+
+  const handleSearch = (value: any) => {
+    setSearchValue(value)
+  }
 
   const handleSortChange = (
     pagination: TablePaginationConfig,
@@ -120,7 +128,11 @@ export const Packs = () => {
       </CardsHeader>
 
       <StyledCardsToolbar>
-        <CardsSearch />
+        <CardsSearch
+          handleSearch={handleSearch}
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+        />
         <PacksButton activeButton={activeButton} setActiveButton={setActiveButton} />
         <PacksSlider />
         <PacksFilter />

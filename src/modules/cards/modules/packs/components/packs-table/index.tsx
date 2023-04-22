@@ -6,6 +6,7 @@ import { FilterValue, SorterResult } from 'antd/es/table/interface'
 import { TablePaginationConfig } from 'antd/lib'
 
 import { ErrorServerHandler } from '../../../../../../components'
+import { StyledErrorText } from '../../../../../auth/styles'
 import { MY_BUTTON_NAME } from '../../../../constants'
 import { StyledCardTable } from '../../../../styles'
 
@@ -130,6 +131,10 @@ export const PacksTable: FC<PacksTableProps> = ({
       updated: new Date(pack.updated).toLocaleDateString('ru-RU'),
       user_name: pack.user_name,
     })) || []
+
+  if (!isLoading && !isError && !data?.cardPacks.length) {
+    return <StyledErrorText>No packs with the entered name were found (:</StyledErrorText>
+  }
 
   return (
     <>

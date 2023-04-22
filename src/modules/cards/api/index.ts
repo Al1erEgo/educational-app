@@ -6,7 +6,10 @@ export const cardsApi = rootApi.injectEndpoints({
       query: (params: CardPacksRequestType) => ({
         url: 'cards/pack',
         method: 'GET',
-        params,
+        params: {
+          ...params,
+          packName: params.packName || undefined,
+        },
         cacheTime: 1,
       }),
       providesTags: ['pack'],
