@@ -1,5 +1,8 @@
 import { Button, Table, Typography } from 'antd'
 import styled from 'styled-components'
+
+import { CardsSearchWrapperProps } from '../../types'
+
 const { Text } = Typography
 
 export const StyledPacksContainer = styled.div`
@@ -32,9 +35,10 @@ export const StyledCardsToolbar = styled.div`
   justify-content: space-between;
   margin-bottom: 24px;
 `
-export const CardsSearchWrapper = styled.div`
-  flex: 2 2;
+export const CardsSearchWrapper = styled.div<CardsSearchWrapperProps>`
+  width: ${props => (props.size === 'small' ? 35 : 100)}%;
 `
+
 export const StyledPacksButton = styled.div`
   width: 14%;
   max-width: 200px;

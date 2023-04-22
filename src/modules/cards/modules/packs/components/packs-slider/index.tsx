@@ -1,6 +1,5 @@
 import { Slider } from 'antd'
 
-import { useCardPacksQuery } from '../../../../api'
 import { StyledCardsText } from '../../../../styles'
 
 export const PacksSlider = () => {

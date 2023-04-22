@@ -21,7 +21,7 @@ export const CardsPack = () => {
         <StyledCardsTitleButton loading={isLoading}>{titleButtonName}</StyledCardsTitleButton>
       </CardsHeader>
       <StyledCardsToolbar>
-        <CardsSearch />
+        <CardsSearch size="big" />
       </StyledCardsToolbar>
       <PackTable data={data} />
     </StyledPacksContainer>
