@@ -17,6 +17,7 @@ import { getSortParam } from './components/pack-table/utils'
 export const CardsPack = () => {
   const { packId } = useParams()
   const { data: authData } = useAuthorised()
+  const [searchParam, setSearchParam] = useState<string>()
   const [tableParams, setTableParams] = useState<PackTableParamsType>({
     pagination: {
       current: 1,
@@ -31,6 +32,7 @@ export const CardsPack = () => {
     page: tableParams.pagination?.current,
     pageCount: tableParams.pagination?.pageSize,
     sortCards: getSortParam(tableParams),
+    cardQuestion: searchParam,
   })
 
   //TODO проверить работу условия, сейчас нет моих паков
@@ -53,7 +55,7 @@ export const CardsPack = () => {
         <StyledCardsTitleButton loading={isLoading}>{titleButtonName}</StyledCardsTitleButton>
       </CardsHeader>
       <StyledCardsToolbar>
-        <CardsSearch size="big" />
+        <CardsSearch size="big" onSearch={setSearchParam} isLoading={isLoading || isFetching} />
       </StyledCardsToolbar>
       <PackTable
         data={data}
