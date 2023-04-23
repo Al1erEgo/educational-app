@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 import arrowBack from '../../../../assets/arrow-back.svg'
 import { MAIN_PATH } from '../../../../constants'
@@ -17,7 +17,6 @@ import { getSortParam } from './components/pack-table/utils'
 export const CardsPack = () => {
   const { packId } = useParams()
   const { data: authData } = useAuthorised()
-  const [searchParams, setSearchParams] = useSearchParams()
   const [tableParams, setTableParams] = useState<PackTableParamsType>({
     pagination: {
       current: 1,
@@ -34,7 +33,6 @@ export const CardsPack = () => {
     sortCards: getSortParam(tableParams),
   })
 
-  console.log('pack data', data)
   //TODO проверить работу условия, сейчас нет моих паков
   const titleButtonName = authData?._id === data?.packUserId ? 'Add new card' : 'Learn pack'
 
