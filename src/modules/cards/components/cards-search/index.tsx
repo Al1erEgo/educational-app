@@ -1,22 +1,34 @@
-import { useEffect, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 
 import { Input } from 'antd'
 import { useDebounce } from 'usehooks-ts'
 
 import { CardsSearchWrapper, StyledCardsText } from '../../styles'
 
-export const CardsSearch = ({ onSearch }: { onSearch: (value: string) => void }) => {
+type CardsSearchProps = {
+  setState: React.Dispatch<
+    React.SetStateAction<{
+      currentPage: number
+      pageCount: number
+      currentHeight: number
+      sortPacks: string
+      searchValue: string
+      minCardsCount: number
+      maxCardsCount: number
+    }>
+  >
+}
+export const CardsSearch: FC<CardsSearchProps> = ({ setState }) => {
   const [searchValue, setSearchValue] = useState('')
 
   const debouncedValue = useDebounce(searchValue, 500)
 
   useEffect(() => {
-    onSearch(debouncedValue)
+    handleSearch(debouncedValue)
   }, [debouncedValue])
 
   const handleSearch = (value: string) => {
-    console.log('value', value)
-    setSearchValue(value)
+    setState(prevState => ({ ...prevState, searchValue: value }))
   }
 
   return (
