@@ -60,15 +60,14 @@ export const Packs = () => {
     packName: searchValue || undefined,
   })
 
+  const [deleteCard, { isLoading: isDeleteLoading }] = useDeleteCardsPackMutation()
+
   const handleSearch = useCallback(
     (value: string) => {
       setState(prevState => ({ ...prevState, searchValue: value }))
     },
     [setState]
   )
-
-  const [deleteCard, { isLoading: isDeleteLoading }] = useDeleteCardsPackMutation()
-
   const handleSortChange = (
     pagination: TablePaginationConfig,
     filter: Record<string, FilterValue | null>,
@@ -127,6 +126,18 @@ export const Packs = () => {
     }
   }
 
+  const clearFilters = () => {
+    setState({
+      currentPage: 1,
+      pageCount: 10,
+      currentHeight: windowHeight,
+      sortPacks: '',
+      searchValue: '',
+    })
+  }
+
+  console.log('state', state)
+
   return (
     <StyledPacksContainer>
       <CardsHeader title={'Packs list'}>
@@ -139,27 +150,27 @@ export const Packs = () => {
         <CardsSearch onSearch={handleSearch} />
         <PacksButton activeButton={activeButton} setActiveButton={setActiveButton} />
         <PacksSlider />
-        <PacksFilter />
+        <PacksFilter clearFilters={clearFilters} setState={setState} />
       </StyledCardsToolbar>
 
       <PacksTable
         activeButton={activeButton}
         currentHeight={currentHeight}
+        currentPage={currentPage}
+        pageCount={pageCount}
+        userData={userData}
+        data={data}
+        sortPacks={sortPacks}
         handlePageChange={handlePageChange}
         handleSortChange={handleSortChange}
-        sortPacks={sortPacks}
         handleLearn={handleLearn}
         handleEdit={handleEdit}
         handleDelete={handleDelete}
         isDeleteLoading={isDeleteLoading}
-        currentPage={currentPage}
-        pageCount={pageCount}
-        userData={userData}
-        isError={isError}
-        error={error}
-        data={data}
         isLoading={isLoading}
         isFetching={isFetching}
+        isError={isError}
+        error={error}
       />
     </StyledPacksContainer>
   )

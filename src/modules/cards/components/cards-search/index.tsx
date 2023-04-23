@@ -12,9 +12,10 @@ export const CardsSearch = ({ onSearch }: { onSearch: (value: string) => void })
 
   useEffect(() => {
     onSearch(debouncedValue)
-  }, [debouncedValue, onSearch])
+  }, [debouncedValue])
 
   const handleSearch = (value: string) => {
+    console.log('value', value)
     setSearchValue(value)
   }
 
