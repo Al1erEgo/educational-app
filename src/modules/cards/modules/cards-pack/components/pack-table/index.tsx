@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 
 import { Table } from 'antd'
 
@@ -11,6 +11,7 @@ export const PackTable: FC<PackTablePropsType> = ({
   isLoading,
   onTableChange,
 }) => {
+  const [tableHeight, setTableHeight] = useState(window.innerHeight - 350)
   const formattedData: TableCardType[] =
     data?.cards.map(card => ({
       key: card._id,
@@ -19,6 +20,14 @@ export const PackTable: FC<PackTablePropsType> = ({
       updated: new Date(card.updated).toLocaleDateString('ru-RU'),
       grade: card.grade,
     })) || []
+
+  useEffect(() => {
+    window.addEventListener('resize', () => setTableHeight(window.innerHeight - 350))
+
+    return () => {
+      window.removeEventListener('resize', () => setTableHeight(window.innerHeight - 350))
+    }
+  }, [window.innerHeight])
 
   return (
     <Table
@@ -33,8 +42,9 @@ export const PackTable: FC<PackTablePropsType> = ({
         pageSizeOptions: ['10', '20', '50'],
         showQuickJumper: true,
         showSizeChanger: true,
-        total: data?.cardsTotalCount || 1,
+        total: data?.cardsTotalCount || 0,
       }}
+      scroll={{ scrollToFirstRowOnChange: true, y: tableHeight }}
     />
   )
 }

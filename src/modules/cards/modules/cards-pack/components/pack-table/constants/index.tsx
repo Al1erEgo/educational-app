@@ -1,3 +1,5 @@
+import { Rate } from 'antd'
+
 import { PackTableColumnsType } from '../types'
 
 export const PackTableColumns: PackTableColumnsType[] = [
@@ -13,10 +15,13 @@ export const PackTableColumns: PackTableColumnsType[] = [
     title: 'LastUpdated',
     dataIndex: 'updated',
     sorter: true,
+    width: '10%',
   },
   {
     title: 'Grade',
     dataIndex: 'grade',
     sorter: true,
+    width: '17%',
+    render: (_, card) => <Rate disabled defaultValue={card.grade} />,
   },
 ]

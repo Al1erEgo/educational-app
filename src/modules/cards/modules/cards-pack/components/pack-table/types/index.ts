@@ -20,6 +20,8 @@ export type PackTableColumnsType = {
   title: string
   dataIndex: string
   sorter?: boolean
+  width?: string
+  render?: (text: string, record: TableCardType) => JSX.Element
 }
 
 export type CardType = {

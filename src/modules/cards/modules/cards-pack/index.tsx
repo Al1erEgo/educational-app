@@ -31,6 +31,7 @@ export const CardsPack = () => {
     sortCards: getSortParam(tableParams),
   })
 
+  console.log('pack data', data)
   //TODO проверить работу условия, сейчас нет моих паков
   const titleButtonName = authData?._id === data?.packUserId ? 'Add new card' : 'Learn pack'
 
