@@ -9,6 +9,8 @@ export type HandleTableChangeType = (
   sorter: SorterResult<TableCardType> | SorterResult<TableCardType>[]
 ) => void
 
+export type GetTableHeightType = (windowInnerHeight: number) => number
+
 export type PackTablePropsType = {
   data: CardsResponseType | undefined
   tableParams: PackTableParamsType

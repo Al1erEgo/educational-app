@@ -2,10 +2,13 @@ import { useState } from 'react'
 
 import { useParams, useSearchParams } from 'react-router-dom'
 
+import arrowBack from '../../../../assets/arrow-back.svg'
+import { MAIN_PATH } from '../../../../constants'
+import { StyledArrowImg, StyledBackToCardLink } from '../../../../styles'
 import { useAuthorised } from '../../../auth/hooks'
 import { useCardsQuery } from '../../api'
 import { CardsHeader, CardsSearch } from '../../components'
-import { StyledCardsTitleButton, StyledCardsToolbar, StyledPacksContainer } from '../../styles'
+import { StyledCardsTitleButton, StyledCardsToolbar } from '../../styles'
 
 import { PackTable } from './components'
 import { HandleTableChangeType, PackTableParamsType } from './components/pack-table/types'
@@ -43,7 +46,11 @@ export const CardsPack = () => {
   }
 
   return (
-    <StyledPacksContainer>
+    <>
+      <StyledBackToCardLink to={MAIN_PATH.Cards}>
+        <StyledArrowImg src={arrowBack} alt="arrow-back" />
+        Go to Packs List
+      </StyledBackToCardLink>
       <CardsHeader title={'Pack'}>
         <StyledCardsTitleButton loading={isLoading}>{titleButtonName}</StyledCardsTitleButton>
       </CardsHeader>
@@ -56,6 +63,6 @@ export const CardsPack = () => {
         isLoading={isLoading || isFetching}
         onTableChange={handleTableChange}
       />
-    </StyledPacksContainer>
+    </>
   )
 }

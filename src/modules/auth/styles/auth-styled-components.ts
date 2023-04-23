@@ -3,13 +3,6 @@ import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 export const { Text } = Typography
 
-export const AuthContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 80px 5%;
-  margin: 0;
-`
-
 export const StyledCard = styled(Card)`
   width: 100%;
   max-width: 26rem;

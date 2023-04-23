@@ -1,21 +1,20 @@
 import { Button, Table, Typography } from 'antd'
+import Title from 'antd/es/typography/Title'
 import styled from 'styled-components'
 
 import { CardsSearchWrapperProps } from '../../types'
 
 const { Text } = Typography
 
-export const StyledPacksContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 0 10%;
-  margin: 0;
-`
 export const StyledPacksHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+`
+
+export const StyledTitle = styled(Title)`
+  margin: 0;
 `
 
 export const StyledCardsTitleButton = styled(Button).attrs(props => ({

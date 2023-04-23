@@ -1,17 +1,17 @@
 import React from 'react'
 
 import logo from '../../assets/incubator-logo.png'
-import { AuthWidget } from '../../modules/auth/modules/auth-widget'
+import { AuthWidget } from '../../modules/auth/modules'
 
-import { AuthWrapper, Logo, HeaderStyled } from './styles'
+import { AuthWrapper, Logo, StyledHeader } from './styles'
 
 export const Header = () => {
   return (
-    <HeaderStyled>
+    <StyledHeader>
       <Logo src={logo} />
       <AuthWrapper>
         <AuthWidget />
       </AuthWrapper>
-    </HeaderStyled>
+    </StyledHeader>
   )
 }

@@ -4,6 +4,7 @@ import { Table } from 'antd'
 
 import { PackTableColumns } from './constants'
 import { PackTablePropsType, TableCardType } from './types'
+import { getTableHeight } from './utils'
 
 export const PackTable: FC<PackTablePropsType> = ({
   data,
@@ -11,7 +12,7 @@ export const PackTable: FC<PackTablePropsType> = ({
   isLoading,
   onTableChange,
 }) => {
-  const [tableHeight, setTableHeight] = useState(window.innerHeight - 350)
+  const [tableHeight, setTableHeight] = useState(getTableHeight(window.innerHeight))
   const formattedData: TableCardType[] =
     data?.cards.map(card => ({
       key: card._id,
@@ -22,10 +23,10 @@ export const PackTable: FC<PackTablePropsType> = ({
     })) || []
 
   useEffect(() => {
-    window.addEventListener('resize', () => setTableHeight(window.innerHeight - 350))
+    window.addEventListener('resize', () => setTableHeight(getTableHeight(window.innerHeight)))
 
     return () => {
-      window.removeEventListener('resize', () => setTableHeight(window.innerHeight - 350))
+      window.removeEventListener('resize', () => setTableHeight(getTableHeight(window.innerHeight)))
     }
   }, [window.innerHeight])
 

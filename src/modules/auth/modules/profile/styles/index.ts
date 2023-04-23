@@ -1,30 +1,7 @@
 import { Avatar, Button, Typography } from 'antd'
-import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
 export const { Text, Paragraph } = Typography
-
-export const StyledBackToCardLink = styled(NavLink)`
-  display: block;
-  text-align: start;
-  text-decoration: none;
-  position: absolute;
-  top: 100px;
-  color: black;
-  font-size: 1rem;
-  line-height: 1.5rem;
-  font-weight: 500;
-  left: 14%;
-
-  &:hover {
-    color: black;
-    opacity: 0.7;
-  }
-`
-
-export const StyledProfileImg = styled.img`
-  margin-right: 0.5rem;
-`
 
 export const StyledProfileContainer = styled.div`
   display: flex;

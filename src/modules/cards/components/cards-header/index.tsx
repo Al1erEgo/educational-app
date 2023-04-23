@@ -1,10 +1,6 @@
 import { FC, PropsWithChildren } from 'react'
 
-import { Typography } from 'antd'
-
-import { StyledPacksHeader } from '../../styles'
-
-const { Title } = Typography
+import { StyledPacksHeader, StyledTitle } from '../../styles'
 
 type PacksHeaderProps = {
   title: string
@@ -12,7 +8,7 @@ type PacksHeaderProps = {
 export const CardsHeader: FC<PropsWithChildren<PacksHeaderProps>> = ({ title, children }) => {
   return (
     <StyledPacksHeader>
-      <Title level={2}>{title}</Title>
+      <StyledTitle level={2}>{title}</StyledTitle>
       {children}
     </StyledPacksHeader>
   )

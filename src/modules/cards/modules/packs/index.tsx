@@ -7,7 +7,7 @@ import { useAuthorised } from '../../../auth/hooks'
 import { useCardPacksQuery, useDeleteCardsPackMutation, useNewCardsPackMutation } from '../../api'
 import { CardsHeader, CardsSearch } from '../../components'
 import { MY_BUTTON_NAME, windowHeight } from '../../constants'
-import { StyledCardsTitleButton, StyledCardsToolbar, StyledPacksContainer } from '../../styles'
+import { StyledCardsTitleButton, StyledCardsToolbar } from '../../styles'
 
 import { PacksButton, PacksFilter, PacksSlider, PacksTable } from './components'
 
@@ -105,7 +105,7 @@ export const Packs = () => {
   }
 
   return (
-    <StyledPacksContainer>
+    <>
       <CardsHeader title={'Packs list'}>
         <StyledCardsTitleButton loading={isAddNewPackLoading} onClick={handleAddNewPack}>
           Add new pack
@@ -138,6 +138,6 @@ export const Packs = () => {
         isLoading={isLoading}
         isFetching={isFetching}
       />
-    </StyledPacksContainer>
+    </>
   )
 }
