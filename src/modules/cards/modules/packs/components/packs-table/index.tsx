@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 
 import { DeleteOutlined, EditOutlined, InfoCircleOutlined } from '@ant-design/icons'
 import { Space, Tooltip, Skeleton } from 'antd'
@@ -7,8 +7,10 @@ import { TablePaginationConfig } from 'antd/lib'
 
 import { ErrorServerHandler } from '../../../../../../components'
 import { StyledErrorText } from '../../../../../auth/styles'
-import { MY_BUTTON_NAME } from '../../../../constants'
+import { MY_BUTTON_NAME, windowHeight } from '../../../../constants'
 import { StyledCardTable } from '../../../../styles'
+
+import { PackType, SorterType, TableDataType } from './types'
 
 type PacksTableProps = {
   activeButton: string
@@ -23,7 +25,6 @@ type PacksTableProps = {
   handleLearn: (record: PackType) => void
   handleEdit: (record: PackType) => void
   handleDelete: (record: PackType) => void
-  isDeleteLoading: boolean
   currentPage: number
   pageCount: number
   userData: any
@@ -32,26 +33,17 @@ type PacksTableProps = {
   data: any
   isLoading: boolean
   isFetching: boolean
-}
-
-type TableDataType = {
-  title: string
-  dataIndex: string
-  sorter?: boolean
-  render?: (text: string, record: any) => JSX.Element
-}
-
-type PackType = {
-  _id: string
-  name: string
-  cardsCount: number
-  updated: string
-  user_name: string
-}
-
-type SorterType = {
-  field?: string
-  order?: 'ascend' | 'descend'
+  setState: React.Dispatch<
+    React.SetStateAction<{
+      currentPage: number
+      pageCount: number
+      currentHeight: number
+      sortPacks: string
+      searchValue: string
+      minCardsCount: number
+      maxCardsCount: number
+    }>
+  >
 }
 
 export const PacksTable: FC<PacksTableProps> = ({
@@ -62,7 +54,6 @@ export const PacksTable: FC<PacksTableProps> = ({
   handleLearn,
   handleEdit,
   handleDelete,
-  isDeleteLoading,
   currentPage,
   pageCount,
   userData,
@@ -71,6 +62,7 @@ export const PacksTable: FC<PacksTableProps> = ({
   data,
   isLoading,
   isFetching,
+  setState,
 }) => {
   const columns: TableDataType[] = [
     {
@@ -118,6 +110,18 @@ export const PacksTable: FC<PacksTableProps> = ({
     },
   ]
 
+  const handleResize = () => {
+    setState(prevState => ({ ...prevState, currentHeight: windowHeight }))
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [window.innerHeight])
+
   if (isError) {
     return <ErrorServerHandler error={error} />
   }
@@ -138,7 +142,7 @@ export const PacksTable: FC<PacksTableProps> = ({
 
   return (
     <>
-      {isLoading || isDeleteLoading || isFetching ? (
+      {isLoading || isFetching ? (
         <Skeleton paragraph={{ rows: 10 }} active />
       ) : (
         <StyledCardTable
