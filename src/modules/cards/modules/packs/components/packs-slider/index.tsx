@@ -1,34 +1,53 @@
-import { Slider } from 'antd'
+import React, { FC, useCallback, useEffect, useState } from 'react'
 
-import { useCardPacksQuery } from '../../../../api'
+import { Slider } from 'antd'
+import { useDebounce } from 'usehooks-ts'
+
 import { StyledCardsText } from '../../../../styles'
 
-export const PacksSlider = () => {
-  //const { data } = useCardPacksQuery({})
-  //TODO заглушка - исправить
-  const data = { minCardsCount: 0, maxCardsCount: 110 }
+type PacksSliderType = {
+  setState: React.Dispatch<
+    React.SetStateAction<{
+      currentPage: number
+      pageCount: number
+      currentHeight: number
+      sortPacks: string
+      searchValue: string
+      minCardsCount: number
+      maxCardsCount: number
+    }>
+  >
+  minCardsCount: number
+  maxCardsCount: number
+}
 
-  const minCount = data?.minCardsCount ?? 0
-  const maxCount = data?.maxCardsCount ?? 110
+export const PacksSlider: FC<PacksSliderType> = ({ minCardsCount, maxCardsCount, setState }) => {
+  const [localState, setLocalState] = useState({ minCardsCount, maxCardsCount })
+  const [debouncedState] = useDebounce([localState], 500)
 
-  const onChange = (value: number | [number, number]) => {
-    console.log('onChange: ', value)
-  }
+  const onChange = useCallback((value: number | [number, number]) => {
+    if (Array.isArray(value)) {
+      setLocalState({ minCardsCount: value[0], maxCardsCount: value[1] })
+    }
+  }, [])
 
-  const onAfterChange = (value: number | [number, number]) => {
-    console.log('onAfterChange: ', value)
-  }
+  // Send the updated state to the parent component only when it is debounced
+  useEffect(() => {
+    setState(prevState => ({
+      ...prevState,
+      minCardsCount: debouncedState.minCardsCount,
+      maxCardsCount: debouncedState.maxCardsCount,
+    }))
+  }, [debouncedState, setState])
 
   return (
     <div style={{ width: '25%', maxWidth: '370px', marginRight: '10px' }}>
       <StyledCardsText>Number of cards</StyledCardsText>
       <Slider
-        max={maxCount}
         range={{ draggableTrack: true }}
-        defaultValue={[minCount, maxCount]}
+        value={[localState.minCardsCount, localState.maxCardsCount]}
         step={1}
         onChange={onChange}
-        onAfterChange={onAfterChange}
       />
     </div>
   )
