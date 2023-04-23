@@ -12,9 +12,10 @@ type PacksFilterProps = {
       currentHeight: number
       sortPacks: string
       searchValue: string
+      minCardsCount: number
+      maxCardsCount: number
     }>
   >
-  clearFilters: () => void
 }
 export const PacksFilter: FC<PacksFilterProps> = ({ setState }) => {
   const [isFiltered, setIsFiltered] = useState(true)
@@ -27,6 +28,8 @@ export const PacksFilter: FC<PacksFilterProps> = ({ setState }) => {
         currentHeight: windowHeight,
         sortPacks: '',
         searchValue: '',
+        minCardsCount: 0,
+        maxCardsCount: 110,
       })
     }
   }
