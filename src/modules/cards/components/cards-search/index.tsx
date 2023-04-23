@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { Dispatch, FC, useEffect, useState } from 'react'
 
 import { Input } from 'antd'
 
@@ -6,7 +6,7 @@ import { CardsSearchWrapperProps } from '../../../types'
 import { CardsSearchWrapper, StyledCardsText } from '../../styles'
 
 type CardsSearchType = Partial<CardsSearchWrapperProps> & {
-  onSearch: (searchValue: string | undefined) => void
+  onSearch: Dispatch<string | undefined>
   delay?: number
   isLoading: boolean
 }
