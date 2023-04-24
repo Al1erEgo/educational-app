@@ -17,17 +17,19 @@ type PacksSliderType = {
       maxCardsCount: number
     }>
   >
-  minCardsCount: number
-  maxCardsCount: number
+  minCount: number
+  maxCount: number
 }
 
-export const PacksSlider: FC<PacksSliderType> = ({ minCardsCount, maxCardsCount, setState }) => {
-  const [localState, setLocalState] = useState({ minCardsCount, maxCardsCount })
+export const PacksSlider: FC<PacksSliderType> = ({ minCount, maxCount, setState }) => {
+  const [localState, setLocalState] = useState({ minCount, maxCount })
   const [debouncedState] = useDebounce([localState], 500)
+
+  /* console.log(minCount, maxCount)*/
 
   const onChange = useCallback((value: number | [number, number]) => {
     if (Array.isArray(value)) {
-      setLocalState({ minCardsCount: value[0], maxCardsCount: value[1] })
+      setLocalState({ minCount: value[0], maxCount: value[1] })
     }
   }, [])
 
@@ -35,8 +37,8 @@ export const PacksSlider: FC<PacksSliderType> = ({ minCardsCount, maxCardsCount,
   useEffect(() => {
     setState(prevState => ({
       ...prevState,
-      minCardsCount: debouncedState.minCardsCount,
-      maxCardsCount: debouncedState.maxCardsCount,
+      minCardsCount: debouncedState.minCount,
+      maxCardsCount: debouncedState.maxCount,
     }))
   }, [debouncedState, setState])
 
@@ -44,8 +46,10 @@ export const PacksSlider: FC<PacksSliderType> = ({ minCardsCount, maxCardsCount,
     <div style={{ width: '25%', maxWidth: '370px', marginRight: '10px' }}>
       <StyledCardsText>Number of cards</StyledCardsText>
       <Slider
-        range={{ draggableTrack: true }}
-        value={[localState.minCardsCount, localState.maxCardsCount]}
+        range={{ draggableTrack: false }}
+        defaultValue={[minCount, maxCount]}
+        min={minCount}
+        max={maxCount}
         step={1}
         onChange={onChange}
       />

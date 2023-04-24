@@ -36,8 +36,6 @@ export const Packs = () => {
     maxCardsCount: 110,
   })
 
-  console.log('pack render')
-
   const {
     currentPage,
     pageCount,
@@ -73,6 +71,9 @@ export const Packs = () => {
     min: minCardsCount ?? 0,
     max: maxCardsCount ?? 110,
   })
+
+  const minCount = data?.minCardsCount ?? 0
+  const maxCount = data?.maxCardsCount ?? 110
 
   const [deleteCard] = useDeleteCardsPackMutation()
 
@@ -121,8 +122,6 @@ export const Packs = () => {
     }
   }
 
-  console.log('state', state)
-
   return (
     <StyledPacksContainer>
       <CardsHeader title={'Packs list'}>
@@ -134,11 +133,7 @@ export const Packs = () => {
       <StyledCardsToolbar>
         <CardsSearch setState={setState} />
         <PacksButton activeButton={activeButton} setActiveButton={setActiveButton} />
-        <PacksSlider
-          setState={setState}
-          minCardsCount={minCardsCount}
-          maxCardsCount={maxCardsCount}
-        />
+        <PacksSlider setState={setState} minCount={minCount} maxCount={maxCount} />
         <PacksFilter setState={setState} />
       </StyledCardsToolbar>
 
