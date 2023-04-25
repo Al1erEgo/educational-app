@@ -22,6 +22,6 @@ export const PackTableColumns: PackTableColumnsType[] = [
     dataIndex: 'grade',
     sorter: true,
     width: '17%',
-    render: (_, card) => <Rate disabled defaultValue={card.grade} />,
+    render: (_, card) => <Rate defaultValue={card.grade} />,
   },
 ]
