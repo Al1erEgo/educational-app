@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from 'react'
+import React, { FC, useCallback, useEffect } from 'react'
 
 import { Slider } from 'antd'
 
@@ -30,6 +30,14 @@ export const PacksSlider: FC<PacksSliderType> = ({ minCount, maxCount, setState 
       }))
     }
   }, [])
+
+  useEffect(() => {
+    setState(prevState => ({
+      ...prevState,
+      minCardsCount: 0,
+      maxCardsCount: 110,
+    }))
+  }, [setState])
 
   return (
     <div style={{ width: '25%', maxWidth: '370px', marginRight: '10px' }}>
