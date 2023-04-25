@@ -1,10 +1,11 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC } from 'react'
 
 import { Table } from 'antd'
 
+import { useTableResize } from '../../../../hooks'
+
 import { PackTableColumns } from './constants'
 import { PackTablePropsType, TableCardType } from './types'
-import { getTableHeight } from './utils'
 
 export const PackTable: FC<PackTablePropsType> = ({
   data,
@@ -12,7 +13,8 @@ export const PackTable: FC<PackTablePropsType> = ({
   isLoading,
   onTableChange,
 }) => {
-  const [tableHeight, setTableHeight] = useState(getTableHeight(window.innerHeight))
+  const tableHeight = useTableResize()
+
   const formattedData: TableCardType[] =
     data?.cards.map(card => ({
       key: card._id,
@@ -21,14 +23,6 @@ export const PackTable: FC<PackTablePropsType> = ({
       updated: new Date(card.updated).toLocaleDateString('ru-RU'),
       grade: card.grade,
     })) || []
-
-  useEffect(() => {
-    window.addEventListener('resize', () => setTableHeight(getTableHeight(window.innerHeight)))
-
-    return () => {
-      window.removeEventListener('resize', () => setTableHeight(getTableHeight(window.innerHeight)))
-    }
-  }, [window.innerHeight])
 
   return (
     <Table

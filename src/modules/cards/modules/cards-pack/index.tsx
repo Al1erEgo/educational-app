@@ -1,49 +1,18 @@
-import { useState } from 'react'
-
-import { useParams } from 'react-router-dom'
-
 import arrowBack from '../../../../assets/arrow-back.svg'
 import { MAIN_PATH } from '../../../../constants'
 import { StyledArrowImg, StyledBackToCardLink } from '../../../../styles'
-import { useAuthorised } from '../../../auth/hooks'
-import { useCardsQuery } from '../../api'
 import { CardsHeader, CardsSearch } from '../../components'
 import { StyledCardsTitleButton, StyledCardsToolbar } from '../../styles'
 
 import { PackTable } from './components'
-import { HandleTableChangeType, PackTableParamsType } from './components/pack-table/types'
-import { getSortParam } from './components/pack-table/utils'
+import { useCardsPackData } from './hooks'
 
 export const CardsPack = () => {
-  const { packId } = useParams()
-  const { data: authData } = useAuthorised()
-  const [searchParam, setSearchParam] = useState<string>()
-  const [tableParams, setTableParams] = useState<PackTableParamsType>({
-    pagination: {
-      current: 1,
-      pageSize: 10,
-    },
-    field: '',
-    order: null,
-  })
-
-  const { data, isLoading, isFetching } = useCardsQuery({
-    cardsPack_id: packId + '',
-    page: tableParams.pagination?.current,
-    pageCount: tableParams.pagination?.pageSize,
-    sortCards: getSortParam(tableParams),
-    cardQuestion: searchParam,
-  })
-
-  //TODO проверить работу условия, сейчас нет моих паков
-  const titleButtonName = authData?._id === data?.packUserId ? 'Add new card' : 'Learn pack'
-
-  const handleTableChange: HandleTableChangeType = (pagination, filters, sorter) => {
-    setTableParams({
-      pagination,
-      ...sorter,
-    })
-  }
+  const [
+    { titleButtonName, titleButtonOnclickHandler, isCardAdding },
+    { setSearchParam },
+    { isPackDataLoading, handleTableChange, tableParams, tableData },
+  ] = useCardsPackData()
 
   return (
     <>
@@ -52,15 +21,17 @@ export const CardsPack = () => {
         Go to Packs List
       </StyledBackToCardLink>
       <CardsHeader title={'Pack'}>
-        <StyledCardsTitleButton loading={isLoading}>{titleButtonName}</StyledCardsTitleButton>
+        <StyledCardsTitleButton loading={isCardAdding} onClick={titleButtonOnclickHandler}>
+          {titleButtonName}
+        </StyledCardsTitleButton>
       </CardsHeader>
       <StyledCardsToolbar>
-        <CardsSearch size="big" onSearch={setSearchParam} isLoading={isLoading || isFetching} />
+        <CardsSearch size="big" onSearch={setSearchParam} isLoading={isPackDataLoading} />
       </StyledCardsToolbar>
       <PackTable
-        data={data}
+        data={tableData}
         tableParams={tableParams}
-        isLoading={isLoading || isFetching}
+        isLoading={isPackDataLoading}
         onTableChange={handleTableChange}
       />
     </>
