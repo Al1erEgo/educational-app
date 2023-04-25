@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 import { useAuthorised } from '../../../../../auth/hooks'
 import { CardsResponseType, useCardsPackQuery, useNewCardMutation } from '../../../../api'
 import { HandleTableChangeType, PackTableParamsType } from '../../components/pack-table/types'
-import { getSortParam } from '../../components/pack-table/utils'
+import { getSortingParam } from '../../components/pack-table/utils'
 
 type useCardsPackDataType = () => [
   { titleButtonName: string; titleButtonOnclickHandler: () => void },
@@ -39,7 +39,7 @@ export const useCardsPackData: useCardsPackDataType = () => {
     cardsPack_id: packId + '',
     page: tableParams.pagination?.current,
     pageCount: tableParams.pagination?.pageSize,
-    sortCards: getSortParam(tableParams),
+    sortCards: getSortingParam(tableParams),
     cardQuestion: searchParam,
   })
 

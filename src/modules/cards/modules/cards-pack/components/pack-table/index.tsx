@@ -5,7 +5,8 @@ import { Table } from 'antd'
 import { useTableResize } from '../../../../hooks'
 
 import { PackTableColumns } from './constants'
-import { PackTablePropsType, TableCardType } from './types'
+import { PackTablePropsType } from './types'
+import { getFormattedTableData } from './utils'
 
 export const PackTable: FC<PackTablePropsType> = ({
   data,
@@ -15,20 +16,13 @@ export const PackTable: FC<PackTablePropsType> = ({
 }) => {
   const tableHeight = useTableResize()
 
-  const formattedData: TableCardType[] =
-    data?.cards.map(card => ({
-      key: card._id,
-      question: card.question,
-      answer: card.answer,
-      updated: new Date(card.updated).toLocaleDateString('ru-RU'),
-      grade: card.grade,
-    })) || []
+  const formattedTableData = getFormattedTableData(data)
 
   return (
     <Table
       size={'small'}
       columns={PackTableColumns}
-      dataSource={formattedData}
+      dataSource={formattedTableData}
       loading={isLoading}
       onChange={onTableChange}
       sortDirections={['ascend', 'descend', null]}
