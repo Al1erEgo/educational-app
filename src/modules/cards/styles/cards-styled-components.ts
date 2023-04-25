@@ -21,7 +21,7 @@ export const StyledCardsTitleButton = styled(Button).attrs(props => ({
   type: 'primary',
   htmlType: 'submit',
   size: 'large',
-  children: props.children,
+  children: props.loading ? 'Loading...' : props.children,
 }))`
   font-weight: 500;
   margin-left: 10px;

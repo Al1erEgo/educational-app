@@ -8,7 +8,7 @@ import { HandleTableChangeType, PackTableParamsType } from '../../components/pac
 import { getSortParam } from '../../components/pack-table/utils'
 
 type useCardsPackDataType = () => [
-  { titleButtonName: string; titleButtonOnclickHandler: () => void; isCardAdding: boolean },
+  { titleButtonName: string; titleButtonOnclickHandler: () => void },
   { setSearchParam: Dispatch<string | undefined> },
   {
     isPackDataLoading: boolean
@@ -32,6 +32,7 @@ export const useCardsPackData: useCardsPackDataType = () => {
   })
   const {
     data,
+    refetch,
     isLoading: isInitialLoading,
     isFetching,
   } = useCardsPackQuery({
@@ -45,8 +46,9 @@ export const useCardsPackData: useCardsPackDataType = () => {
   const [addNewCard, { isLoading: isCardAdding }] = useNewCardMutation()
 
   const titleButtonName = authData?._id === data?.packUserId ? 'Add new card' : 'Learn pack'
-  const handleAddCard = () => {
-    addNewCard({ card: { cardsPack_id: packId || '', grade: 4 } })
+  const handleAddCard = async () => {
+    await addNewCard({ card: { cardsPack_id: packId || '', grade: 4 } })
+    refetch()
   }
 
   const handleTableChange: HandleTableChangeType = (pagination, filters, sorter) => {
@@ -56,10 +58,10 @@ export const useCardsPackData: useCardsPackDataType = () => {
     })
   }
 
-  const isPackDataLoading = isInitialLoading || isFetching
+  const isPackDataLoading = isInitialLoading || isFetching || isCardAdding
 
   return [
-    { titleButtonName, titleButtonOnclickHandler: handleAddCard, isCardAdding },
+    { titleButtonName, titleButtonOnclickHandler: handleAddCard },
     { setSearchParam },
     { isPackDataLoading, handleTableChange, tableParams, tableData: data },
   ]
