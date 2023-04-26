@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 import { FilterValue, SorterResult } from 'antd/es/table/interface'
 import { TablePaginationConfig } from 'antd/lib'
@@ -23,10 +23,24 @@ type SorterType = {
   field?: string
   order?: 'ascend' | 'descend'
 }
-export const Packs = () => {
-  const [activeButton, setActiveButton] = useState('All')
 
-  const [state, setState] = useState({
+export type StateType = {
+  currentPage: number
+  pageCount: number
+  currentHeight: number
+  sortPacks: string
+  searchValue: string
+  minCardsCount: number
+  maxCardsCount: number
+  /*sliderKey: number*/
+}
+
+export type SetStateType = React.Dispatch<React.SetStateAction<StateType>>
+export const Packs = () => {
+  const [activeButton, setActiveButton] = useState<string>('All')
+  const [sliderKey, setSliderKey] = useState(0)
+
+  const [state, setState] = useState<StateType>({
     currentPage: 1,
     pageCount: 10,
     currentHeight: windowHeight,
@@ -34,6 +48,7 @@ export const Packs = () => {
     searchValue: '',
     minCardsCount: 0,
     maxCardsCount: 110,
+    /*  sliderKey: 0,*/
   })
 
   const {
@@ -44,6 +59,7 @@ export const Packs = () => {
     searchValue,
     minCardsCount,
     maxCardsCount,
+    /* sliderKey,*/
   } = state
 
   const [addNewCardPack, { isLoading: isAddNewPackLoading }] = useNewCardsPackMutation()
@@ -60,6 +76,8 @@ export const Packs = () => {
     searchValue: searchValue || undefined,
     min: minCardsCount ?? 0,
     max: maxCardsCount ?? 110,
+    sliderKey: sliderKey,
+    packName: '',
   })
 
   const { data, isLoading, isError, error, refetch, isFetching } = useCardPacksQuery({
@@ -131,10 +149,10 @@ export const Packs = () => {
       </CardsHeader>
 
       <StyledCardsToolbar>
-        <CardsSearch setState={setState} />
+        <CardsSearch state={state} setState={setState} />
         <PacksButton activeButton={activeButton} setActiveButton={setActiveButton} />
-        <PacksSlider setState={setState} minCount={minCount} maxCount={maxCount} />
-        <PacksFilter setState={setState} />
+        <PacksSlider key={sliderKey} setState={setState} minCount={minCount} maxCount={maxCount} />
+        <PacksFilter setSliderKey={setSliderKey} setState={setState} />
       </StyledCardsToolbar>
 
       <PacksTable

@@ -1,21 +1,12 @@
-import React, { FC, useCallback, useEffect } from 'react'
+import React, { FC, useCallback, useState } from 'react'
 
 import { Slider } from 'antd'
 
 import { StyledCardsText } from '../../../../styles'
+import { SetStateType } from '../../index'
 
 type PacksSliderType = {
-  setState: React.Dispatch<
-    React.SetStateAction<{
-      currentPage: number
-      pageCount: number
-      currentHeight: number
-      sortPacks: string
-      searchValue: string
-      minCardsCount: number
-      maxCardsCount: number
-    }>
-  >
+  setState: SetStateType
   minCount: number
   maxCount: number
 }
@@ -30,14 +21,6 @@ export const PacksSlider: FC<PacksSliderType> = ({ minCount, maxCount, setState 
       }))
     }
   }, [])
-
-  useEffect(() => {
-    setState(prevState => ({
-      ...prevState,
-      minCardsCount: 0,
-      maxCardsCount: 110,
-    }))
-  }, [setState])
 
   return (
     <div style={{ width: '25%', maxWidth: '370px', marginRight: '10px' }}>

@@ -9,6 +9,7 @@ import { ErrorServerHandler } from '../../../../../../components'
 import { StyledErrorText } from '../../../../../auth/styles'
 import { MY_BUTTON_NAME, windowHeight } from '../../../../constants'
 import { StyledCardTable } from '../../../../styles'
+import { SetStateType } from '../../index'
 
 import { PackType, SorterType, TableDataType } from './types'
 
@@ -33,17 +34,7 @@ type PacksTableProps = {
   data: any
   isLoading: boolean
   isFetching: boolean
-  setState: React.Dispatch<
-    React.SetStateAction<{
-      currentPage: number
-      pageCount: number
-      currentHeight: number
-      sortPacks: string
-      searchValue: string
-      minCardsCount: number
-      maxCardsCount: number
-    }>
-  >
+  setState: SetStateType
 }
 
 export const PacksTable: FC<PacksTableProps> = ({
