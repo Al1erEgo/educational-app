@@ -11,14 +11,8 @@ import { CardsSearchWrapperProps } from '../../types'
 type CardsSearchProps = Partial<CardsSearchWrapperProps> & {
   searchData: StateType | any
   onSearch: SetStateType | any
-  isLoading: boolean
 }
-export const CardsSearch: FC<CardsSearchProps> = ({
-  size = 'small',
-  onSearch,
-  searchData,
-  isLoading,
-}) => {
+export const CardsSearch: FC<CardsSearchProps> = ({ size = 'small', onSearch, searchData }) => {
   const [searchValue, setSearchValue] = useState<string>('')
 
   useEffect(() => {
@@ -46,7 +40,6 @@ export const CardsSearch: FC<CardsSearchProps> = ({
         onSearch={onSearch}
         allowClear={true}
         maxLength={50}
-        loading={isLoading}
       />
     </CardsSearchWrapper>
   )

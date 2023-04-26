@@ -151,11 +151,7 @@ export const Packs = () => {
       </CardsHeader>
 
       <StyledCardsToolbar>
-        <CardsSearch
-          searchData={state.searchValue}
-          onSearch={setSearchParam}
-          isLoading={isLoading || isFetching}
-        />
+        <CardsSearch searchData={state.searchValue} onSearch={setSearchParam} />
         <PacksButton activeButton={activeButton} setActiveButton={setActiveButton} />
         <PacksSlider key={sliderKey} setState={setState} minCount={minCount} maxCount={maxCount} />
         <PacksFilter setState={setState} />
