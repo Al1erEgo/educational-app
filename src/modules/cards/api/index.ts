@@ -41,22 +41,22 @@ export const cardsApi = rootApi.injectEndpoints({
         params,
       }),
     }),
-    newCard: builder.mutation<{}, NewCardsRequestType>({
-      query: (requestData: NewCardsRequestType) => ({
+    newCard: builder.mutation<{}, NewCardRequestType>({
+      query: (requestData: NewCardRequestType) => ({
         url: 'cards/card',
         method: 'POST',
         body: requestData,
       }),
     }),
-    deleteCard: builder.mutation<{}, DeletedCardRequestType>({
-      query: (requestData: DeletedCardRequestType) => ({
+    deleteCard: builder.mutation<{}, DeleteCardRequestType>({
+      query: (requestData: DeleteCardRequestType) => ({
         url: 'cards/card',
         method: 'DELETE',
         body: requestData,
       }),
     }),
-    updatedCard: builder.mutation<{}, UpdatedCardRequestType>({
-      query: (requestData: UpdatedCardRequestType) => ({
+    updateCard: builder.mutation<{}, UpdateCardRequestType>({
+      query: (requestData: UpdateCardRequestType) => ({
         url: 'cards/card',
         method: 'PUT',
         body: requestData,
@@ -74,7 +74,7 @@ export const {
   useCardsPackQuery,
   useNewCardMutation,
   useDeleteCardMutation,
-  useUpdatedCardMutation,
+  useUpdateCardMutation,
 } = cardsApi
 
 type CardPacksResponseType = {
@@ -114,11 +114,11 @@ export type NewCardPacksRequestType = {
   }
 }
 
-type DeletedCardsPackRequestType = {
+export type DeletedCardsPackRequestType = {
   id: string
 }
 
-type UpdatedCardsPackRequestType = {
+export type UpdatedCardsPackRequestType = {
   _id: string
   name?: string
 }
@@ -155,7 +155,7 @@ type CardsRequestType = {
   pageCount?: number
 }
 
-type NewCardsRequestType = {
+export type NewCardRequestType = {
   card: {
     cardsPack_id: string
     question?: string
@@ -169,11 +169,11 @@ type NewCardsRequestType = {
   }
 }
 
-type DeletedCardRequestType = {
+export type DeleteCardRequestType = {
   id: string
 }
 
-type UpdatedCardRequestType = {
+export type UpdateCardRequestType = {
   card: {
     _id: string
     question?: string

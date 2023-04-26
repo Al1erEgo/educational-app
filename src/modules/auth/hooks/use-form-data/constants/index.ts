@@ -9,11 +9,12 @@ import {
 } from '../../../api'
 import { ABSOLUTE_AUTH_PATH } from '../../../constants'
 
-type mutationAndPathByFormType = {
+//TODO убрать any
+type MutationAndPathByFormType = {
   [key: string]: { mutation: any; path?: string }
 }
 
-export const mutationAndPathByForm: mutationAndPathByFormType = {
+export const mutationAndPathByForm: MutationAndPathByFormType = {
   login: {
     mutation: useLoginMutation,
     path: MAIN_PATH.Root,

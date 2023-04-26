@@ -1,16 +1,14 @@
 import { Dispatch, useState } from 'react'
 
+import { SerializedError } from '@reduxjs/toolkit'
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { useParams } from 'react-router-dom'
 
 import { useAuthorised } from '../../../../../auth/hooks'
-import {
-  CardsResponseType,
-  useCardsPackQuery,
-  useDeleteCardMutation,
-  useNewCardMutation,
-} from '../../../../api'
+import { CardsResponseType, useCardsPackQuery, useDeleteCardMutation } from '../../../../api'
 import { HandleTableChangeType, PackTableParamsType } from '../../components/pack-table/types'
 import { getSortingParam } from '../../components/pack-table/utils'
+import { useHandleAction } from '../use-handle-action'
 
 type useCardsPackDataType = () => [
   { titleButtonName: string; titleButtonOnclickHandler: () => void },
@@ -21,7 +19,7 @@ type useCardsPackDataType = () => [
     tableParams: PackTableParamsType
     tableData: CardsResponseType | undefined
   },
-  { error: string | undefined }
+  { error: FetchBaseQueryError | SerializedError | undefined }
 ]
 
 export const useCardsPackData: useCardsPackDataType = () => {
@@ -51,14 +49,16 @@ export const useCardsPackData: useCardsPackDataType = () => {
     sortCards: getSortingParam(tableParams),
     cardQuestion: searchParam,
   })
-  const [addNewCard, { isLoading: isCardAdding, error: newCardError }] = useNewCardMutation()
   const [deleteCard, { isLoading: isCardDeleting, error: deleteCardError }] =
     useDeleteCardMutation()
 
-  const handleAddCard = async () => {
-    await addNewCard({ card: { cardsPack_id: packId || '', grade: 4 } })
-    refetch()
-  }
+  const {
+    handler: addCard,
+    isLoading: isCardAdding,
+    error: addCardError,
+  } = useHandleAction('addCard', refetch)
+
+  const handleAddCard = () => addCard({ card: { cardsPack_id: packId || '', grade: 4 } })
   const handleLearnPack = () => {}
 
   const handleTableChange: HandleTableChangeType = (pagination, filters, sorter) => {
@@ -69,10 +69,11 @@ export const useCardsPackData: useCardsPackDataType = () => {
   }
   const isMinePack = authData?._id === data?.packUserId
   const isPackDataLoading = isInitialLoading || isFetching || isCardAdding || isCardDeleting
-  const error = cardsPackQueryError || newCardError || deleteCardError
+  const error = cardsPackQueryError || addCardError || deleteCardError
   const titleButtonName = isMinePack ? 'Add new card' : 'Learn pack'
   const titleButtonOnclickHandler = isMinePack ? handleAddCard : handleLearnPack
-  const tableColumns = getTableColumns(isMinePack)
+
+  // const tableColumns = getTableColumns(isMinePack)
 
   return [
     { titleButtonName, titleButtonOnclickHandler },
