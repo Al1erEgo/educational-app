@@ -48,7 +48,7 @@ export const cardsApi = rootApi.injectEndpoints({
         body: requestData,
       }),
     }),
-    deletedCard: builder.mutation<{}, DeletedCardRequestType>({
+    deleteCard: builder.mutation<{}, DeletedCardRequestType>({
       query: (requestData: DeletedCardRequestType) => ({
         url: 'cards/card',
         method: 'DELETE',
@@ -73,7 +73,7 @@ export const {
   useUpdatedCardsPackMutation,
   useCardsPackQuery,
   useNewCardMutation,
-  useDeletedCardMutation,
+  useDeleteCardMutation,
   useUpdatedCardMutation,
 } = cardsApi
 

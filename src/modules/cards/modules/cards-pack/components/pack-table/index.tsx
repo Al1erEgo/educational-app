@@ -4,7 +4,7 @@ import { Table } from 'antd'
 
 import { useTableResize } from '../../../../hooks'
 
-import { PackTableColumns } from './constants'
+import { packTableColumns } from './data'
 import { PackTablePropsType } from './types'
 import { getFormattedTableData } from './utils'
 
@@ -21,7 +21,7 @@ export const PackTable: FC<PackTablePropsType> = ({
   return (
     <Table
       size={'small'}
-      columns={PackTableColumns}
+      columns={packTableColumns}
       dataSource={formattedTableData}
       loading={isLoading}
       onChange={onTableChange}

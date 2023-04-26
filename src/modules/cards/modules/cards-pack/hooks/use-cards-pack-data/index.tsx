@@ -3,7 +3,12 @@ import { Dispatch, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { useAuthorised } from '../../../../../auth/hooks'
-import { CardsResponseType, useCardsPackQuery, useNewCardMutation } from '../../../../api'
+import {
+  CardsResponseType,
+  useCardsPackQuery,
+  useDeleteCardMutation,
+  useNewCardMutation,
+} from '../../../../api'
 import { HandleTableChangeType, PackTableParamsType } from '../../components/pack-table/types'
 import { getSortingParam } from '../../components/pack-table/utils'
 
@@ -15,12 +20,14 @@ type useCardsPackDataType = () => [
     handleTableChange: HandleTableChangeType
     tableParams: PackTableParamsType
     tableData: CardsResponseType | undefined
-  }
+  },
+  { error: string | undefined }
 ]
 
 export const useCardsPackData: useCardsPackDataType = () => {
   const { packId } = useParams<string>()
   const { data: authData } = useAuthorised()
+
   const [searchParam, setSearchParam] = useState<string>()
   const [tableParams, setTableParams] = useState<PackTableParamsType>({
     pagination: {
@@ -30,11 +37,13 @@ export const useCardsPackData: useCardsPackDataType = () => {
     field: '',
     order: null,
   })
+
   const {
     data,
     refetch,
     isLoading: isInitialLoading,
     isFetching,
+    error: cardsPackQueryError,
   } = useCardsPackQuery({
     cardsPack_id: packId + '',
     page: tableParams.pagination?.current,
@@ -42,14 +51,15 @@ export const useCardsPackData: useCardsPackDataType = () => {
     sortCards: getSortingParam(tableParams),
     cardQuestion: searchParam,
   })
+  const [addNewCard, { isLoading: isCardAdding, error: newCardError }] = useNewCardMutation()
+  const [deleteCard, { isLoading: isCardDeleting, error: deleteCardError }] =
+    useDeleteCardMutation()
 
-  const [addNewCard, { isLoading: isCardAdding }] = useNewCardMutation()
-
-  const titleButtonName = authData?._id === data?.packUserId ? 'Add new card' : 'Learn pack'
   const handleAddCard = async () => {
     await addNewCard({ card: { cardsPack_id: packId || '', grade: 4 } })
     refetch()
   }
+  const handleLearnPack = () => {}
 
   const handleTableChange: HandleTableChangeType = (pagination, filters, sorter) => {
     setTableParams({
@@ -57,12 +67,17 @@ export const useCardsPackData: useCardsPackDataType = () => {
       ...sorter,
     })
   }
-
-  const isPackDataLoading = isInitialLoading || isFetching || isCardAdding
+  const isMinePack = authData?._id === data?.packUserId
+  const isPackDataLoading = isInitialLoading || isFetching || isCardAdding || isCardDeleting
+  const error = cardsPackQueryError || newCardError || deleteCardError
+  const titleButtonName = isMinePack ? 'Add new card' : 'Learn pack'
+  const titleButtonOnclickHandler = isMinePack ? handleAddCard : handleLearnPack
+  const tableColumns = getTableColumns(isMinePack)
 
   return [
-    { titleButtonName, titleButtonOnclickHandler: handleAddCard },
+    { titleButtonName, titleButtonOnclickHandler },
     { setSearchParam },
     { isPackDataLoading, handleTableChange, tableParams, tableData: data },
+    { error },
   ]
 }
