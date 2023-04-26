@@ -6,7 +6,10 @@ export const cardsApi = rootApi.injectEndpoints({
       query: (params: CardPacksRequestType) => ({
         url: 'cards/pack',
         method: 'GET',
-        params,
+        params: {
+          ...params,
+          packName: params.packName || undefined,
+        },
         cacheTime: 1,
       }),
       providesTags: ['pack'],
@@ -24,7 +27,7 @@ export const cardsApi = rootApi.injectEndpoints({
         url: `cards/pack?id=${id}`,
         method: 'DELETE',
       }),
-      /*invalidatesTags: ['pack'],*/
+      invalidatesTags: ['pack'],
     }),
 
     updatedCardsPack: builder.mutation<{}, UpdatedCardsPackRequestType>({

@@ -1,33 +1,38 @@
+import React, { FC, useCallback, useState } from 'react'
+
 import { Slider } from 'antd'
 
 import { StyledCardsText } from '../../../../styles'
+import { SetStateType } from '../../index'
 
-export const PacksSlider = () => {
-  //const { data } = useCardPacksQuery({})
-  //TODO заглушка - исправить
-  const data = { minCardsCount: 0, maxCardsCount: 110 }
+type PacksSliderType = {
+  setState: SetStateType
+  minCount: number
+  maxCount: number
+}
 
-  const minCount = data?.minCardsCount ?? 0
-  const maxCount = data?.maxCardsCount ?? 110
-
-  const onChange = (value: number | [number, number]) => {
-    console.log('onChange: ', value)
-  }
-
-  const onAfterChange = (value: number | [number, number]) => {
-    console.log('onAfterChange: ', value)
-  }
+export const PacksSlider: FC<PacksSliderType> = ({ minCount, maxCount, setState }) => {
+  const onChange = useCallback((value: number | [number, number]) => {
+    if (Array.isArray(value)) {
+      setState(prevState => ({
+        ...prevState,
+        minCardsCount: value[0],
+        maxCardsCount: value[1],
+      }))
+    }
+  }, [])
 
   return (
     <div style={{ width: '25%', maxWidth: '370px', marginRight: '10px' }}>
       <StyledCardsText>Number of cards</StyledCardsText>
       <Slider
-        max={maxCount}
-        range={{ draggableTrack: true }}
+        range={{ draggableTrack: false }}
         defaultValue={[minCount, maxCount]}
+        min={minCount}
+        max={maxCount}
         step={1}
-        onChange={onChange}
-        onAfterChange={onAfterChange}
+        onAfterChange={onChange}
+        disabled={minCount === maxCount}
       />
     </div>
   )
