@@ -55,7 +55,12 @@ export const CardsPack = () => {
         <StyledCardsTitleButton loading={isLoading}>{titleButtonName}</StyledCardsTitleButton>
       </CardsHeader>
       <StyledCardsToolbar>
-        <CardsSearch size="big" onSearch={setSearchParam} isLoading={isLoading || isFetching} />
+        <CardsSearch
+          size="big"
+          state={searchParam}
+          setState={setSearchParam}
+          isLoading={isLoading || isFetching}
+        />
       </StyledCardsToolbar>
       <PackTable
         data={data}

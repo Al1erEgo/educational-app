@@ -7,9 +7,10 @@ import { CardsSearchWrapperProps } from '../../../types'
 import { SetStateType, StateType } from '../../modules/packs'
 import { CardsSearchWrapper, StyledCardsText } from '../../styles'
 
+//TODO убрать any
 type CardsSearchProps = Partial<CardsSearchWrapperProps> & {
-  state: StateType
-  setState: SetStateType
+  state: StateType | any
+  setState: SetStateType | any
   isLoading: boolean
 }
 export const CardsSearch: FC<CardsSearchProps> = ({
@@ -29,6 +30,14 @@ export const CardsSearch: FC<CardsSearchProps> = ({
       setSearchValue('')
     }
   }, [state.searchValue])
+
+  useEffect(() => {
+    const timer = setTimeout(() => handleSearch(searchValue), 1000)
+
+    return () => {
+      clearTimeout(timer)
+    }
+  }, [searchValue])
 
   return (
     <CardsSearchWrapper size={size}>
