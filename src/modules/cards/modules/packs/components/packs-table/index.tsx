@@ -4,6 +4,7 @@ import { DeleteOutlined, EditOutlined, InfoCircleOutlined } from '@ant-design/ic
 import { Space, Tooltip, Skeleton } from 'antd'
 import { FilterValue, SorterResult } from 'antd/es/table/interface'
 import { TablePaginationConfig } from 'antd/lib'
+import { NavLink } from 'react-router-dom'
 
 import { ErrorServerHandler } from '../../../../../../components'
 import { StyledErrorText } from '../../../../../auth/styles'
@@ -60,6 +61,9 @@ export const PacksTable: FC<PacksTableProps> = ({
       title: 'Name',
       dataIndex: 'name',
       sorter: true,
+      render: (text: string, record: PackType) => (
+        <NavLink to={`/cards/packs/${record._id}`}>{text}</NavLink>
+      ),
     },
     {
       title: 'Cards',

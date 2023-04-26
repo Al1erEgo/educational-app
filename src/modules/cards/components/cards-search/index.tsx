@@ -16,19 +16,21 @@ export const CardsSearch: FC<CardsSearchProps> = ({ setState, state }) => {
 
   const debouncedValue = useDebounce(searchValue, 1000)
 
+  /*
   useEffect(() => {
     handleSearch(debouncedValue)
   }, [debouncedValue])
+*/
 
-  const handleSearch = (value: string) => {
+  /*  const handleSearch = (value: string) => {
     setState(prevState => ({ ...prevState, searchValue: value }))
-  }
+  }*/
 
-  useEffect(() => {
+  /*  useEffect(() => {
     if (!state.searchValue) {
       setSearchValue('')
     }
-  }, [state.searchValue])
+  }, [state.searchValue])*/
 
   return (
     <CardsSearchWrapper>
@@ -38,7 +40,7 @@ export const CardsSearch: FC<CardsSearchProps> = ({ setState, state }) => {
         enterButton={<SearchOutlined />}
         value={searchValue}
         onChange={e => setSearchValue(e.target.value)}
-        onSearch={handleSearch}
+        /* onSearch={handleSearch}*/
         allowClear={true}
         maxLength={50}
       />
