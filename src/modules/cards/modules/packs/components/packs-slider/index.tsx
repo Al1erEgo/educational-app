@@ -32,6 +32,7 @@ export const PacksSlider: FC<PacksSliderType> = ({ minCount, maxCount, setState 
         max={maxCount}
         step={1}
         onAfterChange={onChange}
+        disabled={minCount === maxCount}
       />
     </div>
   )
