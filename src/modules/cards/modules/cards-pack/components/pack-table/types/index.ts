@@ -1,8 +1,6 @@
 import { FilterValue, SorterResult } from 'antd/es/table/interface'
 import { TablePaginationConfig } from 'antd/es/table/InternalTable'
 
-import { CardsResponseType } from '../../../../../api'
-
 export type HandleTableChangeType = (
   pagination: TablePaginationConfig,
   filters: Record<string, FilterValue | null>,
@@ -10,13 +8,6 @@ export type HandleTableChangeType = (
 ) => void
 
 export type GetTableHeightType = (windowInnerHeight: number) => number
-
-export type PackTablePropsType = {
-  data: CardsResponseType | undefined
-  tableParams: PackTableParamsType
-  isLoading: boolean
-  onTableChange: HandleTableChangeType
-}
 
 export type PackTableColumnsType = {
   title: string

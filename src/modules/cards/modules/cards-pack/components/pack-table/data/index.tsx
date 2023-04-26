@@ -1,8 +1,7 @@
-import { Rate } from 'antd'
-
+import { StyledRate } from '../styles'
 import { PackTableColumnsType } from '../types'
 
-export const PackTableColumns: PackTableColumnsType[] = [
+export const packTableColumns: PackTableColumnsType[] = [
   {
     title: 'Question',
     dataIndex: 'question',
@@ -15,13 +14,13 @@ export const PackTableColumns: PackTableColumnsType[] = [
     title: 'LastUpdated',
     dataIndex: 'updated',
     sorter: true,
-    width: '10%',
+    width: '14%',
   },
   {
     title: 'Grade',
     dataIndex: 'grade',
     sorter: true,
-    width: '17%',
-    render: (_, card) => <Rate disabled defaultValue={card.grade} />,
+    width: '18%',
+    render: (_, card) => <StyledRate defaultValue={card.grade} />,
   },
 ]

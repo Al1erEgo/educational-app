@@ -3,9 +3,9 @@ import React, { FC, useEffect, useState } from 'react'
 import { SearchOutlined } from '@ant-design/icons'
 import { Input } from 'antd'
 
-import { CardsSearchWrapperProps } from '../../../types'
 import { SetStateType, StateType } from '../../modules/packs'
 import { CardsSearchWrapper, StyledCardsText } from '../../styles'
+import { CardsSearchWrapperProps } from '../../types'
 
 //TODO убрать any
 type CardsSearchProps = Partial<CardsSearchWrapperProps> & {

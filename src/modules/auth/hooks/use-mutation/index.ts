@@ -8,6 +8,8 @@ A hook that returns a mutation trigger function and a form submission function f
 @param {MutationType} mutationType - A string representing the type of mutation.
 @returns {Array} - An array containing a mutation trigger function and a form submission function.
 */
+
+//TODO убрать any
 export const useMutation = (mutationType: MutationType): any => {
   //Get mutation and path to redirect(if provided) from defined object by specified key
   const { mutation, path } = mutationAndPathByForm[mutationType]

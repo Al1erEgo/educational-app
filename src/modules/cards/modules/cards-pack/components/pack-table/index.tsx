@@ -1,40 +1,37 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC } from 'react'
 
 import { Table } from 'antd'
 
-import { PackTableColumns } from './constants'
-import { PackTablePropsType, TableCardType } from './types'
-import { getTableHeight } from './utils'
+import { CardsResponseType } from '../../../../api'
+import { useTableResize } from '../../../../hooks'
 
-export const PackTable: FC<PackTablePropsType> = ({
+import { HandleTableChangeType, PackTableColumnsType, PackTableParamsType } from './types'
+import { getFormattedTableData } from './utils'
+
+export type PackTableType = {
+  data: CardsResponseType | undefined
+  tableColumns: PackTableColumnsType[]
+  tableParams: PackTableParamsType
+  isLoading: boolean
+  onTableChange: HandleTableChangeType
+}
+
+export const PackTable: FC<PackTableType> = ({
   data,
+  tableColumns,
   tableParams,
   isLoading,
   onTableChange,
 }) => {
-  const [tableHeight, setTableHeight] = useState(getTableHeight(window.innerHeight))
-  const formattedData: TableCardType[] =
-    data?.cards.map(card => ({
-      key: card._id,
-      question: card.question,
-      answer: card.answer,
-      updated: new Date(card.updated).toLocaleDateString('ru-RU'),
-      grade: card.grade,
-    })) || []
+  const tableHeight = useTableResize()
 
-  useEffect(() => {
-    window.addEventListener('resize', () => setTableHeight(getTableHeight(window.innerHeight)))
-
-    return () => {
-      window.removeEventListener('resize', () => setTableHeight(getTableHeight(window.innerHeight)))
-    }
-  }, [window.innerHeight])
+  const formattedTableData = getFormattedTableData(data)
 
   return (
     <Table
       size={'small'}
-      columns={PackTableColumns}
-      dataSource={formattedData}
+      columns={tableColumns}
+      dataSource={formattedTableData}
       loading={isLoading}
       onChange={onTableChange}
       sortDirections={['ascend', 'descend', null]}

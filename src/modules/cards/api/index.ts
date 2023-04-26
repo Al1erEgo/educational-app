@@ -12,7 +12,7 @@ export const cardsApi = rootApi.injectEndpoints({
         },
         cacheTime: 1,
       }),
-      providesTags: ['pack'],
+      providesTags: ['packs'],
     }),
     newCardsPack: builder.mutation<{}, NewCardPacksRequestType>({
       query: (requestData: NewCardPacksRequestType) => ({
@@ -20,7 +20,7 @@ export const cardsApi = rootApi.injectEndpoints({
         method: 'POST',
         body: requestData,
       }),
-      invalidatesTags: ['pack'],
+      invalidatesTags: ['packs'],
     }),
     deleteCardsPack: builder.mutation<{}, DeletedCardsPackRequestType>({
       query: ({ id }: DeletedCardsPackRequestType) => ({
@@ -37,33 +37,36 @@ export const cardsApi = rootApi.injectEndpoints({
         body: requestData,
       }),
     }),
-    cards: builder.query<CardsResponseType, CardsRequestType>({
+    cardsPack: builder.query<CardsResponseType, CardsRequestType>({
       query: (params: CardsRequestType) => ({
         url: 'cards/card',
         method: 'GET',
         params,
       }),
     }),
-    newCard: builder.mutation<{}, NewCardsRequestType>({
-      query: (requestData: NewCardsRequestType) => ({
+    newCard: builder.mutation<{}, NewCardRequestType>({
+      query: (requestData: NewCardRequestType) => ({
         url: 'cards/card',
         method: 'POST',
         body: requestData,
       }),
+      invalidatesTags: ['packs', 'pack'],
     }),
-    deletedCard: builder.mutation<{}, DeletedCardRequestType>({
-      query: (requestData: DeletedCardRequestType) => ({
+    deleteCard: builder.mutation<{}, DeleteCardRequestType>({
+      query: (params: DeleteCardRequestType) => ({
         url: 'cards/card',
         method: 'DELETE',
-        body: requestData,
+        params,
       }),
+      invalidatesTags: ['packs', 'pack'],
     }),
-    updatedCard: builder.mutation<{}, UpdatedCardRequestType>({
-      query: (requestData: UpdatedCardRequestType) => ({
+    updateCard: builder.mutation<{}, UpdateCardRequestType>({
+      query: (requestData: UpdateCardRequestType) => ({
         url: 'cards/card',
         method: 'PUT',
         body: requestData,
       }),
+      invalidatesTags: ['packs', 'pack'],
     }),
   }),
   overrideExisting: false,
@@ -74,10 +77,10 @@ export const {
   useNewCardsPackMutation,
   useDeleteCardsPackMutation,
   useUpdatedCardsPackMutation,
-  useCardsQuery,
+  useCardsPackQuery,
   useNewCardMutation,
-  useDeletedCardMutation,
-  useUpdatedCardMutation,
+  useDeleteCardMutation,
+  useUpdateCardMutation,
 } = cardsApi
 
 type CardPacksResponseType = {
@@ -117,11 +120,11 @@ export type NewCardPacksRequestType = {
   }
 }
 
-type DeletedCardsPackRequestType = {
+export type DeletedCardsPackRequestType = {
   id: string
 }
 
-type UpdatedCardsPackRequestType = {
+export type UpdatedCardsPackRequestType = {
   _id: string
   name?: string
 }
@@ -158,7 +161,7 @@ type CardsRequestType = {
   pageCount?: number
 }
 
-type NewCardsRequestType = {
+export type NewCardRequestType = {
   card: {
     cardsPack_id: string
     question?: string
@@ -172,11 +175,11 @@ type NewCardsRequestType = {
   }
 }
 
-type DeletedCardRequestType = {
+export type DeleteCardRequestType = {
   id: string
 }
 
-type UpdatedCardRequestType = {
+export type UpdateCardRequestType = {
   card: {
     _id: string
     question?: string
