@@ -32,13 +32,12 @@ export type StateType = {
   searchValue: string
   minCardsCount: number
   maxCardsCount: number
-  /*sliderKey: number*/
+  sliderKey: number
 }
 
 export type SetStateType = React.Dispatch<React.SetStateAction<StateType>>
 export const Packs = () => {
   const [activeButton, setActiveButton] = useState<string>('All')
-  const [sliderKey, setSliderKey] = useState(0)
 
   const [state, setState] = useState<StateType>({
     currentPage: 1,
@@ -48,7 +47,7 @@ export const Packs = () => {
     searchValue: '',
     minCardsCount: 0,
     maxCardsCount: 110,
-    /*  sliderKey: 0,*/
+    sliderKey: 0,
   })
 
   const {
@@ -59,7 +58,7 @@ export const Packs = () => {
     searchValue,
     minCardsCount,
     maxCardsCount,
-    /* sliderKey,*/
+    sliderKey,
   } = state
 
   const [addNewCardPack, { isLoading: isAddNewPackLoading }] = useNewCardsPackMutation()
@@ -77,7 +76,6 @@ export const Packs = () => {
     min: minCardsCount ?? 0,
     max: maxCardsCount ?? 110,
     sliderKey: sliderKey,
-    packName: '',
   })
 
   const { data, isLoading, isError, error, refetch, isFetching } = useCardPacksQuery({
@@ -152,7 +150,7 @@ export const Packs = () => {
         <CardsSearch state={state} setState={setState} />
         <PacksButton activeButton={activeButton} setActiveButton={setActiveButton} />
         <PacksSlider key={sliderKey} setState={setState} minCount={minCount} maxCount={maxCount} />
-        <PacksFilter setSliderKey={setSliderKey} setState={setState} />
+        <PacksFilter setState={setState} />
       </StyledCardsToolbar>
 
       <PacksTable
