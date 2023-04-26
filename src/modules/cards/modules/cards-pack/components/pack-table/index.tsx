@@ -2,14 +2,23 @@ import React, { FC } from 'react'
 
 import { Table } from 'antd'
 
+import { CardsResponseType } from '../../../../api'
 import { useTableResize } from '../../../../hooks'
 
-import { packTableColumns } from './data'
-import { PackTablePropsType } from './types'
+import { HandleTableChangeType, PackTableColumnsType, PackTableParamsType } from './types'
 import { getFormattedTableData } from './utils'
 
-export const PackTable: FC<PackTablePropsType> = ({
+export type PackTableType = {
+  data: CardsResponseType | undefined
+  tableColumns: PackTableColumnsType[]
+  tableParams: PackTableParamsType
+  isLoading: boolean
+  onTableChange: HandleTableChangeType
+}
+
+export const PackTable: FC<PackTableType> = ({
   data,
+  tableColumns,
   tableParams,
   isLoading,
   onTableChange,
@@ -21,7 +30,7 @@ export const PackTable: FC<PackTablePropsType> = ({
   return (
     <Table
       size={'small'}
-      columns={packTableColumns}
+      columns={tableColumns}
       dataSource={formattedTableData}
       loading={isLoading}
       onChange={onTableChange}

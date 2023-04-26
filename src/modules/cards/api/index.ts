@@ -47,13 +47,15 @@ export const cardsApi = rootApi.injectEndpoints({
         method: 'POST',
         body: requestData,
       }),
+      invalidatesTags: ['packs', 'pack'],
     }),
     deleteCard: builder.mutation<{}, DeleteCardRequestType>({
-      query: (requestData: DeleteCardRequestType) => ({
+      query: (params: DeleteCardRequestType) => ({
         url: 'cards/card',
         method: 'DELETE',
-        body: requestData,
+        params,
       }),
+      invalidatesTags: ['packs', 'pack'],
     }),
     updateCard: builder.mutation<{}, UpdateCardRequestType>({
       query: (requestData: UpdateCardRequestType) => ({
@@ -61,6 +63,7 @@ export const cardsApi = rootApi.injectEndpoints({
         method: 'PUT',
         body: requestData,
       }),
+      invalidatesTags: ['packs', 'pack'],
     }),
   }),
   overrideExisting: false,

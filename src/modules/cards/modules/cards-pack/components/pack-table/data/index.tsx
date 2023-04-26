@@ -1,6 +1,3 @@
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
-import { Space, Tooltip } from 'antd'
-
 import { StyledRate } from '../styles'
 import { PackTableColumnsType } from '../types'
 
@@ -27,18 +24,3 @@ export const packTableColumns: PackTableColumnsType[] = [
     render: (_, card) => <StyledRate defaultValue={card.grade} />,
   },
 ]
-
-export const minePackColumn: PackTableColumnsType = {
-  title: 'Actions',
-  dataIndex: 'actions',
-  render: (_, card) => (
-    <Space size="middle">
-      <Tooltip title="Edit">
-        <EditOutlined onClick={() => handleEdit(record)} />
-      </Tooltip>
-      <Tooltip title="Delete">
-        <DeleteOutlined onClick={() => handleDelete(record)} />
-      </Tooltip>
-    </Space>
-  ),
-}

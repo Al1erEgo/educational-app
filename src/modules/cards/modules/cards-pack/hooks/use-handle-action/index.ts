@@ -6,7 +6,7 @@ import { DeleteCardRequestType, NewCardRequestType, UpdateCardRequestType } from
 import { cardsPackActions } from './constants'
 type DataType = NewCardRequestType | DeleteCardRequestType | UpdateCardRequestType
 
-type HandlerFunctionType = (data: DataType) => void
+export type HandlerFunctionType = (data: DataType) => void
 
 type useHandleActionType = (
   actionType: keyof typeof cardsPackActions,

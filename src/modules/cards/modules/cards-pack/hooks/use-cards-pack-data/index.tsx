@@ -5,9 +5,13 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { useParams } from 'react-router-dom'
 
 import { useAuthorised } from '../../../../../auth/hooks'
-import { CardsResponseType, useCardsPackQuery, useDeleteCardMutation } from '../../../../api'
-import { HandleTableChangeType, PackTableParamsType } from '../../components/pack-table/types'
-import { getSortingParam } from '../../components/pack-table/utils'
+import { CardsResponseType, useCardsPackQuery } from '../../../../api'
+import {
+  HandleTableChangeType,
+  PackTableColumnsType,
+  PackTableParamsType,
+} from '../../components/pack-table/types'
+import { getSortingParam, getTableColumns } from '../../components/pack-table/utils'
 import { useHandleAction } from '../use-handle-action'
 
 type useCardsPackDataType = () => [
@@ -18,6 +22,7 @@ type useCardsPackDataType = () => [
     handleTableChange: HandleTableChangeType
     tableParams: PackTableParamsType
     tableData: CardsResponseType | undefined
+    tableColumns: PackTableColumnsType[]
   },
   { error: FetchBaseQueryError | SerializedError | undefined }
 ]
@@ -37,7 +42,7 @@ export const useCardsPackData: useCardsPackDataType = () => {
   })
 
   const {
-    data,
+    data: tableData,
     refetch,
     isLoading: isInitialLoading,
     isFetching,
@@ -49,14 +54,22 @@ export const useCardsPackData: useCardsPackDataType = () => {
     sortCards: getSortingParam(tableParams),
     cardQuestion: searchParam,
   })
-  const [deleteCard, { isLoading: isCardDeleting, error: deleteCardError }] =
-    useDeleteCardMutation()
+  const {
+    handler: deleteCard,
+    isLoading: isCardDeleting,
+    error: deleteCardError,
+  } = useHandleAction('deleteCard', refetch)
 
   const {
     handler: addCard,
     isLoading: isCardAdding,
     error: addCardError,
   } = useHandleAction('addCard', refetch)
+  const {
+    handler: updateCard,
+    isLoading: isCardUpdating,
+    error: updateCardError,
+  } = useHandleAction('updateCard', refetch)
 
   const handleAddCard = () => addCard({ card: { cardsPack_id: packId || '', grade: 4 } })
   const handleLearnPack = () => {}
@@ -67,18 +80,25 @@ export const useCardsPackData: useCardsPackDataType = () => {
       ...sorter,
     })
   }
-  const isMinePack = authData?._id === data?.packUserId
-  const isPackDataLoading = isInitialLoading || isFetching || isCardAdding || isCardDeleting
-  const error = cardsPackQueryError || addCardError || deleteCardError
+  const isMinePack = authData?._id === tableData?.packUserId
+  const isPackDataLoading =
+    isInitialLoading || isFetching || isCardAdding || isCardDeleting || isCardUpdating
+  const error = cardsPackQueryError || addCardError || deleteCardError || updateCardError
   const titleButtonName = isMinePack ? 'Add new card' : 'Learn pack'
   const titleButtonOnclickHandler = isMinePack ? handleAddCard : handleLearnPack
 
-  // const tableColumns = getTableColumns(isMinePack)
+  const tableColumns = getTableColumns(isMinePack, deleteCard, updateCard)
 
   return [
     { titleButtonName, titleButtonOnclickHandler },
     { setSearchParam },
-    { isPackDataLoading, handleTableChange, tableParams, tableData: data },
+    {
+      isPackDataLoading,
+      handleTableChange,
+      tableParams,
+      tableData,
+      tableColumns,
+    },
     { error },
   ]
 }

@@ -11,7 +11,7 @@ export const CardsPack = () => {
   const [
     { titleButtonName, titleButtonOnclickHandler },
     { setSearchParam },
-    { isPackDataLoading, handleTableChange, tableParams, tableData },
+    { isPackDataLoading, handleTableChange, tableParams, tableData, tableColumns },
   ] = useCardsPackData()
 
   return (
@@ -30,6 +30,7 @@ export const CardsPack = () => {
       </StyledCardsToolbar>
       <PackTable
         data={tableData}
+        tableColumns={tableColumns}
         tableParams={tableParams}
         isLoading={isPackDataLoading}
         onTableChange={handleTableChange}

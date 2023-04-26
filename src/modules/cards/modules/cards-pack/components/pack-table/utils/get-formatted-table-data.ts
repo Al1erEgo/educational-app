@@ -1,7 +1,7 @@
 import { CardsResponseType } from '../../../../../api'
 import { TableCardType } from '../types'
 
-type getFormattedTableDataType = (
+export type getFormattedTableDataType = (
   tableData: CardsResponseType | undefined
 ) => TableCardType[] | undefined
 
