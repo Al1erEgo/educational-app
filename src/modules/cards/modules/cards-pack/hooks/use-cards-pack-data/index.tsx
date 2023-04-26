@@ -1,4 +1,4 @@
-import { Dispatch, useState } from 'react'
+import { useState } from 'react'
 
 import { SerializedError } from '@reduxjs/toolkit'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
@@ -14,9 +14,10 @@ import {
 import { getSortingParam, getTableColumns } from '../../components/pack-table/utils'
 import { useHandleAction } from '../use-handle-action'
 
-type useCardsPackDataType = () => [
+export type SetSearchParamType = (searchValue: string) => void
+type UseCardsPackDataType = () => [
   { titleButtonName: string; titleButtonOnclickHandler: () => void },
-  { setSearchParam: Dispatch<string | undefined> },
+  { setSearchParam: SetSearchParamType },
   {
     isPackDataLoading: boolean
     handleTableChange: HandleTableChangeType
@@ -27,11 +28,10 @@ type useCardsPackDataType = () => [
   { error: FetchBaseQueryError | SerializedError | undefined }
 ]
 
-export const useCardsPackData: useCardsPackDataType = () => {
+export const useCardsPackData: UseCardsPackDataType = () => {
   const { packId } = useParams<string>()
   const { data: authData } = useAuthorised()
 
-  const [searchParam, setSearchParam] = useState<string>()
   const [tableParams, setTableParams] = useState<PackTableParamsType>({
     pagination: {
       current: 1,
@@ -39,6 +39,7 @@ export const useCardsPackData: useCardsPackDataType = () => {
     },
     field: '',
     order: null,
+    searchValue: '',
   })
 
   const {
@@ -52,7 +53,7 @@ export const useCardsPackData: useCardsPackDataType = () => {
     page: tableParams.pagination?.current,
     pageCount: tableParams.pagination?.pageSize,
     sortCards: getSortingParam(tableParams),
-    cardQuestion: searchParam,
+    cardQuestion: tableParams.searchValue,
   })
   const {
     handler: deleteCard,
@@ -75,10 +76,11 @@ export const useCardsPackData: useCardsPackDataType = () => {
   const handleLearnPack = () => {}
 
   const handleTableChange: HandleTableChangeType = (pagination, filters, sorter) => {
-    setTableParams({
+    setTableParams(prevState => ({
+      ...prevState,
       pagination,
       ...sorter,
-    })
+    }))
   }
   const isMinePack = authData?._id === tableData?.packUserId
   const isPackDataLoading =
@@ -87,6 +89,8 @@ export const useCardsPackData: useCardsPackDataType = () => {
   const titleButtonName = isMinePack ? 'Add new card' : 'Learn pack'
   const titleButtonOnclickHandler = isMinePack ? handleAddCard : handleLearnPack
 
+  const setSearchParam: SetSearchParamType = searchValue =>
+    setTableParams(prevState => ({ ...prevState, searchValue }))
   const tableColumns = getTableColumns(isMinePack, deleteCard, updateCard)
 
   return [

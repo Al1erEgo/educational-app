@@ -26,6 +26,7 @@ export type CardType = {
 
 export type PackTableParamsType = SorterResult<TableCardType> & {
   pagination?: TablePaginationConfig
+  searchValue: string
 }
 
 export type TableCardType = CardType & {

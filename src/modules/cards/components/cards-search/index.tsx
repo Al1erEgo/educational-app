@@ -9,30 +9,26 @@ import { CardsSearchWrapperProps } from '../../types'
 
 //TODO убрать any
 type CardsSearchProps = Partial<CardsSearchWrapperProps> & {
-  state: StateType | any
-  setState: SetStateType | any
+  searchData: StateType | any
+  onSearch: SetStateType | any
   isLoading: boolean
 }
 export const CardsSearch: FC<CardsSearchProps> = ({
   size = 'small',
-  setState,
-  state,
+  onSearch,
+  searchData,
   isLoading,
 }) => {
-  const [searchValue, setSearchValue] = useState('')
-
-  const handleSearch = (value: string) => {
-    setState(prevState => ({ ...prevState, searchValue: value }))
-  }
+  const [searchValue, setSearchValue] = useState<string>('')
 
   useEffect(() => {
-    if (!state.searchValue) {
+    if (!searchData) {
       setSearchValue('')
     }
-  }, [state.searchValue])
+  }, [searchData])
 
   useEffect(() => {
-    const timer = setTimeout(() => handleSearch(searchValue), 1000)
+    const timer = setTimeout(() => onSearch(searchValue), 1000)
 
     return () => {
       clearTimeout(timer)
@@ -47,7 +43,7 @@ export const CardsSearch: FC<CardsSearchProps> = ({
         enterButton={<SearchOutlined />}
         value={searchValue}
         onChange={e => setSearchValue(e.target.value)}
-        onSearch={handleSearch}
+        onSearch={onSearch}
         allowClear={true}
         maxLength={50}
         loading={isLoading}

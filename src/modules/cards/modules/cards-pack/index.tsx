@@ -26,7 +26,12 @@ export const CardsPack = () => {
         </StyledCardsTitleButton>
       </CardsHeader>
       <StyledCardsToolbar>
-        <CardsSearch size="big" onSearch={setSearchParam} isLoading={isPackDataLoading} />
+        <CardsSearch
+          size="big"
+          searchData={tableParams.searchValue}
+          onSearch={setSearchParam}
+          isLoading={isPackDataLoading}
+        />
       </StyledCardsToolbar>
       <PackTable
         data={tableData}

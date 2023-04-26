@@ -8,6 +8,7 @@ import { useCardPacksQuery, useDeleteCardsPackMutation, useNewCardsPackMutation 
 import { CardsHeader, CardsSearch } from '../../components'
 import { MY_BUTTON_NAME, windowHeight } from '../../constants'
 import { StyledCardsTitleButton, StyledCardsToolbar } from '../../styles'
+import { SetSearchParamType } from '../cards-pack/hooks'
 
 import { PacksButton, PacksFilter, PacksSlider, PacksTable } from './components'
 
@@ -138,6 +139,9 @@ export const Packs = () => {
     }
   }
 
+  const setSearchParam: SetSearchParamType = searchValue =>
+    setState(prevState => ({ ...prevState, searchValue }))
+
   return (
     <>
       <CardsHeader title={'Packs list'}>
@@ -147,7 +151,11 @@ export const Packs = () => {
       </CardsHeader>
 
       <StyledCardsToolbar>
-        <CardsSearch state={state} setState={setState} isLoading={isLoading || isFetching} />
+        <CardsSearch
+          searchData={state.searchValue}
+          onSearch={setSearchParam}
+          isLoading={isLoading || isFetching}
+        />
         <PacksButton activeButton={activeButton} setActiveButton={setActiveButton} />
         <PacksSlider key={sliderKey} setState={setState} minCount={minCount} maxCount={maxCount} />
         <PacksFilter setState={setState} />
