@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react'
 
-import { SearchOutlined, CloseOutlined } from '@ant-design/icons'
+import { SearchOutlined } from '@ant-design/icons'
 import { Input } from 'antd'
 import { useDebounce } from 'usehooks-ts'
 
@@ -14,7 +14,7 @@ type CardsSearchProps = {
 export const CardsSearch: FC<CardsSearchProps> = ({ setState, state }) => {
   const [searchValue, setSearchValue] = useState('')
 
-  const debouncedValue = useDebounce(searchValue, 500)
+  const debouncedValue = useDebounce(searchValue, 1000)
 
   useEffect(() => {
     handleSearch(debouncedValue)
@@ -22,11 +22,6 @@ export const CardsSearch: FC<CardsSearchProps> = ({ setState, state }) => {
 
   const handleSearch = (value: string) => {
     setState(prevState => ({ ...prevState, searchValue: value }))
-  }
-
-  const handleClearSearch = () => {
-    setSearchValue('')
-    setState(prevState => ({ ...prevState, searchValue: '' }))
   }
 
   useEffect(() => {
@@ -39,12 +34,13 @@ export const CardsSearch: FC<CardsSearchProps> = ({ setState, state }) => {
     <CardsSearchWrapper>
       <StyledCardsText>Search</StyledCardsText>
       <Input.Search
-        placeholder="Search packs..."
+        placeholder="Enter pack name"
         enterButton={<SearchOutlined />}
-        suffix={<CloseOutlined onClick={handleClearSearch} />}
         value={searchValue}
         onChange={e => setSearchValue(e.target.value)}
         onSearch={handleSearch}
+        allowClear={true}
+        maxLength={50}
       />
     </CardsSearchWrapper>
   )
