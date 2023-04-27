@@ -9,6 +9,7 @@ import { useCardsPackData } from './hooks'
 
 export const CardsPack = () => {
   const [
+    { packName },
     { titleButtonName, titleButtonOnclickHandler },
     { setSearchParam },
     { isPackDataLoading, handleTableChange, tableParams, tableData, tableColumns },
@@ -20,7 +21,7 @@ export const CardsPack = () => {
         <StyledArrowImg src={arrowBack} alt="arrow-back" />
         Go to Packs List
       </StyledBackToCardLink>
-      <CardsHeader title={'Pack'}>
+      <CardsHeader title={packName || ''}>
         <StyledCardsTitleButton loading={isPackDataLoading} onClick={titleButtonOnclickHandler}>
           {titleButtonName}
         </StyledCardsTitleButton>

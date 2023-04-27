@@ -16,6 +16,7 @@ import { useHandleAction } from '../use-handle-action'
 
 export type SetSearchParamType = (searchValue: string) => void
 type UseCardsPackDataType = () => [
+  { packName: string },
   { titleButtonName: string; titleButtonOnclickHandler: () => void },
   { setSearchParam: SetSearchParamType },
   {
@@ -29,7 +30,7 @@ type UseCardsPackDataType = () => [
 ]
 
 export const useCardsPackData: UseCardsPackDataType = () => {
-  const { packId } = useParams<string>()
+  const { packId, packName = '' } = useParams()
   const { data: authData } = useAuthorised()
 
   const [tableParams, setTableParams] = useState<PackTableParamsType>({
@@ -44,7 +45,7 @@ export const useCardsPackData: UseCardsPackDataType = () => {
 
   const {
     data: tableData,
-    refetch,
+    refetch: refetchPack,
     isLoading: isInitialLoading,
     isFetching,
     error: cardsPackQueryError,
@@ -59,18 +60,18 @@ export const useCardsPackData: UseCardsPackDataType = () => {
     handler: deleteCard,
     isLoading: isCardDeleting,
     error: deleteCardError,
-  } = useHandleAction('deleteCard', refetch)
+  } = useHandleAction('deleteCard', refetchPack)
 
   const {
     handler: addCard,
     isLoading: isCardAdding,
     error: addCardError,
-  } = useHandleAction('addCard', refetch)
+  } = useHandleAction('addCard', refetchPack)
   const {
     handler: updateCard,
     isLoading: isCardUpdating,
     error: updateCardError,
-  } = useHandleAction('updateCard', refetch)
+  } = useHandleAction('updateCard', refetchPack)
 
   const handleAddCard = () => addCard({ card: { cardsPack_id: packId || '', grade: 4 } })
   const handleLearnPack = () => {}
@@ -86,6 +87,7 @@ export const useCardsPackData: UseCardsPackDataType = () => {
   const isPackDataLoading =
     isInitialLoading || isFetching || isCardAdding || isCardDeleting || isCardUpdating
   const error = cardsPackQueryError || addCardError || deleteCardError || updateCardError
+
   const titleButtonName = isMinePack ? 'Add new card' : 'Learn pack'
   const titleButtonOnclickHandler = isMinePack ? handleAddCard : handleLearnPack
 
@@ -94,6 +96,7 @@ export const useCardsPackData: UseCardsPackDataType = () => {
   const tableColumns = getTableColumns(isMinePack, deleteCard, updateCard)
 
   return [
+    { packName },
     { titleButtonName, titleButtonOnclickHandler },
     { setSearchParam },
     {

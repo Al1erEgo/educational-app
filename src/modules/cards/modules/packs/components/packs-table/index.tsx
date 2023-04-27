@@ -62,7 +62,7 @@ export const PacksTable: FC<PacksTableProps> = ({
       dataIndex: 'name',
       sorter: true,
       render: (text: string, record: PackType) => (
-        <NavLink to={`/cards/packs/${record._id}`}>{text}</NavLink>
+        <NavLink to={`/cards/packs/${record._id}/${record.name}`}>{text}</NavLink>
       ),
     },
     {
