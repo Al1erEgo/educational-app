@@ -21,7 +21,7 @@ export const CardsPack = () => {
         <StyledArrowImg src={arrowBack} alt="arrow-back" />
         Go to Packs List
       </StyledBackToCardLink>
-      <CardsHeader title={packName || ''}>
+      <CardsHeader title={packName}>
         <StyledCardsTitleButton loading={isPackDataLoading} onClick={titleButtonOnclickHandler}>
           {titleButtonName}
         </StyledCardsTitleButton>
