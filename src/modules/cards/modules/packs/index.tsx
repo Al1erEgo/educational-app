@@ -6,7 +6,7 @@ import { TablePaginationConfig } from 'antd/lib'
 import { useAuthorised } from '../../../auth/hooks'
 import { useCardPacksQuery, useDeleteCardsPackMutation, useNewCardsPackMutation } from '../../api'
 import { CardsHeader, CardsSearch } from '../../components'
-import { MY_BUTTON_NAME, windowHeight } from '../../constants'
+import { MY_BUTTON_NAME } from '../../constants'
 import { StyledCardsTitleButton, StyledCardsToolbar } from '../../styles'
 import { SetSearchParamType } from '../cards-pack/hooks'
 
@@ -28,12 +28,12 @@ type SorterType = {
 export type StateType = {
   currentPage: number
   pageCount: number
-  currentHeight: number
   sortPacks: string
   searchValue: string
   minCardsCount: number
   maxCardsCount: number
   sliderKey: number
+  isFiltered: boolean
 }
 
 export type SetStateType = React.Dispatch<React.SetStateAction<StateType>>
@@ -43,23 +43,23 @@ export const Packs = () => {
   const [state, setState] = useState<StateType>({
     currentPage: 1,
     pageCount: 10,
-    currentHeight: windowHeight,
     sortPacks: '',
     searchValue: '',
     minCardsCount: 0,
     maxCardsCount: 110,
     sliderKey: 0,
+    isFiltered: true,
   })
 
   const {
     currentPage,
     pageCount,
-    currentHeight,
     sortPacks,
     searchValue,
     minCardsCount,
     maxCardsCount,
     sliderKey,
+    isFiltered,
   } = state
 
   const [addNewCardPack, { isLoading: isAddNewPackLoading }] = useNewCardsPackMutation()
@@ -74,9 +74,10 @@ export const Packs = () => {
     user_id: activeButton === MY_BUTTON_NAME ? user_id : undefined,
     sortPacks: sortPacks || undefined,
     searchValue: searchValue || undefined,
-    min: minCardsCount ?? 0,
-    max: maxCardsCount ?? 110,
+    min: minCardsCount,
+    max: maxCardsCount,
     sliderKey: sliderKey,
+    isFiltered: isFiltered,
   })
 
   const { data, isLoading, isError, error, refetch, isFetching } = useCardPacksQuery({
@@ -142,6 +143,26 @@ export const Packs = () => {
   const setSearchParam: SetSearchParamType = searchValue =>
     setState(prevState => ({ ...prevState, searchValue }))
 
+  const clearFilters = () => {
+    if (isFiltered) {
+      setState(prevState => ({
+        ...prevState,
+        currentPage: 1,
+        pageCount: 10,
+        sortPacks: '',
+        searchValue: '',
+        minCardsCount: 0,
+        maxCardsCount: 110,
+        sliderKey: prevState.sliderKey + 1,
+      }))
+    }
+  }
+
+  const handleToggleButton = (buttonName: string) => {
+    setActiveButton(buttonName)
+    clearFilters()
+  }
+
   return (
     <>
       <CardsHeader title={'Packs list'}>
@@ -152,14 +173,13 @@ export const Packs = () => {
 
       <StyledCardsToolbar>
         <CardsSearch searchData={state.searchValue} onSearch={setSearchParam} />
-        <PacksButton activeButton={activeButton} setActiveButton={setActiveButton} />
+        <PacksButton activeButton={activeButton} handleToggleButton={handleToggleButton} />
         <PacksSlider key={sliderKey} setState={setState} minCount={minCount} maxCount={maxCount} />
-        <PacksFilter setState={setState} />
+        <PacksFilter clearFilters={clearFilters} />
       </StyledCardsToolbar>
 
       <PacksTable
         activeButton={activeButton}
-        currentHeight={currentHeight}
         currentPage={currentPage}
         pageCount={pageCount}
         userData={userData}
@@ -174,7 +194,6 @@ export const Packs = () => {
         isFetching={isFetching}
         isError={isError}
         error={error}
-        setState={setState}
       />
     </>
   )

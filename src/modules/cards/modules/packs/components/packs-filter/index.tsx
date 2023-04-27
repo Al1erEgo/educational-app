@@ -1,29 +1,14 @@
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 
-import { FilterOutlined } from '@ant-design/icons'
-
-import { SetStateType } from '../../index'
+import { StyledClearFiltersButton } from '../../../../styles'
 
 type PacksFilterProps = {
-  setState: SetStateType
+  clearFilters: () => void
 }
-export const PacksFilter: FC<PacksFilterProps> = ({ setState }) => {
-  const [isFiltered, setIsFiltered] = useState(true)
-
-  const clearFilters = () => {
-    if (isFiltered) {
-      setState(prevState => ({
-        ...prevState,
-        currentPage: 1,
-        pageCount: 10,
-        sortPacks: '',
-        searchValue: '',
-        minCardsCount: 0,
-        maxCardsCount: 110,
-        sliderKey: prevState.sliderKey + 1,
-      }))
-    }
-  }
-
-  return <FilterOutlined onClick={clearFilters} />
+export const PacksFilter: FC<PacksFilterProps> = ({ clearFilters }) => {
+  return (
+    <StyledClearFiltersButton type="text" onClick={clearFilters}>
+      Clear Filters
+    </StyledClearFiltersButton>
+  )
 }

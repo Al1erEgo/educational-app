@@ -53,3 +53,7 @@ export const StyledCardsText = styled(Text)`
 export const StyledCardTable = styled(Table)`
   margin-bottom: 24px;
 `
+
+export const StyledClearFiltersButton = styled(Button)`
+  font-weight: 500;
+`

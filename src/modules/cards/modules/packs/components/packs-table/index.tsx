@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC } from 'react'
 
 import { DeleteOutlined, EditOutlined, InfoCircleOutlined } from '@ant-design/icons'
 import { Space, Tooltip, Skeleton } from 'antd'
@@ -8,15 +8,14 @@ import { NavLink } from 'react-router-dom'
 
 import { ErrorServerHandler } from '../../../../../../components'
 import { StyledErrorText } from '../../../../../auth/styles'
-import { MY_BUTTON_NAME, windowHeight } from '../../../../constants'
+import { MY_BUTTON_NAME } from '../../../../constants'
+import { useTableResize } from '../../../../hooks'
 import { StyledCardTable } from '../../../../styles'
-import { SetStateType } from '../../index'
 
 import { PackType, SorterType, TableDataType } from './types'
 
 type PacksTableProps = {
   activeButton: string
-  currentHeight: number
   handlePageChange: (page: number, pageCount?: number) => void
   handleSortChange: (
     pagination: TablePaginationConfig,
@@ -35,12 +34,10 @@ type PacksTableProps = {
   data: any
   isLoading: boolean
   isFetching: boolean
-  setState: SetStateType
 }
 
 export const PacksTable: FC<PacksTableProps> = ({
   activeButton,
-  currentHeight,
   handlePageChange,
   handleSortChange,
   handleLearn,
@@ -54,8 +51,8 @@ export const PacksTable: FC<PacksTableProps> = ({
   data,
   isLoading,
   isFetching,
-  setState,
 }) => {
+  const tableHeight = useTableResize()
   const columns: TableDataType[] = [
     {
       title: 'Name',
@@ -105,18 +102,6 @@ export const PacksTable: FC<PacksTableProps> = ({
     },
   ]
 
-  const handleResize = () => {
-    setState(prevState => ({ ...prevState, currentHeight: windowHeight }))
-  }
-
-  useEffect(() => {
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [window.innerHeight])
-
   if (isError) {
     return <ErrorServerHandler error={error} />
   }
@@ -155,7 +140,7 @@ export const PacksTable: FC<PacksTableProps> = ({
             showSizeChanger: true,
           }}
           scroll={{
-            y: currentHeight,
+            y: tableHeight,
             scrollToFirstRowOnChange: true,
           }}
         />

@@ -8,22 +8,25 @@ import { StyledCardsText, StyledPacksButton } from '../../../../styles'
 
 type PacksButtonsContainerProps = {
   activeButton: string
-  setActiveButton: (buttonName: string) => void
+  handleToggleButton: (buttonName: string) => void
 }
-export const PacksButton: FC<PacksButtonsContainerProps> = ({ activeButton, setActiveButton }) => {
+export const PacksButton: FC<PacksButtonsContainerProps> = ({
+  activeButton,
+  handleToggleButton,
+}) => {
   return (
     <StyledPacksButton>
       <StyledCardsText>Show packs</StyledCardsText>
       <Space.Compact block>
         <StyledButton
           type={activeButton === MY_BUTTON_NAME ? 'primary' : 'default'}
-          onClick={() => setActiveButton(MY_BUTTON_NAME)}
+          onClick={() => handleToggleButton(MY_BUTTON_NAME)}
         >
           My
         </StyledButton>
         <StyledButton
           type={activeButton === ALL_BUTTON_NAME ? 'primary' : 'default'}
-          onClick={() => setActiveButton(ALL_BUTTON_NAME)}
+          onClick={() => handleToggleButton(ALL_BUTTON_NAME)}
         >
           All
         </StyledButton>
