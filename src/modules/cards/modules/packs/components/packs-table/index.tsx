@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-import { DeleteOutlined, EditOutlined, InfoCircleOutlined } from '@ant-design/icons'
+import { DeleteOutlined, EditOutlined, InfoCircleTwoTone } from '@ant-design/icons'
 import { Space, Tooltip, Skeleton } from 'antd'
 import { FilterValue, SorterResult } from 'antd/es/table/interface'
 import { TablePaginationConfig } from 'antd/lib'
@@ -81,21 +81,33 @@ export const PacksTable: FC<PacksTableProps> = ({
       title: 'Actions',
       dataIndex: 'actions',
       render: (text: string, record: PackType) => {
+        const hasCards = record.cardsCount > 0
+
         return activeButton === MY_BUTTON_NAME || record?.user_name === userData?.name ? (
           <Space size="middle">
             <Tooltip title="Learn">
-              <InfoCircleOutlined onClick={() => handleLearn(record)} />
+              {hasCards ? (
+                <InfoCircleTwoTone onClick={() => handleLearn(record)} />
+              ) : (
+                <InfoCircleTwoTone twoToneColor="lightgrey" />
+              )}
             </Tooltip>
+
             <Tooltip title="Edit">
               <EditOutlined onClick={() => handleEdit(record)} />
             </Tooltip>
+
             <Tooltip title="Delete">
               <DeleteOutlined onClick={() => handleDelete(record)} />
             </Tooltip>
           </Space>
         ) : (
           <Tooltip title="Learn">
-            <InfoCircleOutlined onClick={() => handleLearn(record)} />
+            {hasCards ? (
+              <InfoCircleTwoTone onClick={() => handleLearn(record)} />
+            ) : (
+              <InfoCircleTwoTone twoToneColor="lightgrey" />
+            )}
           </Tooltip>
         )
       },
