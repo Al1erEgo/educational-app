@@ -14,7 +14,7 @@ export type PackTableType = {
 
 export const PackTable: FC<PackTableType> = ({ data }) => {
   const {
-    tableData,
+    responseData,
     tableColumns,
     tableParams,
     handleTableChange,
@@ -23,7 +23,7 @@ export const PackTable: FC<PackTableType> = ({ data }) => {
   } = data
   const tableHeight = useTableResize()
 
-  const formattedTableData = getFormattedTableData(tableData)
+  const formattedTableData = getFormattedTableData(responseData)
 
   if (isPackDataLoading) {
     return <Skeleton paragraph={{ rows: 10 }} active />
@@ -42,7 +42,7 @@ export const PackTable: FC<PackTableType> = ({ data }) => {
           pageSizeOptions: ['10', '20', '50'],
           showQuickJumper: true,
           showSizeChanger: true,
-          total: tableData?.cardsTotalCount || 0,
+          total: responseData?.cardsTotalCount || 0,
         }}
         scroll={{ scrollToFirstRowOnChange: true, y: tableHeight }}
       />

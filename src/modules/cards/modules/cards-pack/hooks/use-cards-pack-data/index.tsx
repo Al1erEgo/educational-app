@@ -17,7 +17,7 @@ export type TableDataType = {
   isPackDataLoading: boolean
   handleTableChange: HandleTableChangeType
   tableParams: PackTableParamsType
-  tableData: CardsResponseType | undefined
+  responseData: CardsResponseType | undefined
   tableColumns: PackTableColumnsType[]
   serverError: TableErrorType
 }
@@ -44,7 +44,7 @@ export const useCardsPackData: UseCardsPackDataType = () => {
   })
 
   const {
-    data: tableData,
+    data: responseData,
     refetch: refetchPack,
     isLoading: isInitialLoading,
     isFetching,
@@ -84,7 +84,7 @@ export const useCardsPackData: UseCardsPackDataType = () => {
       ...sorter,
     }))
   }
-  const isMinePack = authData?._id === tableData?.packUserId
+  const isMinePack = authData?._id === responseData?.packUserId
   const isPackDataLoading =
     isInitialLoading || isFetching || isCardAdding || isCardDeleting || isCardUpdating
   const serverError = cardsPackQueryError || addCardError || deleteCardError || updateCardError
@@ -104,7 +104,7 @@ export const useCardsPackData: UseCardsPackDataType = () => {
       isPackDataLoading,
       handleTableChange,
       tableParams,
-      tableData,
+      responseData,
       tableColumns,
       serverError,
     },
