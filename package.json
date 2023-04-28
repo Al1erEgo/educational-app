@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "lint:styles": "stylelint \"**/*.css\"",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src",
-    "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx src"
+    "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx src",
+    "test": "jest"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
@@ -27,7 +28,9 @@
     "@babel/core": "^7.21.3",
     "@babel/eslint-parser": "^7.21.3",
     "@hookform/resolvers": "^3.0.0",
-    "@types/jest": "^29.5.0",
+    "@jest/globals": "^29.5.0",
+    "@testing-library/react-hooks": "^8.0.1",
+    "@types/jest": "^29.5.1",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@types/styled-components": "^5.1.26",
@@ -49,7 +52,8 @@
     "stylelint": "^14.10.0",
     "stylelint-config-clean-order": "^0.9.0",
     "stylelint-prettier": "^2.0.0",
-    "typescript": "^4.9.3",
+    "ts-jest": "^29.1.0",
+    "typescript": "^5.0.4",
     "usehooks-ts": "^2.9.1",
     "vite": "^4.2.0"
   }
