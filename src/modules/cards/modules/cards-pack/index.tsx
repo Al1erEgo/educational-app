@@ -27,7 +27,12 @@ export const CardsPack = () => {
         </StyledCardsTitleButton>
       </CardsHeader>
       <StyledCardsToolbar>
-        <CardsSearch size="big" searchData={tableParams.searchValue} onSearch={setSearchParam} />
+        <CardsSearch
+          size="big"
+          placeholder={'Enter question for searching'}
+          searchData={tableParams.searchValue}
+          onSearch={setSearchParam}
+        />
       </StyledCardsToolbar>
       <PackTable
         data={tableData}

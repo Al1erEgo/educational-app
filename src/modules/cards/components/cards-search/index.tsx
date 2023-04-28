@@ -8,11 +8,17 @@ import { CardsSearchWrapper, StyledCardsText } from '../../styles'
 import { CardsSearchWrapperProps } from '../../types'
 
 //TODO убрать any
-type CardsSearchProps = Partial<CardsSearchWrapperProps> & {
+type CardsSearchProps = CardsSearchWrapperProps & {
   searchData: StateType | any
   onSearch: SetStateType | any
+  placeholder: string
 }
-export const CardsSearch: FC<CardsSearchProps> = ({ size = 'small', onSearch, searchData }) => {
+export const CardsSearch: FC<CardsSearchProps> = ({
+  size = 'small',
+  onSearch,
+  searchData,
+  placeholder,
+}) => {
   const [searchValue, setSearchValue] = useState<string>('')
 
   useEffect(() => {
@@ -33,7 +39,7 @@ export const CardsSearch: FC<CardsSearchProps> = ({ size = 'small', onSearch, se
     <CardsSearchWrapper size={size}>
       <StyledCardsText>Search</StyledCardsText>
       <Input.Search
-        placeholder="Enter pack name"
+        placeholder={placeholder}
         enterButton={<SearchOutlined />}
         value={searchValue}
         onChange={e => setSearchValue(e.target.value)}

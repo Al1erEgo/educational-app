@@ -1,3 +1,3 @@
 export type CardsSearchWrapperProps = {
-  size: 'big' | 'small'
+  size?: 'big' | 'small'
 }
