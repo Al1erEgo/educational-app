@@ -30,8 +30,8 @@ export type StateType = {
   pageCount: number
   sortPacks: string
   searchValue: string
-  minCardsCount: number
-  maxCardsCount: number
+  minCardsCount?: number
+  maxCardsCount?: number
   sliderKey: number
   isFiltered: boolean
 }
@@ -45,8 +45,8 @@ export const Packs = () => {
     pageCount: 10,
     sortPacks: '',
     searchValue: '',
-    minCardsCount: 0,
-    maxCardsCount: 110,
+    minCardsCount: undefined,
+    maxCardsCount: undefined,
     sliderKey: 0,
     isFiltered: true,
   })
@@ -86,12 +86,12 @@ export const Packs = () => {
     user_id: activeButton === MY_BUTTON_NAME ? user_id : undefined,
     sortPacks: sortPacks || undefined,
     packName: searchValue || undefined,
-    min: minCardsCount ?? 0,
-    max: maxCardsCount ?? 110,
+    min: minCardsCount,
+    max: maxCardsCount,
   })
 
-  const minCount = data?.minCardsCount ?? 0
-  const maxCount = data?.maxCardsCount ?? 110
+  const minCount = data?.minCardsCount
+  const maxCount = data?.maxCardsCount
 
   const [deleteCard] = useDeleteCardsPackMutation()
 
@@ -151,8 +151,8 @@ export const Packs = () => {
         pageCount: 10,
         sortPacks: '',
         searchValue: '',
-        minCardsCount: 0,
-        maxCardsCount: 110,
+        minCardsCount: undefined,
+        maxCardsCount: undefined,
         sliderKey: prevState.sliderKey + 1,
       }))
     }
@@ -174,7 +174,7 @@ export const Packs = () => {
       <StyledCardsToolbar>
         <CardsSearch searchData={state.searchValue} onSearch={setSearchParam} />
         <PacksButton activeButton={activeButton} handleToggleButton={handleToggleButton} />
-        <PacksSlider key={sliderKey} setState={setState} minCount={minCount} maxCount={maxCount} />
+        <PacksSlider setState={setState} state={state} minCount={minCount} maxCount={maxCount} />
         <PacksFilter clearFilters={clearFilters} />
       </StyledCardsToolbar>
 
