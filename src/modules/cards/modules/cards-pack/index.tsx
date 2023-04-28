@@ -30,7 +30,7 @@ export const CardsPack = () => {
         <CardsSearch
           size="big"
           placeholder={'Enter question for searching'}
-          searchData={tableParams.searchValue}
+          searchValue={tableParams.searchValue}
           onSearch={setSearchParam}
         />
       </StyledCardsToolbar>

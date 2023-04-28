@@ -1,39 +1,29 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC } from 'react'
 
 import { SearchOutlined } from '@ant-design/icons'
 import { Input } from 'antd'
 
-import { SetStateType, StateType } from '../../modules/packs'
+import { SetSearchParamType } from '../../modules/cards-pack/hooks'
 import { CardsSearchWrapper, StyledCardsText } from '../../styles'
 import { CardsSearchWrapperProps } from '../../types'
 
-//TODO убрать any
+import { useDebouncedSearchWithReset } from './hooks'
+
 type CardsSearchProps = CardsSearchWrapperProps & {
-  searchData: StateType | any
-  onSearch: SetStateType | any
+  searchValue: string
+  onSearch: SetSearchParamType
   placeholder: string
 }
 export const CardsSearch: FC<CardsSearchProps> = ({
   size = 'small',
   onSearch,
-  searchData,
+  searchValue,
   placeholder,
 }) => {
-  const [searchValue, setSearchValue] = useState<string>('')
-
-  useEffect(() => {
-    if (!searchData) {
-      setSearchValue('')
-    }
-  }, [searchData])
-
-  useEffect(() => {
-    const timer = setTimeout(() => onSearch(searchValue), 1000)
-
-    return () => {
-      clearTimeout(timer)
-    }
-  }, [searchValue])
+  const { handleOnSearchChange, localSearchValue } = useDebouncedSearchWithReset(
+    searchValue,
+    onSearch
+  )
 
   return (
     <CardsSearchWrapper size={size}>
@@ -41,8 +31,8 @@ export const CardsSearch: FC<CardsSearchProps> = ({
       <Input.Search
         placeholder={placeholder}
         enterButton={<SearchOutlined />}
-        value={searchValue}
-        onChange={e => setSearchValue(e.target.value)}
+        value={localSearchValue}
+        onChange={handleOnSearchChange}
         onSearch={onSearch}
         allowClear={true}
         maxLength={50}

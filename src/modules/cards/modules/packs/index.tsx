@@ -152,7 +152,7 @@ export const Packs = () => {
 
       <StyledCardsToolbar>
         <CardsSearch
-          searchData={state.searchValue}
+          searchValue={state.searchValue}
           onSearch={setSearchParam}
           placeholder={'Enter pack name for searching'}
         />
