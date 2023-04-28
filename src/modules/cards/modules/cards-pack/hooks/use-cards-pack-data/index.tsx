@@ -1,11 +1,10 @@
 import { useState } from 'react'
 
-import { SerializedError } from '@reduxjs/toolkit'
-import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { useParams } from 'react-router-dom'
 
 import { useAuthorised } from '../../../../../auth/hooks'
 import { CardsResponseType, useCardsPackQuery } from '../../../../api'
+import { TableErrorType } from '../../../../types'
 import {
   HandleTableChangeType,
   PackTableColumnsType,
@@ -14,19 +13,20 @@ import {
 import { getSortingParam, getTableColumns } from '../../components/pack-table/utils'
 import { useHandleAction } from '../use-handle-action'
 
+export type TableDataType = {
+  isPackDataLoading: boolean
+  handleTableChange: HandleTableChangeType
+  tableParams: PackTableParamsType
+  tableData: CardsResponseType | undefined
+  tableColumns: PackTableColumnsType[]
+  serverError: TableErrorType
+}
 export type SetSearchParamType = (searchValue: string) => void
 type UseCardsPackDataType = () => [
   { packName: string },
   { titleButtonName: string; titleButtonOnclickHandler: () => void },
   { setSearchParam: SetSearchParamType },
-  {
-    isPackDataLoading: boolean
-    handleTableChange: HandleTableChangeType
-    tableParams: PackTableParamsType
-    tableData: CardsResponseType | undefined
-    tableColumns: PackTableColumnsType[]
-  },
-  { error: FetchBaseQueryError | SerializedError | undefined }
+  TableDataType
 ]
 
 export const useCardsPackData: UseCardsPackDataType = () => {
@@ -87,7 +87,7 @@ export const useCardsPackData: UseCardsPackDataType = () => {
   const isMinePack = authData?._id === tableData?.packUserId
   const isPackDataLoading =
     isInitialLoading || isFetching || isCardAdding || isCardDeleting || isCardUpdating
-  const error = cardsPackQueryError || addCardError || deleteCardError || updateCardError
+  const serverError = cardsPackQueryError || addCardError || deleteCardError || updateCardError
 
   const titleButtonName = isMinePack ? 'Add new card' : 'Learn pack'
   const titleButtonOnclickHandler = isMinePack ? handleAddCard : handleLearnPack
@@ -106,7 +106,7 @@ export const useCardsPackData: UseCardsPackDataType = () => {
       tableParams,
       tableData,
       tableColumns,
+      serverError,
     },
-    { error },
   ]
 }

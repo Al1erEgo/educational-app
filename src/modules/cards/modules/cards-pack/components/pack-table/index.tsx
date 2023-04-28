@@ -1,48 +1,51 @@
 import React, { FC } from 'react'
 
-import { Table } from 'antd'
+import { Skeleton, Table } from 'antd'
 
-import { CardsResponseType } from '../../../../api'
+import { CardsTableConditionProvider } from '../../../../components/cards-table-condition-provider'
 import { useTableResize } from '../../../../hooks'
+import { TableDataType } from '../../hooks'
 
-import { HandleTableChangeType, PackTableColumnsType, PackTableParamsType } from './types'
 import { getFormattedTableData } from './utils'
 
 export type PackTableType = {
-  data: CardsResponseType | undefined
-  tableColumns: PackTableColumnsType[]
-  tableParams: PackTableParamsType
-  isLoading: boolean
-  onTableChange: HandleTableChangeType
+  data: TableDataType
 }
 
-export const PackTable: FC<PackTableType> = ({
-  data,
-  tableColumns,
-  tableParams,
-  isLoading,
-  onTableChange,
-}) => {
+export const PackTable: FC<PackTableType> = ({ data }) => {
+  const {
+    tableData,
+    tableColumns,
+    tableParams,
+    handleTableChange,
+    isPackDataLoading,
+    serverError,
+  } = data
   const tableHeight = useTableResize()
 
-  const formattedTableData = getFormattedTableData(data)
+  const formattedTableData = getFormattedTableData(tableData)
+
+  if (isPackDataLoading) {
+    return <Skeleton paragraph={{ rows: 10 }} active />
+  }
 
   return (
-    <Table
-      size={'small'}
-      columns={tableColumns}
-      dataSource={formattedTableData}
-      loading={isLoading}
-      onChange={onTableChange}
-      sortDirections={['ascend', 'descend', null]}
-      pagination={{
-        ...tableParams.pagination,
-        pageSizeOptions: ['10', '20', '50'],
-        showQuickJumper: true,
-        showSizeChanger: true,
-        total: data?.cardsTotalCount || 0,
-      }}
-      scroll={{ scrollToFirstRowOnChange: true, y: tableHeight }}
-    />
+    <CardsTableConditionProvider serverError={serverError} isPackDataLoading={isPackDataLoading}>
+      <Table
+        size={'small'}
+        columns={tableColumns}
+        dataSource={formattedTableData}
+        onChange={handleTableChange}
+        sortDirections={['ascend', 'descend', null]}
+        pagination={{
+          ...tableParams.pagination,
+          pageSizeOptions: ['10', '20', '50'],
+          showQuickJumper: true,
+          showSizeChanger: true,
+          total: tableData?.cardsTotalCount || 0,
+        }}
+        scroll={{ scrollToFirstRowOnChange: true, y: tableHeight }}
+      />
+    </CardsTableConditionProvider>
   )
 }

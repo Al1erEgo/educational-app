@@ -12,7 +12,7 @@ export const CardsPack = () => {
     { packName },
     { titleButtonName, titleButtonOnclickHandler },
     { setSearchParam },
-    { isPackDataLoading, handleTableChange, tableParams, tableData, tableColumns },
+    tableData,
   ] = useCardsPackData()
 
   return (
@@ -22,7 +22,10 @@ export const CardsPack = () => {
         Go to Packs List
       </StyledBackToCardLink>
       <CardsHeader title={packName}>
-        <StyledCardsTitleButton loading={isPackDataLoading} onClick={titleButtonOnclickHandler}>
+        <StyledCardsTitleButton
+          loading={tableData.isPackDataLoading}
+          onClick={titleButtonOnclickHandler}
+        >
           {titleButtonName}
         </StyledCardsTitleButton>
       </CardsHeader>
@@ -30,17 +33,11 @@ export const CardsPack = () => {
         <CardsSearch
           size="big"
           placeholder={'Enter question for searching'}
-          searchValue={tableParams.searchValue}
+          searchValue={tableData.tableParams.searchValue}
           onSearch={setSearchParam}
         />
       </StyledCardsToolbar>
-      <PackTable
-        data={tableData}
-        tableColumns={tableColumns}
-        tableParams={tableParams}
-        isLoading={isPackDataLoading}
-        onTableChange={handleTableChange}
-      />
+      <PackTable data={tableData} />
     </>
   )
 }
