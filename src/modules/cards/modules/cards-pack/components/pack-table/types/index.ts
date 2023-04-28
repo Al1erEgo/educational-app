@@ -7,8 +7,6 @@ export type HandleTableChangeType = (
   sorter: SorterResult<TableCardType> | SorterResult<TableCardType>[]
 ) => void
 
-export type GetTableHeightType = (windowInnerHeight: number) => number
-
 export type PackTableColumnsType = {
   title: string
   dataIndex: string

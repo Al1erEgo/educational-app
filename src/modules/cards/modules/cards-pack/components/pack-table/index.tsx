@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-import { Skeleton, Table } from 'antd'
+import { Table } from 'antd'
 
 import { CardsTableConditionProvider } from '../../../../components/cards-table-condition-provider'
 import { useTableResize } from '../../../../hooks'
@@ -24,10 +24,6 @@ export const PackTable: FC<PackTableType> = ({ data }) => {
   const tableHeight = useTableResize()
 
   const formattedTableData = getFormattedTableData(responseData)
-
-  if (isPackDataLoading) {
-    return <Skeleton paragraph={{ rows: 10 }} active />
-  }
 
   return (
     <CardsTableConditionProvider serverError={serverError} isPackDataLoading={isPackDataLoading}>
