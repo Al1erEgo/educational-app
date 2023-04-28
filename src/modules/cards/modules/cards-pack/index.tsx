@@ -2,18 +2,13 @@ import arrowBack from '../../../../assets/arrow-back.svg'
 import { MAIN_PATH } from '../../../../constants'
 import { StyledArrowImg, StyledBackToCardLink } from '../../../../styles'
 import { CardsHeader, CardsSearch } from '../../components'
-import { StyledCardsTitleButton, StyledCardsToolbar } from '../../styles'
+import { StyledCardsToolbar } from '../../styles'
 
-import { PackTable } from './components'
+import { PackActionButtons, PackTable } from './components'
 import { useCardsPackData } from './hooks'
 
 export const CardsPack = () => {
-  const [
-    { packName },
-    { titleButtonName, titleButtonOnclickHandler },
-    { setSearchParam },
-    tableData,
-  ] = useCardsPackData()
+  const [{ packName, isOwnPack, buttonsHandlers }, { handleSearch }, tableData] = useCardsPackData()
 
   return (
     <>
@@ -22,19 +17,14 @@ export const CardsPack = () => {
         Go to Packs List
       </StyledBackToCardLink>
       <CardsHeader title={packName}>
-        <StyledCardsTitleButton
-          loading={tableData.isPackDataLoading}
-          onClick={titleButtonOnclickHandler}
-        >
-          {titleButtonName}
-        </StyledCardsTitleButton>
+        <PackActionButtons isOwnPack={isOwnPack} handlers={buttonsHandlers} />
       </CardsHeader>
       <StyledCardsToolbar>
         <CardsSearch
           size="big"
           placeholder={'Enter question for searching'}
           searchValue={tableData.tableParams.searchValue}
-          onSearch={setSearchParam}
+          onSearch={handleSearch}
         />
       </StyledCardsToolbar>
       <PackTable data={tableData} />

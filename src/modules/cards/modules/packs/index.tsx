@@ -8,7 +8,7 @@ import { useCardPacksQuery, useDeleteCardsPackMutation, useNewCardsPackMutation 
 import { CardsHeader, CardsSearch } from '../../components'
 import { MY_BUTTON_NAME, windowHeight } from '../../constants'
 import { StyledCardsTitleButton, StyledCardsToolbar } from '../../styles'
-import { SetSearchParamType } from '../cards-pack/hooks'
+import { HandleSearchType } from '../cards-pack/hooks'
 
 import { PacksButton, PacksFilter, PacksSlider, PacksTable } from './components'
 
@@ -139,7 +139,7 @@ export const Packs = () => {
     }
   }
 
-  const setSearchParam: SetSearchParamType = searchValue =>
+  const setSearchParam: HandleSearchType = searchValue =>
     setState(prevState => ({ ...prevState, searchValue }))
 
   return (

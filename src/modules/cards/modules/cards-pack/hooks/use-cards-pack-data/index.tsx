@@ -11,7 +11,8 @@ import {
   PackTableParamsType,
 } from '../../components/pack-table/types'
 import { getSortingParam, getTableColumns } from '../../components/pack-table/utils'
-import { useHandleAction } from '../use-handle-action'
+import { ButtonsHandlersType, useCardsPackHandlers } from '../use-cards-pack-handlers'
+import { usePackActions } from '../use-pack-actions'
 
 export type TableDataType = {
   isPackDataLoading: boolean
@@ -21,16 +22,15 @@ export type TableDataType = {
   tableColumns: PackTableColumnsType[]
   serverError: TableErrorType
 }
-export type SetSearchParamType = (searchValue: string) => void
+export type HandleSearchType = (searchValue: string) => void
 type UseCardsPackDataType = () => [
-  { packName: string },
-  { titleButtonName: string; titleButtonOnclickHandler: () => void },
-  { setSearchParam: SetSearchParamType },
+  { packName: string; isOwnPack: boolean; buttonsHandlers: ButtonsHandlersType },
+  { handleSearch: HandleSearchType },
   TableDataType
 ]
 
 export const useCardsPackData: UseCardsPackDataType = () => {
-  const { packId, packName = '' } = useParams()
+  const { packId = '', packName = '' } = useParams()
   const { data: authData } = useAuthorised()
 
   const [tableParams, setTableParams] = useState<PackTableParamsType>({
@@ -56,50 +56,26 @@ export const useCardsPackData: UseCardsPackDataType = () => {
     sortCards: getSortingParam(tableParams),
     cardQuestion: tableParams.searchValue,
   })
-  const {
-    handler: deleteCard,
-    isLoading: isCardDeleting,
-    error: deleteCardError,
-  } = useHandleAction('deleteCard', refetchPack)
 
-  const {
-    handler: addCard,
-    isLoading: isCardAdding,
-    error: addCardError,
-  } = useHandleAction('addCard', refetchPack)
+  const isOwnPack = authData?._id === responseData?.packUserId
 
-  const {
-    handler: updateCard,
-    isLoading: isCardUpdating,
-    error: updateCardError,
-  } = useHandleAction('updateCard', refetchPack)
+  const packActions = usePackActions(refetchPack)
+  const [{ deleteCard, updateCard }, actionsLoading, actionsError] = packActions
 
-  const handleAddCard = () => addCard({ card: { cardsPack_id: packId || '', grade: 4 } })
-  const handleLearnPack = () => {}
+  const isPackDataLoading = isInitialLoading || isFetching || actionsLoading
+  const serverError = cardsPackQueryError || actionsError
 
-  const handleTableChange: HandleTableChangeType = (pagination, filters, sorter) => {
-    setTableParams(prevState => ({
-      ...prevState,
-      pagination,
-      ...sorter,
-    }))
-  }
-  const isMinePack = authData?._id === responseData?.packUserId
-  const isPackDataLoading =
-    isInitialLoading || isFetching || isCardAdding || isCardDeleting || isCardUpdating
-  const serverError = cardsPackQueryError || addCardError || deleteCardError || updateCardError
+  const tableColumns = getTableColumns(isOwnPack, deleteCard.handler, updateCard.handler)
 
-  const titleButtonName = isMinePack ? 'Add new card' : 'Learn pack'
-  const titleButtonOnclickHandler = isMinePack ? handleAddCard : handleLearnPack
-
-  const setSearchParam: SetSearchParamType = searchValue =>
-    setTableParams(prevState => ({ ...prevState, searchValue }))
-  const tableColumns = getTableColumns(isMinePack, deleteCard, updateCard)
+  const { handleTableChange, handleSearch, buttonsHandlers } = useCardsPackHandlers(
+    setTableParams,
+    packActions,
+    packId
+  )
 
   return [
-    { packName },
-    { titleButtonName, titleButtonOnclickHandler },
-    { setSearchParam },
+    { packName, isOwnPack, buttonsHandlers },
+    { handleSearch },
     {
       isPackDataLoading,
       handleTableChange,

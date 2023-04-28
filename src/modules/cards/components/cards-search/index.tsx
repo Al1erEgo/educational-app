@@ -3,7 +3,7 @@ import React, { FC } from 'react'
 import { SearchOutlined } from '@ant-design/icons'
 import { Input } from 'antd'
 
-import { SetSearchParamType } from '../../modules/cards-pack/hooks'
+import { HandleSearchType } from '../../modules/cards-pack/hooks'
 import { CardsSearchWrapper, StyledCardsText } from '../../styles'
 import { CardsSearchWrapperProps } from '../../types'
 
@@ -11,7 +11,7 @@ import { useDebouncedSearchWithReset } from './hooks'
 
 type CardsSearchProps = CardsSearchWrapperProps & {
   searchValue: string
-  onSearch: SetSearchParamType
+  onSearch: HandleSearchType
   placeholder: string
 }
 export const CardsSearch: FC<CardsSearchProps> = ({
