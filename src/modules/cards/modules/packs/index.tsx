@@ -8,7 +8,7 @@ import { useCardPacksQuery, useDeleteCardsPackMutation, useNewCardsPackMutation 
 import { CardsHeader, CardsSearch } from '../../components'
 import { MY_BUTTON_NAME, windowHeight } from '../../constants'
 import { StyledCardsTitleButton, StyledCardsToolbar } from '../../styles'
-import { HandleSearchType } from '../pack/hooks'
+import { HandleSearchType } from '../pack/types'
 
 import { PacksButton, PacksFilter, PacksSlider, PacksTable } from './components'
 
