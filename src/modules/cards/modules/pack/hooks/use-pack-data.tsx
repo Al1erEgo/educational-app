@@ -1,8 +1,7 @@
 import { useState } from 'react'
 
-import { useParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 
-import { useAuthorised } from '../../../../auth/hooks'
 import { useCardsPackQuery } from '../../../api'
 import { TableDataType } from '../../../types'
 import { ButtonsHandlersType, HandleSearchType, PackTableParamsType } from '../types'
@@ -18,8 +17,11 @@ type UsePackDataType = () => [
 ]
 
 export const usePackData: UsePackDataType = () => {
-  const { packId = '', packName = '' } = useParams()
-  const { data: authData } = useAuthorised()
+  const { packId = '' } = useParams()
+
+  const [searchParams, setSearchParams] = useSearchParams()
+  const isOwnPack = searchParams.get('own') === 'true'
+  const packName = searchParams.get('name') || ''
 
   const [tableParams, setTableParams] = useState<PackTableParamsType>({
     pagination: {
@@ -44,8 +46,6 @@ export const usePackData: UsePackDataType = () => {
     sortCards: getSortingParam(tableParams),
     cardQuestion: tableParams.searchValue,
   })
-
-  const isOwnPack = authData?._id === responseData?.packUserId
 
   const packMutations = usePackMutations(refetchPack)
   const [{ deleteCard, updateCard }, actionsLoading, actionsError] = packMutations

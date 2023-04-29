@@ -85,18 +85,18 @@ export const {
   useUpdateCardMutation,
 } = cardsApi
 
-type CardPacksResponseType = {
-  cardPacks: [
-    {
-      _id: string
-      user_id: string
-      name: string
-      cardsCount: number
-      created: string
-      updated: string
-      user_name: string
-    }
-  ]
+export type CardsPackType = {
+  _id: string
+  user_id: string
+  name: string
+  cardsCount: number
+  created: string
+  updated: string
+  user_name: string
+}
+
+export type CardPacksResponseType = {
+  cardPacks: CardsPackType[]
   cardPacksTotalCount: number
   maxCardsCount: number
   minCardsCount: number

@@ -11,6 +11,7 @@ export type PackType = {
   cardsCount: number
   updated: string
   user_name: string
+  user_id: string
 }
 
 export type SorterType = {

@@ -8,6 +8,7 @@ import { NavLink } from 'react-router-dom'
 
 import { ErrorServerHandler } from '../../../../../../components'
 import { StyledErrorText } from '../../../../../auth/styles'
+import { CardsPackType } from '../../../../api'
 import { MY_BUTTON_NAME, windowHeight } from '../../../../constants'
 import { StyledCardTable } from '../../../../styles'
 import { SetStateType } from '../../index'
@@ -62,7 +63,13 @@ export const PacksTable: FC<PacksTableProps> = ({
       dataIndex: 'name',
       sorter: true,
       render: (text: string, record: PackType) => (
-        <NavLink to={`/cards/packs/${record._id}/${record.name}`}>{text}</NavLink>
+        <NavLink
+          to={`/cards/packs/${record._id}?name=${record.name}&own=${
+            userData._id === record.user_id
+          }`}
+        >
+          {text}
+        </NavLink>
       ),
     },
     {
@@ -122,13 +129,14 @@ export const PacksTable: FC<PacksTableProps> = ({
   }
 
   const formattedData: PackType[] =
-    data?.cardPacks.map((pack: PackType) => ({
+    data?.cardPacks.map((pack: CardsPackType) => ({
       key: pack._id,
       _id: pack._id,
       name: pack.name,
       cardsCount: pack.cardsCount,
       updated: new Date(pack.updated).toLocaleDateString('ru-RU'),
       user_name: pack.user_name,
+      user_id: pack.user_id,
     })) || []
 
   if (!isLoading && !isError && !data?.cardPacks.length) {
