@@ -2,8 +2,6 @@ import { Button, Table, Typography } from 'antd'
 import Title from 'antd/es/typography/Title'
 import styled from 'styled-components'
 
-import { CardsSearchWrapperProps } from '../types'
-
 const { Text } = Typography
 
 export const StyledPacksHeader = styled.div`
@@ -33,9 +31,6 @@ export const StyledCardsToolbar = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 24px;
-`
-export const CardsSearchWrapper = styled.div<CardsSearchWrapperProps>`
-  width: ${props => (props.size === 'small' ? 35 : 100)}%;
 `
 
 export const StyledPacksButton = styled.div`

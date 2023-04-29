@@ -3,7 +3,7 @@ import React, { FC, PropsWithChildren } from 'react'
 import { Skeleton } from 'antd'
 
 import { ErrorServerHandler } from '../../../../components'
-import { TableDataType } from '../../modules/cards-pack/hooks'
+import { TableDataType } from '../../types'
 
 type CardsTableConditionProviderType = Pick<TableDataType, 'serverError' | 'isPackDataLoading'>
 
