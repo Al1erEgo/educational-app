@@ -103,7 +103,7 @@ export type CardPacksResponseType = {
   page: number
   pageCount: number
 }
-type CardPacksRequestType = {
+export type CardPacksRequestType = {
   packName?: string
   min?: number
   max?: number

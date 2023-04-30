@@ -16,6 +16,7 @@ import { StyledCardsTitleButton, StyledCardsToolbar } from '../../styles'
 import { HandleSearchType } from '../pack/types'
 
 import { PacksButton, PacksFilter, PacksSlider, PacksTable } from './components'
+import { usePacksData } from './components/packs-table/hooks/use-packs-data'
 
 type PackType = {
   _id: string
@@ -43,6 +44,8 @@ export type StateType = {
 
 export type SetStateType = React.Dispatch<React.SetStateAction<StateType>>
 export const Packs = () => {
+  const [{ actionsHandlers }, { handlePacksSearch }, packsTableData] = usePacksData()
+
   const [activeButton, setActiveButton] = useState<string>('All')
 
   const [state, setState] = useState<StateType>({
@@ -119,8 +122,8 @@ export const Packs = () => {
     }
   }
 
-  const handleLearn = (record: PackType) => {
-    console.log('record', record)
+  const handleLearn = (pack: PackType) => {
+    console.log('record', pack)
   }
   const handleEdit = async (record: PackType) => {
     try {
@@ -184,18 +187,20 @@ export const Packs = () => {
     clearFilters()
   }
 
+  console.log(packsTableData.packsTableParams.searchValue)
+
   return (
     <>
       <CardsHeader title={'Packs list'}>
         <StyledCardsTitleButton loading={isAddNewPackLoading} onClick={handleAddNewPack}>
-          Add new pack
+          Add New Pack
         </StyledCardsTitleButton>
       </CardsHeader>
 
       <StyledCardsToolbar>
         <CardsSearch
-          searchValue={state.searchValue}
-          onSearch={setSearchParam}
+          searchValue={packsTableData.packsTableParams.searchValue}
+          onSearch={handlePacksSearch}
           placeholder={'Enter pack name'}
         />
         <PacksButton activeButton={activeButton} handleToggleButton={handleToggleButton} />

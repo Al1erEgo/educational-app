@@ -6,15 +6,15 @@ import { NavLink } from 'react-router-dom'
 
 import { MY_BUTTON_NAME } from '../../../../../constants'
 import { packsTableColumns } from '../constants'
-import { PackType, PacksTableDataType } from '../types'
+import { PacksTableDataColumnsType, HandlerPacksFunctionType } from '../types'
 
 type GetPacksTableColumnsType = (
   activeButton: string,
   userData: any,
-  handleLearn: (record: PackType) => void,
-  handleEdit: (record: PackType) => void,
-  handleDelete: (record: PackType) => void
-) => PacksTableDataType[]
+  handleLearn: HandlerPacksFunctionType,
+  handleEdit: HandlerPacksFunctionType,
+  handleDelete: HandlerPacksFunctionType
+) => PacksTableDataColumnsType[]
 
 export const getPacksTableColumns: GetPacksTableColumnsType = (
   activeButton,
@@ -28,11 +28,9 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
       title: 'Name',
       dataIndex: 'name',
       sorter: true,
-      render: (text: string, record: PackType) => (
+      render: (text: string, pack) => (
         <NavLink
-          to={`/cards/packs/${record._id}?name=${record.name}&own=${
-            record?.user_id === userData?._id
-          }`}
+          to={`/cards/packs/${pack._id}?name=${pack.name}&own=${pack?.user_id === userData?._id}`}
         >
           {text}
         </NavLink>
@@ -42,31 +40,31 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
     {
       title: 'Actions',
       dataIndex: 'actions',
-      render: (text: string, record: PackType) => {
-        const hasCards = record.cardsCount > 0
+      render: (text: string, pack) => {
+        const hasCards = pack.cardsCount > 0
 
-        return activeButton === MY_BUTTON_NAME || record?.user_id === userData?._id ? (
+        return activeButton === MY_BUTTON_NAME || pack?.user_id === userData?._id ? (
           <Space size="middle">
             <Tooltip title="Learn">
               {hasCards ? (
-                <InfoCircleTwoTone onClick={() => handleLearn(record)} />
+                <InfoCircleTwoTone onClick={() => handleLearn(pack)} />
               ) : (
                 <InfoCircleTwoTone twoToneColor="lightgrey" />
               )}
             </Tooltip>
 
             <Tooltip title="Edit">
-              <EditOutlined onClick={() => handleEdit(record)} />
+              <EditOutlined onClick={() => handleEdit(pack)} />
             </Tooltip>
 
             <Tooltip title="Delete">
-              <DeleteOutlined onClick={() => handleDelete(record)} />
+              <DeleteOutlined onClick={() => handleDelete(pack)} />
             </Tooltip>
           </Space>
         ) : (
           <Tooltip title="Learn">
             {hasCards ? (
-              <InfoCircleTwoTone onClick={() => handleLearn(record)} />
+              <InfoCircleTwoTone onClick={() => handleLearn(pack)} />
             ) : (
               <InfoCircleTwoTone twoToneColor="lightgrey" />
             )}
