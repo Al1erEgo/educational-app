@@ -4,7 +4,12 @@ import { FilterValue, SorterResult } from 'antd/es/table/interface'
 import { TablePaginationConfig } from 'antd/lib'
 
 import { useAuthorised } from '../../../auth/hooks'
-import { useCardPacksQuery, useDeleteCardsPackMutation, useNewCardsPackMutation } from '../../api'
+import {
+  useCardPacksQuery,
+  useDeleteCardsPackMutation,
+  useNewCardsPackMutation,
+  useUpdatedCardsPackMutation,
+} from '../../api'
 import { CardsHeader, CardsSearch } from '../../components'
 import { MY_BUTTON_NAME } from '../../constants'
 import { StyledCardsTitleButton, StyledCardsToolbar } from '../../styles'
@@ -95,6 +100,8 @@ export const Packs = () => {
 
   const [deleteCard] = useDeleteCardsPackMutation()
 
+  const [updateCardsPack] = useUpdatedCardsPackMutation()
+
   const handleSortChange = (
     pagination: TablePaginationConfig,
     filter: Record<string, FilterValue | null>,
@@ -115,12 +122,26 @@ export const Packs = () => {
   const handleLearn = (record: PackType) => {
     console.log('record', record)
   }
-  const handleEdit = (record: PackType) => {
-    console.log('record', record)
+  const handleEdit = async (record: PackType) => {
+    try {
+      await updateCardsPack({
+        cardsPack: {
+          _id: record._id,
+          name: 'new-name',
+        },
+      })
+      refetch()
+    } catch (error) {
+      console.error('Error updating pack:', error)
+    }
   }
   const handleDelete = async (record: PackType) => {
-    await deleteCard({ id: record._id })
-    await refetch()
+    try {
+      await deleteCard({ id: record._id })
+      await refetch()
+    } catch (error) {
+      console.error('Error deleting pack:', error)
+    }
   }
   const handlePageChange = (page: number, pageCount?: number) => {
     setState(prevState => ({ ...prevState, currentPage: page }))

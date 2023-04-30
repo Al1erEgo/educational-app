@@ -125,8 +125,10 @@ export type DeletedCardsPackRequestType = {
 }
 
 export type UpdatedCardsPackRequestType = {
-  _id: string
-  name?: string
+  cardsPack: {
+    _id: string
+    name?: string
+  }
 }
 
 export type CardsResponseType = {
