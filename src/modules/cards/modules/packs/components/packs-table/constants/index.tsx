@@ -10,7 +10,7 @@ export const packsTableColumns: PacksTableDataType[] = [
     dataIndex: 'name',
     sorter: true,
     render: (text: string, record: PackType) => (
-      <NavLink to={`/cards/packs/${record._id}`}>{text}</NavLink>
+      <NavLink to={`/cards/packs/${record._id}?name=${record.name}&own=`}>{text}</NavLink>
     ),
   },
   {

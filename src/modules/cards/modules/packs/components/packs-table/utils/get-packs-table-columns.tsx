@@ -2,6 +2,7 @@ import React from 'react'
 
 import { DeleteOutlined, EditOutlined, InfoCircleTwoTone } from '@ant-design/icons'
 import { Space, Tooltip } from 'antd'
+import { NavLink } from 'react-router-dom'
 
 import { MY_BUTTON_NAME } from '../../../../../constants'
 import { packsTableColumns } from '../constants'
@@ -23,7 +24,35 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
   handleDelete
 ) => {
   return [
-    ...packsTableColumns,
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      sorter: true,
+      render: (text: string, record: PackType) => (
+        <NavLink
+          to={`/cards/packs/${record._id}?name=${record.name}&own=${
+            record?.user_id === userData?._id
+          }`}
+        >
+          {text}
+        </NavLink>
+      ),
+    },
+    {
+      title: 'Cards',
+      dataIndex: 'cardsCount',
+      sorter: true,
+    },
+    {
+      title: 'Last Updated',
+      dataIndex: 'updated',
+      sorter: true,
+    },
+    {
+      title: 'Created By',
+      dataIndex: 'user_name',
+      sorter: true,
+    },
     {
       title: 'Actions',
       dataIndex: 'actions',

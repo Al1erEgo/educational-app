@@ -8,12 +8,12 @@ import {
   useCardPacksQuery,
   useDeleteCardsPackMutation,
   useNewCardsPackMutation,
-  useUpdatedCardsPackMutation,
+  useUpdateCardsPackMutation,
 } from '../../api'
 import { CardsHeader, CardsSearch } from '../../components'
 import { MY_BUTTON_NAME } from '../../constants'
 import { StyledCardsTitleButton, StyledCardsToolbar } from '../../styles'
-import { SetSearchParamType } from '../cards-pack/hooks'
+import { HandleSearchType } from '../pack/types'
 
 import { PacksButton, PacksFilter, PacksSlider, PacksTable } from './components'
 
@@ -100,7 +100,7 @@ export const Packs = () => {
 
   const [deleteCard] = useDeleteCardsPackMutation()
 
-  const [updateCardsPack] = useUpdatedCardsPackMutation()
+  const [updateCardsPack] = useUpdateCardsPackMutation()
 
   const handleSortChange = (
     pagination: TablePaginationConfig,
@@ -161,7 +161,7 @@ export const Packs = () => {
     }
   }
 
-  const setSearchParam: SetSearchParamType = searchValue =>
+  const setSearchParam: HandleSearchType = searchValue =>
     setState(prevState => ({ ...prevState, searchValue }))
 
   const clearFilters = () => {
@@ -193,7 +193,11 @@ export const Packs = () => {
       </CardsHeader>
 
       <StyledCardsToolbar>
-        <CardsSearch searchData={state.searchValue} onSearch={setSearchParam} />
+        <CardsSearch
+          searchValue={state.searchValue}
+          onSearch={setSearchParam}
+          placeholder={'Enter pack name'}
+        />
         <PacksButton activeButton={activeButton} handleToggleButton={handleToggleButton} />
         <PacksSlider setState={setState} state={state} minCount={minCount} maxCount={maxCount} />
         <PacksFilter clearFilters={clearFilters} />

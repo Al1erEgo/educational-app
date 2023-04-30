@@ -15,7 +15,7 @@ import { getFormattedPacksTableData } from './utils/get-formatted-packs-table-da
 import { getPacksTableColumns } from './utils/get-packs-table-columns'
 
 type PacksTableProps = {
-  data: CardPacksResponseType
+  data: CardPacksResponseType | undefined
   activeButton: string
   handlePageChange: (page: number, pageCount?: number) => void
   handleSortChange: (
