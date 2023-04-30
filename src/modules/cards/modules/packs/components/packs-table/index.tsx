@@ -1,20 +1,21 @@
 import React, { FC } from 'react'
 
-import { DeleteOutlined, EditOutlined, InfoCircleTwoTone } from '@ant-design/icons'
-import { Space, Tooltip, Skeleton } from 'antd'
+import { Skeleton } from 'antd'
 import { FilterValue, SorterResult } from 'antd/es/table/interface'
 import { TablePaginationConfig } from 'antd/lib'
-import { NavLink } from 'react-router-dom'
 
 import { ErrorServerHandler } from '../../../../../../components'
 import { StyledErrorText } from '../../../../../auth/styles'
-import { MY_BUTTON_NAME } from '../../../../constants'
+import { CardPacksResponseType } from '../../../../api'
 import { useTableResize } from '../../../../hooks'
 import { StyledCardTable } from '../../../../styles'
 
-import { PackType, SorterType, TableDataType } from './types'
+import { PackType, SorterType } from './types'
+import { getFormattedPacksTableData } from './utils/get-formatted-packs-table-data'
+import { getPacksTableColumns } from './utils/get-packs-table-columns'
 
 type PacksTableProps = {
+  data: CardPacksResponseType
   activeButton: string
   handlePageChange: (page: number, pageCount?: number) => void
   handleSortChange: (
@@ -31,7 +32,6 @@ type PacksTableProps = {
   userData: any
   isError: boolean
   error: any
-  data: any
   isLoading: boolean
   isFetching: boolean
 }
@@ -53,84 +53,23 @@ export const PacksTable: FC<PacksTableProps> = ({
   isFetching,
 }) => {
   const tableHeight = useTableResize()
-  const columns: TableDataType[] = [
-    {
-      title: 'Name',
-      dataIndex: 'name',
-      sorter: true,
-      render: (text: string, record: PackType) => (
-        <NavLink to={`/cards/packs/${record._id}`}>{text}</NavLink>
-      ),
-    },
-    {
-      title: 'Cards',
-      dataIndex: 'cardsCount',
-      sorter: true,
-    },
-    {
-      title: 'Last Updated',
-      dataIndex: 'updated',
-      sorter: true,
-    },
-    {
-      title: 'Created By',
-      dataIndex: 'user_name',
-      sorter: true,
-    },
-    {
-      title: 'Actions',
-      dataIndex: 'actions',
-      render: (text: string, record: PackType) => {
-        const hasCards = record.cardsCount > 0
 
-        return activeButton === MY_BUTTON_NAME || record?.user_id === userData?._id ? (
-          <Space size="middle">
-            <Tooltip title="Learn">
-              {hasCards ? (
-                <InfoCircleTwoTone onClick={() => handleLearn(record)} />
-              ) : (
-                <InfoCircleTwoTone twoToneColor="lightgrey" />
-              )}
-            </Tooltip>
+  const formattedPacksTableData = getFormattedPacksTableData(data)
 
-            <Tooltip title="Edit">
-              <EditOutlined onClick={() => handleEdit(record)} />
-            </Tooltip>
-
-            <Tooltip title="Delete">
-              <DeleteOutlined onClick={() => handleDelete(record)} />
-            </Tooltip>
-          </Space>
-        ) : (
-          <Tooltip title="Learn">
-            {hasCards ? (
-              <InfoCircleTwoTone onClick={() => handleLearn(record)} />
-            ) : (
-              <InfoCircleTwoTone twoToneColor="lightgrey" />
-            )}
-          </Tooltip>
-        )
-      },
-    },
-  ]
+  const packsTableColumns = getPacksTableColumns(
+    activeButton,
+    userData,
+    handleLearn,
+    handleEdit,
+    handleDelete
+  )
 
   if (isError) {
     return <ErrorServerHandler error={error} />
   }
 
-  const formattedData: PackType[] =
-    data?.cardPacks.map((pack: PackType) => ({
-      key: pack._id,
-      _id: pack._id,
-      name: pack.name,
-      cardsCount: pack.cardsCount,
-      updated: new Date(pack.updated).toLocaleDateString('ru-RU'),
-      user_name: pack.user_name,
-      user_id: pack.user_id,
-    })) || []
-
   if (!isLoading && !isError && !data?.cardPacks.length) {
-    return <StyledErrorText>No packs with the entered name were found (:</StyledErrorText>
+    return <StyledErrorText>No packs were found (:</StyledErrorText>
   }
 
   return (
@@ -140,8 +79,8 @@ export const PacksTable: FC<PacksTableProps> = ({
       ) : (
         <StyledCardTable
           size={'small'}
-          columns={columns}
-          dataSource={formattedData}
+          columns={packsTableColumns}
+          dataSource={formattedPacksTableData}
           onChange={handleSortChange}
           pagination={{
             pageSizeOptions: ['10', '20', '50'],
@@ -152,10 +91,7 @@ export const PacksTable: FC<PacksTableProps> = ({
             pageSize: pageCount,
             showSizeChanger: true,
           }}
-          scroll={{
-            y: tableHeight,
-            scrollToFirstRowOnChange: true,
-          }}
+          scroll={{ y: tableHeight, scrollToFirstRowOnChange: true }}
         />
       )}
     </>

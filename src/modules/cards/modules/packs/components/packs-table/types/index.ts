@@ -1,4 +1,4 @@
-export type TableDataType = {
+export type PacksTableDataType = {
   title: string
   dataIndex: string
   sorter?: boolean

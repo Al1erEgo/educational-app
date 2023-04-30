@@ -1,10 +1,17 @@
-import { TableDataType } from '../types'
+import React from 'react'
 
-const columns: TableDataType[] = [
+import { NavLink } from 'react-router-dom'
+
+import { PackType, PacksTableDataType } from '../types'
+
+export const packsTableColumns: PacksTableDataType[] = [
   {
     title: 'Name',
     dataIndex: 'name',
     sorter: true,
+    render: (text: string, record: PackType) => (
+      <NavLink to={`/cards/packs/${record._id}`}>{text}</NavLink>
+    ),
   },
   {
     title: 'Cards',
@@ -21,5 +28,4 @@ const columns: TableDataType[] = [
     dataIndex: 'user_name',
     sorter: true,
   },
-  /* ActionsColumn,*/
 ]

@@ -83,7 +83,7 @@ export const {
   useUpdateCardMutation,
 } = cardsApi
 
-type CardPacksResponseType = {
+export type CardPacksResponseType = {
   cardPacks: [
     {
       _id: string
