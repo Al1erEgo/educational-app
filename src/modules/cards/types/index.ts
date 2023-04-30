@@ -1,3 +1,1 @@
-export type CardsSearchWrapperProps = {
-  size: 'big' | 'small'
-}
+export * from './table-data'

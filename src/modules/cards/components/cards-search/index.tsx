@@ -1,46 +1,42 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC } from 'react'
 
 import { SearchOutlined } from '@ant-design/icons'
 import { Input } from 'antd'
 
-import { SetStateType, StateType } from '../../modules/packs'
-import { CardsSearchWrapper, StyledCardsText } from '../../styles'
-import { CardsSearchWrapperProps } from '../../types'
+import { useDebouncedSearchWithReset } from '../../hooks'
+import { HandleSearchType } from '../../modules/pack/types'
+import { StyledCardsText } from '../../styles'
 
-//TODO убрать any
-type CardsSearchProps = Partial<CardsSearchWrapperProps> & {
-  searchData: StateType | any
-  onSearch: SetStateType | any
+import { CardsSearchWrapperProps, Style } from './style'
+
+type CardsSearchProps = CardsSearchWrapperProps & {
+  searchValue: string
+  onSearch: HandleSearchType
+  placeholder: string
 }
-export const CardsSearch: FC<CardsSearchProps> = ({ size = 'small', onSearch, searchData }) => {
-  const [searchValue, setSearchValue] = useState<string>('')
-
-  useEffect(() => {
-    if (!searchData) {
-      setSearchValue('')
-    }
-  }, [searchData])
-
-  useEffect(() => {
-    const timer = setTimeout(() => onSearch(searchValue), 1000)
-
-    return () => {
-      clearTimeout(timer)
-    }
-  }, [searchValue])
+export const CardsSearch: FC<CardsSearchProps> = ({
+  size = 'small',
+  onSearch,
+  searchValue,
+  placeholder,
+}) => {
+  const { handleOnSearchChange, localSearchValue } = useDebouncedSearchWithReset(
+    searchValue,
+    onSearch
+  )
 
   return (
-    <CardsSearchWrapper size={size}>
+    <Style size={size}>
       <StyledCardsText>Search</StyledCardsText>
       <Input.Search
-        placeholder="Enter pack name"
+        placeholder={placeholder}
         enterButton={<SearchOutlined />}
-        value={searchValue}
-        onChange={e => setSearchValue(e.target.value)}
+        value={localSearchValue}
+        onChange={handleOnSearchChange}
         onSearch={onSearch}
         allowClear={true}
         maxLength={50}
       />
-    </CardsSearchWrapper>
+    </Style>
   )
 }

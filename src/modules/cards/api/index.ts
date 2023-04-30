@@ -23,15 +23,16 @@ export const cardsApi = rootApi.injectEndpoints({
       invalidatesTags: ['packs'],
     }),
     deleteCardsPack: builder.mutation<{}, DeletedCardsPackRequestType>({
-      query: ({ id }: DeletedCardsPackRequestType) => ({
-        url: `cards/pack?id=${id}`,
+      query: (params: DeletedCardsPackRequestType) => ({
+        url: `cards/pack`,
         method: 'DELETE',
+        params,
       }),
-      invalidatesTags: ['pack'],
+      invalidatesTags: ['packs', 'pack'],
     }),
 
-    updatedCardsPack: builder.mutation<{}, UpdatedCardsPackRequestType>({
-      query: (requestData: UpdatedCardsPackRequestType) => ({
+    updateCardsPack: builder.mutation<{}, UpdateCardsPackRequestType>({
+      query: (requestData: UpdateCardsPackRequestType) => ({
         url: 'cards/pack',
         method: 'PUT',
         body: requestData,
@@ -74,27 +75,28 @@ export const cardsApi = rootApi.injectEndpoints({
 
 export const {
   useCardPacksQuery,
+  useLazyCardPacksQuery,
   useNewCardsPackMutation,
   useDeleteCardsPackMutation,
-  useUpdatedCardsPackMutation,
+  useUpdateCardsPackMutation,
   useCardsPackQuery,
   useNewCardMutation,
   useDeleteCardMutation,
   useUpdateCardMutation,
 } = cardsApi
 
+export type CardsPackType = {
+  _id: string
+  user_id: string
+  name: string
+  cardsCount: number
+  created: string
+  updated: string
+  user_name: string
+}
+
 export type CardPacksResponseType = {
-  cardPacks: [
-    {
-      _id: string
-      user_id: string
-      name: string
-      cardsCount: number
-      created: string
-      updated: string
-      user_name: string
-    }
-  ]
+  cardPacks: CardsPackType[]
   cardPacksTotalCount: number
   maxCardsCount: number
   minCardsCount: number
@@ -124,7 +126,7 @@ export type DeletedCardsPackRequestType = {
   id: string
 }
 
-export type UpdatedCardsPackRequestType = {
+export type UpdateCardsPackRequestType = {
   cardsPack: {
     _id: string
     name?: string
