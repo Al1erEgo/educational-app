@@ -3,8 +3,9 @@ import React, { FC, useCallback } from 'react'
 import { Slider } from 'antd'
 
 import { StyledCardsText } from '../../../../styles'
-import { useSliderKeyEffect } from '../../hooks/use-slider-key-effect'
 import { SetStateType, StateType } from '../../index'
+
+import { useSliderKeyUpdater } from './hooks/use-slider-key-updater'
 
 type PacksSliderType = {
   state: StateType
@@ -19,7 +20,7 @@ export const PacksSlider: FC<PacksSliderType> = ({
   state,
   setState,
 }) => {
-  const sliderKey = useSliderKeyEffect(minCount, maxCount, state)
+  const sliderKey = useSliderKeyUpdater(minCount, maxCount, state)
 
   const onChange = useCallback((value: number | [number, number]) => {
     if (Array.isArray(value)) {
