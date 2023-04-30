@@ -2,6 +2,8 @@ import checkEmailImage from '../../../../../assets/check-email-image.svg'
 import successRegistrationImage from '../../../../../assets/success-registration.png'
 import { ABSOLUTE_AUTH_PATH } from '../../../constants'
 
+//TODO переделать типы и нэйминг
+
 type ConfirmationMessageArgumentsType = {
   resetPassword: ConfirmationMessagePropsType
   signUp: ConfirmationMessagePropsType

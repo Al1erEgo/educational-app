@@ -1,4 +1,7 @@
-import { MAIN_PATH } from '../../../../../constants'
+import { UseMutation } from '@reduxjs/toolkit/dist/query/react/buildHooks'
+import { MutationDefinition } from '@reduxjs/toolkit/query'
+
+import { MAIN_PATH } from '../../../constants'
 import {
   useAuthMeLogOutMutation,
   useAuthMeUpdateMutation,
@@ -6,15 +9,15 @@ import {
   useRegisterMutation,
   useRequestPasswordResetMutation,
   useSetNewPasswordMutation,
-} from '../../../api'
-import { ABSOLUTE_AUTH_PATH } from '../../../constants'
+} from '../api'
 
-//TODO убрать any
-type MutationAndPathByFormType = {
-  [key: string]: { mutation: any; path?: string }
+import { ABSOLUTE_AUTH_PATH } from './index'
+
+type AuthMutationsType = {
+  [key: string]: { mutation: UseMutation<MutationDefinition<any, any, string, any>>; path?: string }
 }
 
-export const mutationAndPathByForm: MutationAndPathByFormType = {
+export const authMutations: AuthMutationsType = {
   login: {
     mutation: useLoginMutation,
     path: MAIN_PATH.Root,

@@ -1,3 +1,6 @@
+import { UseMutation } from '@reduxjs/toolkit/dist/query/react/buildHooks'
+import { MutationDefinition } from '@reduxjs/toolkit/query'
+
 import {
   useDeleteCardMutation,
   useDeleteCardsPackMutation,
@@ -6,10 +9,14 @@ import {
   useUpdateCardsPackMutation,
 } from '../../../api'
 
-//TODO убрать any
-type packMutationsType = { [key: string]: { mutation: any; isRefetch?: boolean } }
+type PackMutationsType = {
+  [key: string]: {
+    mutation: UseMutation<MutationDefinition<any, any, string, any>>
+    isRefetch?: boolean
+  }
+}
 
-export const packMutations: packMutationsType = {
+export const packMutations: PackMutationsType = {
   addCard: { mutation: useNewCardMutation, isRefetch: true },
   deleteCard: { mutation: useDeleteCardMutation, isRefetch: true },
   updateCard: { mutation: useUpdateCardMutation, isRefetch: true },
