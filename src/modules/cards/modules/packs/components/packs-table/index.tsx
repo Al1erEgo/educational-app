@@ -83,7 +83,7 @@ export const PacksTable: FC<PacksTableProps> = ({
       render: (text: string, record: PackType) => {
         const hasCards = record.cardsCount > 0
 
-        return activeButton === MY_BUTTON_NAME || record?.user_name === userData?.name ? (
+        return activeButton === MY_BUTTON_NAME || record?.user_id === userData?._id ? (
           <Space size="middle">
             <Tooltip title="Learn">
               {hasCards ? (
@@ -126,6 +126,7 @@ export const PacksTable: FC<PacksTableProps> = ({
       cardsCount: pack.cardsCount,
       updated: new Date(pack.updated).toLocaleDateString('ru-RU'),
       user_name: pack.user_name,
+      user_id: pack.user_id,
     })) || []
 
   if (!isLoading && !isError && !data?.cardPacks.length) {
