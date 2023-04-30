@@ -38,21 +38,7 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
         </NavLink>
       ),
     },
-    {
-      title: 'Cards',
-      dataIndex: 'cardsCount',
-      sorter: true,
-    },
-    {
-      title: 'Last Updated',
-      dataIndex: 'updated',
-      sorter: true,
-    },
-    {
-      title: 'Created By',
-      dataIndex: 'user_name',
-      sorter: true,
-    },
+    ...packsTableColumns,
     {
       title: 'Actions',
       dataIndex: 'actions',

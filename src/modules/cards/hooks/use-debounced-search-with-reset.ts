@@ -1,12 +1,12 @@
 import { ChangeEventHandler, useEffect, useState } from 'react'
 
-import { SetSearchParamType } from '../modules/pack/hooks'
+import { HandleSearchType } from '../modules/pack/types'
 
 type HandleOnSearchChangeType = ChangeEventHandler<HTMLInputElement>
 
 type UseDebouncedSearchWithResetType = (
   searchValue: string,
-  onSearch: SetSearchParamType
+  onSearch: HandleSearchType
 ) => { handleOnSearchChange: HandleOnSearchChangeType; localSearchValue: string }
 
 /**
