@@ -1,5 +1,4 @@
 import { rootApi } from '../../../store/root-api'
-
 import {
   AuthMeRequestType,
   AuthMeResponseType,
@@ -15,7 +14,7 @@ import {
   SetNewPasswordResponseType,
   UpdateRequestType,
   UpdateResponseType,
-} from './types'
+} from '../types'
 
 export const authApi = rootApi.injectEndpoints({
   endpoints: builder => ({

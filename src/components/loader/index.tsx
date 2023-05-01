@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from 'react'
 
 import { Spin } from 'antd'
 
-import { LoaderContainer } from './styles'
+import { StyledLoaderContainer } from './styles'
 
 type LoaderPropsType = {
   isLoading: boolean
@@ -10,9 +10,9 @@ type LoaderPropsType = {
 
 export const Loader: React.FC<PropsWithChildren<LoaderPropsType>> = ({ isLoading, children }) => {
   return isLoading ? (
-    <LoaderContainer>
+    <StyledLoaderContainer>
       <Spin tip="Loading" size="large" />
-    </LoaderContainer>
+    </StyledLoaderContainer>
   ) : (
     <>{children}</>
   )

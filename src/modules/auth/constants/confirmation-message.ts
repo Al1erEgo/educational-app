@@ -1,6 +1,7 @@
-import checkEmailImage from '../../../../../assets/check-email-image.svg'
-import successRegistrationImage from '../../../../../assets/success-registration.png'
-import { ABSOLUTE_AUTH_PATH } from '../../../constants'
+import checkEmailImage from '../../../assets/check-email-image.svg'
+import successRegistrationImage from '../../../assets/success-registration.png'
+
+import { ABSOLUTE_AUTH_PATH } from './index'
 
 //TODO переделать типы и нэйминг
 

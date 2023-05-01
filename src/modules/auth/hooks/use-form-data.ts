@@ -1,7 +1,8 @@
 import { FieldValues } from 'react-hook-form'
 
+import { FormType } from '../types'
+
 import { useFormWithValidation } from './use-authform'
-import { FormType } from './use-authform/types'
 import { useMutation, UseMutationReturnType } from './use-mutation'
 
 //TODO type

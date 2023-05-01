@@ -1,9 +1,8 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { FieldValues, useForm } from 'react-hook-form'
 
-import { schemaMap } from '../../constants'
-
-import { FormType } from './types'
+import { schemaMap } from '../constants'
+import { FormType } from '../types'
 
 //TODO made type
 export const useFormWithValidation = <T extends FieldValues>(formType: FormType) => {
@@ -15,7 +14,7 @@ export const useFormWithValidation = <T extends FieldValues>(formType: FormType)
     setError,
     watch,
     setValue,
-  } = useForm<T>({
+  } = useForm({
     mode: 'onBlur',
     resolver: yupResolver(schema),
   })

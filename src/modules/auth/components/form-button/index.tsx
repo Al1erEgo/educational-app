@@ -1,8 +1,8 @@
 import { FC, PropsWithChildren } from 'react'
 
-import { Button, Form } from 'antd'
+import { Form } from 'antd'
 
-import { buttonProps } from './constants'
+import { StyledButton } from '../../styles'
 
 type FormButtonPropsType = {
   loading: boolean
@@ -11,9 +11,7 @@ type FormButtonPropsType = {
 export const FormButton: FC<PropsWithChildren<FormButtonPropsType>> = ({ loading, children }) => {
   return (
     <Form.Item>
-      <Button {...buttonProps} loading={loading}>
-        {children}
-      </Button>
+      <StyledButton loading={loading}>{children}</StyledButton>
     </Form.Item>
   )
 }
