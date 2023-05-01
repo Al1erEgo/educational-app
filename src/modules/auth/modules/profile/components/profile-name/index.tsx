@@ -6,7 +6,7 @@ import { FieldValues } from 'react-hook-form/dist/types'
 
 import { ErrorServerHandler } from '../../../../../../components'
 import { useFormData } from '../../../../hooks'
-import { UpdateUserNameType } from '../../../../hooks/use-authform/types'
+import { UpdateUserNameType } from '../../../../types'
 import { StyledProfileParagraph } from '../../styles'
 
 type ProfileNamePropsType = {

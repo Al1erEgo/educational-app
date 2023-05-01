@@ -5,8 +5,8 @@ import { ErrorServerHandler } from '../../../../components'
 import { FormButton, FormInput, ConfirmationMessage } from '../../components'
 import { ABSOLUTE_AUTH_PATH } from '../../constants'
 import { useFormData } from '../../hooks'
-import { NewPasswordFormInputs } from '../../hooks/use-authform/types'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledText } from '../../styles'
+import { NewPasswordFormInputs } from '../../types'
 
 export const NewPassword = () => {
   const { token } = useParams()

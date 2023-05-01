@@ -4,8 +4,8 @@ import { ErrorServerHandler } from '../../../../components'
 import { FormButton, FormInput, FormCheckbox } from '../../components'
 import { ABSOLUTE_AUTH_PATH } from '../../constants'
 import { useFormData } from '../../hooks'
-import { LoginFormInputs } from '../../hooks/use-authform/types'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../../styles'
+import { LoginFormInputs } from '../../types'
 
 import { ForgotPasswordLink } from './styles'
 

@@ -8,6 +8,7 @@ type FormCheckboxPropsType = {
   control: Control<any>
 }
 
+//TODO type and type conflicts
 export const FormCheckbox: FC<FormCheckboxPropsType> = ({ name, control }) => {
   return (
     <Form.Item
