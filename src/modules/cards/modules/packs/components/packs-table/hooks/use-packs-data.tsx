@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { useAuthorised } from '../../../../../../auth/hooks'
 import { useCardPacksQuery } from '../../../../../api'
+import { MY_BUTTON_NAME } from '../../../../../constants'
 import {
   ActionsHandlersType,
   HandlePacksSearchType,
@@ -17,13 +18,16 @@ import { usePacksMutations } from './use-packs-mutations'
 type UsePacksDataType = () => [
   { actionsHandlers: ActionsHandlersType },
   { handlePacksSearch: HandlePacksSearchType },
-  PacksTableDataType
+  PacksTableDataType,
+  { handleAddNewPack: any },
+  { handleSliderChange: any },
+  { handleToggleButton: any },
+  { clearFilters: any }
 ]
 
 export const usePacksData: UsePacksDataType = () => {
-  const [activeButton, setActiveButton] = useState<string>('All')
-
   const { data: userData } = useAuthorised()
+  const user_id = userData?._id
 
   const [packsTableParams, setPacksTableParams] = useState<PacksTableParamsType>({
     pagination: {
@@ -33,6 +37,9 @@ export const usePacksData: UsePacksDataType = () => {
     field: '',
     order: null,
     searchValue: '',
+    minCardsCount: undefined,
+    maxCardsCount: undefined,
+    activeButton: 'All',
   })
 
   const {
@@ -45,6 +52,10 @@ export const usePacksData: UsePacksDataType = () => {
     page: packsTableParams.pagination?.current,
     pageCount: packsTableParams.pagination?.pageSize,
     sortPacks: getSortingPacksParam(packsTableParams),
+    user_id: packsTableParams.activeButton === MY_BUTTON_NAME ? user_id : undefined,
+    packName: packsTableParams.searchValue || undefined,
+    min: packsTableParams.minCardsCount,
+    max: packsTableParams.maxCardsCount,
   })
 
   const packsMutations = usePacksMutations(refetchPacks)
@@ -54,15 +65,22 @@ export const usePacksData: UsePacksDataType = () => {
   const serverError = cardsPacksQueryError || actionsError
 
   const packsTableColumns = getPacksTableColumns(
-    activeButton,
+    packsTableParams.activeButton,
     userData,
     addPacks.handlers,
     updatePacks.handlers,
     deletePacks.handlers
   )
 
-  const { handlePacksTableChange, handlePacksSearch, handleAddNewPack, actionsHandlers } =
-    usePacksHandlers(setPacksTableParams, packsMutations, '')
+  const {
+    handlePacksTableChange,
+    handlePacksSearch,
+    actionsHandlers,
+    handleAddNewPack,
+    handleSliderChange,
+    handleToggleButton,
+    clearFilters,
+  } = usePacksHandlers(setPacksTableParams, packsMutations, '')
 
   return [
     { actionsHandlers },
@@ -70,11 +88,14 @@ export const usePacksData: UsePacksDataType = () => {
     {
       isPacksDataLoading,
       handlePacksTableChange,
-      handleAddNewPack,
       packsTableParams,
       data,
       packsTableColumns,
       serverError,
     },
+    { handleAddNewPack },
+    { handleSliderChange },
+    { handleToggleButton },
+    { clearFilters },
   ]
 }

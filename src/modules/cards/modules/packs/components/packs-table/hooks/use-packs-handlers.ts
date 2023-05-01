@@ -1,12 +1,12 @@
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useCallback } from 'react'
 
 import {
   ActionsHandlersType,
   HandlePacksSearchType,
   HandlePacksTableChangeType,
   MutationsWithConditionsPackType,
+  PacksTableParamsType,
 } from '../types'
-import { PacksTableParamsType } from '../utils/get-sorting-packs-param'
 
 type UsePacksHandlersType = (
   setPacksTableParams: Dispatch<SetStateAction<PacksTableParamsType>>,
@@ -15,8 +15,11 @@ type UsePacksHandlersType = (
 ) => {
   handlePacksTableChange: HandlePacksTableChangeType
   handlePacksSearch: HandlePacksSearchType
-  handleAddNewPack: () => Promise<void>
   actionsHandlers: ActionsHandlersType
+  handleAddNewPack: any
+  handleSliderChange: any
+  handleToggleButton: any
+  clearFilters: any
 }
 
 export const usePacksHandlers: UsePacksHandlersType = (
@@ -35,14 +38,44 @@ export const usePacksHandlers: UsePacksHandlersType = (
     }))
   }
 
+  const handleSliderChange = useCallback((value: number | [number, number]) => {
+    if (Array.isArray(value)) {
+      setPacksTableParams(prevState => ({
+        ...prevState,
+        minCardsCount: value[0],
+        maxCardsCount: value[1],
+      }))
+    }
+  }, [])
+
+  const clearFilters = () => {
+    setPacksTableParams(prevState => ({
+      ...prevState,
+      pagination: {
+        current: 1,
+        pageSize: 10,
+      },
+      sortPacks: '',
+      searchValue: '',
+      minCardsCount: undefined,
+      maxCardsCount: undefined,
+    }))
+  }
+
+  const handleToggleButton = (buttonName: string) => {
+    setPacksTableParams(prevState => ({
+      ...prevState,
+      activeButton: buttonName,
+    }))
+    clearFilters()
+  }
+
   const handleAddNewPack = async () =>
     await addPacks.handlers({
       cardsPack: { name: `test pack ${Math.round(Math.random() + 100)}` },
     })
 
-  const handleLearn = () => {
-    console.log('record')
-  }
+  const handleLearn = () => console.log('record')
   const handleEdit = async () =>
     await updatePacks.handlers({ cardsPack: { _id: packsId, name: 'new-name' } })
 
@@ -54,5 +87,13 @@ export const usePacksHandlers: UsePacksHandlersType = (
     handleDelete,
   }
 
-  return { handlePacksTableChange, handlePacksSearch, handleAddNewPack, actionsHandlers }
+  return {
+    handlePacksTableChange,
+    handlePacksSearch,
+    actionsHandlers,
+    handleAddNewPack,
+    handleSliderChange,
+    handleToggleButton,
+    clearFilters,
+  }
 }

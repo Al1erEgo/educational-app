@@ -13,29 +13,29 @@ import { TableErrorType } from '../../../../../types'
 import { usePacksMutation } from '../hooks/use-packs-mutation'
 
 export type PackType = {
-  _id: string
-  name: string
-  cardsCount: number
-  updated: string
-  user_name: string
-  user_id: string
+  _id?: string
+  user_id?: string
+  name?: string
+  cardsCount?: number
+  created?: string
+  updated?: string
+  user_name?: string
 }
-
+// TODO: ИСПРАВИТЬ ТИП PackType
 export type PacksTableDataColumnsType = {
   title: string
   dataIndex: string
   sorter?: boolean
-  render?: (text: string, record: PackType) => JSX.Element
+  width?: string
+  render?: (text: string, record: any) => JSX.Element
 }
 
 export type PacksTableParamsType = SorterResult<PackType> & {
   pagination?: TablePaginationConfig
   searchValue: string
-}
-
-export type SorterType = {
-  field?: string
-  order?: 'ascend' | 'descend'
+  minCardsCount: number | undefined
+  maxCardsCount: number | undefined
+  activeButton: string
 }
 
 type HandlerFunctionPacksDataType =
@@ -63,7 +63,7 @@ export type PacksTableErrorType = FetchBaseQueryError | SerializedError | undefi
 
 export type PacksTableDataType = {
   isPacksDataLoading: boolean
-  handlePacksTableChange: HandlePacksTableChangeType
+  handlePacksTableChange: any
   packsTableParams: PacksTableParamsType
   data: CardPacksResponseType | undefined
   packsTableColumns: PacksTableDataColumnsType[]
