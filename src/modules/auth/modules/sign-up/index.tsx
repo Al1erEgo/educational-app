@@ -4,8 +4,8 @@ import { ErrorServerHandler } from '../../../../components'
 import { FormButton, FormInput, ConfirmationMessage } from '../../components'
 import { ABSOLUTE_AUTH_PATH } from '../../constants'
 import { useFormData } from '../../hooks'
-import { SignUpFormInputs } from '../../hooks/use-authform/types'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../../styles'
+import { SignUpFormInputs } from '../../types'
 
 export const SignUp = () => {
   const [onSubmit, { handleSubmit, control, errors }, { isLoading, isSuccess, error }] =
