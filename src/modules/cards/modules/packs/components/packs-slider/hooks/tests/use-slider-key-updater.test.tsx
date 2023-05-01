@@ -40,14 +40,16 @@ jest.mock('react', () => {
 
 describe('useSliderKeyEffect_function', () => {
   const state = {
-    currentPage: 1,
-    pageCount: 10,
-    sortPacks: '',
+    pagination: {
+      current: 1,
+      pageSize: 10,
+    },
+    field: '',
+    order: null,
     searchValue: '',
-    sliderKey: 0,
-    isFiltered: true,
     minCardsCount: 2,
     maxCardsCount: 8,
+    activeButton: 'All',
   }
 
   beforeEach(() => {

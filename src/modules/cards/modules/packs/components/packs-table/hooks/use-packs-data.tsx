@@ -5,7 +5,11 @@ import { useCardPacksQuery } from '../../../../../api'
 import { MY_BUTTON_NAME } from '../../../../../constants'
 import {
   ActionsHandlersType,
+  HandleAddNewPackType,
+  HandleClearFiltersType,
   HandlePacksSearchType,
+  HandleSliderChangeType,
+  HandleToggleButtonType,
   PacksTableDataType,
   PacksTableParamsType,
 } from '../types'
@@ -19,10 +23,10 @@ type UsePacksDataType = () => [
   { actionsHandlers: ActionsHandlersType },
   { handlePacksSearch: HandlePacksSearchType },
   PacksTableDataType,
-  { handleAddNewPack: any },
-  { handleSliderChange: any },
-  { handleToggleButton: any },
-  { clearFilters: any }
+  { handleAddNewPack: HandleAddNewPackType },
+  { handleSliderChange: HandleSliderChangeType },
+  { handleToggleButton: HandleToggleButtonType },
+  { handleClearFilters: HandleClearFiltersType }
 ]
 
 export const usePacksData: UsePacksDataType = () => {
@@ -59,7 +63,7 @@ export const usePacksData: UsePacksDataType = () => {
   })
 
   const packsMutations = usePacksMutations(refetchPacks)
-  const [{ addPacks, updatePacks, deletePacks }, actionsLoading, actionsError] = packsMutations
+  const [{ updatePacks, deletePacks }, actionsLoading, actionsError] = packsMutations
 
   const isPacksDataLoading = isPacksLoading || isPacksFetching || actionsLoading
   const serverError = cardsPacksQueryError || actionsError
@@ -67,7 +71,6 @@ export const usePacksData: UsePacksDataType = () => {
   const packsTableColumns = getPacksTableColumns(
     packsTableParams.activeButton,
     userData,
-    addPacks.handlers,
     updatePacks.handlers,
     deletePacks.handlers
   )
@@ -79,7 +82,7 @@ export const usePacksData: UsePacksDataType = () => {
     handleAddNewPack,
     handleSliderChange,
     handleToggleButton,
-    clearFilters,
+    handleClearFilters,
   } = usePacksHandlers(setPacksTableParams, packsMutations, '')
 
   return [
@@ -96,6 +99,6 @@ export const usePacksData: UsePacksDataType = () => {
     { handleAddNewPack },
     { handleSliderChange },
     { handleToggleButton },
-    { clearFilters },
+    { handleClearFilters },
   ]
 }

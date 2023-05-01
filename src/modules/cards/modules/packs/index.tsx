@@ -14,10 +14,12 @@ export const Packs = () => {
     { handleAddNewPack },
     { handleSliderChange },
     { handleToggleButton },
-    { clearFilters },
+    { handleClearFilters },
   ] = usePacksData()
 
   const { isPacksDataLoading, packsTableParams, data } = packsTableData
+
+  console.log(packsTableParams)
 
   return (
     <>
@@ -43,7 +45,7 @@ export const Packs = () => {
           minCardsCount={data?.minCardsCount}
           maxCardsCount={data?.maxCardsCount}
         />
-        <PacksFilter clearFilters={clearFilters} />
+        <PacksFilter clearFilters={handleClearFilters} />
       </StyledCardsToolbar>
 
       <PacksTable packsTableData={packsTableData} />

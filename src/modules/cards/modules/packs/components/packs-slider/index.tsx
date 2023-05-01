@@ -3,14 +3,15 @@ import React, { FC } from 'react'
 import { Slider } from 'antd'
 
 import { StyledCardsText } from '../../../../styles'
+import { HandleSliderChangeType, PacksTableParamsType } from '../packs-table/types'
 
 import { useSliderKeyUpdater } from './hooks/use-slider-key-updater'
 
 type PacksSliderType = {
-  handleSliderChange: any
+  handleSliderChange: HandleSliderChangeType
   minCardsCount?: number
   maxCardsCount?: number
-  state: any
+  state: PacksTableParamsType
 }
 
 export const PacksSlider: FC<PacksSliderType> = ({

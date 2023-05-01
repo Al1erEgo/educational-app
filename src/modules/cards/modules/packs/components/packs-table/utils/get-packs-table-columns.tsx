@@ -4,22 +4,22 @@ import { DeleteOutlined, EditOutlined, InfoCircleTwoTone } from '@ant-design/ico
 import { Space, Tooltip } from 'antd'
 import { NavLink } from 'react-router-dom'
 
+import { LoginResponseType } from '../../../../../../auth/api/types'
 import { MY_BUTTON_NAME } from '../../../../../constants'
 import { packsTableColumns } from '../constants'
 import { PacksTableDataColumnsType, HandlerPacksFunctionType } from '../types'
 
 type GetPacksTableColumnsType = (
   activeButton: string,
-  userData: any,
-  handleLearn: (pack: any) => void,
-  handleEdit: (pack: any) => void,
-  handleDelete: (pack: any) => void
+  userData: LoginResponseType | undefined,
+  /*handleLearn: (pack: any) => void,*/
+  handleEdit: HandlerPacksFunctionType,
+  handleDelete: HandlerPacksFunctionType
 ) => PacksTableDataColumnsType[]
 
 export const getPacksTableColumns: GetPacksTableColumnsType = (
   activeButton,
   userData,
-  handleLearn,
   handleEdit,
   handleDelete
 ) => {
@@ -47,7 +47,7 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
           <Space size="middle">
             <Tooltip title="Learn">
               {hasCards ? (
-                <InfoCircleTwoTone onClick={() => handleLearn(pack)} />
+                <InfoCircleTwoTone onClick={() => console.log(pack)} />
               ) : (
                 <InfoCircleTwoTone twoToneColor="lightgrey" />
               )}
@@ -66,7 +66,7 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
         ) : (
           <Tooltip title="Learn">
             {hasCards ? (
-              <InfoCircleTwoTone onClick={() => handleLearn(pack)} />
+              <InfoCircleTwoTone onClick={() => console.log(pack)} />
             ) : (
               <InfoCircleTwoTone twoToneColor="lightgrey" />
             )}

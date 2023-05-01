@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 
+import { PacksTableParamsType } from '../../../packs-table/types'
+
 /**
  A custom hook that updates the sliderKey state variable whenever minCount,
  maxCount, or state.minCardsCount/state.maxCardsCount change. This hook updates
@@ -13,7 +15,11 @@ import { useEffect, useState } from 'react'
 
  @return {number} - The current value of the sliderKey state variable.
  */
-export const useSliderKeyUpdater = (minCardsCount: number, maxCardsCount: number, state: any) => {
+export const useSliderKeyUpdater = (
+  minCardsCount: number,
+  maxCardsCount: number,
+  state: PacksTableParamsType
+) => {
   const [sliderKey, setSliderKey] = useState(0)
 
   useEffect(() => {

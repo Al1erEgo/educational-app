@@ -13,6 +13,7 @@ import { TableErrorType } from '../../../../../types'
 import { usePacksMutation } from '../hooks/use-packs-mutation'
 
 export type PackType = {
+  key: string
   _id?: string
   user_id?: string
   name?: string
@@ -69,3 +70,11 @@ export type PacksTableDataType = {
   packsTableColumns: PacksTableDataColumnsType[]
   serverError: PacksTableErrorType
 }
+
+export type HandleAddNewPackType = () => void | Promise<void>
+
+export type HandleSliderChangeType = (value: number | [number, number]) => void
+
+export type HandleToggleButtonType = (buttonName: string) => void
+
+export type HandleClearFiltersType = () => void

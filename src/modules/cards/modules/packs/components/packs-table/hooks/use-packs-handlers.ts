@@ -2,8 +2,12 @@ import { Dispatch, SetStateAction, useCallback } from 'react'
 
 import {
   ActionsHandlersType,
+  HandleAddNewPackType,
+  HandleClearFiltersType,
   HandlePacksSearchType,
   HandlePacksTableChangeType,
+  HandleSliderChangeType,
+  HandleToggleButtonType,
   MutationsWithConditionsPackType,
   PacksTableParamsType,
 } from '../types'
@@ -16,10 +20,10 @@ type UsePacksHandlersType = (
   handlePacksTableChange: HandlePacksTableChangeType
   handlePacksSearch: HandlePacksSearchType
   actionsHandlers: ActionsHandlersType
-  handleAddNewPack: any
-  handleSliderChange: any
-  handleToggleButton: any
-  clearFilters: any
+  handleAddNewPack: HandleAddNewPackType
+  handleSliderChange: HandleSliderChangeType
+  handleToggleButton: HandleToggleButtonType
+  handleClearFilters: HandleClearFiltersType
 }
 
 export const usePacksHandlers: UsePacksHandlersType = (
@@ -48,7 +52,7 @@ export const usePacksHandlers: UsePacksHandlersType = (
     }
   }, [])
 
-  const clearFilters = () => {
+  const handleClearFilters = () => {
     setPacksTableParams(prevState => ({
       ...prevState,
       pagination: {
@@ -67,13 +71,11 @@ export const usePacksHandlers: UsePacksHandlersType = (
       ...prevState,
       activeButton: buttonName,
     }))
-    clearFilters()
+    handleClearFilters()
   }
 
   const handleAddNewPack = async () =>
-    await addPacks.handlers({
-      cardsPack: { name: `test pack ${Math.round(Math.random() + 100)}` },
-    })
+    await addPacks.handlers({ cardsPack: { name: `test pack ${Math.round(Math.random() + 100)}` } })
 
   const handleLearn = () => console.log('record')
   const handleEdit = async () =>
@@ -94,6 +96,6 @@ export const usePacksHandlers: UsePacksHandlersType = (
     handleAddNewPack,
     handleSliderChange,
     handleToggleButton,
-    clearFilters,
+    handleClearFilters,
   }
 }
