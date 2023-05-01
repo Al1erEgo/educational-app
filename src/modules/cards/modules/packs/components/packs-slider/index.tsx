@@ -3,9 +3,10 @@ import React, { FC } from 'react'
 import { Slider } from 'antd'
 
 import { StyledCardsText } from '../../../../styles'
-import { HandleSliderChangeType, PacksTableParamsType } from '../packs-table/types'
+import { HandleSliderChangeType, PacksTableParamsType } from '../../types'
 
 import { useSliderKeyUpdater } from './hooks/use-slider-key-updater'
+import { StyledPacksSliderWrapper } from './styles'
 
 type PacksSliderType = {
   handleSliderChange: HandleSliderChangeType
@@ -23,7 +24,7 @@ export const PacksSlider: FC<PacksSliderType> = ({
   const sliderKey = useSliderKeyUpdater(minCardsCount, maxCardsCount, state)
 
   return (
-    <div style={{ width: '25%', maxWidth: '370px', marginRight: '10px' }}>
+    <StyledPacksSliderWrapper>
       <StyledCardsText>Number of cards</StyledCardsText>
       <Slider
         key={sliderKey}
@@ -35,6 +36,6 @@ export const PacksSlider: FC<PacksSliderType> = ({
         onAfterChange={handleSliderChange}
         disabled={minCardsCount === maxCardsCount}
       />
-    </div>
+    </StyledPacksSliderWrapper>
   )
 }

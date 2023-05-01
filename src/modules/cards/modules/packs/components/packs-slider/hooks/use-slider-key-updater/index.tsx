@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { PacksTableParamsType } from '../../../packs-table/types'
+import { PacksTableParamsType } from '../../../../types'
 
 /**
  A custom hook that updates the sliderKey state variable whenever minCount,

@@ -2,10 +2,10 @@ import React, { FC } from 'react'
 
 import { CardsTableConditionProvider } from '../../../../components'
 import { useTableResize } from '../../../../hooks'
-import { StyledCardTable } from '../../../../styles'
+import { PacksTableDataType } from '../../types'
+import { getFormattedPacksTableData } from '../../utils'
 
-import { PacksTableDataType } from './types'
-import { getFormattedPacksTableData } from './utils/get-formatted-packs-table-data'
+import { StyledPacksTable } from './styles'
 
 type PacksTableProps = {
   packsTableData: PacksTableDataType
@@ -26,7 +26,7 @@ export const PacksTable: FC<PacksTableProps> = ({ packsTableData }) => {
 
   return (
     <CardsTableConditionProvider serverError={serverError} isPackDataLoading={isPacksDataLoading}>
-      <StyledCardTable
+      <StyledPacksTable
         size={'small'}
         columns={packsTableColumns}
         dataSource={formattedPacksTableData}

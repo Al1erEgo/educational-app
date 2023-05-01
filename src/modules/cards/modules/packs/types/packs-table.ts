@@ -1,16 +1,9 @@
 import { SerializedError } from '@reduxjs/toolkit'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
-import { FilterValue, SorterResult } from 'antd/es/table/interface'
+import { SorterResult } from 'antd/es/table/interface'
 import { TablePaginationConfig } from 'antd/es/table/InternalTable'
 
-import {
-  CardPacksResponseType,
-  DeletedCardsPackRequestType,
-  NewCardPacksRequestType,
-  UpdateCardsPackRequestType,
-} from '../../../../../api'
-import { TableErrorType } from '../../../../../types'
-import { usePacksMutation } from '../hooks/use-packs-mutation'
+import { CardPacksResponseType } from '../../../api'
 
 export type PackType = {
   key: string
@@ -38,27 +31,6 @@ export type PacksTableParamsType = SorterResult<PackType> & {
   maxCardsCount: number | undefined
   activeButton: string
 }
-
-type HandlerFunctionPacksDataType =
-  | NewCardPacksRequestType
-  | DeletedCardsPackRequestType
-  | UpdateCardsPackRequestType
-
-export type HandlerPacksFunctionType = (data: HandlerFunctionPacksDataType) => void
-
-export type HandlePacksTableChangeType = (
-  pagination: TablePaginationConfig,
-  filters: Record<string, FilterValue | null>,
-  sorter: SorterResult<PackType> | SorterResult<PackType>[]
-) => void
-
-export type HandlePacksSearchType = (searchValue: string) => void
-
-export type ActionsHandlersType = { [key: string]: () => void }
-
-export type MutationsPackObjType = { [key: string]: ReturnType<typeof usePacksMutation> }
-
-export type MutationsWithConditionsPackType = [MutationsPackObjType, boolean, TableErrorType]
 
 export type PacksTableErrorType = FetchBaseQueryError | SerializedError | undefined
 

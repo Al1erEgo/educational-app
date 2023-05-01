@@ -1,4 +1,4 @@
-import { packsMutations } from '../constants/packs-mutations'
+import { packsMutations } from '../constants'
 import { MutationsPackObjType, MutationsWithConditionsPackType } from '../types'
 
 import { usePacksMutation } from './use-packs-mutation'

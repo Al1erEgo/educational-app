@@ -1,5 +1,5 @@
-import { TableErrorType } from '../../../../../types'
-import { packsMutations } from '../constants/packs-mutations'
+import { TableErrorType } from '../../../types'
+import { packsMutations } from '../constants'
 import { HandlerPacksFunctionType } from '../types'
 
 type UsePacksMutationType = (

@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
-import { useAuthorised } from '../../../../../../auth/hooks'
-import { useCardPacksQuery } from '../../../../../api'
-import { MY_BUTTON_NAME } from '../../../../../constants'
+import { useAuthorised } from '../../../../auth/hooks'
+import { useCardPacksQuery } from '../../../api'
+import { MY_BUTTON_NAME } from '../../../constants'
 import {
   ActionsHandlersType,
   HandleAddNewPackType,
@@ -13,8 +13,7 @@ import {
   PacksTableDataType,
   PacksTableParamsType,
 } from '../types'
-import { getPacksTableColumns } from '../utils/get-packs-table-columns'
-import { getSortingPacksParam } from '../utils/get-sorting-packs-param'
+import { getPacksTableColumns, getSortingPacksParam } from '../utils'
 
 import { usePacksHandlers } from './use-packs-handlers'
 import { usePacksMutations } from './use-packs-mutations'

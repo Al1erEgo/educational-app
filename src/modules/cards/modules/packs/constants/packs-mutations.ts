@@ -5,7 +5,7 @@ import {
   useDeleteCardsPackMutation,
   useNewCardsPackMutation,
   useUpdateCardsPackMutation,
-} from '../../../../../api'
+} from '../../../api'
 
 type PacksMutationsType = {
   [key: string]: {

@@ -4,7 +4,7 @@ import { CardsHeader, CardsSearch } from '../../components'
 import { StyledCardsTitleButton, StyledCardsToolbar } from '../../styles'
 
 import { PacksButton, PacksFilter, PacksSlider, PacksTable } from './components'
-import { usePacksData } from './components/packs-table/hooks/use-packs-data'
+import { usePacksData } from './hooks'
 
 export const Packs = () => {
   const [

@@ -75,7 +75,6 @@ export const cardsApi = rootApi.injectEndpoints({
 
 export const {
   useCardPacksQuery,
-  useLazyCardPacksQuery,
   useNewCardsPackMutation,
   useDeleteCardsPackMutation,
   useUpdateCardsPackMutation,

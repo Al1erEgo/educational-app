@@ -4,15 +4,16 @@ import { DeleteOutlined, EditOutlined, InfoCircleTwoTone } from '@ant-design/ico
 import { Space, Tooltip } from 'antd'
 import { NavLink } from 'react-router-dom'
 
-import { LoginResponseType } from '../../../../../../auth/api/types'
-import { MY_BUTTON_NAME } from '../../../../../constants'
+import { LoginResponseType } from '../../../../auth/api/types'
+import { MY_BUTTON_NAME } from '../../../constants'
 import { packsTableColumns } from '../constants'
-import { PacksTableDataColumnsType, HandlerPacksFunctionType } from '../types'
+import { HandlerPacksFunctionType, PacksTableDataColumnsType } from '../types'
 
 type GetPacksTableColumnsType = (
   activeButton: string,
   userData: LoginResponseType | undefined,
   /*handleLearn: (pack: any) => void,*/
+  /*handlers: ActionsHandlersType*/
   handleEdit: HandlerPacksFunctionType,
   handleDelete: HandlerPacksFunctionType
 ) => PacksTableDataColumnsType[]
@@ -23,6 +24,8 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
   handleEdit,
   handleDelete
 ) => {
+  /*const { handleEdit, handleDelete } = handlers*/
+
   return [
     {
       title: 'Name',
