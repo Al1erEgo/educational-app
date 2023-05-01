@@ -8,7 +8,7 @@ type FormCheckboxPropsType = {
   control: Control<any>
 }
 
-//TODO type and type conflicts
+//TODO type
 export const FormCheckbox: FC<FormCheckboxPropsType> = ({ name, control }) => {
   return (
     <Form.Item
@@ -23,7 +23,11 @@ export const FormCheckbox: FC<FormCheckboxPropsType> = ({ name, control }) => {
         name={name}
         control={control}
         render={({ field }) => (
-          <Checkbox {...field} checked={field.value}>
+          <Checkbox
+            name={field.name}
+            checked={field.value}
+            onChange={e => field.onChange(e.target.checked)}
+          >
             Remember me
           </Checkbox>
         )}
