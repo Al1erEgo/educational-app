@@ -4,7 +4,6 @@ import { useAuthorised } from '../../../../auth/hooks'
 import { useCardPacksQuery } from '../../../api'
 import { MY_BUTTON_NAME } from '../../../constants'
 import {
-  ActionsHandlersType,
   HandleAddNewPackType,
   HandleClearFiltersType,
   HandlePacksSearchType,
@@ -19,7 +18,6 @@ import { usePacksHandlers } from './use-packs-handlers'
 import { usePacksMutations } from './use-packs-mutations'
 
 type UsePacksDataType = () => [
-  { actionsHandlers: ActionsHandlersType },
   { handlePacksSearch: HandlePacksSearchType },
   PacksTableDataType,
   { handleAddNewPack: HandleAddNewPackType },
@@ -61,8 +59,7 @@ export const usePacksData: UsePacksDataType = () => {
     max: packsTableParams.maxCardsCount,
   })
 
-  const packsMutations = usePacksMutations(refetchPacks)
-  const [{ updatePacks, deletePacks }, actionsLoading, actionsError] = packsMutations
+  const [packsActions, actionsLoading, actionsError] = usePacksMutations(refetchPacks)
 
   const isPacksDataLoading = isPacksLoading || isPacksFetching || actionsLoading
   const serverError = cardsPacksQueryError || actionsError
@@ -70,22 +67,20 @@ export const usePacksData: UsePacksDataType = () => {
   const packsTableColumns = getPacksTableColumns(
     packsTableParams.activeButton,
     userData,
-    updatePacks.handlers,
-    deletePacks.handlers
+    packsActions.updatePacks.handlers,
+    packsActions.deletePacks.handlers
   )
 
   const {
     handlePacksTableChange,
     handlePacksSearch,
-    actionsHandlers,
     handleAddNewPack,
     handleSliderChange,
     handleToggleButton,
     handleClearFilters,
-  } = usePacksHandlers(setPacksTableParams, packsMutations, '')
+  } = usePacksHandlers(setPacksTableParams, packsActions, '')
 
   return [
-    { actionsHandlers },
     { handlePacksSearch },
     {
       isPacksDataLoading,

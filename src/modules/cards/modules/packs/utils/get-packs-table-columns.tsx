@@ -12,8 +12,6 @@ import { HandlerPacksFunctionType, PacksTableDataColumnsType } from '../types'
 type GetPacksTableColumnsType = (
   activeButton: string,
   userData: LoginResponseType | undefined,
-  /*handleLearn: (pack: any) => void,*/
-  /*handlers: ActionsHandlersType*/
   handleEdit: HandlerPacksFunctionType,
   handleDelete: HandlerPacksFunctionType
 ) => PacksTableDataColumnsType[]
@@ -24,8 +22,6 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
   handleEdit,
   handleDelete
 ) => {
-  /*const { handleEdit, handleDelete } = handlers*/
-
   return [
     {
       title: 'Name',
@@ -58,7 +54,7 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
 
             <Tooltip title="Edit">
               <EditOutlined
-                onClick={() => handleEdit({ cardsPack: { _id: pack._id, name: 'new-name' } })}
+                onClick={() => handleEdit({ cardsPack: { _id: pack._id, name: 'new name' } })}
               />
             </Tooltip>
 

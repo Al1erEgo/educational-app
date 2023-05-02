@@ -8,7 +8,6 @@ import { usePacksData } from './hooks'
 
 export const Packs = () => {
   const [
-    { actionsHandlers },
     { handlePacksSearch },
     packsTableData,
     { handleAddNewPack },
@@ -18,8 +17,6 @@ export const Packs = () => {
   ] = usePacksData()
 
   const { isPacksDataLoading, packsTableParams, data } = packsTableData
-
-  console.log(packsTableParams)
 
   return (
     <>

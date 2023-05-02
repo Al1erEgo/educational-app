@@ -3,9 +3,9 @@ import React, { FC } from 'react'
 import { Slider } from 'antd'
 
 import { StyledCardsText } from '../../../../styles'
+import { useSliderKeyUpdater } from '../../hooks/use-slider-key-updater'
 import { HandleSliderChangeType, PacksTableParamsType } from '../../types'
 
-import { useSliderKeyUpdater } from './hooks/use-slider-key-updater'
 import { StyledPacksSliderWrapper } from './styles'
 
 type PacksSliderType = {

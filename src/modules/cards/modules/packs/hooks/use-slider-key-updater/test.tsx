@@ -26,7 +26,7 @@
 
 import React, { useState } from 'react'
 
-import { useSliderKeyUpdater } from '../use-slider-key-updater'
+import { useSliderKeyUpdater } from './index'
 
 jest.mock('react', () => {
   const original = jest.requireActual('react')
