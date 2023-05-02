@@ -5,8 +5,10 @@ import { TablePaginationConfig } from 'antd/es/table/InternalTable'
 
 import { CardPacksResponseType } from '../../../api'
 
+import { HandlePacksTableChangeType } from './packs-handler-functions'
+
 export type PackType = {
-  key: string
+  key?: string
   _id?: string
   user_id?: string
   name?: string
@@ -15,13 +17,13 @@ export type PackType = {
   updated?: string
   user_name?: string
 }
-// TODO: ИСПРАВИТЬ ТИП PackType
+
 export type PacksTableDataColumnsType = {
   title: string
   dataIndex: string
   sorter?: boolean
   width?: string
-  render?: (text: string, record: any) => JSX.Element
+  render?: (text: string, record: PackType) => JSX.Element
 }
 
 export type PacksTableParamsType = SorterResult<PackType> & {
@@ -36,7 +38,7 @@ export type PacksTableErrorType = FetchBaseQueryError | SerializedError | undefi
 
 export type PacksTableDataType = {
   isPacksDataLoading: boolean
-  handlePacksTableChange: any
+  handlePacksTableChange: HandlePacksTableChangeType
   packsTableParams: PacksTableParamsType
   data: CardPacksResponseType | undefined
   packsTableColumns: PacksTableDataColumnsType[]

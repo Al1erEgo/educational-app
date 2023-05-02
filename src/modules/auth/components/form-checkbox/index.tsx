@@ -21,8 +21,13 @@ export const FormCheckbox: FC<FormCheckboxPropsType> = ({ name, control }) => {
       <Controller
         name={name}
         control={control}
+        defaultValue={false}
         render={({ field }) => (
-          <Checkbox {...field} checked={field.value}>
+          <Checkbox
+            {...field}
+            checked={field.value}
+            onChange={e => field.onChange(e.target.checked)}
+          >
             Remember me
           </Checkbox>
         )}
