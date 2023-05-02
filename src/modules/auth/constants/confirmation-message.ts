@@ -1,43 +1,30 @@
 import checkEmailImage from '../../../assets/check-email-image.svg'
 import successRegistrationImage from '../../../assets/success-registration.png'
+import { ConfirmationMessagesArgumentsType } from '../types/confirmation-message'
 
 import { ABSOLUTE_AUTH_PATH } from './index'
 
-//TODO переделать типы и нэйминг
+export const confirmationMessageTimeout = 5000
 
-type ConfirmationMessageArgumentsType = {
-  resetPassword: ConfirmationMessagePropsType
-  signUp: ConfirmationMessagePropsType
-  newPassword: ConfirmationMessagePropsType
-}
-
-type ConfirmationMessagePropsType = {
-  title: string
-  propsPath: string
-  text: string
-  image?: string
-  timer?: boolean
-}
-
-export const confirmationMessageArguments: ConfirmationMessageArgumentsType = {
+export const confirmationMessagesArguments: ConfirmationMessagesArgumentsType = {
   resetPassword: {
     title: 'Check Email',
-    propsPath: ABSOLUTE_AUTH_PATH.SignIn,
+    redirectPath: ABSOLUTE_AUTH_PATH.SignIn,
     image: checkEmailImage,
     text: 'We’ve sent an Email with instructions to',
-  } as const,
+  },
   signUp: {
     title: 'Success!',
     text: 'We’ve successfully registered you, please go through the authorization',
-    propsPath: ABSOLUTE_AUTH_PATH.SignIn,
+    redirectPath: ABSOLUTE_AUTH_PATH.SignIn,
     image: successRegistrationImage,
     timer: true,
-  } as const,
+  },
   newPassword: {
     title: 'Success!',
     text: 'Your password has been successfully changed, please go to login!',
-    propsPath: ABSOLUTE_AUTH_PATH.SignIn,
+    redirectPath: ABSOLUTE_AUTH_PATH.SignIn,
     image: successRegistrationImage,
     timer: true,
-  } as const,
-}
+  },
+} as const

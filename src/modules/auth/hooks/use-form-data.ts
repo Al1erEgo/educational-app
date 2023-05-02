@@ -2,8 +2,8 @@ import { FieldValues } from 'react-hook-form'
 
 import { FormType } from '../types'
 
+import { useAuthMutation, UseMutationReturnType } from './use-auth-mutation'
 import { useFormWithValidation } from './use-authform'
-import { useMutation, UseMutationReturnType } from './use-mutation'
 
 //TODO type
 
@@ -20,7 +20,7 @@ export const useFormData = <T extends FieldValues>(formType: FormType): any => {
   const { handleSubmit, control, setError, errors, watch, setValue } =
     useFormWithValidation<T>(formType)
   // Get mutation trigger and status using the useMutation hook
-  const [onSubmit, { trigger, isLoading, isSuccess, error }] = useMutation(formType)
+  const [onSubmit, { trigger, isLoading, isSuccess, error }] = useAuthMutation(formType)
 
   return [
     onSubmit,

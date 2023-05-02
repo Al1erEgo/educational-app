@@ -45,7 +45,7 @@ export const StyledCard = styled(Card)`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 `
 
-export const StyledButton = styled(Button).attrs({
+export const StyledAuthButton = styled(Button).attrs({
   type: 'primary',
   htmlType: 'submit',
   size: 'large',

@@ -1,3 +1,5 @@
+import { FC } from 'react'
+
 import { Form } from 'antd'
 import { useParams } from 'react-router-dom'
 
@@ -8,7 +10,7 @@ import { useFormData } from '../../hooks'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledText } from '../../styles'
 import { NewPasswordFormInputs } from '../../types'
 
-export const NewPassword = () => {
+export const NewPassword: FC = () => {
   const { token } = useParams()
   const [onSubmit, { handleSubmit, control, setError, errors }, { isLoading, error, isSuccess }] =
     useFormData<NewPasswordFormInputs>('newPassword')

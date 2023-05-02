@@ -3,13 +3,12 @@ import { FC } from 'react'
 import { Checkbox, Form } from 'antd'
 import { Control, Controller } from 'react-hook-form'
 
-type FormCheckboxPropsType = {
+type FormCheckboxType = {
   name: 'rememberMe'
   control: Control<any>
 }
 
-//TODO type
-export const FormCheckbox: FC<FormCheckboxPropsType> = ({ name, control }) => {
+export const FormCheckbox: FC<FormCheckboxType> = ({ name, control }) => {
   return (
     <Form.Item
       name={name}

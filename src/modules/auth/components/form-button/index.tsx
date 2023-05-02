@@ -2,16 +2,16 @@ import { FC, PropsWithChildren } from 'react'
 
 import { Form } from 'antd'
 
-import { StyledButton } from '../../styles'
+import { StyledAuthButton } from '../../styles'
 
-type FormButtonPropsType = {
+type FormButtonType = {
   loading: boolean
 }
 
-export const FormButton: FC<PropsWithChildren<FormButtonPropsType>> = ({ loading, children }) => {
+export const FormButton: FC<PropsWithChildren<FormButtonType>> = ({ loading, children }) => {
   return (
     <Form.Item>
-      <StyledButton loading={loading}>{children}</StyledButton>
+      <StyledAuthButton loading={loading}>{children}</StyledAuthButton>
     </Form.Item>
   )
 }

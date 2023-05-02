@@ -1,9 +1,11 @@
+import { FC } from 'react'
+
 import { Button, Result } from 'antd'
 
 import { MAIN_PATH } from '../../constants'
 import { useNavigateToOnclick } from '../../hooks'
 
-export const Error404 = () => {
+export const Error404: FC = () => {
   const onClickNavigateToMain = useNavigateToOnclick(MAIN_PATH.Root)
 
   return (

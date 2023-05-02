@@ -20,7 +20,7 @@ A hook that returns a mutation trigger function and a form submission function f
 */
 
 //TODO убрать any
-export const useMutation: UseAuthMutationType = mutationArg => {
+export const useAuthMutation: UseAuthMutationType = mutationArg => {
   //Get mutation and path to redirect(if provided) from defined object by specified key
   const { mutation, path } = authMutations[mutationArg]
   // Get mutation trigger and status using the useMutation hook

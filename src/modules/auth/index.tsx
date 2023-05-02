@@ -7,7 +7,7 @@ import { useDefaultPage } from '../../hooks'
 
 import { AuthProvider, GuestProvider } from './components'
 import { AUTH_PATH } from './constants'
-import { NewPassword, Profile, ResetPassword, SignIn, SignUp } from './modules'
+import { NewPassword, Profile, ResetPassword, SignIn, SignUp } from './pages'
 
 export const Auth = () => {
   const path = useResolvedPath('')

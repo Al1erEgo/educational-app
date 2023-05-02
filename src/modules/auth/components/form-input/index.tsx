@@ -1,11 +1,15 @@
 import { Form, Input } from 'antd'
-import { Controller } from 'react-hook-form'
+import { Control, Controller, FieldError } from 'react-hook-form'
 
 import { inputs } from '../../constants'
 
-import { FormInputProps } from './types'
+type FormInputType = {
+  name: keyof typeof inputs
+  control: Control<any>
+  error?: FieldError | undefined
+}
 
-export const FormInput = ({ name, control, error }: FormInputProps) => {
+export const FormInput = ({ name, control, error }: FormInputType) => {
   const { type, placeholder, rules, autoComplete } = inputs[name]
 
   return (

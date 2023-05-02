@@ -1,11 +1,11 @@
-import React from 'react'
+import { FC } from 'react'
 
 import logo from '../../assets/incubator-logo.png'
-import { AuthWidget } from '../../modules/auth/modules'
+import { AuthWidget } from '../../modules/auth/pages'
 
 import { StyledHeader, StyledLogo, StyledAuthWrapper } from './styles'
 
-export const Header = () => {
+export const Header: FC = () => {
   return (
     <StyledHeader>
       <StyledLogo src={logo} />
