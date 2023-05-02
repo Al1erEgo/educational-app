@@ -3,10 +3,10 @@ import { LogoutOutlined } from '@ant-design/icons'
 import arrowBack from '../../../../assets/arrow-back.svg'
 import { MAIN_PATH } from '../../../../constants'
 import { StyledArrowImg, StyledBackToCardLink } from '../../../../styles'
+import { ProfileAvatar, ProfileName } from '../../components'
 import { useAuthorised, useAuthMutation } from '../../hooks'
 import { cardHeadStyle, StyledCard } from '../../styles'
 
-import { ProfileAvatar, ProfileName } from './components'
 import { StyledProfileContainer, StyledProfileText, StyledProfileLogOutButton } from './styles'
 
 export const Profile = () => {

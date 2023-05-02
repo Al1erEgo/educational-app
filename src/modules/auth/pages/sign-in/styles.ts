@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
-export const ForgotPasswordLink = styled(NavLink)`
+export const StyledForgotPasswordLink = styled(NavLink)`
   display: block;
   margin-left: 65%;
   color: black;

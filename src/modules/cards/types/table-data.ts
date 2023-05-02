@@ -10,6 +10,7 @@ import {
 
 export type TableErrorType = FetchBaseQueryError | SerializedError | undefined
 
+//TODO убрать в свой хук
 export type TableDataType = {
   isPackDataLoading: boolean
   handleTableChange: HandleTableChangeType

@@ -1,7 +1,7 @@
 import { UserOutlined } from '@ant-design/icons'
 import { Avatar, Upload } from 'antd'
 
-import { StyledAvatarGroup } from '../../styles'
+import { StyledAvatarGroup } from '../../pages/profile/styles'
 
 export const ProfileAvatar = () => {
   return (

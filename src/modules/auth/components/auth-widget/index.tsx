@@ -4,11 +4,15 @@ import { LogoutOutlined } from '@ant-design/icons'
 import { useLocation } from 'react-router-dom'
 
 import { useNavigateToOnclick } from '../../../../hooks'
-import { WidgetProfileData } from '../../components/widget-profile-data'
 import { ABSOLUTE_AUTH_PATH } from '../../constants'
 import { useAuthorised, useAuthMutation } from '../../hooks'
 
-import { StyledAuthWidgetButton } from './styles'
+import {
+  StyledAuthWidgetButton,
+  StyledUserDataWrapper,
+  StyledUserName,
+  StyledUserIconWidget,
+} from './styles'
 
 export const AuthWidget: FC = () => {
   const { isAuthorised, data: userData } = useAuthorised()
@@ -31,7 +35,10 @@ export const AuthWidget: FC = () => {
 
   return (
     <>
-      <WidgetProfileData onClick={profileRedirect} userName={userData?.name} />
+      <StyledUserDataWrapper onClick={profileRedirect}>
+        <StyledUserName>{userData.userName}</StyledUserName>
+        <StyledUserIconWidget />
+      </StyledUserDataWrapper>
       <StyledAuthWidgetButton icon={<LogoutOutlined />} onClick={handleLogOut}>
         Log out
       </StyledAuthWidgetButton>

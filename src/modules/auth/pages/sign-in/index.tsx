@@ -7,7 +7,7 @@ import { useFormData } from '../../hooks'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../../styles'
 import { LoginFormInputs } from '../../types'
 
-import { ForgotPasswordLink } from './styles'
+import { StyledForgotPasswordLink } from './styles'
 
 export const SignIn = () => {
   const [onSubmit, { handleSubmit, control, errors }, { isLoading, error }] =
@@ -19,9 +19,9 @@ export const SignIn = () => {
         <FormInput name="email" control={control} error={errors.email} />
         <FormInput name="password" control={control} error={errors.password} />
         <FormCheckbox name="rememberMe" control={control} />
-        <ForgotPasswordLink to={ABSOLUTE_AUTH_PATH.ResetPassword}>
+        <StyledForgotPasswordLink to={ABSOLUTE_AUTH_PATH.ResetPassword}>
           Forgot password?
-        </ForgotPasswordLink>
+        </StyledForgotPasswordLink>
 
         <ErrorServerHandler error={error} />
 
