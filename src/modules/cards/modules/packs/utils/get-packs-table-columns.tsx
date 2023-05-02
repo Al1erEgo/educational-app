@@ -44,7 +44,7 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
       title: 'Actions',
       dataIndex: 'actions',
       render: (text: string, pack) => {
-        const hasCards = pack.cardsCount > 0
+        const hasCards = pack.cardsCount ? pack.cardsCount > 0 : false
 
         return activeButton === MY_BUTTON_NAME || pack?.user_id === userData?._id ? (
           <Space size="middle">

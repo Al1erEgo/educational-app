@@ -122,7 +122,7 @@ export type NewCardPacksRequestType = {
 }
 
 export type DeletedCardsPackRequestType = {
-  id: string
+  id?: string
 }
 
 export type UpdateCardsPackRequestType = {
