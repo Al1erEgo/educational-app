@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { CardsHeader, CardsSearch } from '../../components'
 import { StyledCardsTitleButton, StyledCardsToolbar } from '../../styles'
 
 import { PacksButton, PacksFilter, PacksSlider, PacksTable } from './components'
+import { AddNewPackModal } from './components/packs-modal/add-new-pack-modal'
 import { usePacksData } from './hooks'
 
 export const Packs = () => {
@@ -18,13 +19,22 @@ export const Packs = () => {
 
   const { isPacksDataLoading, packsTableParams, data } = packsTableData
 
+  const [open, setOpen] = useState(false)
+
+  const handleOk = (name: string, isPrivate?: boolean) => {
+    handleAddNewPack(name)
+    setOpen(false)
+  }
+
   return (
     <>
       <CardsHeader title={'Packs list'}>
-        <StyledCardsTitleButton loading={isPacksDataLoading} onClick={handleAddNewPack}>
+        <StyledCardsTitleButton loading={isPacksDataLoading} onClick={() => setOpen(true)}>
           Add New Pack
         </StyledCardsTitleButton>
       </CardsHeader>
+
+      <AddNewPackModal open={open} onCancel={() => setOpen(false)} onOk={handleOk} />
 
       <StyledCardsToolbar>
         <CardsSearch

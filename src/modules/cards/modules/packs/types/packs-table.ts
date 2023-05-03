@@ -45,7 +45,7 @@ export type PacksTableDataType = {
   serverError: PacksTableErrorType
 }
 
-export type HandleAddNewPackType = () => void | Promise<void>
+export type HandleAddNewPackType = (name: string) => void | Promise<void>
 
 export type HandleSliderChangeType = (value: number | [number, number]) => void
 
