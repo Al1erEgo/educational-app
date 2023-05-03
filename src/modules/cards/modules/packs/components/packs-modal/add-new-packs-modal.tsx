@@ -9,7 +9,7 @@ type PacksModalProps = {
   onOk: (name: string, isPrivate?: boolean) => void
 }
 
-export const AddNewPackModal: FC<PacksModalProps> = ({ open, onCancel, onOk }) => {
+export const AddNewPacksModal: FC<PacksModalProps> = ({ open, onCancel, onOk }) => {
   const [packData, setPackData] = useState<{ name: string; isPrivate: boolean }>({
     name: '',
     isPrivate: false,

@@ -4,7 +4,7 @@ import { CardsHeader, CardsSearch } from '../../components'
 import { StyledCardsTitleButton, StyledCardsToolbar } from '../../styles'
 
 import { PacksButton, PacksFilter, PacksSlider, PacksTable } from './components'
-import { AddNewPackModal } from './components/packs-modal/add-new-pack-modal'
+import { AddNewPacksModal } from './components/packs-modal/add-new-packs-modal'
 import { usePacksData } from './hooks'
 
 export const Packs = () => {
@@ -34,7 +34,7 @@ export const Packs = () => {
         </StyledCardsTitleButton>
       </CardsHeader>
 
-      <AddNewPackModal open={open} onCancel={() => setOpen(false)} onOk={handleOk} />
+      <AddNewPacksModal open={open} onCancel={() => setOpen(false)} onOk={handleOk} />
 
       <StyledCardsToolbar>
         <CardsSearch
