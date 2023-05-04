@@ -1,5 +1,6 @@
 import { Button, Table, Typography } from 'antd'
 import Title from 'antd/es/typography/Title'
+import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
 const { Text } = Typography
@@ -51,4 +52,21 @@ export const StyledCardTable = styled(Table)`
 
 export const StyledClearFiltersButton = styled(Button)`
   font-weight: 500;
+`
+
+export const StyledBackToCardLink = styled(NavLink)`
+  position: absolute;
+  top: 30px;
+  text-decoration: none;
+  color: black;
+  line-height: 1.5rem;
+  margin-bottom: 20px;
+
+  &:hover {
+    opacity: 0.7;
+  }
+`
+
+export const StyledArrowImg = styled.img`
+  margin-right: 0.5rem;
 `

@@ -1,8 +1,6 @@
 import { LogoutOutlined } from '@ant-design/icons'
 
-import arrowBack from '../../../../assets/arrow-back.svg'
-import { MAIN_PATH } from '../../../../constants'
-import { StyledArrowImg, StyledBackToCardLink } from '../../../../styles'
+import { BackToCardsButton } from '../../../cards/components/back-to-cards-button'
 import { ProfileAvatar, ProfileName } from '../../components'
 import { useAuthorised, useAuthMutation } from '../../hooks'
 import { cardHeadStyle, StyledCard } from '../../styles'
@@ -17,10 +15,7 @@ export const Profile = () => {
 
   return (
     <>
-      <StyledBackToCardLink to={MAIN_PATH.Cards}>
-        <StyledArrowImg src={arrowBack} alt="arrow-back" />
-        Go to Cards
-      </StyledBackToCardLink>
+      <BackToCardsButton />
       <StyledCard title={'Personal information'} headStyle={cardHeadStyle}>
         <StyledProfileContainer>
           <ProfileAvatar />
