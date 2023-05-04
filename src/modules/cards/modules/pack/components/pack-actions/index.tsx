@@ -15,7 +15,7 @@ export const PackActionsButtons: FC<PackActionButtonsType> = ({ isOwnPack, handl
   const { handleAddCard, handleEditPack, handleDeletePack, handleLearnPack } = handlers
 
   if (!isOwnPack) {
-    return <StyledActionsButton>Learn Pack</StyledActionsButton>
+    return <StyledActionsButton onClick={handleLearnPack}>Learn Pack</StyledActionsButton>
   }
 
   return (

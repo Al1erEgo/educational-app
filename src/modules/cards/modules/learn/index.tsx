@@ -3,7 +3,8 @@ import { FC } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { useCardsPackQuery } from '../../api'
-import { BackToCardsButton } from '../../components/back-to-cards-button'
+import { BackToCardsButton } from '../../components'
+import { StyledTitle } from '../../styles'
 
 export const Learn: FC = () => {
   const { packId = '' } = useParams()
@@ -12,5 +13,10 @@ export const Learn: FC = () => {
     pageCount: 200,
   })
 
-  return <BackToCardsButton />
+  return (
+    <>
+      <BackToCardsButton />
+      <StyledTitle>{'Test pack name'}</StyledTitle>
+    </>
+  )
 }

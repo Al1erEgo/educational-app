@@ -1,7 +1,6 @@
 import { FC } from 'react'
 
-import { CardsHeader, CardsSearch } from '../../components'
-import { BackToCardsButton } from '../../components/back-to-cards-button'
+import { CardsHeader, CardsSearch, BackToCardsButton } from '../../components'
 import { StyledCardsToolbar } from '../../styles'
 
 import { PackActionsButtons, PackTable } from './components'

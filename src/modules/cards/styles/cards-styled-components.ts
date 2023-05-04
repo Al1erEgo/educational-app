@@ -12,10 +12,14 @@ export const StyledPacksHeader = styled.div`
   margin-bottom: 20px;
 `
 
-export const StyledTitle = styled(Title)`
+export const StyledTitle = styled(Title).attrs({
+  level: 2,
+})`
+  text-align: center;
   margin: 0;
 `
 
+//TODO проверить надо ли оставить лоадинг условие
 export const StyledCardsTitleButton = styled(Button).attrs(props => ({
   type: 'primary',
   htmlType: 'submit',

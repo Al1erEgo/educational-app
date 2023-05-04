@@ -8,7 +8,7 @@ type PacksHeaderProps = {
 export const CardsHeader: FC<PropsWithChildren<PacksHeaderProps>> = ({ title, children }) => {
   return (
     <StyledPacksHeader>
-      <StyledTitle level={2}>{title}</StyledTitle>
+      <StyledTitle>{title}</StyledTitle>
       {children}
     </StyledPacksHeader>
   )
