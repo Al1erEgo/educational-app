@@ -9,35 +9,44 @@ import { MY_BUTTON_NAME } from '../../../constants'
 import { DeleteModal } from '../components/packs-modal/delete-packs-modal'
 import { EditPacksModal } from '../components/packs-modal/edit-packs-modal'
 import { packsTableColumns } from '../constants'
-import { HandlerPacksFunctionType, PacksTableDataColumnsType, PackType } from '../types'
+import {
+  HandlerPacksFunctionType,
+  PacksTableDataColumnsType,
+  PackType,
+  SetEditModalFunctionType,
+} from '../types'
 
 type GetPacksTableColumnsType = (
   activeButton: string,
   userData: LoginResponseType | undefined,
   handleEdit: HandlerPacksFunctionType,
-  handleDelete: HandlerPacksFunctionType
+  handleDelete: HandlerPacksFunctionType,
+  handleOk: (setEditModal: SetEditModalFunctionType, id?: string, newName?: string) => void
 ) => PacksTableDataColumnsType[]
 
 export const getPacksTableColumns: GetPacksTableColumnsType = (
   activeButton,
   userData,
   handleEdit,
-  handleDelete
+  handleDelete,
+  handleOk
 ) => {
   const [editModal, setEditModal] = useState<{ open: boolean; id?: string; name?: string }>({
     open: false,
   })
 
+  console.log(editModal)
+
   const [deleteModal, setDeleteModal] = useState<{ open: boolean; id?: string }>({
     open: false,
   })
 
-  const handleOk = (id: string, newName?: string) => {
+  /*  const handleOk = (id: string, newName?: string) => {
     if (id) {
       handleEdit({ cardsPack: { _id: id, name: newName } })
       setEditModal(prev => ({ ...prev, open: false, id: undefined, name: newName }))
     }
-  }
+  }*/
 
   const handleDeleteOk = (id: string | undefined) => {
     if (id) {
@@ -85,8 +94,8 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
             <EditPacksModal
               open={editModal.open}
               onCancel={() => setEditModal({ open: false, id: undefined, name: undefined })}
-              onOk={handleOk}
-              initialValue={editModal.name}
+              onOk={(id, name) => handleOk(setEditModal, pack._id, name)}
+              initialValue={pack.name}
               id={editModal.id}
             />
 

@@ -64,13 +64,6 @@ export const usePacksData: UsePacksDataType = () => {
   const isPacksDataLoading = isPacksLoading || isPacksFetching || actionsLoading
   const serverError = cardsPacksQueryError || actionsError
 
-  const packsTableColumns = getPacksTableColumns(
-    packsTableParams.activeButton,
-    userData,
-    packsActions.updatePacks.handlers,
-    packsActions.deletePacks.handlers
-  )
-
   const {
     handlePacksTableChange,
     handlePacksSearch,
@@ -78,7 +71,16 @@ export const usePacksData: UsePacksDataType = () => {
     handleSliderChange,
     handleToggleButton,
     handleClearFilters,
+    handleOk,
   } = usePacksHandlers(setPacksTableParams, packsActions, '')
+
+  const packsTableColumns = getPacksTableColumns(
+    packsTableParams.activeButton,
+    userData,
+    packsActions.updatePacks.handlers,
+    packsActions.deletePacks.handlers,
+    handleOk
+  )
 
   return [
     { handlePacksSearch },

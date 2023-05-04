@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { FilterValue, SorterResult } from 'antd/es/table/interface'
 import { TablePaginationConfig } from 'antd/es/table/InternalTable'
 
@@ -25,3 +27,7 @@ export type HandlePacksTableChangeType = (
 export type HandlePacksSearchType = (searchValue: string) => void
 
 export type ActionsHandlersType = { [key: string]: () => void }
+
+export type SetEditModalFunctionType = React.Dispatch<
+  React.SetStateAction<{ open: boolean; id?: string; name?: string }>
+>
