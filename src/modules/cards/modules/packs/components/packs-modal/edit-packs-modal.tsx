@@ -17,24 +17,26 @@ export const EditPacksModal: FC<PacksModalProps> = ({ open, onCancel, onOk, init
     isPrivate: false,
   })
 
+  console.log('packData', packData)
+
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setPackData(prev => ({ ...prev, name: event.target.value }))
+    setPackData(prevState => ({ ...prevState, name: event.target.value }))
   }
 
   const handleCheckboxChange = (event: CheckboxChangeEvent) => {
-    setPackData(prev => ({ ...prev, isPrivate: event.target.checked }))
+    setPackData(prevState => ({ ...prevState, isPrivate: event.target.checked }))
   }
 
   const handleOk = () => {
     if (id) {
       onOk(id, packData.name)
     }
-    setPackData(prev => ({ ...prev, name: '', isPrivate: false }))
+    setPackData(prevState => ({ ...prevState, name: '', isPrivate: false }))
   }
 
   const handleCancel = () => {
     onCancel()
-    setPackData(prev => ({ ...prev, name: '' }))
+    setPackData(prevState => ({ ...prevState, name: '' }))
   }
 
   return (
