@@ -12,7 +12,7 @@ type PackActionButtonsType = {
 }
 
 export const PackActionsButtons: FC<PackActionButtonsType> = ({ isOwnPack, handlers }) => {
-  const { handleAddCard, handleEditPack, handleDeletePack } = handlers
+  const { handleAddCard, handleEditPack, handleDeletePack, handleLearnPack } = handlers
 
   if (!isOwnPack) {
     return <StyledActionsButton>Learn Pack</StyledActionsButton>
@@ -22,7 +22,7 @@ export const PackActionsButtons: FC<PackActionButtonsType> = ({ isOwnPack, handl
     <Space.Compact>
       <StyledActionsButton onClick={handleEditPack}>Edit Pack</StyledActionsButton>
       <StyledActionsButton onClick={handleDeletePack}>Delete Pack</StyledActionsButton>
-      <StyledActionsButton>Learn Pack</StyledActionsButton>
+      <StyledActionsButton onClick={handleLearnPack}>Learn Pack</StyledActionsButton>
       <StyledActionsButton onClick={handleAddCard}>Add New Card</StyledActionsButton>
     </Space.Compact>
   )
