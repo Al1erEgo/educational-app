@@ -1,4 +1,4 @@
-import { rootApi } from '../../../store/root-api'
+import { rootApi } from '../../../store'
 
 export const cardsApi = rootApi.injectEndpoints({
   endpoints: builder => ({
@@ -132,20 +132,20 @@ export type UpdateCardsPackRequestType = {
   }
 }
 
+export type CardType = {
+  answer: string
+  question: string
+  cardsPack_id: string
+  grade: number
+  shots: number
+  user_id: string
+  created: string
+  updated: string
+  _id: string
+}
+
 export type CardsResponseType = {
-  cards: [
-    {
-      answer: string
-      question: string
-      cardsPack_id: string
-      grade: number
-      shots: number
-      user_id: string
-      created: string
-      updated: string
-      _id: string
-    }
-  ]
+  cards: CardType[]
   cardsTotalCount: number
   maxGrade: number
   minGrade: number
