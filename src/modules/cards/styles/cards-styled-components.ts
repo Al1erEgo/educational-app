@@ -1,5 +1,6 @@
 import { Button, Typography } from 'antd'
 import Title from 'antd/es/typography/Title'
+import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
 const { Text } = Typography
@@ -11,10 +12,14 @@ export const StyledPacksHeader = styled.div`
   margin-bottom: 20px;
 `
 
-export const StyledTitle = styled(Title)`
+export const StyledTitle = styled(Title).attrs({
+  level: 2,
+})`
+  text-align: center;
   margin: 0;
 `
 
+//TODO проверить надо ли оставить лоадинг условие
 export const StyledCardsTitleButton = styled(Button).attrs(props => ({
   type: 'primary',
   htmlType: 'submit',
@@ -37,4 +42,20 @@ export const StyledCardsText = styled(Text)`
   font-size: 14px;
   font-weight: 500;
   line-height: 17px;
+`
+export const StyledBackToCardLink = styled(NavLink)`
+  position: absolute;
+  top: 30px;
+  text-decoration: none;
+  color: black;
+  line-height: 1.5rem;
+  margin-bottom: 20px;
+
+  &:hover {
+    opacity: 0.7;
+  }
+`
+
+export const StyledArrowImg = styled.img`
+  margin-right: 0.5rem;
 `

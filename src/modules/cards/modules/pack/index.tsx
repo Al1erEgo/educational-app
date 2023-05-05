@@ -1,9 +1,6 @@
 import { FC } from 'react'
 
-import arrowBack from '../../../../assets/arrow-back.svg'
-import { MAIN_PATH } from '../../../../constants'
-import { StyledArrowImg, StyledBackToCardLink } from '../../../../styles'
-import { CardsHeader, CardsSearch } from '../../components'
+import { CardsHeader, CardsSearch, BackToCardsButton } from '../../components'
 import { StyledCardsToolbar } from '../../styles'
 
 import { PackActionsButtons, PackTable } from './components'
@@ -14,10 +11,7 @@ export const Pack: FC = () => {
 
   return (
     <>
-      <StyledBackToCardLink to={MAIN_PATH.Cards}>
-        <StyledArrowImg src={arrowBack} alt="arrow-back" />
-        Go to Packs List
-      </StyledBackToCardLink>
+      <BackToCardsButton />
       <CardsHeader title={packName}>
         <PackActionsButtons isOwnPack={isOwnPack} handlers={buttonsHandlers} />
       </CardsHeader>

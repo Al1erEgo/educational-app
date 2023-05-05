@@ -3,6 +3,7 @@ import { Dispatch, SetStateAction } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { MAIN_PATH } from '../../../../../constants'
+import { ABSOLUTE_CARD_PATH } from '../../../constants'
 import {
   MutationsWithConditionsType,
   ButtonsHandlersType,
@@ -43,10 +44,13 @@ export const usePackHandlers: UsePackHandlersType = (setTableParams, packActions
   }
   const handleEditPack = () => updatePack.handler({ cardsPack: { _id: packId } })
 
+  const handleLearnPack = () => navigate(`${ABSOLUTE_CARD_PATH.Learn}/${packId}`)
+
   const buttonsHandlers = {
     handleAddCard,
     handleEditPack,
     handleDeletePack,
+    handleLearnPack,
   }
 
   return { handleTableChange, handleSearch, buttonsHandlers }
