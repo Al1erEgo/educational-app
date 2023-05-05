@@ -2,37 +2,26 @@ import React, { createContext, useContext } from 'react'
 
 import { Modal } from 'antd'
 
-type ModalConfig = {
-  title: string
-  content: React.ReactNode
-  okText: string
-  cancelText: string
+export type ModalConfig = {
+  title?: string
+  content?: React.ReactNode
+  okText?: string
+  cancelText?: string
 }
 
-type ModalContextType = {
-  modalConfig: ModalConfig
-  setModalConfig: any
-}
+type ModalContextType = React.Dispatch<React.SetStateAction<ModalConfig>> | undefined
 
-const ModalContext = createContext<ModalContextType>({
-  modalConfig: {
-    title: '',
-    content: null,
-    okText: '',
-    cancelText: '',
-  },
-  setModalConfig: () => {},
-})
+export const ModalContext = createContext<ModalContextType>(undefined)
 
-const useModalContext = () => useContext(ModalContext)
+export const useModalContext = () => useContext(ModalContext)
 
-type ModalProps = ModalConfig & {
+type CustomModalProps = ModalConfig & {
   open: boolean
   onCancel: () => void
   onOk: () => void
 }
 
-export const CustomModal: React.FC<ModalProps> = ({
+export const CustomModal: React.FC<CustomModalProps> = ({
   title,
   content,
   okText,

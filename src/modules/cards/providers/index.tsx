@@ -1,3 +1,39 @@
+/*import React, { useState } from 'react'
+
+import {
+  CustomModal,
+  ModalConfig,
+  ModalContext,
+} from '../modules/packs/components/packs-modal/custom-modal'
+type ModalProviderProps = {
+  children: React.ReactNode
+}
+
+export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
+  const [modalConfig, setModalConfig] = useState<ModalConfig>({
+    title: '',
+    content: null,
+    okText: '',
+    cancelText: '',
+  })
+
+  const { title, content, okText, cancelText } = modalConfig
+
+  return (
+    <ModalContext.Provider value={setModalConfig}>
+      <CustomModal
+        title={title}
+        content={content}
+        okText={okText}
+        cancelText={cancelText}
+        open={!!title}
+        onCancel={() => setModalConfig({})}
+        onOk={() => setModalConfig({})}
+      />
+      {children}
+    </ModalContext.Provider>
+  )
+}*/
 import React, { createContext, useContext, useState } from 'react'
 
 import { Modal } from 'antd'
@@ -11,7 +47,7 @@ export type ModalConfig = {
 
 type ModalContextType = {
   modalConfig: ModalConfig
-  setModalConfig: any
+  setModalConfig: React.Dispatch<React.SetStateAction<ModalConfig>>
 }
 
 export const ModalContext = createContext<ModalContextType>({
@@ -53,34 +89,3 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
     </ModalContext.Provider>
   )
 }
-
-/*
-import { FC, ReactNode } from 'react'
-
-import {
-  CustomModal,
-  ModalConfig,
-  ModalContext,
-} from '../modules/packs/components/packs-modal/custom-modal'
-
-type ModalProviderProps = {
-  children: ReactNode
-  modalConfig: ModalConfig
-  setModalConfig: (config: ModalConfig) => void
-  restProps: any
-}
-
-export const ModalProvider: FC<ModalProviderProps> = ({
-  children,
-  modalConfig,
-  setModalConfig,
-  restProps,
-}) => {
-  return (
-    <ModalContext.Provider value={{ modalConfig, setModalConfig }}>
-      <CustomModal {...restProps} />
-      {children}
-    </ModalContext.Provider>
-  )
-}
-*/
