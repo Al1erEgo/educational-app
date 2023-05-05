@@ -6,9 +6,10 @@ type DeleteModalProps = {
   open: boolean
   onCancel: () => void
   onOk: () => void
+  packName: string | undefined
 }
 
-export const DeleteModal: FC<DeleteModalProps> = ({ open, onCancel, onOk }) => {
+export const DeleteModal: FC<DeleteModalProps> = ({ open, onCancel, onOk, packName }) => {
   const handleOk = () => {
     onOk()
   }
@@ -31,7 +32,9 @@ export const DeleteModal: FC<DeleteModalProps> = ({ open, onCancel, onOk }) => {
         </Button>,
       ]}
     >
-      <p>Are you sure you want to delete this pack?</p>
+      <p>
+        Are you sure you want to delete the pack <strong>{packName}</strong>?
+      </p>
     </Modal>
   )
 }

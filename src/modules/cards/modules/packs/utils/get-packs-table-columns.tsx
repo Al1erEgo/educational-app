@@ -107,6 +107,7 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
               open={deleteModal.open}
               onCancel={() => setDeleteModal({ open: false, id: undefined })}
               onOk={() => handleDeleteOk(deleteModal.id)}
+              packName={pack.name}
             />
           </Space>
         ) : (
