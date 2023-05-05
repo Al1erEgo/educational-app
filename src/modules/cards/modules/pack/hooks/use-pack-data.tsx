@@ -58,7 +58,8 @@ export const usePackData: UsePackDataType = () => {
   const { handleTableChange, handleSearch, buttonsHandlers } = usePackHandlers(
     setTableParams,
     packMutations,
-    packId
+    packId,
+    packName
   )
 
   return [

@@ -15,14 +15,20 @@ import {
 type UsePackHandlersType = (
   setTableParams: Dispatch<SetStateAction<PackTableParamsType>>,
   packActions: MutationsWithConditionsType,
-  packId: string
+  packId: string,
+  packName: string
 ) => {
   handleTableChange: HandleTableChangeType
   handleSearch: HandleSearchType
   buttonsHandlers: ButtonsHandlersType
 }
 
-export const usePackHandlers: UsePackHandlersType = (setTableParams, packActions, packId) => {
+export const usePackHandlers: UsePackHandlersType = (
+  setTableParams,
+  packActions,
+  packId,
+  packName
+) => {
   const navigate = useNavigate()
   const [{ addCard, updatePack, deletePack }] = packActions
 
@@ -44,7 +50,7 @@ export const usePackHandlers: UsePackHandlersType = (setTableParams, packActions
   }
   const handleEditPack = () => updatePack.handler({ cardsPack: { _id: packId } })
 
-  const handleLearnPack = () => navigate(`${ABSOLUTE_CARD_PATH.Learn}/${packId}`)
+  const handleLearnPack = () => navigate(`${ABSOLUTE_CARD_PATH.Learn}/${packId}?name=${packName}`)
 
   const buttonsHandlers = {
     handleAddCard,

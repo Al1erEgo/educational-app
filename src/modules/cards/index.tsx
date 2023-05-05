@@ -13,16 +13,16 @@ export const Cards = () => {
 
   return (
     <ModalProvider>
-    <Routes>
-      <Route
-        path={CARD_PATH.Root}
-        element={<Navigate to={`${path.pathname}${CARD_PATH.Packs}`} />}
-      />
-      <Route path={`${CARD_PATH.Learn}/:packId`} element={<Learn />} />
-      <Route path={CARD_PATH.Packs} element={<Packs />} />
-      <Route path={CARD_PATH.Pack} element={<Pack />} />
-      <Route path={CARD_PATH.Error} element={<Error404 />} />
-    </Routes>
+      <Routes>
+        <Route
+          path={CARD_PATH.Root}
+          element={<Navigate to={`${path.pathname}${CARD_PATH.Packs}`} />}
+        />
+        <Route path={`${CARD_PATH.Learn}/:packId`} element={<Learn />} />
+        <Route path={CARD_PATH.Packs} element={<Packs />} />
+        <Route path={CARD_PATH.Pack} element={<Pack />} />
+        <Route path={CARD_PATH.Error} element={<Error404 />} />
+      </Routes>
     </ModalProvider>
   )
 }

@@ -1,6 +1,6 @@
 import { LogoutOutlined } from '@ant-design/icons'
 
-import { BackToCardsButton } from '../../../cards/components/back-to-cards-button'
+import { BackToCardsButton } from '../../../cards/components'
 import { ProfileAvatar, ProfileName } from '../../components'
 import { useAuthorised, useAuthMutation } from '../../hooks'
 import { cardHeadStyle, StyledCard } from '../../styles'
