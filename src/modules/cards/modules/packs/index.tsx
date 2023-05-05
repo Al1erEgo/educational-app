@@ -36,13 +36,9 @@ export const Packs = () => {
               content: (
                 <AddNewPacksModal
                   onOk={handleOk}
-                  onCancel={() =>
-                    setModalConfig({ title: '', content: null, cancelText: '', okText: '' })
-                  }
+                  onCancel={() => setModalConfig({ title: '', content: null })}
                 />
               ),
-              okText: 'Save',
-              cancelText: 'Cancel',
             })
           }
         >

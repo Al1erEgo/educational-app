@@ -41,8 +41,6 @@ import { Modal } from 'antd'
 export type ModalConfig = {
   title: string
   content: React.ReactNode
-  okText: string
-  cancelText: string
 }
 
 type ModalContextType = {
@@ -54,8 +52,6 @@ export const ModalContext = createContext<ModalContextType>({
   modalConfig: {
     title: '',
     content: null,
-    okText: '',
-    cancelText: '',
   },
   setModalConfig: () => {},
 })
@@ -70,19 +66,11 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
   const [modalConfig, setModalConfig] = useState<ModalConfig>({
     title: '',
     content: null,
-    okText: '',
-    cancelText: '',
   })
 
   return (
     <ModalContext.Provider value={{ modalConfig, setModalConfig }}>
-      <Modal
-        title={modalConfig.title}
-        open={!!modalConfig.title}
-        footer={null}
-        okText={modalConfig.okText}
-        cancelText={modalConfig.cancelText}
-      >
+      <Modal title={modalConfig.title} open={!!modalConfig.title} footer={null}>
         {modalConfig.content}
       </Modal>
       {children}
