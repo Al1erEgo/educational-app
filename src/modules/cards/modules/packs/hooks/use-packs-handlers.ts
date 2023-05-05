@@ -9,7 +9,6 @@ import {
   HandleToggleButtonType,
   MutationsPackObjType,
   PacksTableParamsType,
-  SetEditModalFunctionType,
 } from '../types'
 
 type UsePacksHandlersType = (
@@ -23,11 +22,12 @@ type UsePacksHandlersType = (
   handleSliderChange: HandleSliderChangeType
   handleToggleButton: HandleToggleButtonType
   handleClearFilters: HandleClearFiltersType
-  handleOk: (setEditModal: SetEditModalFunctionType, id?: string, newName?: string) => void
+  handleOk: (id?: string, newName?: string) => void
+  handleDeleteOk: (id?: string) => void
 }
 
 export const usePacksHandlers: UsePacksHandlersType = (setPacksTableParams, packsActions) => {
-  const { addPacks, updatePacks } = packsActions
+  const { addPacks, updatePacks, deletePacks } = packsActions
   const handlePacksSearch: HandlePacksSearchType = searchValue =>
     setPacksTableParams(prevState => ({ ...prevState, searchValue }))
   const handlePacksTableChange: HandlePacksTableChangeType = (pagination, filters, sorter) => {
@@ -74,10 +74,16 @@ export const usePacksHandlers: UsePacksHandlersType = (setPacksTableParams, pack
     await addPacks.handlers({ cardsPack: { name: name } })
   }
 
-  const handleOk = (setEditModal: SetEditModalFunctionType, id?: string, newName?: string) => {
+  const handleOk = (id?: string, newName?: string) => {
     if (id) {
       updatePacks.handlers({ cardsPack: { _id: id, name: newName } })
-      setEditModal(prevState => ({ ...prevState, open: false, id: undefined, name: newName }))
+      /*setEditModal(prevState => ({ ...prevState, open: false, id: undefined, name: newName }))*/
+    }
+  }
+
+  const handleDeleteOk = (id?: string) => {
+    if (id) {
+      deletePacks.handlers({ id })
     }
   }
 
@@ -89,5 +95,6 @@ export const usePacksHandlers: UsePacksHandlersType = (setPacksTableParams, pack
     handleToggleButton,
     handleClearFilters,
     handleOk,
+    handleDeleteOk,
   }
 }

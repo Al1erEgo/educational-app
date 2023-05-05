@@ -11,9 +11,9 @@ export type ModalConfig = {
 
 type ModalContextType = React.Dispatch<React.SetStateAction<ModalConfig>> | undefined
 
-export const ModalContext = createContext<ModalContextType>(undefined)
+const ModalContext = createContext<ModalContextType>(undefined)
 
-export const useModalContext = () => useContext(ModalContext)
+const useModalContext = () => useContext(ModalContext)
 
 type CustomModalProps = ModalConfig & {
   open: boolean
@@ -21,7 +21,7 @@ type CustomModalProps = ModalConfig & {
   onOk: () => void
 }
 
-export const CustomModal: React.FC<CustomModalProps> = ({
+const CustomModal: React.FC<CustomModalProps> = ({
   title,
   content,
   okText,

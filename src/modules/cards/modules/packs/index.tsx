@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { CardsHeader, CardsSearch } from '../../components'
-import { useModalContext } from '../../providers'
+import { useModalContext } from '../../providers/use-modal'
 import { StyledCardsTitleButton, StyledCardsToolbar } from '../../styles'
 
 import { PacksButton, PacksFilter, PacksSlider, PacksTable } from './components'
@@ -20,28 +20,21 @@ export const Packs = () => {
 
   const { isPacksDataLoading, packsTableParams, data } = packsTableData
 
-  const { setModalConfig } = useModalContext()
-  const handleOk = (name: string, isPrivate?: boolean) => {
-    handleAddNewPack(name)
+  const { showModal } = useModalContext()
+
+  const handleOk = (name: string, isPrivate?: boolean) => handleAddNewPack(name)
+
+  const handleAddNewPackButtonClick = () => {
+    showModal({
+      title: 'Add New Pack',
+      content: <AddNewPacksModal onOk={handleOk} />,
+    })
   }
 
   return (
     <>
       <CardsHeader title={'Packs list'}>
-        <StyledCardsTitleButton
-          loading={isPacksDataLoading}
-          onClick={() =>
-            setModalConfig({
-              title: 'Add New Pack',
-              content: (
-                <AddNewPacksModal
-                  onOk={handleOk}
-                  onCancel={() => setModalConfig({ title: '', content: null })}
-                />
-              ),
-            })
-          }
-        >
+        <StyledCardsTitleButton loading={isPacksDataLoading} onClick={handleAddNewPackButtonClick}>
           Add New Pack
         </StyledCardsTitleButton>
       </CardsHeader>

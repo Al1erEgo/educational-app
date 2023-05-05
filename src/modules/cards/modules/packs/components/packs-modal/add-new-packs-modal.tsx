@@ -3,12 +3,62 @@ import React, { useState } from 'react'
 import { Button, Checkbox, Input } from 'antd'
 import { CheckboxChangeEvent } from 'antd/lib/checkbox'
 
+import { useModalContext } from '../../../../providers/use-modal'
+
 type AddNewPacksModalProps = {
-  onCancel: () => void
   onOk: (name: string, isPrivate?: boolean) => void
 }
 
-export const AddNewPacksModal: React.FC<AddNewPacksModalProps> = ({ onCancel, onOk }) => {
+export const AddNewPacksModal: React.FC<AddNewPacksModalProps> = ({ onOk }) => {
+  const [packData, setPackData] = useState({
+    name: '',
+    isPrivate: false,
+  })
+
+  const { hideModal } = useModalContext()
+
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPackData(prevState => ({ ...prevState, name: event.target.value }))
+  }
+
+  const handleCheckboxChange = (event: CheckboxChangeEvent) => {
+    setPackData(prevState => ({ ...prevState, isPrivate: event.target.checked }))
+  }
+
+  const handleOk = () => {
+    onOk(packData.name, packData.isPrivate)
+    setPackData({ name: '', isPrivate: false })
+    hideModal()
+  }
+
+  const handleCancel = () => {
+    setPackData({ name: '', isPrivate: false })
+    hideModal()
+  }
+
+  return (
+    <>
+      <Input placeholder="Pack Name" value={packData.name} onChange={handleNameChange} />
+      <Checkbox checked={packData.isPrivate} onChange={handleCheckboxChange}>
+        Private Pack
+      </Checkbox>
+
+      <div style={{ marginTop: '16px', textAlign: 'right' }}>
+        <Button onClick={handleCancel}>Cancel</Button>
+        <Button
+          onClick={handleOk}
+          type="primary"
+          disabled={!packData.name}
+          style={{ marginLeft: '8px' }}
+        >
+          Save
+        </Button>
+      </div>
+    </>
+  )
+}
+
+/*export const AddNewPacksModal: React.FC<AddNewPacksModalProps> = ({ onCancel, onOk }) => {
   const [packData, setPackData] = useState<{ name: string; isPrivate: boolean }>({
     name: '',
     isPrivate: false,
@@ -53,7 +103,7 @@ export const AddNewPacksModal: React.FC<AddNewPacksModalProps> = ({ onCancel, on
       </div>
     </>
   )
-}
+}*/
 
 /*
 import { FC, ChangeEvent, useState, useContext } from 'react'

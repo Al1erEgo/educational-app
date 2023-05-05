@@ -1,5 +1,72 @@
 import React, { ChangeEvent, FC, useState } from 'react'
 
+import { Input, Checkbox, Button } from 'antd'
+import { CheckboxChangeEvent } from 'antd/lib/checkbox'
+
+import { useModalContext } from '../../../../providers/use-modal'
+
+type PacksModalProps = {
+  onOk: (id?: string, name?: string) => void
+  initialValue?: string
+  id?: string
+}
+
+export const EditPacksModal: FC<PacksModalProps> = ({ onOk, initialValue, id }) => {
+  const [packData, setPackData] = useState({
+    name: initialValue,
+    isPrivate: false,
+    id: '',
+  })
+
+  const { hideModal } = useModalContext()
+
+  console.log('packDataEdit', packData)
+
+  const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setPackData(prevState => ({ ...prevState, name: event.target.value }))
+  }
+
+  const handleCheckboxChange = (event: CheckboxChangeEvent) => {
+    setPackData(prevState => ({ ...prevState, isPrivate: event.target.checked }))
+  }
+
+  const handleOk = () => {
+    if (id) {
+      onOk(packData.id, packData.name)
+    }
+    setPackData(prevState => ({ ...prevState, name: '', isPrivate: false }))
+    hideModal()
+  }
+
+  const handleCancel = () => {
+    /*setPackData(prevState => ({ ...prevState, name: '' }))*/
+    hideModal()
+  }
+
+  return (
+    <>
+      <Input placeholder="Pack Name" value={packData.name} onChange={handleNameChange} />
+      <Checkbox checked={packData.isPrivate} onChange={handleCheckboxChange}>
+        Private Pack
+      </Checkbox>
+
+      <div style={{ marginTop: '16px', textAlign: 'right' }}>
+        <Button onClick={handleCancel}>Cancel</Button>
+        <Button
+          onClick={handleOk}
+          type="primary"
+          disabled={!packData.name}
+          style={{ marginLeft: '8px' }}
+        >
+          Save
+        </Button>
+      </div>
+    </>
+  )
+}
+
+/*import React, { ChangeEvent, FC, useState } from 'react'
+
 import { Modal, Input, Checkbox, Button } from 'antd'
 import { CheckboxChangeEvent } from 'antd/lib/checkbox'
 
@@ -59,4 +126,4 @@ export const EditPacksModal: FC<PacksModalProps> = ({ open, onCancel, onOk, init
       </Checkbox>
     </Modal>
   )
-}
+}*/
