@@ -1,40 +1,38 @@
 import { FC } from 'react'
 
-import { Button, Space } from 'antd'
-import styled from 'styled-components'
+import { Space } from 'antd'
 
 import { ALL_BUTTON_NAME, MY_BUTTON_NAME } from '../../../../constants'
-import { StyledCardsText, StyledPacksButton } from '../../../../styles'
+import { StyledCardsText } from '../../../../styles'
+import { HandleToggleButtonType } from '../../types'
+
+import { StyledPacksToggleButtonWrapper, StyledToggleButton } from './styles'
 
 type PacksButtonsContainerProps = {
   activeButton: string
-  handleToggleButton: (buttonName: string) => void
+  handleToggleButton: HandleToggleButtonType
 }
 export const PacksButton: FC<PacksButtonsContainerProps> = ({
   activeButton,
   handleToggleButton,
 }) => {
   return (
-    <StyledPacksButton>
+    <StyledPacksToggleButtonWrapper>
       <StyledCardsText>Show packs</StyledCardsText>
       <Space.Compact block>
-        <StyledButton
+        <StyledToggleButton
           type={activeButton === MY_BUTTON_NAME ? 'primary' : 'default'}
           onClick={() => handleToggleButton(MY_BUTTON_NAME)}
         >
           My
-        </StyledButton>
-        <StyledButton
+        </StyledToggleButton>
+        <StyledToggleButton
           type={activeButton === ALL_BUTTON_NAME ? 'primary' : 'default'}
           onClick={() => handleToggleButton(ALL_BUTTON_NAME)}
         >
           All
-        </StyledButton>
+        </StyledToggleButton>
       </Space.Compact>
-    </StyledPacksButton>
+    </StyledPacksToggleButtonWrapper>
   )
 }
-
-const StyledButton = styled(Button)`
-  width: 100px;
-`

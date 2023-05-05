@@ -75,7 +75,6 @@ export const cardsApi = rootApi.injectEndpoints({
 
 export const {
   useCardPacksQuery,
-  useLazyCardPacksQuery,
   useNewCardsPackMutation,
   useDeleteCardsPackMutation,
   useUpdateCardsPackMutation,
@@ -103,7 +102,7 @@ export type CardPacksResponseType = {
   page: number
   pageCount: number
 }
-type CardPacksRequestType = {
+export type CardPacksRequestType = {
   packName?: string
   min?: number
   max?: number
@@ -123,7 +122,7 @@ export type NewCardPacksRequestType = {
 }
 
 export type DeletedCardsPackRequestType = {
-  id: string
+  id?: string
 }
 
 export type UpdateCardsPackRequestType = {

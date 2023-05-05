@@ -1,9 +1,11 @@
 import React, { FC } from 'react'
 
-import { StyledClearFiltersButton } from '../../../../styles'
+import { HandleClearFiltersType } from '../../types'
+
+import { StyledClearFiltersButton } from './styles'
 
 type PacksFilterProps = {
-  clearFilters: () => void
+  clearFilters: HandleClearFiltersType
 }
 export const PacksFilter: FC<PacksFilterProps> = ({ clearFilters }) => {
   return (

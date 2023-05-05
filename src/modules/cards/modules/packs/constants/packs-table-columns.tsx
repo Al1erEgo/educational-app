@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { PacksTableDataType } from '../types'
+import { PacksTableDataColumnsType } from '../types'
 
-export const packsTableColumns: PacksTableDataType[] = [
+export const packsTableColumns: PacksTableDataColumnsType[] = [
   {
     title: 'Cards',
     dataIndex: 'cardsCount',
