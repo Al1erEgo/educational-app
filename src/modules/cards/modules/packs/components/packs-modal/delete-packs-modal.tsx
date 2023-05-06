@@ -4,6 +4,8 @@ import { Button } from 'antd'
 
 import { useModalContext } from '../../../../providers/use-modal'
 
+import { StyledOkButton } from './styles'
+
 type DeleteModalProps = {
   onOk: () => void
   packName?: string
@@ -27,53 +29,8 @@ export const DeleteModal: FC<DeleteModalProps> = ({ onOk, packName }) => {
 
       <div style={{ marginTop: '16px', textAlign: 'right' }}>
         <Button onClick={handleCancel}>Cancel</Button>
-        <Button key="delete" type="primary" danger onClick={handleOk}>
-          Delete
-        </Button>
+        <StyledOkButton onClick={handleOk}>Delete</StyledOkButton>
       </div>
     </>
   )
 }
-
-/*
-import { FC } from 'react'
-
-import { Modal, Button } from 'antd'
-
-type DeleteModalProps = {
-  open: boolean
-  onCancel: () => void
-  onOk: () => void
-  packName: string | undefined
-}
-
-export const DeleteModal: FC<DeleteModalProps> = ({ open, onCancel, onOk, packName }) => {
-  const handleOk = () => {
-    onOk()
-  }
-
-  const handleCancel = () => {
-    onCancel()
-  }
-
-  return (
-    <Modal
-      title="Delete Pack"
-      open={open}
-      onCancel={handleCancel}
-      footer={[
-        <Button key="cancel" onClick={handleCancel}>
-          Cancel
-        </Button>,
-        <Button key="delete" type="primary" danger onClick={handleOk}>
-          Delete
-        </Button>,
-      ]}
-    >
-      <p>
-        Are you sure you want to delete the pack <strong>{packName}</strong>?
-      </p>
-    </Modal>
-  )
-}
-*/
