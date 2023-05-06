@@ -5,7 +5,7 @@ import { Button } from 'antd'
 import { useModalContext } from '../../../../providers/use-modal'
 
 type DeleteModalProps = {
-  onOk: (id?: string) => void
+  onOk: () => void
   packName?: string
 }
 

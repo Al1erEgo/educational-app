@@ -7,20 +7,18 @@ import { useModalContext } from '../../../../providers/use-modal'
 
 type PacksModalProps = {
   onOk: (id?: string, name?: string) => void
-  initialValue?: string
   id?: string
+  packName?: string
 }
 
-export const EditPacksModal: FC<PacksModalProps> = ({ onOk, initialValue, id }) => {
+export const EditPacksModal: FC<PacksModalProps> = ({ onOk, id, packName }) => {
   const [packData, setPackData] = useState({
-    name: initialValue,
+    name: packName,
     isPrivate: false,
-    id: '',
+    id: id,
   })
 
   const { hideModal } = useModalContext()
-
-  console.log('packDataEdit', packData)
 
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     setPackData(prevState => ({ ...prevState, name: event.target.value }))
@@ -34,12 +32,10 @@ export const EditPacksModal: FC<PacksModalProps> = ({ onOk, initialValue, id }) 
     if (id) {
       onOk(packData.id, packData.name)
     }
-    setPackData(prevState => ({ ...prevState, name: '', isPrivate: false }))
     hideModal()
   }
 
   const handleCancel = () => {
-    /*setPackData(prevState => ({ ...prevState, name: '' }))*/
     hideModal()
   }
 

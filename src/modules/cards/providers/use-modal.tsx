@@ -28,6 +28,8 @@ export const useCustomModal = (): ModalContextType => {
     content: null,
   })
 
+  console.log('modalConfig', modalConfig)
+
   const showModal = (config: ModalConfig) => {
     setModalConfig(config)
   }

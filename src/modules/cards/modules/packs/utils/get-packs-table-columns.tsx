@@ -29,7 +29,7 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
   handleOk,
   handleDeleteOk
 ) => {
-  const { showModal } = useModalContext()
+  const { modalConfig, showModal } = useModalContext()
 
   return [
     {
@@ -68,8 +68,9 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
                     title: 'Edit Pack',
                     content: (
                       <EditPacksModal
-                        onOk={(id, name) => handleOk(pack._id, name)}
-                        initialValue={pack.name}
+                        key={pack._id}
+                        onOk={handleOk}
+                        packName={pack.name}
                         id={pack._id}
                       />
                     ),
