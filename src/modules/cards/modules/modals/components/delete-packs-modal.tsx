@@ -2,9 +2,9 @@ import React, { FC } from 'react'
 
 import { Button } from 'antd'
 
-import { useModalContext } from '../../../../providers/use-modal'
+import { useModalContext } from '../hooks'
 
-import { StyledModalButtonsWrapper, StyledOkButton } from './styles'
+import { StyledModalButtonsWrapper, StyledModalOkButton } from './styles'
 
 type DeleteModalProps = {
   onOk: () => void
@@ -29,7 +29,7 @@ export const DeleteModal: FC<DeleteModalProps> = ({ onOk, packName }) => {
 
       <StyledModalButtonsWrapper>
         <Button onClick={handleCancel}>Cancel</Button>
-        <StyledOkButton onClick={handleOk}>Delete</StyledOkButton>
+        <StyledModalOkButton onClick={handleOk}>Delete</StyledModalOkButton>
       </StyledModalButtonsWrapper>
     </>
   )

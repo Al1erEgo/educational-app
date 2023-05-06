@@ -6,8 +6,8 @@ import { NavLink } from 'react-router-dom'
 
 import { LoginResponseType } from '../../../../auth/api/types'
 import { MY_BUTTON_NAME } from '../../../constants'
-import { useModalContext } from '../../../providers/use-modal'
-import { DeleteModal, EditPacksModal } from '../components/packs-modal'
+import { DeleteModal, useModalContext } from '../../modals'
+import { PacksModal } from '../../modals/components/packs-modal'
 import { packsTableColumns } from '../constants'
 import { HandlerPacksFunctionType, PacksTableDataColumnsType, PackType } from '../types'
 
@@ -60,6 +60,7 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
               )}
             </Tooltip>
 
+            {/*
             <Tooltip title="Edit">
               <EditOutlined
                 onClick={() => {
@@ -68,6 +69,26 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
                     content: (
                       <EditPacksModal
                         key={pack._id}
+                        onOk={handleOk}
+                        packName={pack.name}
+                        id={pack._id}
+                      />
+                    ),
+                  })
+                }}
+              />
+            </Tooltip>
+*/}
+
+            <Tooltip title="Edit">
+              <EditOutlined
+                onClick={() => {
+                  showModal({
+                    title: 'Edit Pack',
+                    content: (
+                      <PacksModal
+                        key={pack._id}
+                        editing
                         onOk={handleOk}
                         packName={pack.name}
                         id={pack._id}

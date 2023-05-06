@@ -1,11 +1,11 @@
 import React from 'react'
 
 import { CardsHeader, CardsSearch } from '../../components'
-import { useModalContext } from '../../providers/use-modal'
 import { StyledCardsTitleButton, StyledCardsToolbar } from '../../styles'
+import { useModalContext } from '../modals'
+import { PacksModal } from '../modals/components/packs-modal'
 
 import { PacksButton, PacksFilter, PacksSlider, PacksTable } from './components'
-import { AddNewPacksModal } from './components/packs-modal'
 import { usePacksData } from './hooks'
 
 export const Packs = () => {
@@ -22,12 +22,20 @@ export const Packs = () => {
 
   const { showModal } = useModalContext()
 
-  const handleOk = (name: string, isPrivate?: boolean) => handleAddNewPack(name, isPrivate)
+  const handleOk = (id?: string, name?: string, isPrivate?: boolean) =>
+    handleAddNewPack(id, name, isPrivate)
+
+  /*  const handleAddNewPackButtonClick = () => {
+    showModal({
+      title: 'Add New Pack',
+      content: <AddNewPacksModal onOk={handleOk} />,
+    })
+  }*/
 
   const handleAddNewPackButtonClick = () => {
     showModal({
       title: 'Add New Pack',
-      content: <AddNewPacksModal onOk={handleOk} />,
+      content: <PacksModal onOk={handleOk} />,
     })
   }
 

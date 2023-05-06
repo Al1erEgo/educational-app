@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Modal } from 'antd'
 
-import { useCustomModal, ModalContext } from './use-modal'
+import { useCustomModal, ModalContext } from '../hooks'
 
 type ModalProviderProps = {
   children: React.ReactNode

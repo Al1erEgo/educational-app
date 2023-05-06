@@ -13,7 +13,7 @@ export const StyledModalCheckbox = styled(Checkbox)`
   margin-top: 8px;
 `
 
-export const StyledOkButton = styled(Button).attrs(({ children }) => ({
+export const StyledModalOkButton = styled(Button).attrs(({ children }) => ({
   type: 'primary',
   ...(children === 'Delete' && { key: 'delete', danger: true }),
 }))``

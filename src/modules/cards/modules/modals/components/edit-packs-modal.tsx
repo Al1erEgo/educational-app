@@ -3,9 +3,11 @@ import React, { ChangeEvent, FC, useState } from 'react'
 import { Input, Button } from 'antd'
 import { CheckboxChangeEvent } from 'antd/lib/checkbox'
 
-import { useModalContext } from '../../../../providers/use-modal'
+import { StyledErrorText } from '../../../../auth/styles'
+import { useModalContext } from '../hooks'
+import { validateModalInputNameName } from '../utils/validate-modal-input-name'
 
-import { StyledModalButtonsWrapper, StyledModalCheckbox, StyledOkButton } from './styles'
+import { StyledModalButtonsWrapper, StyledModalCheckbox, StyledModalOkButton } from './styles'
 
 type PacksModalProps = {
   onOk: (id?: string, name?: string) => void
@@ -22,16 +24,30 @@ export const EditPacksModal: FC<PacksModalProps> = ({ onOk, id, packName }) => {
 
   const { hideModal } = useModalContext()
 
+  const [error, setError] = useState('')
+
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setPackData(prevState => ({ ...prevState, name: event.target.value }))
+    const inputName = event.target.value
+
+    const nameError = validateModalInputNameName(inputName)
+
+    setError(nameError)
+    setPackData({ ...packData, name: inputName })
   }
 
   const handleCheckboxChange = (event: CheckboxChangeEvent) => {
     setPackData(prevState => ({ ...prevState, isPrivate: event.target.checked }))
   }
 
-  const handleOk = () => {
-    id && onOk(packData.id, packData.name)
+  const handleSave = () => {
+    const nameError = validateModalInputNameName(packData.name)
+
+    if (nameError) {
+      setError(nameError)
+
+      return
+    }
+    id && onOk(packData.id, packData.name?.trim())
     hideModal()
   }
 
@@ -40,6 +56,7 @@ export const EditPacksModal: FC<PacksModalProps> = ({ onOk, id, packName }) => {
   return (
     <>
       <Input placeholder="Pack Name" value={packData.name} onChange={handleNameChange} />
+      {error && <StyledErrorText>{error}</StyledErrorText>}
 
       <StyledModalCheckbox checked={packData.isPrivate} onChange={handleCheckboxChange}>
         Private Pack
@@ -47,9 +64,9 @@ export const EditPacksModal: FC<PacksModalProps> = ({ onOk, id, packName }) => {
 
       <StyledModalButtonsWrapper>
         <Button onClick={handleCancel}>Cancel</Button>
-        <StyledOkButton onClick={handleOk} disabled={!packData.name}>
+        <StyledModalOkButton onClick={handleSave} disabled={!packData.name}>
           Save
-        </StyledOkButton>
+        </StyledModalOkButton>
       </StyledModalButtonsWrapper>
     </>
   )

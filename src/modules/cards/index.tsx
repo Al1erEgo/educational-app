@@ -5,9 +5,9 @@ import { Navigate, Route, Routes, useResolvedPath } from 'react-router-dom'
 import { Error404 } from '../../components'
 
 import { CARD_PATH } from './constants'
+import { ModalProvider } from './modules/modals'
 import { Pack } from './modules/pack'
 import { Packs } from './modules/packs'
-import { ModalProvider } from './providers'
 
 export const Cards = () => {
   const path = useResolvedPath('')
