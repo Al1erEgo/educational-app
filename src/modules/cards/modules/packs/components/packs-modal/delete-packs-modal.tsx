@@ -4,7 +4,7 @@ import { Button } from 'antd'
 
 import { useModalContext } from '../../../../providers/use-modal'
 
-import { StyledOkButton } from './styles'
+import { StyledModalButtonsWrapper, StyledOkButton } from './styles'
 
 type DeleteModalProps = {
   onOk: () => void
@@ -27,10 +27,10 @@ export const DeleteModal: FC<DeleteModalProps> = ({ onOk, packName }) => {
         Are you sure you want to delete the pack <strong>{packName}</strong>?
       </p>
 
-      <div style={{ marginTop: '16px', textAlign: 'right' }}>
+      <StyledModalButtonsWrapper>
         <Button onClick={handleCancel}>Cancel</Button>
         <StyledOkButton onClick={handleOk}>Delete</StyledOkButton>
-      </div>
+      </StyledModalButtonsWrapper>
     </>
   )
 }

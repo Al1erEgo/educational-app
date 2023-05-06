@@ -76,7 +76,6 @@ export const usePacksHandlers: UsePacksHandlersType = (setPacksTableParams, pack
 
   const handleOk = (id?: string, newName?: string) => {
     if (id) {
-      console.log('id', id, 'newName', newName)
       updatePacks.handlers({ cardsPack: { _id: id, name: newName } })
     }
   }

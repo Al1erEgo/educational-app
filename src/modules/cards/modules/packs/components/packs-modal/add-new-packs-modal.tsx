@@ -5,7 +5,7 @@ import { CheckboxChangeEvent } from 'antd/lib/checkbox'
 
 import { useModalContext } from '../../../../providers/use-modal'
 
-import { StyledModalCheckbox, StyledOkButton } from './styles'
+import { StyledModalButtonsWrapper, StyledModalCheckbox, StyledOkButton } from './styles'
 
 type AddNewPacksModalProps = {
   onOk: (name: string, isPrivate?: boolean) => void
@@ -41,16 +41,17 @@ export const AddNewPacksModal: React.FC<AddNewPacksModalProps> = ({ onOk }) => {
   return (
     <>
       <Input placeholder="Pack Name" value={packData.name} onChange={handleNameChange} />
+
       <StyledModalCheckbox checked={packData.isPrivate} onChange={handleCheckboxChange}>
         Private Pack
       </StyledModalCheckbox>
 
-      <div style={{ marginTop: '16px', textAlign: 'right' }}>
+      <StyledModalButtonsWrapper>
         <Button onClick={handleCancel}>Cancel</Button>
         <StyledOkButton onClick={handleOk} disabled={!packData.name}>
           Save
         </StyledOkButton>
-      </div>
+      </StyledModalButtonsWrapper>
     </>
   )
 }
