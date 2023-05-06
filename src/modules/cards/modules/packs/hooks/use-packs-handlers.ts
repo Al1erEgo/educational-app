@@ -70,8 +70,8 @@ export const usePacksHandlers: UsePacksHandlersType = (setPacksTableParams, pack
     handleClearFilters()
   }
 
-  const handleAddNewPack = async (name: string) => {
-    await addPacks.handlers({ cardsPack: { name: name } })
+  const handleAddNewPack = async (name: string, isPrivate?: boolean) => {
+    await addPacks.handlers({ cardsPack: { name: name, private: isPrivate } })
   }
 
   const handleOk = (id?: string, newName?: string) => {

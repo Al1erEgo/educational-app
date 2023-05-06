@@ -22,7 +22,7 @@ export const Packs = () => {
 
   const { showModal } = useModalContext()
 
-  const handleOk = (name: string, isPrivate?: boolean) => handleAddNewPack(name)
+  const handleOk = (name: string, isPrivate?: boolean) => handleAddNewPack(name, isPrivate)
 
   const handleAddNewPackButtonClick = () => {
     showModal({
