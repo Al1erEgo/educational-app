@@ -5,7 +5,7 @@ import { CardsHeader, CardsSearch } from '../../components'
 import { StyledCardsTitleButton, StyledCardsToolbar } from '../../styles'
 
 import { PacksButton, PacksFilter, PacksSlider, PacksTable } from './components'
-import { PacksModal } from './components/packs-modals/packs-modal'
+import { PacksModal } from './components/packs-modals'
 import { usePacksData } from './hooks'
 
 export const Packs = () => {
@@ -24,13 +24,6 @@ export const Packs = () => {
 
   const handleOk = (id?: string, name?: string, isPrivate?: boolean) =>
     handleAddNewPack(id, name, isPrivate)
-
-  /*  const handleAddNewPackButtonClick = () => {
-    showModal({
-      title: 'Add New Pack',
-      content: <AddNewPacksModal onOk={handleOk} />,
-    })
-  }*/
 
   const handleAddNewPackButtonClick = () => {
     showModal({

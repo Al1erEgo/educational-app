@@ -24,9 +24,6 @@ export const PacksModal: FC<PacksModalProps> = ({ onOk, editing, id, packName, i
     isPrivate,
   })
 
-  console.log('packData.name', packData.name)
-  console.log('packName', packData.name)
-
   const { hideModal } = useModalContext()
 
   const [error, setError] = useState('')
