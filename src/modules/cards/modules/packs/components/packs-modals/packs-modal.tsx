@@ -19,9 +19,9 @@ type PacksModalProps = {
 
 export const PacksModal: FC<PacksModalProps> = ({ onOk, editing, id, packName, isPrivate }) => {
   const [packData, setPackData] = useState({
-    id: id,
+    id,
     name: packName || '',
-    isPrivate: isPrivate,
+    isPrivate,
   })
 
   console.log('packData.name', packData.name)
@@ -89,7 +89,7 @@ export const PacksModal: FC<PacksModalProps> = ({ onOk, editing, id, packName, i
     } else {
       hideModal()
     }
-  }, [setPackData, packName])
+  }, [setPackData, packName, isPrivate])
 
   return (
     <>
