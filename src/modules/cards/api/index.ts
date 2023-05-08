@@ -37,6 +37,7 @@ export const cardsApi = rootApi.injectEndpoints({
         method: 'PUT',
         body: requestData,
       }),
+      invalidatesTags: ['packs'],
     }),
     cardsPack: builder.query<CardsResponseType, CardsRequestType>({
       query: (params: CardsRequestType) => ({
