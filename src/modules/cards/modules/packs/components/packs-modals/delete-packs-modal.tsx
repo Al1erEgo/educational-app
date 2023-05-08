@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 
 import { Button } from 'antd'
 
-import { useModalContext } from '../hooks'
+import { useModalContext } from '../../../../../modal-provider/hooks'
 
 import { StyledModalButtonsWrapper, StyledModalOkButton } from './styles'
 

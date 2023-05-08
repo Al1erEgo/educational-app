@@ -1,11 +1,11 @@
-import React, { ChangeEvent, FC, useState } from 'react'
+import React, { ChangeEvent, FC, useCallback, useState } from 'react'
 
 import { Input, Button } from 'antd'
 import { CheckboxChangeEvent } from 'antd/lib/checkbox'
 
-import { StyledErrorText } from '../../../../auth/styles'
-import { useModalContext } from '../hooks'
-import { validateModalInputNameName } from '../utils/validate-modal-input-name'
+import { StyledErrorText } from '../../../../../auth/styles'
+import { useModalContext } from '../../../../../modal-provider/hooks'
+import { validateModalInputName } from '../../../../../modal-provider/utils'
 
 import { StyledModalButtonsWrapper, StyledModalCheckbox, StyledModalOkButton } from './styles'
 
@@ -19,29 +19,38 @@ type PacksModalProps = {
 
 export const PacksModal: FC<PacksModalProps> = ({ onOk, editing, id, packName, isPrivate }) => {
   const [packData, setPackData] = useState({
+    id: id,
     name: packName || '',
-    isPrivate: isPrivate || false,
-    id: id || '',
+    isPrivate: isPrivate,
   })
+
+  console.log('packData.name', packData.name)
+  console.log('packName', packData.name)
 
   const { hideModal } = useModalContext()
 
   const [error, setError] = useState('')
 
+  const isDisabled =
+    (!packData.id && packData.name.trim().length === 0) ||
+    (packData.id && packData.name === packName && packData.isPrivate === isPrivate) ||
+    packData.name.length > 100
+
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     const inputName = event.target.value
 
-    const nameError = validateModalInputNameName(inputName)
+    const nameError = validateModalInputName(inputName)
 
     setError(nameError)
-    setPackData({ ...packData, name: inputName })
+    setPackData(prevState => ({ ...prevState, name: inputName }))
   }
 
   const handleCheckboxChange = (event: CheckboxChangeEvent) => {
     setPackData(prevState => ({ ...prevState, isPrivate: event.target.checked }))
   }
+
   const handleSave = () => {
-    const nameError = validateModalInputNameName(packData.name)
+    const nameError = validateModalInputName(packData.name)
 
     if (nameError) {
       setError(nameError)
@@ -51,22 +60,36 @@ export const PacksModal: FC<PacksModalProps> = ({ onOk, editing, id, packName, i
 
     if (editing) {
       onOk(packData.id, packData.name.trim(), packData.isPrivate)
+      setPackData(prevState => ({
+        ...prevState,
+        name: packData.name.trim(),
+        isPrivate: packData.isPrivate,
+        id: packData.id,
+      }))
     } else {
       onOk(undefined, packData.name.trim(), packData.isPrivate)
+      setPackData(prevState => ({
+        ...prevState,
+        name: '',
+        isPrivate: false,
+        id: '',
+      }))
     }
-
-    setPackData({ name: '', isPrivate: false, id: '' })
     hideModal()
   }
 
-  const handleCancel = () => {
+  const handleCancel = useCallback(() => {
     if (editing) {
+      setPackData(prevState => ({
+        name: packData.name.trim(),
+        isPrivate: packData.isPrivate,
+        id: packData.id,
+      }))
       hideModal()
     } else {
-      setPackData({ id: '', name: '', isPrivate: false })
       hideModal()
     }
-  }
+  }, [setPackData, packName])
 
   return (
     <>
@@ -79,7 +102,7 @@ export const PacksModal: FC<PacksModalProps> = ({ onOk, editing, id, packName, i
 
       <StyledModalButtonsWrapper>
         <Button onClick={handleCancel}>Cancel</Button>
-        <StyledModalOkButton onClick={handleSave} disabled={!packData.name}>
+        <StyledModalOkButton onClick={handleSave} disabled={isDisabled}>
           Save
         </StyledModalOkButton>
       </StyledModalButtonsWrapper>

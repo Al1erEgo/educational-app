@@ -1,11 +1,11 @@
 import React from 'react'
 
+import { useModalContext } from '../../../modal-provider/hooks'
 import { CardsHeader, CardsSearch } from '../../components'
 import { StyledCardsTitleButton, StyledCardsToolbar } from '../../styles'
-import { useModalContext } from '../modals'
-import { PacksModal } from '../modals/components/packs-modal'
 
 import { PacksButton, PacksFilter, PacksSlider, PacksTable } from './components'
+import { PacksModal } from './components/packs-modals/packs-modal'
 import { usePacksData } from './hooks'
 
 export const Packs = () => {

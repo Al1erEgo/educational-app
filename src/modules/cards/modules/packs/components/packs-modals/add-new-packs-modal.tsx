@@ -1,38 +1,35 @@
-import React, { ChangeEvent, FC, useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 
-import { Input, Button } from 'antd'
+import { Button, Input } from 'antd'
 import { CheckboxChangeEvent } from 'antd/lib/checkbox'
 
-import { StyledErrorText } from '../../../../auth/styles'
-import { useModalContext } from '../hooks'
-import { validateModalInputNameName } from '../utils/validate-modal-input-name'
+import { StyledErrorText } from '../../../../../auth/styles'
+import { useModalContext } from '../../../../../modal-provider/hooks'
+import { validateModalInputName } from '../../../../../modal-provider/utils'
 
 import { StyledModalButtonsWrapper, StyledModalCheckbox, StyledModalOkButton } from './styles'
 
-type PacksModalProps = {
-  onOk: (id?: string, name?: string) => void
-  id?: string
-  packName?: string
+type AddNewPacksModalProps = {
+  onOk: (name: string, isPrivate?: boolean) => void
 }
 
-export const EditPacksModal: FC<PacksModalProps> = ({ onOk, id, packName }) => {
+export const AddNewPacksModal: React.FC<AddNewPacksModalProps> = ({ onOk }) => {
   const [packData, setPackData] = useState({
-    name: packName,
+    name: '',
     isPrivate: false,
-    id: id,
   })
-
-  const { hideModal } = useModalContext()
 
   const [error, setError] = useState('')
 
-  const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const inputName = event.target.value
+  const { hideModal } = useModalContext()
 
-    const nameError = validateModalInputNameName(inputName)
+  const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const inputPackName = event.target.value
+
+    const nameError = validateModalInputName(inputPackName)
 
     setError(nameError)
-    setPackData({ ...packData, name: inputName })
+    setPackData({ ...packData, name: inputPackName })
   }
 
   const handleCheckboxChange = (event: CheckboxChangeEvent) => {
@@ -40,18 +37,23 @@ export const EditPacksModal: FC<PacksModalProps> = ({ onOk, id, packName }) => {
   }
 
   const handleSave = () => {
-    const nameError = validateModalInputNameName(packData.name)
+    const nameError = validateModalInputName(packData.name)
 
     if (nameError) {
       setError(nameError)
 
       return
     }
-    id && onOk(packData.id, packData.name?.trim())
+
+    onOk(packData.name.trim(), packData.isPrivate)
+    setPackData({ name: '', isPrivate: false })
     hideModal()
   }
 
-  const handleCancel = () => hideModal()
+  const handleCancel = () => {
+    setPackData({ name: '', isPrivate: false })
+    hideModal()
+  }
 
   return (
     <>

@@ -16,6 +16,7 @@ export type PackType = {
   created?: string
   updated?: string
   user_name?: string
+  isPrivate?: boolean
 }
 
 export type PacksTableDataColumnsType = {

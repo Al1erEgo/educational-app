@@ -5,9 +5,10 @@ import { Space, Tooltip } from 'antd'
 import { NavLink } from 'react-router-dom'
 
 import { LoginResponseType } from '../../../../auth/api/types'
+import { useModalContext } from '../../../../modal-provider/hooks'
 import { MY_BUTTON_NAME } from '../../../constants'
-import { DeleteModal, useModalContext } from '../../modals'
-import { PacksModal } from '../../modals/components/packs-modal'
+import { DeleteModal } from '../components/packs-modals'
+import { PacksModal } from '../components/packs-modals/packs-modal'
 import { packsTableColumns } from '../constants'
 import { HandlerPacksFunctionType, PacksTableDataColumnsType, PackType } from '../types'
 
@@ -60,8 +61,7 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
               )}
             </Tooltip>
 
-            {/*
-            <Tooltip title="Edit">
+            {/*            <Tooltip title="Edit">
               <EditOutlined
                 onClick={() => {
                   showModal({
@@ -77,8 +77,7 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
                   })
                 }}
               />
-            </Tooltip>
-*/}
+            </Tooltip>*/}
 
             <Tooltip title="Edit">
               <EditOutlined
@@ -92,6 +91,7 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
                         onOk={handleOk}
                         packName={pack.name}
                         id={pack._id}
+                        isPrivate={pack.isPrivate}
                       />
                     ),
                   })

@@ -92,6 +92,7 @@ export type CardsPackType = {
   created: string
   updated: string
   user_name: string
+  private: boolean
 }
 
 export type CardPacksResponseType = {

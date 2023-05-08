@@ -22,7 +22,7 @@ type UsePacksHandlersType = (
   handleSliderChange: HandleSliderChangeType
   handleToggleButton: HandleToggleButtonType
   handleClearFilters: HandleClearFiltersType
-  handleOk: (id?: string, newName?: string) => void
+  handleOk: (id?: string, newName?: string, isPrivate?: boolean) => void
   handleDeleteOk: (id?: string) => void
 }
 
@@ -74,9 +74,9 @@ export const usePacksHandlers: UsePacksHandlersType = (setPacksTableParams, pack
     await addPacks.handlers({ cardsPack: { name: name, private: isPrivate } })
   }
 
-  const handleOk = (id?: string, newName?: string) => {
+  const handleOk = (id?: string, newName?: string, isPrivate?: boolean) => {
     if (id) {
-      updatePacks.handlers({ cardsPack: { _id: id, name: newName } })
+      updatePacks.handlers({ cardsPack: { _id: id, name: newName, private: isPrivate } })
     }
   }
 
