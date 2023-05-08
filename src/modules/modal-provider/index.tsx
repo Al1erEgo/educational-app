@@ -17,6 +17,7 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
         open={!!modalConfig.title}
         footer={null}
         onCancel={hideModal}
+        destroyOnClose
       >
         {modalConfig.content}
       </Modal>

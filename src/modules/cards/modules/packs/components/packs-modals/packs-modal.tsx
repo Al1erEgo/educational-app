@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useCallback, useState } from 'react'
+import React, { ChangeEvent, FC, useState } from 'react'
 
 import { Input, Button } from 'antd'
 import { CheckboxChangeEvent } from 'antd/lib/checkbox'
@@ -68,18 +68,21 @@ export const PacksModal: FC<PacksModalProps> = ({ onOk, editing, id, packName, i
     hideModal()
   }
 
-  const handleCancel = useCallback(() => {
-    if (editing) {
-      setPackData({ id: packData.id, name: packData.name.trim(), isPrivate: packData.isPrivate })
-      hideModal()
-    } else {
-      hideModal()
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleSave()
     }
-  }, [packName, isPrivate])
+  }
+  const handleCancel = () => hideModal()
 
   return (
     <>
-      <Input placeholder="Pack Name" value={packData.name} onChange={handleNameChange} />
+      <Input
+        placeholder="Pack Name"
+        value={packData.name}
+        onChange={handleNameChange}
+        onKeyDown={handleKeyDown}
+      />
       {error && <StyledErrorText>{error}</StyledErrorText>}
 
       <StyledModalCheckbox checked={packData.isPrivate} onChange={handleCheckboxChange}>
