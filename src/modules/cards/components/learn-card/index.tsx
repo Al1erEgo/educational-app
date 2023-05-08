@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 const { Text } = Typography
 
 import { Skeleton, Typography } from 'antd'
@@ -12,7 +12,9 @@ type LearnCardType = {
 }
 
 export const LearnCard: FC<LearnCardType> = ({ cardData, isLoading }) => {
-  console.log(isLoading)
+  const [showAnswer, setShowAnswer] = useState<boolean>(false)
+
+  const handleShowAnswer = () => setShowAnswer(true)
 
   return (
     <Skeleton active loading={isLoading} rows={5}>
@@ -22,7 +24,12 @@ export const LearnCard: FC<LearnCardType> = ({ cardData, isLoading }) => {
           {cardData?.question}
         </div>
         <Text type="secondary">Количество попыток ответа на вопрос: {cardData?.shots}</Text>
-        <StyledLearnButton>Show answer</StyledLearnButton>
+        {/*TODO Выделить в отдельную компоненту*/}
+        {showAnswer ? (
+          <Text disabled={!showAnswer}>{cardData?.answer}</Text>
+        ) : (
+          <StyledLearnButton onClick={handleShowAnswer}>Show answer</StyledLearnButton>
+        )}
       </StyledLearnCard>
     </Skeleton>
   )
