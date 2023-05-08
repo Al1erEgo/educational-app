@@ -60,36 +60,22 @@ export const PacksModal: FC<PacksModalProps> = ({ onOk, editing, id, packName, i
 
     if (editing) {
       onOk(packData.id, packData.name.trim(), packData.isPrivate)
-      setPackData(prevState => ({
-        ...prevState,
-        name: packData.name.trim(),
-        isPrivate: packData.isPrivate,
-        id: packData.id,
-      }))
+      setPackData({ id: packData.id, name: packData.name.trim(), isPrivate: packData.isPrivate })
     } else {
       onOk(undefined, packData.name.trim(), packData.isPrivate)
-      setPackData(prevState => ({
-        ...prevState,
-        name: '',
-        isPrivate: false,
-        id: '',
-      }))
+      setPackData({ id: '', name: '', isPrivate: false })
     }
     hideModal()
   }
 
   const handleCancel = useCallback(() => {
     if (editing) {
-      setPackData(prevState => ({
-        name: packData.name.trim(),
-        isPrivate: packData.isPrivate,
-        id: packData.id,
-      }))
+      setPackData({ id: packData.id, name: packData.name.trim(), isPrivate: packData.isPrivate })
       hideModal()
     } else {
       hideModal()
     }
-  }, [setPackData, packName, isPrivate])
+  }, [packName, isPrivate])
 
   return (
     <>
