@@ -51,7 +51,7 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
         const hasCards = pack.cardsCount ? pack.cardsCount > 0 : false
 
         const learnAction = hasCards ? (
-          <NavLink to={`/cards/learn/${pack._id}`}>
+          <NavLink to={`/cards/learn/${pack._id}?name=${pack.name}`}>
             <InfoCircleTwoTone />
           </NavLink>
         ) : (
