@@ -5,7 +5,7 @@ import { CheckboxChangeEvent } from 'antd/lib/checkbox'
 
 import { StyledErrorText } from '../../../../../auth/styles'
 import { useModalContext } from '../../../../../modal-provider/hooks'
-import { validateModalInputName } from '../../../../../modal-provider/utils'
+import { validateModalInputName } from '../../utils'
 
 import { StyledModalButtonsWrapper, StyledModalCheckbox, StyledModalOkButton } from './styles'
 
