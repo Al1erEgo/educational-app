@@ -2,12 +2,7 @@ import { FC, useEffect, useState } from 'react'
 
 import { useParams, useSearchParams } from 'react-router-dom'
 
-import {
-  CardType,
-  UpdateCardGradeRequestType,
-  useCardsPackQuery,
-  useUpdateCardGradeMutation,
-} from '../../api'
+import { CardType, useCardsPackQuery, useUpdateCardGradeMutation } from '../../api'
 import { BackToCardsButton, LearnCard } from '../../components'
 import { StyledTitle } from '../../styles'
 
@@ -20,6 +15,7 @@ export const Learn: FC = () => {
 
   const [currentCard, setCurrentCard] = useState<number>(0)
   const [sortedCards, setSortedCards] = useState<CardType[] | undefined>()
+  const [rate, setRate] = useState(3)
 
   const {
     data,
@@ -36,10 +32,16 @@ export const Learn: FC = () => {
   const [updateGrade, { isLoading: isUpdateGradeLoading, error: updateGradeError }] =
     useUpdateCardGradeMutation()
 
-  const handleLearnCard = (newGradeData: UpdateCardGradeRequestType) => {
-    updateGrade(newGradeData)
+  const handleNextCard = () => {
+    updateGrade({ grade: rate, card_id: _id })
     setCurrentCard(currentCard + 1)
+    setRate(3)
   }
+
+  const cardData = sortedCards && sortedCards[currentCard]
+  const isLoading = isPackLoading || isUpdateGradeLoading || !sortedCards
+  const isSuccess = currentCard === sortedCards?.length
+  const error = packLoadingError || updateGradeError
 
   useEffect(() => {
     if (data) {
@@ -52,10 +54,13 @@ export const Learn: FC = () => {
       <BackToCardsButton />
       <StyledTitle>{packName}</StyledTitle>
       <LearnCard
-        cardData={sortedCards && sortedCards[currentCard]}
-        isLoading={isPackLoading || isUpdateGradeLoading || !sortedCards}
-        handleLearnCard={handleLearnCard}
-        isSuccess={currentCard === sortedCards?.length}
+        error={error}
+        cardData={cardData}
+        isLoading={isLoading}
+        isSuccess={isSuccess}
+        handleNextCard={handleNextCard}
+        rate={rate}
+        setRate={setRate}
       />
     </>
   )

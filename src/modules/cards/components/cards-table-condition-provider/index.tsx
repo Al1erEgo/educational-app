@@ -3,18 +3,27 @@ import React, { FC, PropsWithChildren } from 'react'
 import { Skeleton } from 'antd'
 
 import { ErrorServerHandler } from '../../../../components'
-import { TableDataType } from '../../types'
+import { TableErrorType } from '../../types'
 
-type CardsTableConditionProviderType = Pick<TableDataType, 'serverError' | 'isPackDataLoading'>
+type CardsConditionProviderType = {
+  error: TableErrorType
+  isLoading: boolean
+  type: 'card' | 'table'
+}
 
-export const CardsTableConditionProvider: FC<
-  PropsWithChildren<CardsTableConditionProviderType>
-> = ({ children, isPackDataLoading, serverError }) => {
-  if (isPackDataLoading) {
-    return <Skeleton paragraph={{ rows: 10 }} active />
+export const CardsConditionProvider: FC<PropsWithChildren<CardsConditionProviderType>> = ({
+  children,
+  isLoading,
+  error,
+  type,
+}) => {
+  const skeletonRows = type === 'card' ? 5 : 10
+
+  if (isLoading) {
+    return <Skeleton paragraph={{ rows: skeletonRows }} active />
   }
-  if (serverError) {
-    return <ErrorServerHandler error={serverError} />
+  if (error) {
+    return <ErrorServerHandler error={error} />
   }
 
   return <>{children}</>

@@ -60,6 +60,17 @@ export const StyledArrowImg = styled.img`
   margin-right: 0.5rem;
 `
 
+export const StyledLearnCardButton = styled(Button).attrs({
+  type: 'primary',
+  htmlType: 'submit',
+  size: 'large',
+})`
+  font-weight: 500;
+  margin-left: 10px;
+  width: 18rem;
+  align-self: center;
+`
+
 export const StyledLearnCard = styled.div`
   display: flex;
   flex-direction: column;
@@ -70,15 +81,4 @@ export const StyledLearnCard = styled.div`
   gap: 1rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-`
-
-export const StyledLearnButton = styled(Button).attrs({
-  type: 'primary',
-  htmlType: 'submit',
-  size: 'large',
-})`
-  font-weight: 500;
-  margin-left: 10px;
-  width: 18rem;
-  align-self: center;
 `
