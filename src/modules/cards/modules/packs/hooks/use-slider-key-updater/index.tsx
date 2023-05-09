@@ -20,12 +20,22 @@ export const useSliderKeyUpdater = (
   maxCardsCount: number,
   state: PacksTableParamsType
 ) => {
+  /**
+   * The current slider key.
+   * @type {number}
+   */
   const [sliderKey, setSliderKey] = useState(0)
 
+  /**
+   * Updates the slider key whenever the minimum or maximum card count changes.
+   */
   useEffect(() => {
     setSliderKey(prevState => prevState + 1)
   }, [minCardsCount, maxCardsCount])
 
+  /**
+   * Resets the slider key to 0 if the minimum and maximum card counts are both null.
+   */
   useEffect(() => {
     if (!state.minCardsCount && !state.maxCardsCount) {
       setSliderKey(prevState => prevState + 1)

@@ -19,8 +19,10 @@ import React, { useState } from 'react'
 import { ModalConfig, ModalContextType } from '../types/types'
 
 /**
- * A custom React hook for managing modal state.
- * @returns {ModalContextType} An object containing the current modal configuration, as well as functions to show and hide the modal.
+ A custom React hook for managing modal state.
+
+ @returns {ModalContextType} An object containing the current modal configuration,
+ as well as functions to show and hide the modal.
  */
 export const useCustomModal = (): ModalContextType => {
   /**
