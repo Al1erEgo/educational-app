@@ -1,4 +1,3 @@
 export * from './paths'
-
-export const MY_BUTTON_NAME = 'My'
-export const ALL_BUTTON_NAME = 'All'
+export * from './rate-descriptions'
+export * from './cards-packs-buttons-names'
