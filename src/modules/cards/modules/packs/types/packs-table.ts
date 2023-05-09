@@ -16,6 +16,7 @@ export type PackType = {
   created?: string
   updated?: string
   user_name?: string
+  isPrivate?: boolean
 }
 
 export type PacksTableDataColumnsType = {
@@ -45,7 +46,11 @@ export type PacksTableDataType = {
   serverError: PacksTableErrorType
 }
 
-export type HandleAddNewPackType = (name: string) => void | Promise<void>
+export type HandleAddNewPackType = (
+  id?: string,
+  name?: string,
+  isPrivate?: boolean
+) => void | Promise<void>
 
 export type HandleSliderChangeType = (value: number | [number, number]) => void
 

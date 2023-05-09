@@ -15,6 +15,7 @@ export const getFormattedPacksTableData: getFormattedPacksTableDataType = data =
     created: new Date(pack.created).toLocaleDateString('ru-RU'),
     updated: new Date(pack.updated).toLocaleDateString('ru-RU'),
     user_name: pack.user_name,
+    isPrivate: pack.private,
   }))
 
   return formattedPacksTableData
