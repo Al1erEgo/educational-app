@@ -1,8 +1,5 @@
 import { FC, useState } from 'react'
 
-import { useNavigate } from 'react-router-dom'
-
-import { MAIN_PATH } from '../../../../constants'
 import { CardType } from '../../api'
 import {
   LearnCardSuccess,
@@ -14,10 +11,11 @@ import { StyledLearnCardButton, StyledLearnCard } from '../../styles'
 
 type LearnCardType = {
   error: unknown
-  cardData: CardType | undefined
+  cardData?: CardType
   isLoading: boolean
   isSuccess: boolean
   handleNextCard: () => void
+  handleSuccess: () => void
   rate: number
   setRate: () => void
 }
@@ -28,6 +26,7 @@ export const LearnCard: FC<LearnCardType> = ({
   isLoading,
   isSuccess,
   handleNextCard,
+  handleSuccess,
   rate,
   setRate,
 }) => {
@@ -35,15 +34,12 @@ export const LearnCard: FC<LearnCardType> = ({
 
   const [showAnswer, setShowAnswer] = useState<boolean>(false)
 
-  const navigate = useNavigate()
-
   const handleShowAnswer = () => setShowAnswer(true)
-  const handleNavigateToCards = () => navigate(MAIN_PATH.Cards)
 
   const learnCardButtonName = showAnswer ? 'Next Card' : 'Show answer'
   const learnCardButtonHandler = showAnswer ? handleNextCard : handleShowAnswer
 
-  if (isSuccess) return <LearnCardSuccess handleSuccess={handleNavigateToCards} />
+  if (isSuccess) return <LearnCardSuccess handleSuccess={handleSuccess} />
 
   return (
     <StyledLearnCard>
