@@ -51,16 +51,11 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
         const hasCards = pack.cardsCount ? pack.cardsCount > 0 : false
 
         const learnAction = hasCards ? (
-          <NavLink to={`/learn/${pack._id}`}>
+          <NavLink to={`/cards/learn/${pack._id}`}>
             <InfoCircleTwoTone />
           </NavLink>
         ) : (
-          <InfoCircleTwoTone
-            twoToneColor="lightgrey"
-            onClick={() => {
-              console.log(pack)
-            }}
-          />
+          <InfoCircleTwoTone twoToneColor="lightgrey" />
         )
 
         const learnTooltipTitle = hasCards ? 'Learn' : 'No cards to learn'
