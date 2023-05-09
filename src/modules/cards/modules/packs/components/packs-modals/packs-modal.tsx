@@ -5,7 +5,7 @@ import { CheckboxChangeEvent } from 'antd/lib/checkbox'
 
 import { StyledErrorText } from '../../../../../auth/styles'
 import { useModalContext } from '../../../../../modal-provider/hooks'
-import { validateModalInputName } from '../../utils'
+import { getValidateModalInput } from '../../utils'
 
 import { StyledModalButtonsWrapper, StyledModalCheckbox, StyledModalOkButton } from './styles'
 
@@ -36,7 +36,7 @@ export const PacksModal: FC<PacksModalProps> = ({ onOk, editing, id, packName, i
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     const inputName = event.target.value
 
-    const nameError = validateModalInputName(inputName)
+    const nameError = getValidateModalInput(inputName)
 
     setError(nameError)
     setPackData(prevState => ({ ...prevState, name: inputName }))
@@ -47,7 +47,7 @@ export const PacksModal: FC<PacksModalProps> = ({ onOk, editing, id, packName, i
   }
 
   const handleSave = () => {
-    const nameError = validateModalInputName(packData.name)
+    const nameError = getValidateModalInput(packData.name)
 
     if (nameError) {
       setError(nameError)

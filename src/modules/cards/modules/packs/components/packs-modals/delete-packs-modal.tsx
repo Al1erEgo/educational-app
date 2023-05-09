@@ -13,13 +13,11 @@ type DeleteModalProps = {
 
 export const DeleteModal: FC<DeleteModalProps> = ({ onOk, packName }) => {
   const { hideModal } = useModalContext()
-  const handleOk = () => {
+  const handleSave = () => {
     onOk()
     hideModal()
   }
-  const handleCancel = () => {
-    hideModal()
-  }
+  const handleCancel = () => hideModal()
 
   return (
     <>
@@ -29,7 +27,7 @@ export const DeleteModal: FC<DeleteModalProps> = ({ onOk, packName }) => {
 
       <StyledModalButtonsWrapper>
         <Button onClick={handleCancel}>Cancel</Button>
-        <StyledModalOkButton onClick={handleOk}>Delete</StyledModalOkButton>
+        <StyledModalOkButton onClick={handleSave}>Delete</StyledModalOkButton>
       </StyledModalButtonsWrapper>
     </>
   )
