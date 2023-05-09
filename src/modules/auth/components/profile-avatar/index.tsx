@@ -6,7 +6,7 @@ import { StyledAvatarGroup } from '../../pages/profile/styles'
 export const ProfileAvatar = () => {
   return (
     <StyledAvatarGroup>
-      <Upload showUploadList={false} beforeUpload={() => false} accept="image/*">
+      <Upload showUploadList={false} beforeUpload={() => console.log('')} accept="image/*">
         <Avatar shape="square" size={96} icon={<UserOutlined />} />
       </Upload>
     </StyledAvatarGroup>

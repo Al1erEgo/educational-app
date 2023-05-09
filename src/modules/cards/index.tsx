@@ -3,10 +3,10 @@ import React from 'react'
 import { Navigate, Route, Routes, useResolvedPath } from 'react-router-dom'
 
 import { Error404 } from '../../components'
+import { ModalProvider } from '../modal-provider'
 
 import { CARD_PATH } from './constants'
 import { Learn, Pack, Packs } from './modules'
-import { ModalProvider } from './providers'
 
 export const Cards = () => {
   const path = useResolvedPath('')
