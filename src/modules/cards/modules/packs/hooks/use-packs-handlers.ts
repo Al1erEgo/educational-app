@@ -9,7 +9,6 @@ import {
   HandleToggleButtonType,
   MutationsPackObjType,
   PacksTableParamsType,
-  SetEditModalFunctionType,
 } from '../types'
 
 type UsePacksHandlersType = (
@@ -23,11 +22,12 @@ type UsePacksHandlersType = (
   handleSliderChange: HandleSliderChangeType
   handleToggleButton: HandleToggleButtonType
   handleClearFilters: HandleClearFiltersType
-  handleOk: (setEditModal: SetEditModalFunctionType, id?: string, newName?: string) => void
+  handleOk: (id?: string, newName?: string, isPrivate?: boolean) => void
+  handleDeleteOk: (id?: string) => void
 }
 
 export const usePacksHandlers: UsePacksHandlersType = (setPacksTableParams, packsActions) => {
-  const { addPacks, updatePacks } = packsActions
+  const { addPacks, updatePacks, deletePacks } = packsActions
   const handlePacksSearch: HandlePacksSearchType = searchValue =>
     setPacksTableParams(prevState => ({ ...prevState, searchValue }))
   const handlePacksTableChange: HandlePacksTableChangeType = (pagination, filters, sorter) => {
@@ -70,14 +70,19 @@ export const usePacksHandlers: UsePacksHandlersType = (setPacksTableParams, pack
     handleClearFilters()
   }
 
-  const handleAddNewPack = async (name: string) => {
-    await addPacks.handlers({ cardsPack: { name: name } })
+  const handleAddNewPack = async (id?: string, name?: string, isPrivate?: boolean) => {
+    await addPacks.handlers({ cardsPack: { name: name, private: isPrivate } })
   }
 
-  const handleOk = (setEditModal: SetEditModalFunctionType, id?: string, newName?: string) => {
+  const handleOk = (id?: string, newName?: string, isPrivate?: boolean) => {
     if (id) {
-      updatePacks.handlers({ cardsPack: { _id: id, name: newName } })
-      setEditModal(prevState => ({ ...prevState, open: false, id: undefined, name: newName }))
+      updatePacks.handlers({ cardsPack: { _id: id, name: newName, private: isPrivate } })
+    }
+  }
+
+  const handleDeleteOk = (id?: string) => {
+    if (id) {
+      deletePacks.handlers({ id })
     }
   }
 
@@ -89,5 +94,6 @@ export const usePacksHandlers: UsePacksHandlersType = (setPacksTableParams, pack
     handleToggleButton,
     handleClearFilters,
     handleOk,
+    handleDeleteOk,
   }
 }

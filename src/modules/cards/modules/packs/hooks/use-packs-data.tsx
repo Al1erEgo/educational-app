@@ -72,6 +72,7 @@ export const usePacksData: UsePacksDataType = () => {
     handleToggleButton,
     handleClearFilters,
     handleOk,
+    handleDeleteOk,
   } = usePacksHandlers(setPacksTableParams, packsActions, '')
 
   const packsTableColumns = getPacksTableColumns(
@@ -79,7 +80,8 @@ export const usePacksData: UsePacksDataType = () => {
     userData,
     packsActions.updatePacks.handlers,
     packsActions.deletePacks.handlers,
-    handleOk
+    handleOk,
+    handleDeleteOk
   )
 
   return [

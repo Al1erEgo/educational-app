@@ -1,7 +1,7 @@
 /*
  Code Analysis:
  - The main goal of the function is to update the sliderKey state variable whenever the minCount, maxCount, or state.minCardsCount/state.maxCardsCount change.
- - It is intended to be used in components that render a slider component.
+ - It is intended to be used in packs-modal-provider that render a slider component.
  - The function takes in three parameters: minCount, maxCount, and state.
  - The function returns the current value of the sliderKey state variable.
  - The function uses the useState hook to initialize the sliderKey state variable to 0.
