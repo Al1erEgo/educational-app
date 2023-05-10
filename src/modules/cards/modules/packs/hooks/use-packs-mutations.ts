@@ -6,9 +6,12 @@ import { usePacksMutation } from './use-packs-mutation'
 type UsePackMutationsType = (refetchPack: () => void) => MutationsWithConditionsPackType
 
 /**
- A custom hook that returns mutations and their corresponding loading and error states for managing packs data.
+ A custom hook that takes a function that refetches pack data and returns an array with the
+ mutations and their corresponding loading and error states. The mutations are obtained by
+ iterating over the keys of packsMutations object and calling the usePacksMutation hook for
+ each key, passing the key and refetchPack function as arguments.
 
- @param {Function} refetchPack - A function that refetches the packs data.
+ @param {Function} refetchPack - A function that refetches the pack's data.
 
  @returns {MutationsWithConditionsPackType} An array containing the mutations and their
  corresponding loading and error states.

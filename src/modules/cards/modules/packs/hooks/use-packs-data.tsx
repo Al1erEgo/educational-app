@@ -26,10 +26,24 @@ type UsePacksDataType = () => [
   { handleClearFilters: HandleClearFiltersType }
 ]
 
+/**
+ The custom hook that retrieves the authenticated user's data, the packs table parameters,
+ the packs data, and the loading and error states for manipulating the packs data.
+ The hook also retrieves functions for handling user actions on the packs table,
+  such as searching, adding, updating, and deleting packs.
+
+ @returns {Array} An array of functions and data related to packs table management.
+ */
 export const usePacksData: UsePacksDataType = () => {
+  /**
+   Retrieves the authenticated user's data, including their user ID.
+   */
   const { data: userData } = useAuthorised()
   const user_id = userData?._id
 
+  /**
+   * The state for the packs table parameters, including pagination, sorting, search filters, and more.
+   */
   const [packsTableParams, setPacksTableParams] = useState<PacksTableParamsType>({
     pagination: {
       current: 1,
@@ -43,6 +57,9 @@ export const usePacksData: UsePacksDataType = () => {
     activeButton: 'All',
   })
 
+  /**
+   * Retrieves the packs data from the API based on the current table parameters.
+   */
   const {
     data: data,
     refetch: refetchPacks,
@@ -59,11 +76,24 @@ export const usePacksData: UsePacksDataType = () => {
     max: packsTableParams.maxCardsCount,
   })
 
+  /**
+   * Uses the `usePacksMutations` hook to retrieve functions for creating, updating, and deleting card packs.
+   */
   const [packsActions, actionsLoading, actionsError] = usePacksMutations(refetchPacks)
 
+  /**
+   * Calculates whether the packs data is still loading.
+   */
   const isPacksDataLoading = isPacksLoading || isPacksFetching || actionsLoading
+
+  /**
+   * Retrieves any errors related to retrieving or manipulating packs data.
+   */
   const serverError = cardsPacksQueryError || actionsError
 
+  /**
+   * Uses the `usePacksHandlers` hook to retrieve functions for handling user actions on the packs table.
+   */
   const {
     handlePacksTableChange,
     handlePacksSearch,
@@ -75,11 +105,17 @@ export const usePacksData: UsePacksDataType = () => {
     handleDeleteOk,
   } = usePacksHandlers(setPacksTableParams, packsActions, '')
 
+  /**
+   * Returns an array of table columns for the packs table.
+   * @param {string} activeButton - The currently active button.
+   * @param {object} userData - An object containing the data of the currently authorized user.
+   * @param {Function} handleOk - A callback function to handle the OK button click.
+   * @param {Function} handleDeleteOk - A callback function to handle the OK button click in the delete confirmation modal.
+   * @returns {Array} - An array of table columns for the card packs table.
+   */
   const packsTableColumns = getPacksTableColumns(
     packsTableParams.activeButton,
     userData,
-    packsActions.updatePacks.handlers,
-    packsActions.deletePacks.handlers,
     handleOk,
     handleDeleteOk
   )

@@ -3,6 +3,8 @@ import { Dispatch, SetStateAction, useCallback } from 'react'
 import {
   HandleAddNewPackType,
   HandleClearFiltersType,
+  HandleDeleteOkType,
+  HandleOkType,
   HandlePacksSearchType,
   HandlePacksTableChangeType,
   HandleSliderChangeType,
@@ -11,6 +13,9 @@ import {
   PacksTableParamsType,
 } from '../types'
 
+/**
+ Type for the usePacksHandlers hook
+ */
 type UsePacksHandlersType = (
   setPacksTableParams: Dispatch<SetStateAction<PacksTableParamsType>>,
   packsActions: MutationsPackObjType,
@@ -22,14 +27,38 @@ type UsePacksHandlersType = (
   handleSliderChange: HandleSliderChangeType
   handleToggleButton: HandleToggleButtonType
   handleClearFilters: HandleClearFiltersType
-  handleOk: (id?: string, newName?: string, isPrivate?: boolean) => void
-  handleDeleteOk: (id?: string) => void
+  handleOk: HandleOkType
+  handleDeleteOk: HandleDeleteOkType
 }
 
+/**
+ Custom hook for handling pack-related functionality
+
+ @param setPacksTableParams - React state setter for packs table parameters
+ @param packsActions - Object containing mutation functions for packs
+
+ @returns Object containing handlers for pack-related functionality, including
+ handling pack search, changing pack table parameters, changing slider values,
+ clearing filters, toggling buttons, adding a new pack, updating a pack, and
+ deleting a pack
+ */
 export const usePacksHandlers: UsePacksHandlersType = (setPacksTableParams, packsActions) => {
   const { addPacks, updatePacks, deletePacks } = packsActions
+
+  /**
+   Handler for searching packs
+   @param searchValue - Search value entered by user
+   */
   const handlePacksSearch: HandlePacksSearchType = searchValue =>
     setPacksTableParams(prevState => ({ ...prevState, searchValue }))
+
+  /**
+   Handler for changing packs table parameters, it takes in pagination, filters, and sorter
+   objects and updates the packs table parameters accordingly
+   @param pagination - Object containing current page and page size
+   @param filters - Object containing current filters
+   @param sorter - Object containing current sorting parameters
+   */
   const handlePacksTableChange: HandlePacksTableChangeType = (pagination, filters, sorter) => {
     setPacksTableParams(prevState => ({
       ...prevState,
@@ -38,7 +67,11 @@ export const usePacksHandlers: UsePacksHandlersType = (setPacksTableParams, pack
     }))
   }
 
-  const handleSliderChange = useCallback((value: number | [number, number]) => {
+  /**
+   Handler for changing slider values and updates the packs table parameters accordingly
+   @param value - Value of slider
+   */
+  const handleSliderChange: HandleSliderChangeType = useCallback(value => {
     if (Array.isArray(value)) {
       setPacksTableParams(prevState => ({
         ...prevState,
@@ -48,7 +81,10 @@ export const usePacksHandlers: UsePacksHandlersType = (setPacksTableParams, pack
     }
   }, [])
 
-  const handleClearFilters = () => {
+  /**
+   Handler for clearing filters and resets the packs table parameters to their default values
+   */
+  const handleClearFilters: HandleClearFiltersType = () => {
     setPacksTableParams(prevState => ({
       ...prevState,
       pagination: {
@@ -61,8 +97,12 @@ export const usePacksHandlers: UsePacksHandlersType = (setPacksTableParams, pack
       maxCardsCount: undefined,
     }))
   }
-
-  const handleToggleButton = (buttonName: string) => {
+  /**
+   Handler for toggling buttons, it  takes a button name and
+   updates the packs table parameters accordingly, while also calling the 'handleClearFilters' function
+   @param buttonName - Name of button to toggle
+   */
+  const handleToggleButton: HandleToggleButtonType = buttonName => {
     setPacksTableParams(prevState => ({
       ...prevState,
       activeButton: buttonName,
@@ -70,17 +110,41 @@ export const usePacksHandlers: UsePacksHandlersType = (setPacksTableParams, pack
     handleClearFilters()
   }
 
-  const handleAddNewPack = async (id?: string, name?: string, isPrivate?: boolean) => {
+  /**
+   Handler for adding a new pack
+   @param id - Optional ID of pack to add
+   @param name - Optional name of pack to add
+   @param isPrivate - Optional boolean indicating whether pack is private
+   */
+  const handleAddNewPack: HandleAddNewPackType = async (
+    id?: string,
+    name?: string,
+    isPrivate?: boolean
+  ) => {
     await addPacks.handlers({ cardsPack: { name: name, private: isPrivate } })
   }
 
-  const handleOk = (id?: string, newName?: string, isPrivate?: boolean) => {
+  /**
+   Handler for updating a pack, it takes in an ID, new name, and boolean indicating whether
+   the pack is private, and updates an existing pack using the 'updatePacks' mutation function
+
+   @param id - Optional ID of pack to update
+   @param newName - Optional new name for pack
+   @param isPrivate - Optional boolean indicating whether pack is private
+   */
+  const handleOk: HandleOkType = (id?, newName?, isPrivate?) => {
     if (id) {
       updatePacks.handlers({ cardsPack: { _id: id, name: newName, private: isPrivate } })
     }
   }
 
-  const handleDeleteOk = (id?: string) => {
+  /**
+   Handler for deleting a pack, it takes in an ID and deletes an existing pack
+   using the 'deletePacks' mutation function
+
+   @param id - Optional ID of pack to delete
+   */
+  const handleDeleteOk: HandleDeleteOkType = (id?) => {
     if (id) {
       deletePacks.handlers({ id })
     }
