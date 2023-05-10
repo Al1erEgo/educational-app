@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { Skeleton } from 'antd'
+
 import { useModalContext } from '../../../modal-provider/hooks'
 import { CardsHeader, CardsSearch } from '../../components'
 import { StyledCardsTitleButton, StyledCardsToolbar } from '../../styles'
@@ -40,24 +42,26 @@ export const Packs = () => {
         </StyledCardsTitleButton>
       </CardsHeader>
 
-      <StyledCardsToolbar>
-        <CardsSearch
-          searchValue={packsTableParams.searchValue}
-          onSearch={handlePacksSearch}
-          placeholder={'Enter pack name'}
-        />
-        <PacksButton
-          activeButton={packsTableParams.activeButton}
-          handleToggleButton={handleToggleButton}
-        />
-        <PacksSlider
-          state={packsTableParams}
-          handleSliderChange={handleSliderChange}
-          minCardsCount={data?.minCardsCount}
-          maxCardsCount={data?.maxCardsCount}
-        />
-        <PacksFilter clearFilters={handleClearFilters} />
-      </StyledCardsToolbar>
+      <Skeleton loading={isPacksDataLoading} paragraph={{ rows: 0 }}>
+        <StyledCardsToolbar>
+          <CardsSearch
+            searchValue={packsTableParams.searchValue}
+            onSearch={handlePacksSearch}
+            placeholder={'Enter pack name'}
+          />
+          <PacksButton
+            activeButton={packsTableParams.activeButton}
+            handleToggleButton={handleToggleButton}
+          />
+          <PacksSlider
+            state={packsTableParams}
+            handleSliderChange={handleSliderChange}
+            minCardsCount={data?.minCardsCount}
+            maxCardsCount={data?.maxCardsCount}
+          />
+          <PacksFilter clearFilters={handleClearFilters} />
+        </StyledCardsToolbar>
+      </Skeleton>
 
       <PacksTable packsTableData={packsTableData} />
     </>
