@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-import { CardsTableConditionProvider } from '../../../../components'
+import { CardsConditionProvider } from '../../../../components'
 import { useTableResize } from '../../../../hooks'
 import { PacksTableDataType } from '../../types'
 import { getFormattedPacksTableData } from '../../utils'
@@ -25,7 +25,7 @@ export const PacksTable: FC<PacksTableProps> = ({ packsTableData }) => {
   const formattedPacksTableData = getFormattedPacksTableData(data)
 
   return (
-    <CardsTableConditionProvider serverError={serverError} isPackDataLoading={isPacksDataLoading}>
+    <CardsConditionProvider error={serverError} isLoading={isPacksDataLoading} type="table">
       <StyledPacksTable
         size={'small'}
         columns={packsTableColumns}
@@ -41,6 +41,6 @@ export const PacksTable: FC<PacksTableProps> = ({ packsTableData }) => {
         }}
         scroll={{ y: tableHeight, scrollToFirstRowOnChange: true }}
       />
-    </CardsTableConditionProvider>
+    </CardsConditionProvider>
   )
 }

@@ -1,36 +1,60 @@
 import { FC, useState } from 'react'
-const { Text } = Typography
-
-import { Skeleton, Typography } from 'antd'
 
 import { CardType } from '../../api'
-import { StyledLearnButton, StyledLearnCard } from '../../styles'
+import {
+  LearnCardSuccess,
+  CardsConditionProvider,
+  LearnCardAnswerWithRate,
+  LearnCardQuestion,
+} from '../../components'
+import { StyledLearnCardButton, StyledLearnCard } from '../../styles'
 
 type LearnCardType = {
-  cardData: CardType | undefined
+  error: unknown
+  cardData?: CardType
   isLoading: boolean
+  isSuccess: boolean
+  handleNextCard: () => void
+  handleSuccess: () => void
+  rate: number
+  setRate: () => void
 }
 
-export const LearnCard: FC<LearnCardType> = ({ cardData, isLoading }) => {
+export const LearnCard: FC<LearnCardType> = ({
+  error,
+  cardData,
+  isLoading,
+  isSuccess,
+  handleNextCard,
+  handleSuccess,
+  rate,
+  setRate,
+}) => {
+  const { answer, shots, question } = cardData || {}
+
   const [showAnswer, setShowAnswer] = useState<boolean>(false)
 
   const handleShowAnswer = () => setShowAnswer(true)
 
+  const learnCardButtonName = showAnswer ? 'Next Card' : 'Show answer'
+  const learnCardButtonHandler = showAnswer ? handleNextCard : handleShowAnswer
+
+  if (isSuccess) return <LearnCardSuccess handleSuccess={handleSuccess} />
+
   return (
-    <Skeleton active loading={isLoading} rows={5}>
-      <StyledLearnCard>
-        <div>
-          <Text strong>Question: </Text>
-          {cardData?.question}
-        </div>
-        <Text type="secondary">Количество попыток ответа на вопрос: {cardData?.shots}</Text>
-        {/*TODO Выделить в отдельную компоненту*/}
-        {showAnswer ? (
-          <Text disabled={!showAnswer}>{cardData?.answer}</Text>
-        ) : (
-          <StyledLearnButton onClick={handleShowAnswer}>Show answer</StyledLearnButton>
-        )}
-      </StyledLearnCard>
-    </Skeleton>
+    <StyledLearnCard>
+      <CardsConditionProvider type="card" isLoading={isLoading} error={error}>
+        <LearnCardQuestion shots={shots} question={question} />
+        <LearnCardAnswerWithRate
+          answer={answer}
+          isShow={showAnswer}
+          rate={rate}
+          setRate={setRate}
+        />
+        <StyledLearnCardButton onClick={learnCardButtonHandler}>
+          {learnCardButtonName}
+        </StyledLearnCardButton>
+      </CardsConditionProvider>
+    </StyledLearnCard>
   )
 }

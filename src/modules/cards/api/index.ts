@@ -30,7 +30,6 @@ export const cardsApi = rootApi.injectEndpoints({
       }),
       invalidatesTags: ['packs', 'pack'],
     }),
-
     updateCardsPack: builder.mutation<{}, UpdateCardsPackRequestType>({
       query: (requestData: UpdateCardsPackRequestType) => ({
         url: 'cards/pack',
@@ -45,6 +44,7 @@ export const cardsApi = rootApi.injectEndpoints({
         method: 'GET',
         params,
       }),
+      providesTags: ['pack'],
     }),
     newCard: builder.mutation<{}, NewCardRequestType>({
       query: (requestData: NewCardRequestType) => ({
@@ -70,6 +70,14 @@ export const cardsApi = rootApi.injectEndpoints({
       }),
       invalidatesTags: ['packs', 'pack'],
     }),
+    updateCardGrade: builder.mutation<UpdateCardGradeResponseType, UpdateCardGradeRequestType>({
+      query: (requestData: UpdateCardGradeRequestType) => ({
+        url: 'cards/grade',
+        method: 'PUT',
+        body: requestData,
+      }),
+      invalidatesTags: ['packs', 'pack'],
+    }),
   }),
   overrideExisting: false,
 })
@@ -83,6 +91,7 @@ export const {
   useNewCardMutation,
   useDeleteCardMutation,
   useUpdateCardMutation,
+  useUpdateCardGradeMutation,
 } = cardsApi
 
 export type CardsPackType = {
@@ -189,4 +198,17 @@ export type UpdateCardRequestType = {
     _id: string
     question?: string
   }
+}
+
+export type UpdateCardGradeRequestType = {
+  grade: number
+  card_id: string
+}
+export type UpdateCardGradeResponseType = {
+  _id: string
+  cardsPack_id: string
+  card_id: string
+  user_id: string
+  grade: number
+  shots: number
 }
