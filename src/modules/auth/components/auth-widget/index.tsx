@@ -1,9 +1,10 @@
 import React, { FC } from 'react'
 
-import { LogoutOutlined } from '@ant-design/icons'
+import { LogoutOutlined, UserOutlined } from '@ant-design/icons'
 import { useLocation } from 'react-router-dom'
 
 import { useNavigateToOnclick } from '../../../../hooks'
+import { useAuthMeUpdateMutation } from '../../api'
 import { ABSOLUTE_AUTH_PATH } from '../../constants'
 import { useAuthorised, useAuthMutation } from '../../hooks'
 
@@ -24,6 +25,8 @@ export const AuthWidget: FC = () => {
 
   const location = useLocation()
 
+  const [trigger, { isLoading }] = useAuthMeUpdateMutation('avatar')
+
   const unauthorisedButtonProps =
     location.pathname === '/auth/sign-up'
       ? { children: 'Sign in', onClick: signInRedirect }
@@ -37,7 +40,11 @@ export const AuthWidget: FC = () => {
     <>
       <StyledUserDataWrapper onClick={profileRedirect}>
         <StyledUserName>{userData.userName}</StyledUserName>
-        <StyledUserIconWidget />
+        {userData.avatar ? (
+          <StyledUserIconWidget src={userData.avatar} alt="avatar" />
+        ) : (
+          <UserOutlined />
+        )}
       </StyledUserDataWrapper>
       <StyledAuthWidgetButton icon={<LogoutOutlined />} onClick={handleLogOut}>
         Log out

@@ -1,4 +1,3 @@
-import { UserOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 import styled from 'styled-components'
 
@@ -19,9 +18,8 @@ export const StyledUserName = styled.span`
   margin-right: 7px;
   font-family: 'Montserrat', sans-serif;
 `
-export const StyledUserIconWidget = styled(UserOutlined)`
+export const StyledUserIconWidget = styled.img`
   margin-right: 7px;
-  margin-top: 7px;
   width: 23px;
   height: 23px;
   border-radius: 50%;

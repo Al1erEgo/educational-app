@@ -40,7 +40,7 @@ export type AuthMeRequestType = void | string
 export type AuthMeResponseType = LoginResponseType
 
 export type UpdateRequestType = {
-  name: string
+  name?: string
   avatar?: string
 }
 export type UpdateResponseType = {
