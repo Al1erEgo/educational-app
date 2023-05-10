@@ -31,7 +31,8 @@ export const PacksModal: FC<PacksModalProps> = ({ onOk, editing, id, packName, i
   const isDisabled =
     (!packData.id && packData.name.trim().length === 0) ||
     (packData.id && packData.name === packName && packData.isPrivate === isPrivate) ||
-    packData.name.length > 100
+    packData.name.length > 100 ||
+    packData.name.length === 0
 
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     const inputName = event.target.value

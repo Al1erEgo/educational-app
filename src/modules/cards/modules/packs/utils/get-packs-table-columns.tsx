@@ -17,6 +17,7 @@ type GetPacksTableColumnsType = (
   handleOk: HandleOkType,
   handleDeleteOk: HandleDeleteOkType
 ) => PacksTableDataColumnsType[]
+
 /**
  * A function that returns an array of table columns for the packs table.
  * @param {string} activeButton - The currently active button.
