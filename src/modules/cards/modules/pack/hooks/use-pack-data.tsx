@@ -11,7 +11,12 @@ import { usePackHandlers } from './use-pack-handlers'
 import { usePackMutations } from './use-pack-mutations'
 
 type UsePackDataType = () => [
-  { packName: string; isOwnPack: boolean; buttonsHandlers: ButtonsHandlersType },
+  {
+    packName: string
+    isEmptyPack: boolean
+    isOwnPack: boolean
+    buttonsHandlers: ButtonsHandlersType
+  },
   { handleSearch: HandleSearchType },
   TableDataType
 ]
@@ -22,6 +27,7 @@ export const usePackData: UsePackDataType = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const isOwnPack = searchParams.get('own') === 'true'
   const packName = searchParams.get('name') || ''
+  const isEmptyPack = searchParams.get('isEmpty') === 'true'
 
   const [tableParams, setTableParams] = useState<PackTableParamsType>({
     pagination: {
@@ -63,7 +69,7 @@ export const usePackData: UsePackDataType = () => {
   )
 
   return [
-    { packName, isOwnPack, buttonsHandlers },
+    { packName, isEmptyPack, isOwnPack, buttonsHandlers },
     { handleSearch },
     {
       isPackDataLoading,

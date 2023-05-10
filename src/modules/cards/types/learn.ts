@@ -1,7 +1,11 @@
 import { CardType } from '../api'
 
+import { TableErrorType } from './table-data'
+
 export type LearnHandlersType = {
-  [key: string]: () => void
+  handleNextCard: () => void
+  handleNavigateToCards: () => void
+  setRate: (value: ((prevState: number) => number) | number) => void
 }
 
 export type LearnCardDataType = {
@@ -9,5 +13,5 @@ export type LearnCardDataType = {
   rate: number
   isLoading: boolean
   isSuccess: boolean
-  error: unknown
+  serverError: TableErrorType
 }

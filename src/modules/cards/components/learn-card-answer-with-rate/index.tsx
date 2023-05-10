@@ -30,4 +30,6 @@ export const LearnCardAnswerWithRate: FC<LearnCardAnswerWithRateType> = ({
         </StyledRateContainer>
       </>
     )
+
+  return null
 }

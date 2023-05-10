@@ -7,11 +7,7 @@ import { CardType, useCardsPackQuery, useUpdateCardGradeMutation } from '../../.
 import { LearnCardDataType, LearnHandlersType } from '../../../types'
 import { wiseSortingCards } from '../utils'
 
-type UseLearnDataType = () => [
-  packName: string,
-  cardHandlers: LearnHandlersType,
-  card: LearnCardDataType
-]
+type UseLearnDataType = () => [string, LearnHandlersType, LearnCardDataType]
 
 export const useLearnData: UseLearnDataType = () => {
   const navigate = useNavigate()
@@ -38,17 +34,19 @@ export const useLearnData: UseLearnDataType = () => {
   const [updateGrade, { isLoading: isUpdateGradeLoading, error: updateGradeError }] =
     useUpdateCardGradeMutation()
 
-  const handleNextCard = () => {
-    updateGrade({ grade: rate, card_id: _id })
-    setCurrentCard(currentCard + 1)
-    setRate(3)
-  }
-  const handleNavigateToCards = () => navigate(MAIN_PATH.Cards)
-
   const cardData = sortedCards && sortedCards[currentCard]
   const isLoading = isPackLoading || isUpdateGradeLoading || !sortedCards
   const isSuccess = currentCard === sortedCards?.length
   const serverError = packLoadingError || updateGradeError
+
+  const handleNextCard = () => {
+    if (cardData) {
+      updateGrade({ grade: rate, card_id: cardData._id })
+      setCurrentCard(currentCard + 1)
+      setRate(3)
+    }
+  }
+  const handleNavigateToCards = () => navigate(MAIN_PATH.Cards)
 
   useEffect(() => {
     if (data) {

@@ -1,13 +1,14 @@
 import { confirmationMessagesArguments } from '../constants'
 
-export type ConfirmationMessagesArgumentsType = {
-  [key: keyof confirmationMessagesArguments]: ConfirmationMessageType
-}
+export type ConfirmationMessagesArgumentsType = Record<
+  keyof typeof confirmationMessagesArguments,
+  ConfirmationMessageType
+>
 
 type ConfirmationMessageType = {
   title: string
-  propsPath: string
+  redirectPath: string
   text: string
-  image?: string
-  timer?: boolean
+  image: string
+  timer: boolean
 }

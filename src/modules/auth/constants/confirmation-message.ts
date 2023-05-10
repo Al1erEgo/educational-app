@@ -1,17 +1,17 @@
 import checkEmailImage from '../../../assets/check-email-image.svg'
 import successRegistrationImage from '../../../assets/success-registration.png'
-import { ConfirmationMessagesArgumentsType } from '../types/confirmation-message'
 
 import { ABSOLUTE_AUTH_PATH } from './index'
 
 export const confirmationMessageTimeout = 5000
 
-export const confirmationMessagesArguments: ConfirmationMessagesArgumentsType = {
+export const confirmationMessagesArguments = {
   resetPassword: {
     title: 'Check Email',
     redirectPath: ABSOLUTE_AUTH_PATH.SignIn,
     image: checkEmailImage,
     text: 'We’ve sent an Email with instructions to',
+    timer: false,
   },
   signUp: {
     title: 'Success!',

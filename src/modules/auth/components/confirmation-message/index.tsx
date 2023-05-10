@@ -34,7 +34,7 @@ export const ConfirmationMessage: FC<ConfirmationMessageType> = ({ variant, emai
     <StyledCard title={title} headStyle={cardHeadStyle}>
       <StyledCheckEmailImage src={image} alt="image" />
       <StyledText type="secondary">{`${text} ${email}`}</StyledText>
-      <Form.Item hidden={!!timer}>
+      <Form.Item hidden={timer}>
         <StyledAuthButton onClick={redirect}>Back to login</StyledAuthButton>
       </Form.Item>
     </StyledCard>
