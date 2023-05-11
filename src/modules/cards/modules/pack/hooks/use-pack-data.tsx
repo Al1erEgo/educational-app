@@ -53,6 +53,9 @@ export const usePackData: UsePackDataType = () => {
     cardQuestion: tableParams.searchValue,
   })
 
+  console.log('tableParams', tableParams)
+  console.log('sortingOrder', getSortingParam(tableParams))
+
   const packMutations = usePackMutations(refetchPack)
   const [{ deleteCard, updateCard }, actionsLoading, actionsError] = packMutations
 
