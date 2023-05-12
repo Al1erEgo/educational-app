@@ -35,7 +35,10 @@ export const Packs = () => {
   return (
     <>
       <CardsHeader title={'Packs list'}>
-        <StyledCardsTitleButton loading={isPacksDataLoading} onClick={handleAddNewPackButtonClick}>
+        <StyledCardsTitleButton
+          loading={isPacksDataLoading}
+          onClick={handleAddNewPackButtonClick}
+        >
           Add New Pack
         </StyledCardsTitleButton>
       </CardsHeader>

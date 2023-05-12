@@ -2,15 +2,14 @@ import React, { FC } from 'react'
 
 import { Table } from 'antd'
 
-import { CardsConditionProvider } from '../../../../components'
-import { useTableResize } from '../../../../hooks'
-import { TableDataType } from '../../../../types'
+import { useTableResize } from '../../hooks'
+import { CardsConditionProvider } from '../cards-table-condition-provider'
 
-type PackTableType = {
-  data: TableDataType
+type CardsTableType = {
+  tableData: any
 }
 
-export const PackTable: FC<PackTableType> = ({ data }) => {
+export const CardsTable: FC<CardsTableType> = ({ tableData }) => {
   const {
     formattedTableData,
     tableColumns,
@@ -19,24 +18,24 @@ export const PackTable: FC<PackTableType> = ({ data }) => {
     handleTableChange,
     isDataLoading,
     serverError,
-  } = data
+  } = tableData
 
   const tableHeight = useTableResize()
 
   return (
     <CardsConditionProvider error={serverError} type="table">
       <Table
-        loading={isDataLoading}
         size={'small'}
         columns={tableColumns}
         dataSource={formattedTableData}
+        loading={isDataLoading}
         onChange={handleTableChange}
         pagination={{
           ...tableParams.pagination,
           pageSizeOptions: ['10', '20', '50'],
           showQuickJumper: true,
           showSizeChanger: true,
-          total: elementsCount,
+          total: elementsCount || 0,
         }}
         scroll={{ scrollToFirstRowOnChange: true, y: tableHeight }}
       />
