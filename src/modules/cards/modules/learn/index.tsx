@@ -6,13 +6,13 @@ import { StyledTitle } from '../../styles'
 import { useLearnData } from './hooks'
 
 export const Learn: FC = () => {
-  const [packName, cardHandlers, card] = useLearnData()
+  const [names, cardHandlers, card] = useLearnData()
 
   return (
     <>
       <BackToCardsButton />
-      <StyledTitle>{packName}</StyledTitle>
-      <LearnCard card={card} cardHandlers={cardHandlers} />
+      <StyledTitle>{names.packName}</StyledTitle>
+      <LearnCard card={card} cardHandlers={cardHandlers} names={names} />
     </>
   )
 }

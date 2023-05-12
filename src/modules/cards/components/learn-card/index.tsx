@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 
 import {
   LearnCardSuccess,
@@ -7,24 +7,19 @@ import {
   LearnCardQuestion,
 } from '../../components'
 import { StyledLearnCardButton, StyledLearnCard } from '../../styles'
-import { LearnCardDataType, LearnHandlersType } from '../../types'
+import { LearnCardDataType, LearnHandlersType, LearnNames } from '../../types'
 
 type LearnCardType = {
   card: LearnCardDataType
   cardHandlers: LearnHandlersType
+  names: LearnNames
 }
 
-export const LearnCard: FC<LearnCardType> = ({ card, cardHandlers }) => {
-  const [showAnswer, setShowAnswer] = useState<boolean>(false)
-
-  const { handleNextCard, handleNavigateToCards, setRate } = cardHandlers
-  const { cardData, rate, isLoading, isSuccess, serverError } = card
+export const LearnCard: FC<LearnCardType> = ({ card, cardHandlers, names }) => {
+  const { learnCardButtonHandler, handleNavigateToCards, setRate } = cardHandlers
+  const { cardData, rate, showAnswer, isLoading, isSuccess, serverError } = card
+  const { learnCardButtonName } = names
   const { answer, shots, question } = cardData || {}
-
-  const handleShowAnswer = () => setShowAnswer(true)
-
-  const learnCardButtonName = showAnswer ? 'Next Card' : 'Show answer'
-  const learnCardButtonHandler = showAnswer ? handleNextCard : handleShowAnswer
 
   if (isSuccess) return <LearnCardSuccess handleSuccess={handleNavigateToCards} />
 

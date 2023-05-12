@@ -24,7 +24,7 @@ export const useDebouncedSearchWithReset: UseDebouncedSearchWithResetType = (
   searchValue,
   onSearch
 ) => {
-  const [localSearchValue, setLocalSearchValue] = useState<string>('')
+  const [localSearchValue, setLocalSearchValue] = useState<string>(searchValue)
 
   const handleOnSearchChange: HandleOnSearchChangeType = e => setLocalSearchValue(e.target.value)
 

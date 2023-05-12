@@ -25,13 +25,13 @@ export const PackTable: FC<PackTableType> = ({ data }) => {
   const formattedTableData = getFormattedTableData(responseData)
 
   return (
-    <CardsConditionProvider error={serverError} isLoading={isPackDataLoading} type="table">
+    <CardsConditionProvider error={serverError} type="table">
       <Table
+        loading={isPackDataLoading}
         size={'small'}
         columns={tableColumns}
         dataSource={formattedTableData}
         onChange={handleTableChange}
-        sortDirections={['ascend', 'descend', null]}
         pagination={{
           ...tableParams.pagination,
           pageSizeOptions: ['10', '20', '50'],
