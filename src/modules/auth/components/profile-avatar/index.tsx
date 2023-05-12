@@ -3,6 +3,7 @@ import React from 'react'
 import { Avatar, Upload } from 'antd'
 import { RcFile } from 'antd/lib/upload'
 
+import { ErrorServerHandler } from '../../../../components'
 import { useAuthMeUpdateMutation } from '../../api'
 import { StyledAvatarGroup } from '../../pages/profile/styles'
 import { StyledErrorText } from '../../styles'
@@ -14,7 +15,7 @@ type PropsType = {
 }
 
 export const ProfileAvatar = ({ avatar }: PropsType) => {
-  const [trigger, { isLoading, isError }] = useAuthMeUpdateMutation({
+  const [trigger, { isLoading, isError, error: serverError }] = useAuthMeUpdateMutation({
     fixedCacheKey: 'avatar',
   })
 
@@ -43,6 +44,7 @@ export const ProfileAvatar = ({ avatar }: PropsType) => {
           />
         </Upload>
       </StyledAvatarGroup>
+      <ErrorServerHandler error={serverError} />
       <StyledErrorText>{isError && 'Size too large!'}</StyledErrorText>
     </>
   )

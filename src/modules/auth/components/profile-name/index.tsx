@@ -58,7 +58,6 @@ export const ProfileName: FC<ProfileNamePropsType> = ({ userName }) => {
           )}
         />
       </Form.Item>
-
       <ErrorServerHandler error={updateUserNameError} />
     </>
   )
