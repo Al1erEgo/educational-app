@@ -1,16 +1,19 @@
-import { Avatar, Skeleton, Upload } from 'antd'
+import React from 'react'
+
+import { Avatar, Upload } from 'antd'
 import { RcFile } from 'antd/lib/upload'
 
 import { useAuthMeUpdateMutation } from '../../api'
 import { StyledAvatarGroup } from '../../pages/profile/styles'
 import { getBase64 } from '../../utils/get-base-64'
+import { ProfileAvatarImage } from '../profile-avatar-image'
 
 type PropsType = {
   avatar: string
 }
 
 export const ProfileAvatar = ({ avatar }: PropsType) => {
-  const [trigger, { isLoading }] = useAuthMeUpdateMutation('avatar')
+  const [trigger, { isLoading }] = useAuthMeUpdateMutation({ fixedCacheKey: 'avatar' })
 
   const uploadHandler = action => {
     if (action.file) {
@@ -32,13 +35,7 @@ export const ProfileAvatar = ({ avatar }: PropsType) => {
         <Avatar
           shape="square"
           size={96}
-          icon={
-            isLoading ? (
-              <Skeleton.Image active />
-            ) : (
-              <img src={avatar} alt="avatar" style={{ width: '100%' }} />
-            )
-          }
+          icon={<ProfileAvatarImage avatar={avatar} isLoading={isLoading} />}
         />
       </Upload>
     </StyledAvatarGroup>
