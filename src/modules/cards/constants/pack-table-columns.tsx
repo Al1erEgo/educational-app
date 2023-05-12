@@ -1,4 +1,4 @@
-import { StyledRate } from '../components/pack-table/styles'
+import { StyledRate } from '../styles'
 import { PackTableColumnsType } from '../types'
 
 export const packTableColumns: PackTableColumnsType[] = [

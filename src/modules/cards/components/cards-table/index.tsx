@@ -35,7 +35,7 @@ export const CardsTable: FC<CardsTableType> = ({ tableData }) => {
           pageSizeOptions: ['10', '20', '50'],
           showQuickJumper: true,
           showSizeChanger: true,
-          total: elementsCount || 0,
+          total: elementsCount,
         }}
         scroll={{ scrollToFirstRowOnChange: true, y: tableHeight }}
       />

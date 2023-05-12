@@ -5,11 +5,10 @@ import {
   CardsHeader,
   CardsSearch,
   CardsTable,
+  PackActionsButtons,
 } from '../../components'
+import { usePackData } from '../../hooks'
 import { StyledCardsToolbar } from '../../styles'
-
-import { PackActionsButtons } from './components'
-import { usePackData } from './hooks'
 
 export const Pack: FC = () => {
   const [

@@ -6,15 +6,15 @@ export type PackTableColumnsType = {
   dataIndex: string
   sorter?: boolean
   width?: string
-  render?: (text: string, record: CardType) => JSX.Element
+  render?: (text: string, record: PackCardType) => JSX.Element
 }
 
-export type PackTableParamsType = SorterResult<CardType> & {
+export type PackTableParamsType = SorterResult<PackCardType> & {
   pagination?: TablePaginationConfig
   searchValue: string
 }
 
-export type CardType = {
+export type PackCardType = {
   question: string
   answer: string
   updated: string

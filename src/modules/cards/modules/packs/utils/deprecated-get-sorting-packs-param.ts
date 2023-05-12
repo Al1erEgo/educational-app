@@ -10,10 +10,11 @@ type GetSortingPacksParamType = (
   }
 ) => string | undefined
 
-export const getSortingPacksParam: GetSortingPacksParamType = tableParams => {
-  if (tableParams.order && tableParams.field) {
-    const sortOrder = tableParams.order === 'ascend' ? 0 : 1
+export const deprecatedGetSortingPacksParam: GetSortingPacksParamType =
+  tableParams => {
+    if (tableParams.order && tableParams.field) {
+      const sortOrder = tableParams.order === 'ascend' ? 0 : 1
 
-    return sortOrder + tableParams.field.toString()
+      return sortOrder + tableParams.field.toString()
+    }
   }
-}

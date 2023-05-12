@@ -10,7 +10,11 @@ type GetTableColumnsType = (
   updateCard: HandlerFunctionType
 ) => PackTableColumnsType[]
 
-export const getTableColumns: GetTableColumnsType = (isMine, deleteCard, updateCard) => {
+export const getPackTableColumns: GetTableColumnsType = (
+  isMine,
+  deleteCard,
+  updateCard
+) => {
   if (isMine) {
     return [
       ...packTableColumns,
@@ -22,7 +26,9 @@ export const getTableColumns: GetTableColumnsType = (isMine, deleteCard, updateC
           <Space size="middle">
             <Tooltip title="Edit">
               <EditOutlined
-                onClick={() => updateCard({ card: { _id: card.key, question: '11' } })}
+                onClick={() =>
+                  updateCard({ card: { _id: card.key, question: '11' } })
+                }
               />
             </Tooltip>
             <Tooltip title="Delete">

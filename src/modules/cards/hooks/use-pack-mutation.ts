@@ -1,6 +1,5 @@
-import { TableErrorType } from '../../../types'
 import { packMutations } from '../constants'
-import { HandlerFunctionType } from '../types'
+import { HandlerFunctionType, TableErrorType } from '../types'
 
 type UsePackMutationType = (
   mutationType: keyof typeof packMutations,

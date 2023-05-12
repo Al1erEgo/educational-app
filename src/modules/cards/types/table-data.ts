@@ -1,12 +1,13 @@
 import { SerializedError } from '@reduxjs/toolkit'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
+import { HandleTableChangeType } from '../types'
+
 import {
-  CardType,
-  HandleTableChangeType,
+  PackCardType,
   PackTableColumnsType,
   PackTableParamsType,
-} from '../modules/pack/types'
+} from './pack-table'
 
 export type TableErrorType = FetchBaseQueryError | SerializedError | undefined
 
@@ -15,7 +16,7 @@ export type TableDataType = {
   isDataLoading: boolean
   handleTableChange: HandleTableChangeType
   tableParams: PackTableParamsType
-  formattedTableData: CardType[] | undefined
+  formattedTableData: PackCardType[] | undefined
   tableColumns: PackTableColumnsType[]
   elementsCount: number
   serverError: TableErrorType

@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useAuthorised } from '../../../../auth/hooks'
 import { useCardPacksQuery } from '../../../api'
 import { MY_BUTTON_NAME } from '../../../constants'
+import { getSortingParam } from '../../../utils'
 import {
   HandleAddNewPackType,
   HandleClearFiltersType,
@@ -12,7 +13,7 @@ import {
   PacksTableDataType,
   PacksTableParamsType,
 } from '../types'
-import { getPacksTableColumns, getSortingPacksParam } from '../utils'
+import { getPacksTableColumns } from '../utils'
 
 import { usePacksHandlers } from './use-packs-handlers'
 import { usePacksMutations } from './use-packs-mutations'
@@ -30,32 +31,33 @@ type UsePacksDataType = () => [
  The custom hook that retrieves the authenticated user's data, the packs table parameters,
  the packs data, and the loading and error states for manipulating the packs data.
  The hook also retrieves functions for handling user actions on the packs table,
-  such as searching, adding, updating, and deleting packs.
+ such as searching, adding, updating, and deleting packs.
 
  @returns {Array} An array of functions and data related to packs table management.
  */
 export const usePacksData: UsePacksDataType = () => {
   /**
-   Retrieves the authenticated user's data, including their user ID.
-   */
+     Retrieves the authenticated user's data, including their user ID.
+     */
   const { data: userData } = useAuthorised()
   const user_id = userData?._id
 
   /**
    * The state for the packs table parameters, including pagination, sorting, search filters, and more.
    */
-  const [packsTableParams, setPacksTableParams] = useState<PacksTableParamsType>({
-    pagination: {
-      current: 1,
-      pageSize: 10,
-    },
-    field: '',
-    order: null,
-    searchValue: '',
-    minCardsCount: undefined,
-    maxCardsCount: undefined,
-    activeButton: 'All',
-  })
+  const [packsTableParams, setPacksTableParams] =
+    useState<PacksTableParamsType>({
+      pagination: {
+        current: 1,
+        pageSize: 10,
+      },
+      field: '',
+      order: null,
+      searchValue: '',
+      minCardsCount: undefined,
+      maxCardsCount: undefined,
+      activeButton: 'All',
+    })
 
   /**
    * Retrieves the packs data from the API based on the current table parameters.
@@ -69,8 +71,9 @@ export const usePacksData: UsePacksDataType = () => {
   } = useCardPacksQuery({
     page: packsTableParams.pagination?.current,
     pageCount: packsTableParams.pagination?.pageSize,
-    sortPacks: getSortingPacksParam(packsTableParams),
-    user_id: packsTableParams.activeButton === MY_BUTTON_NAME ? user_id : undefined,
+    sortPacks: getSortingParam(packsTableParams),
+    user_id:
+      packsTableParams.activeButton === MY_BUTTON_NAME ? user_id : undefined,
     packName: packsTableParams.searchValue || undefined,
     min: packsTableParams.minCardsCount,
     max: packsTableParams.maxCardsCount,
@@ -79,7 +82,8 @@ export const usePacksData: UsePacksDataType = () => {
   /**
    * Uses the `usePacksMutations` hook to retrieve functions for creating, updating, and deleting card packs.
    */
-  const [packsActions, actionsLoading, actionsError] = usePacksMutations(refetchPacks)
+  const [packsActions, actionsLoading, actionsError] =
+    usePacksMutations(refetchPacks)
 
   /**
    * Calculates whether the packs data is still loading.

@@ -2,17 +2,17 @@ import { useState } from 'react'
 
 import { useParams, useSearchParams } from 'react-router-dom'
 
-import { useCardsPackQuery } from '../../../api'
-import { TableDataType } from '../../../types'
+import { useCardsPackQuery } from '../api'
 import {
   ButtonsHandlersType,
   HandleSearchType,
   PackTableParamsType,
+  TableDataType,
 } from '../types'
 import {
-  getFormattedTableData,
+  getFormattedPackTableData,
+  getPackTableColumns,
   getSortingParam,
-  getTableColumns,
 } from '../utils'
 
 import { usePackHandlers } from './use-pack-handlers'
@@ -62,20 +62,20 @@ export const usePackData: UsePackDataType = () => {
   })
 
   const packMutations = usePackMutations(refetchPack)
-  const [{ deleteCard, updateCard }, actionsLoading, actionsError] =
+  const [{ deleteCard, updateCard }, mutationsLoading, mutationsError] =
     packMutations
 
-  const isDataLoading = isInitialLoading || isFetching || actionsLoading
-  const serverError = cardsPackQueryError || actionsError
+  const isDataLoading = isInitialLoading || isFetching || mutationsLoading
+  const serverError = cardsPackQueryError || mutationsError
   const elementsCount = responseData?.cardsTotalCount || 0
 
-  const tableColumns = getTableColumns(
+  const tableColumns = getPackTableColumns(
     isOwnPack,
     deleteCard.handler,
     updateCard.handler
   )
 
-  const formattedTableData = getFormattedTableData(responseData)
+  const formattedTableData = getFormattedPackTableData(responseData)
 
   const { handleTableChange, handleSearch, buttonsHandlers } = usePackHandlers(
     setTableParams,

@@ -1,4 +1,4 @@
-import { Button, Typography } from 'antd'
+import { Button, Rate, Typography } from 'antd'
 import Title from 'antd/es/typography/Title'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
@@ -81,4 +81,10 @@ export const StyledLearnCard = styled.div`
   gap: 1rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+`
+
+export const StyledRate = styled(Rate).attrs({
+  disabled: true,
+})`
+  font-size: 0.8rem;
 `
