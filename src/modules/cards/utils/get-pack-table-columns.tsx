@@ -3,10 +3,11 @@ import { Space, Tooltip } from 'antd'
 
 import { packTableColumns } from '../constants'
 import { HandlerFunctionType, PackTableColumnsType } from '../types'
+import { PackModalsOnSubmitType } from '../types/pack-modals'
 
 type GetTableColumnsType = (
   isMine: boolean,
-  deleteCard: HandlerFunctionType,
+  deleteCard: PackModalsOnSubmitType,
   updateCard: HandlerFunctionType
 ) => PackTableColumnsType[]
 

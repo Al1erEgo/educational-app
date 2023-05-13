@@ -13,7 +13,7 @@ type CardsSearchProps = CardsSearchWrapperProps & {
   searchValue: string
   onSearch: HandleSearchType
   placeholder: string
-  disabled: boolean
+  disabled?: boolean
 }
 export const CardsSearch: FC<CardsSearchProps> = ({
   size = 'small',

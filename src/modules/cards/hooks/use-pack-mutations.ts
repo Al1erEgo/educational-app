@@ -29,6 +29,7 @@ export const usePackMutations: UsePackMutationsType = refetchPack => {
     addCard.isLoading ||
     deleteCard.isLoading ||
     updateCard.isLoading ||
+    updatePack.isLoading ||
     deletePack.isLoading
 
   return [mutations, mutationsLoading, mutationsError]

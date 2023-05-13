@@ -1,8 +1,8 @@
-import React from 'react'
+import { ReactNode } from 'react'
 
 export type ModalConfig = {
   title: string
-  content: React.ReactNode
+  content: ReactNode
 }
 
 export type ModalContextType = {

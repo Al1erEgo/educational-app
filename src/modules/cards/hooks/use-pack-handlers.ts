@@ -8,13 +8,13 @@ import {
   ButtonsHandlersType,
   HandleSearchType,
   HandleTableChangeType,
-  PacksMutationsWithConditionsType,
+  PackMutationsObjType,
   PackTableParamsType,
 } from '../types'
 
 type UsePackHandlersType = (
   setTableParams: Dispatch<SetStateAction<PackTableParamsType>>,
-  packMutations: PacksMutationsWithConditionsType,
+  mutations: PackMutationsObjType,
   packId: string,
   packName: string
 ) => {
@@ -25,12 +25,12 @@ type UsePackHandlersType = (
 
 export const usePackHandlers: UsePackHandlersType = (
   setTableParams,
-  packMutations,
+  mutations,
   packId,
   packName
 ) => {
   const navigate = useNavigate()
-  const [{ addCard, updatePack, deletePack }] = packMutations
+  const { addCard, updateCard, updatePack, deletePack } = mutations
 
   const handleSearch: HandleSearchType = searchValue =>
     setTableParams(prevState => ({ ...prevState, searchValue }))
@@ -53,6 +53,7 @@ export const usePackHandlers: UsePackHandlersType = (
     await deletePack.handler({ id: packId })
     navigate(MAIN_PATH.Cards) //можно перенести в хук useHandleAction
   }
+
   const handleEditPack = () =>
     updatePack.handler({ cardsPack: { _id: packId } })
 

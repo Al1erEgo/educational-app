@@ -2,7 +2,6 @@ import { useState } from 'react'
 
 import { useParams, useSearchParams } from 'react-router-dom'
 
-import { useModalContext } from '../../modal-provider/hooks'
 import { useCardsPackQuery } from '../api'
 import {
   ButtonsHandlersType,
@@ -17,6 +16,7 @@ import {
 } from '../utils'
 
 import { usePackHandlers } from './use-pack-handlers'
+import { usePackModals } from './use-pack-modals'
 import { usePackMutations } from './use-pack-mutations'
 
 type UsePackDataType = () => [
@@ -33,7 +33,8 @@ type UsePackDataType = () => [
 export const usePackData: UsePackDataType = () => {
   const { packId = '' } = useParams()
   const [searchParams, setSearchParams] = useSearchParams()
-  const { modalConfig, showModal, hideModal } = useModalContext()
+  const isOwnPack = searchParams.get('own') === 'true'
+  const packName = searchParams.get('name') || ''
 
   const [tableParams, setTableParams] = useState<PackTableParamsType>({
     pagination: {
@@ -59,31 +60,30 @@ export const usePackData: UsePackDataType = () => {
     cardQuestion: tableParams.searchValue,
   })
 
-  const packMutations = usePackMutations(refetchPack)
-  const [{ deleteCard, updateCard }, mutationsLoading, mutationsError] =
-    packMutations
+  const [mutations, mutationsLoading, mutationsError] =
+    usePackMutations(refetchPack)
+
+  const { handleTableChange, handleSearch, buttonsHandlers } = usePackHandlers(
+    setTableParams,
+    mutations,
+    packId,
+    packName
+  )
+
+  const { deleteCardModal } = usePackModals(mutations)
 
   const isDataLoading = isInitialLoading || isFetching || mutationsLoading
   const serverError = cardsPackQueryError || mutationsError
   const elementsCount = responseData?.cardsTotalCount || 0
-  const isOwnPack = searchParams.get('own') === 'true'
-  const packName = searchParams.get('name') || ''
   const isEmptyPack = !elementsCount
 
   const tableColumns = getPackTableColumns(
     isOwnPack,
-    deleteCard.handler,
-    updateCard.handler
+    deleteCardModal,
+    mutations.updateCard.handler
   )
 
   const formattedTableData = getFormattedPackTableData(responseData)
-
-  const { handleTableChange, handleSearch, buttonsHandlers } = usePackHandlers(
-    setTableParams,
-    packMutations,
-    packId,
-    packName
-  )
 
   return [
     { packName, isEmptyPack, isOwnPack, buttonsHandlers },
