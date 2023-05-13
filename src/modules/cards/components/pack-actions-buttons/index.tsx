@@ -9,12 +9,14 @@ import { StyledActionsButton } from './styles'
 type PackActionButtonsType = {
   isEmptyPack: boolean
   isOwnPack: boolean
+  disabled: boolean
   handlers: ButtonsHandlersType
 }
 
 export const PackActionsButtons: FC<PackActionButtonsType> = ({
   isEmptyPack,
   isOwnPack,
+  disabled,
   handlers,
 }) => {
   const { handleAddCard, handleEditPack, handleDeletePack, handleLearnPack } =
@@ -22,7 +24,10 @@ export const PackActionsButtons: FC<PackActionButtonsType> = ({
 
   if (!isOwnPack) {
     return (
-      <StyledActionsButton disabled={isEmptyPack} onClick={handleLearnPack}>
+      <StyledActionsButton
+        disabled={isEmptyPack || disabled}
+        onClick={handleLearnPack}
+      >
         Learn Pack
       </StyledActionsButton>
     )
@@ -30,16 +35,19 @@ export const PackActionsButtons: FC<PackActionButtonsType> = ({
 
   return (
     <Space.Compact>
-      <StyledActionsButton onClick={handleEditPack}>
+      <StyledActionsButton disabled={disabled} onClick={handleEditPack}>
         Edit Pack
       </StyledActionsButton>
-      <StyledActionsButton onClick={handleDeletePack}>
+      <StyledActionsButton disabled={disabled} onClick={handleDeletePack}>
         Delete Pack
       </StyledActionsButton>
-      <StyledActionsButton disabled={isEmptyPack} onClick={handleLearnPack}>
+      <StyledActionsButton
+        disabled={isEmptyPack || disabled}
+        onClick={handleLearnPack}
+      >
         Learn Pack
       </StyledActionsButton>
-      <StyledActionsButton onClick={handleAddCard}>
+      <StyledActionsButton disabled={disabled} onClick={handleAddCard}>
         Add New Card
       </StyledActionsButton>
     </Space.Compact>

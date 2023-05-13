@@ -31,11 +31,7 @@ type UsePackDataType = () => [
 
 export const usePackData: UsePackDataType = () => {
   const { packId = '' } = useParams()
-
   const [searchParams, setSearchParams] = useSearchParams()
-  const isOwnPack = searchParams.get('own') === 'true'
-  const packName = searchParams.get('name') || ''
-  const isEmptyPack = searchParams.get('isEmpty') === 'true'
 
   const [tableParams, setTableParams] = useState<PackTableParamsType>({
     pagination: {
@@ -68,6 +64,9 @@ export const usePackData: UsePackDataType = () => {
   const isDataLoading = isInitialLoading || isFetching || mutationsLoading
   const serverError = cardsPackQueryError || mutationsError
   const elementsCount = responseData?.cardsTotalCount || 0
+  const isOwnPack = searchParams.get('own') === 'true'
+  const packName = searchParams.get('name') || ''
+  const isEmptyPack = !elementsCount
 
   const tableColumns = getPackTableColumns(
     isOwnPack,

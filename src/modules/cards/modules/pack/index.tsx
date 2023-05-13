@@ -24,6 +24,7 @@ export const Pack: FC = () => {
         <PackActionsButtons
           isEmptyPack={isEmptyPack}
           isOwnPack={isOwnPack}
+          disabled={tableData.isDataLoading}
           handlers={buttonsHandlers}
         />
       </CardsHeader>
@@ -33,6 +34,7 @@ export const Pack: FC = () => {
           placeholder={'Enter question for searching'}
           searchValue={tableData.tableParams.searchValue}
           onSearch={handleSearch}
+          disabled={tableData.isDataLoading}
         />
       </StyledCardsToolbar>
       <CardsTable tableData={tableData} />

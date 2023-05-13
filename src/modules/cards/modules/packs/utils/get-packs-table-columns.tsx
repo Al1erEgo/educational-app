@@ -1,15 +1,24 @@
 import React from 'react'
 
-import { DeleteOutlined, EditOutlined, InfoCircleTwoTone } from '@ant-design/icons'
+import {
+  DeleteOutlined,
+  EditOutlined,
+  InfoCircleTwoTone,
+} from '@ant-design/icons'
 import { Space, Tooltip } from 'antd'
 import { NavLink } from 'react-router-dom'
 
 import { LoginResponseType } from '../../../../auth/types'
 import { useModalContext } from '../../../../modal-provider/hooks'
 import { MY_BUTTON_NAME } from '../../../constants'
-import { PacksModal, DeleteModal } from '../components/packs-modals'
+import { DeleteModal, PacksModal } from '../components/packs-modals'
 import { packsTableColumns } from '../constants'
-import { HandleDeleteOkType, HandleOkType, PacksTableDataColumnsType, PackType } from '../types'
+import {
+  HandleDeleteOkType,
+  HandleOkType,
+  PacksTableDataColumnsType,
+  PackType,
+} from '../types'
 
 type GetPacksTableColumnsType = (
   activeButton: string,
@@ -42,7 +51,7 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
         <NavLink
           to={`/cards/packs/${pack._id}?name=${pack.name}&own=${
             pack?.user_id === userData?._id
-          }&isEmpty=${pack.cardsCount === 0}`}
+          }`}
         >
           {text}
         </NavLink>
@@ -84,11 +93,17 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
         const handleDeleteClick = () => {
           showModal({
             title: 'Delete Pack',
-            content: <DeleteModal onOk={() => handleDeleteOk(pack._id)} packName={pack.name} />,
+            content: (
+              <DeleteModal
+                onOk={() => handleDeleteOk(pack._id)}
+                packName={pack.name}
+              />
+            ),
           })
         }
 
-        return activeButton === MY_BUTTON_NAME || pack?.user_id === userData?._id ? (
+        return activeButton === MY_BUTTON_NAME ||
+          pack?.user_id === userData?._id ? (
           <Space size="middle">
             <Tooltip title={learnTooltipTitle}>{learnAction}</Tooltip>
 
