@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { useParams, useSearchParams } from 'react-router-dom'
 
+import { useModalContext } from '../../modal-provider/hooks'
 import { useCardsPackQuery } from '../api'
 import {
   ButtonsHandlersType,
@@ -32,6 +33,7 @@ type UsePackDataType = () => [
 export const usePackData: UsePackDataType = () => {
   const { packId = '' } = useParams()
   const [searchParams, setSearchParams] = useSearchParams()
+  const { modalConfig, showModal, hideModal } = useModalContext()
 
   const [tableParams, setTableParams] = useState<PackTableParamsType>({
     pagination: {

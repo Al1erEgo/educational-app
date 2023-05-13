@@ -48,7 +48,7 @@ export const usePackHandlers: UsePackHandlersType = (
   }
 
   const handleAddCard = () =>
-    addCard.handler({ card: { cardsPack_id: packId || '', grade: 4 } })
+    addCard.handler({ card: { cardsPack_id: packId || '' } })
   const handleDeletePack = async () => {
     await deletePack.handler({ id: packId })
     navigate(MAIN_PATH.Cards) //можно перенести в хук useHandleAction

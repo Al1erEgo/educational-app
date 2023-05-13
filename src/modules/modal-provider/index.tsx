@@ -1,13 +1,10 @@
-import React from 'react'
+import { FC, PropsWithChildren } from 'react'
 
 import { Modal } from 'antd'
 
-import { useCustomModal, ModalContext } from './hooks'
+import { ModalContext, useCustomModal } from './hooks'
 
-type ModalProviderProps = {
-  children: React.ReactNode
-}
-export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
+export const ModalProvider: FC<PropsWithChildren> = ({ children }) => {
   const { modalConfig, showModal, hideModal } = useCustomModal()
 
   return (
