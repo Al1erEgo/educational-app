@@ -10,7 +10,7 @@ import {
 
 import { PackCardType } from './index'
 
-type HandlerFunctionDataType =
+export type HandlerFunctionDataType =
   | NewCardRequestType
   | DeleteCardRequestType
   | UpdateCardRequestType

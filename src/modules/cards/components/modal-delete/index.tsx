@@ -1,9 +1,10 @@
 import React, { FC } from 'react'
 
+import { DeleteCardRequestType } from '../../api'
 import { PackBaseModalType } from '../../types/pack-modals'
 import { ModalButtons } from '../modal-buttons'
 
-type ModalDeleteType = PackBaseModalType
+type ModalDeleteType = PackBaseModalType<DeleteCardRequestType>
 export const ModalDelete: FC<ModalDeleteType> = ({
   payload,
   onSubmit,
