@@ -1,15 +1,20 @@
 import { FC, PropsWithChildren } from 'react'
 
-import { StyledPacksHeader, StyledTitle } from '../../styles'
+import { StyledTitle } from '../../styles'
+
+import { StyledCardsHeader } from './styles'
 
 type PacksHeaderProps = {
   title: string
 }
-export const CardsHeader: FC<PropsWithChildren<PacksHeaderProps>> = ({ title, children }) => {
+export const CardsHeader: FC<PropsWithChildren<PacksHeaderProps>> = ({
+  title,
+  children,
+}) => {
   return (
-    <StyledPacksHeader>
+    <StyledCardsHeader>
       <StyledTitle>{title}</StyledTitle>
       {children}
-    </StyledPacksHeader>
+    </StyledCardsHeader>
   )
 }
