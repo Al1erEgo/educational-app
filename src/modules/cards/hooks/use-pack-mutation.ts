@@ -15,7 +15,7 @@ export const usePackMutation: UsePackMutationType = (mutationType, refetch) => {
   const [trigger, { isLoading, error }] = mutation()
 
   const handler: HandlerFunctionType = async data => {
-    await trigger(data).unwrap()
+    await trigger(data)
     if (isRefetch) {
       refetch()
     }

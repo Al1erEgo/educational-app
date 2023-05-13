@@ -28,7 +28,7 @@ export const cardsApi = rootApi.injectEndpoints({
         method: 'DELETE',
         params,
       }),
-      invalidatesTags: ['packs', 'pack'],
+      invalidatesTags: ['packs'],
     }),
     updateCardsPack: builder.mutation<{}, UpdateCardsPackRequestType>({
       query: (requestData: UpdateCardsPackRequestType) => ({
@@ -70,7 +70,10 @@ export const cardsApi = rootApi.injectEndpoints({
       }),
       invalidatesTags: ['packs', 'pack'],
     }),
-    updateCardGrade: builder.mutation<UpdateCardGradeResponseType, UpdateCardGradeRequestType>({
+    updateCardGrade: builder.mutation<
+      UpdateCardGradeResponseType,
+      UpdateCardGradeRequestType
+    >({
       query: (requestData: UpdateCardGradeRequestType) => ({
         url: 'cards/grade',
         method: 'PUT',
