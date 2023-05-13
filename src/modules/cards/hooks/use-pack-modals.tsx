@@ -1,23 +1,18 @@
 import React from 'react'
 
 import { useModalContext } from '../../modal-provider/hooks'
-import { ModalDelete } from '../components'
+import { ModalAddCard, ModalDelete } from '../components'
 import { PackMutationsObjType } from '../types'
-import {
-  PackModalsOnSubmitType,
-  PackModalsPayloadType,
-} from '../types/pack-modals'
+import { PackModalsHandlers, PackModalsPayloadType } from '../types/pack-modals'
 
-type UsePackModalsType = (mutations: PackMutationsObjType) => {
-  [key: string]: PackModalsOnSubmitType
-}
+type UsePackModalsType = (mutations: PackMutationsObjType) => PackModalsHandlers
 export const usePackModals: UsePackModalsType = mutations => {
   const { showModal, hideModal } = useModalContext()
   const { addCard, deleteCard, updateCard, updatePack, deletePack } = mutations
 
   const deleteCardModal = (payload: PackModalsPayloadType) =>
     showModal({
-      title: 'Delete Card',
+      title: 'Delete card',
       content: (
         <ModalDelete
           payload={payload}
@@ -27,5 +22,20 @@ export const usePackModals: UsePackModalsType = mutations => {
       ),
     })
 
-  return { deleteCardModal }
+  const addCardModal = (payload: PackModalsPayloadType) => {
+    showModal({
+      title: 'Add new card',
+      content: (
+        <ModalAddCard
+          payload={payload}
+          onSubmit={addCard.handler}
+          onCancel={hideModal}
+        />
+      ),
+    })
+  }
+
+  const editCardModal = () => {}
+
+  return { addCardModal, deleteCardModal }
 }

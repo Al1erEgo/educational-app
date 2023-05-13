@@ -16,7 +16,6 @@ import {
 } from '../utils'
 
 import { usePackHandlers } from './use-pack-handlers'
-import { usePackModals } from './use-pack-modals'
 import { usePackMutations } from './use-pack-mutations'
 
 type UsePackDataType = () => [
@@ -63,14 +62,8 @@ export const usePackData: UsePackDataType = () => {
   const [mutations, mutationsLoading, mutationsError] =
     usePackMutations(refetchPack)
 
-  const { handleTableChange, handleSearch, buttonsHandlers } = usePackHandlers(
-    setTableParams,
-    mutations,
-    packId,
-    packName
-  )
-
-  const { deleteCardModal } = usePackModals(mutations)
+  const { handleTableChange, handleSearch, buttonsHandlers, modalHandlers } =
+    usePackHandlers(setTableParams, mutations, packId, packName)
 
   const isDataLoading = isInitialLoading || isFetching || mutationsLoading
   const serverError = cardsPackQueryError || mutationsError
@@ -79,7 +72,7 @@ export const usePackData: UsePackDataType = () => {
 
   const tableColumns = getPackTableColumns(
     isOwnPack,
-    deleteCardModal,
+    modalHandlers.deleteCardModal,
     mutations.updateCard.handler
   )
 

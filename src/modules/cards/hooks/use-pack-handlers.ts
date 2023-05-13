@@ -11,6 +11,9 @@ import {
   PackMutationsObjType,
   PackTableParamsType,
 } from '../types'
+import { PackModalsHandlers } from '../types/pack-modals'
+
+import { usePackModals } from './use-pack-modals'
 
 type UsePackHandlersType = (
   setTableParams: Dispatch<SetStateAction<PackTableParamsType>>,
@@ -21,6 +24,7 @@ type UsePackHandlersType = (
   handleTableChange: HandleTableChangeType
   handleSearch: HandleSearchType
   buttonsHandlers: ButtonsHandlersType
+  modalHandlers: PackModalsHandlers
 }
 
 export const usePackHandlers: UsePackHandlersType = (
@@ -31,6 +35,7 @@ export const usePackHandlers: UsePackHandlersType = (
 ) => {
   const navigate = useNavigate()
   const { addCard, updateCard, updatePack, deletePack } = mutations
+  const { addCardModal, deleteCardModal } = usePackModals(mutations)
 
   const handleSearch: HandleSearchType = searchValue =>
     setTableParams(prevState => ({ ...prevState, searchValue }))
@@ -48,7 +53,8 @@ export const usePackHandlers: UsePackHandlersType = (
   }
 
   const handleAddCard = () =>
-    addCard.handler({ card: { cardsPack_id: packId || '' } })
+    addCardModal({ card: { cardsPack_id: packId || '' } })
+
   const handleDeletePack = async () => {
     await deletePack.handler({ id: packId })
     navigate(MAIN_PATH.Cards) //можно перенести в хук useHandleAction
@@ -67,5 +73,7 @@ export const usePackHandlers: UsePackHandlersType = (
     handleLearnPack,
   }
 
-  return { handleTableChange, handleSearch, buttonsHandlers }
+  const modalHandlers = { deleteCardModal }
+
+  return { handleTableChange, handleSearch, buttonsHandlers, modalHandlers }
 }

@@ -1,27 +1,15 @@
 import React, { FC } from 'react'
 
-import { Button } from 'antd'
+import { PackBaseModalType } from '../../types/pack-modals'
+import { ModalButtons } from '../modal-buttons'
 
-import {
-  StyledModalButtonsWrapper,
-  StyledModalOkButton,
-} from '../../modules/packs/components/packs-modals/styles'
-import {
-  PackModalsOnSubmitType,
-  PackModalsPayloadType,
-} from '../../types/pack-modals'
-
-type ModalDeleteType = {
-  payload: PackModalsPayloadType
-  onSubmit: PackModalsOnSubmitType
-  onCancel: () => void
-}
+type ModalDeleteType = PackBaseModalType
 export const ModalDelete: FC<ModalDeleteType> = ({
   payload,
   onSubmit,
   onCancel,
 }) => {
-  const handleSubmit = () => {
+  const handleDelete = () => {
     onSubmit(payload)
     onCancel()
   }
@@ -30,10 +18,11 @@ export const ModalDelete: FC<ModalDeleteType> = ({
     <>
       <p>Are you sure you want to delete the card?</p>
 
-      <StyledModalButtonsWrapper>
-        <Button onClick={onCancel}>Cancel</Button>
-        <StyledModalOkButton onClick={handleSubmit}>Delete</StyledModalOkButton>
-      </StyledModalButtonsWrapper>
+      <ModalButtons
+        submitButtonName={'Delete'}
+        onSubmit={handleDelete}
+        onCancel={onCancel}
+      />
     </>
   )
 }
