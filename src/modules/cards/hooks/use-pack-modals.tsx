@@ -2,7 +2,7 @@ import React from 'react'
 
 import { useModalContext } from '../../modal-provider/hooks'
 import { DeleteCardRequestType, NewCardRequestType } from '../api'
-import { ModalAddCard, ModalDelete } from '../components'
+import { ModalCard, ModalDelete } from '../components'
 import { PackMutationsObjType } from '../types'
 import { PackModalsHandlers } from '../types/pack-modals'
 
@@ -27,7 +27,7 @@ export const usePackModals: UsePackModalsType = mutations => {
     showModal({
       title: 'Add new card',
       content: (
-        <ModalAddCard
+        <ModalCard
           payload={payload}
           onSubmit={addCard.handler}
           onCancel={hideModal}

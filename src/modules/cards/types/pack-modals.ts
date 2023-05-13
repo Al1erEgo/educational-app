@@ -23,3 +23,8 @@ export type PackModalsHandlers = {
   addCardModal: PackModalsOnSubmitType<NewCardRequestType>
   deleteCardModal: PackModalsOnSubmitType<DeleteCardRequestType>
 }
+
+export type ModalCardFormType = {
+  question?: string
+  answer?: string
+}

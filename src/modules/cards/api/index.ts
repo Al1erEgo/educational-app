@@ -200,6 +200,13 @@ export type UpdateCardRequestType = {
   card: {
     _id: string
     question?: string
+    answer?: string
+    grade?: number
+    shots?: number
+    answerImg?: string
+    questionImg?: string
+    questionVideo?: string
+    answerVideo?: string
   }
 }
 
