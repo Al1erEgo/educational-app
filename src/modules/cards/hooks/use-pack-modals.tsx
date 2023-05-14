@@ -8,10 +8,7 @@ import {
 } from '../api'
 import { ModalCard, ModalDelete } from '../components'
 import { PackMutationsObjType } from '../types'
-import {
-  PackModalCardInitialValuesType,
-  PackModalsHandlersType,
-} from '../types/pack-modals'
+import { PackModalsHandlersType } from '../types/pack-modals'
 
 type UsePackModalsType = (
   mutations: PackMutationsObjType
@@ -45,17 +42,13 @@ export const usePackModals: UsePackModalsType = mutations => {
     })
   }
 
-  const updateCardModal = (
-    payload: UpdateCardRequestType,
-    initialValues: PackModalCardInitialValuesType
-  ) => {
+  const updateCardModal = (payload: UpdateCardRequestType) => {
     showModal({
       title: 'Edit card',
       content: (
         <ModalCard
           payload={payload}
-          initialValues={initialValues}
-          onSubmit={addCard.handler}
+          onSubmit={updateCard.handler}
           onCancel={hideModal}
         />
       ),

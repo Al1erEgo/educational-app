@@ -4,12 +4,10 @@ import {
   UpdateCardRequestType,
 } from '../api'
 
-export type PackModalCardInitialValuesType =
-  | {
-      question?: string
-      answer?: string
-    }
-  | undefined
+export type PackModalCardInitialValuesType = {
+  question: string
+  answer: string
+}
 
 export type PackModalsOnSubmitType<T> = (payload: T) => void
 
@@ -19,18 +17,11 @@ export type PackModalBaseType<T> = {
   onCancel: () => void
 }
 
-export type PackModalCardType = {
-  initialValues?: PackModalCardInitialValuesType
-}
-
 export type PackModalCardPayloadType =
   | NewCardRequestType
   | UpdateCardRequestType
 
-export type PackModalsHandlerType<T> = (
-  payload: T,
-  initialValues?: PackModalCardInitialValuesType
-) => void
+export type PackModalsHandlerType<T> = PackModalsOnSubmitType<T>
 
 export type PackModalsHandlersType = {
   addCardModal: PackModalsHandlerType<NewCardRequestType>

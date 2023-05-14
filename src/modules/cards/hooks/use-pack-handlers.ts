@@ -35,7 +35,7 @@ export const usePackHandlers: UsePackHandlersType = (
 ) => {
   const navigate = useNavigate()
   const { addCard, updateCard, updatePack, deletePack } = mutations
-  const { addCardModal, deleteCardModal } = usePackModals(mutations)
+  const modalHandlers = usePackModals(mutations)
 
   const handleSearch: HandleSearchType = searchValue =>
     setTableParams(prevState => ({ ...prevState, searchValue }))
@@ -53,7 +53,7 @@ export const usePackHandlers: UsePackHandlersType = (
   }
 
   const handleAddCard = () =>
-    addCardModal({ card: { cardsPack_id: packId || '' } })
+    modalHandlers.addCardModal({ card: { cardsPack_id: packId || '' } })
 
   const handleDeletePack = async () => {
     await deletePack.handler({ id: packId })
@@ -72,8 +72,6 @@ export const usePackHandlers: UsePackHandlersType = (
     handleDeletePack,
     handleLearnPack,
   }
-
-  const modalHandlers = { deleteCardModal }
 
   return { handleTableChange, handleSearch, buttonsHandlers, modalHandlers }
 }

@@ -7,20 +7,18 @@ import {
   ModalCardFormType,
   PackModalBaseType,
   PackModalCardPayloadType,
-  PackModalCardType,
 } from '../../types/pack-modals'
 import { ModalButtons } from '../modal-buttons'
 
 export const ModalCard = <T extends PackModalCardPayloadType>({
   payload,
-  initialValues,
   onSubmit,
   onCancel,
-}: PackModalBaseType<T> & PackModalCardType) => {
+}: PackModalBaseType<T>) => {
   const { handleSubmit, control, setValue } = useForm({
     defaultValues: {
-      question: initialValues?.question || '',
-      answer: initialValues?.answer || '',
+      question: payload?.card.question || '',
+      answer: payload?.card.answer || '',
     },
   })
 
