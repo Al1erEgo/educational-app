@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { Form, Input } from 'antd'
-import { Controller, useForm } from 'react-hook-form'
+import { Form } from 'antd'
+import { useForm } from 'react-hook-form'
 
 import {
   ModalCardFormType,
@@ -9,20 +9,21 @@ import {
   PackModalCardPayloadType,
 } from '../../types/pack-modals'
 import { ModalButtons } from '../modal-buttons'
+import { ModalFormInput } from '../modal-form-input'
 
 export const ModalCard = <T extends PackModalCardPayloadType>({
   payload,
   onSubmit,
   onCancel,
 }: PackModalBaseType<T>) => {
-  const { handleSubmit, control, setValue } = useForm({
+  const { handleSubmit, control, setValue } = useForm<ModalCardFormType>({
     defaultValues: {
       question: payload?.card.question || '',
       answer: payload?.card.answer || '',
     },
   })
 
-  const handleAddCard = (inputData: ModalCardFormType) => {
+  const handleCardSubmit = (inputData: ModalCardFormType) => {
     const submitData = {
       card: { ...payload.card, ...inputData },
     } as T
@@ -31,27 +32,20 @@ export const ModalCard = <T extends PackModalCardPayloadType>({
     onCancel()
   }
 
+  //Button name depends on usage of ModalCard and type of payload
+  const submitButtonName =
+    'cardsPack_id' in payload.card ? 'Add card' : 'Edit card'
+
   return (
     <>
-      <Form onFinish={handleSubmit(handleAddCard)}>
+      <Form onFinish={handleSubmit(handleCardSubmit)}>
+        <ModalFormInput name={'Question'} control={control} />
+        <ModalFormInput name={'Answer'} control={control} />
         <Form.Item>
-          <Controller
-            name={'question'}
-            control={control}
-            render={({ field }) => (
-              <Input {...field} placeholder={'Question'} />
-            )}
+          <ModalButtons
+            submitButtonName={submitButtonName}
+            onCancel={onCancel}
           />
-        </Form.Item>
-        <Form.Item>
-          <Controller
-            name={'answer'}
-            control={control}
-            render={({ field }) => <Input {...field} placeholder={'Answer'} />}
-          />
-        </Form.Item>
-        <Form.Item>
-          <ModalButtons submitButtonName={'Add card'} onCancel={onCancel} />
         </Form.Item>
       </Form>
     </>

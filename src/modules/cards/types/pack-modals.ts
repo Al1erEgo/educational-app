@@ -4,11 +4,6 @@ import {
   UpdateCardRequestType,
 } from '../api'
 
-export type PackModalCardInitialValuesType = {
-  question: string
-  answer: string
-}
-
 export type PackModalsOnSubmitType<T> = (payload: T) => void
 
 export type PackModalBaseType<T> = {
