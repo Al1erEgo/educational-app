@@ -1,15 +1,15 @@
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Space, Tooltip } from 'antd'
 
-import { DeleteCardRequestType } from '../api'
+import { DeleteCardRequestType, UpdateCardRequestType } from '../api'
 import { packTableColumns } from '../constants'
-import { HandlerFunctionType, PackTableColumnsType } from '../types'
-import { PackModalsOnSubmitType } from '../types/pack-modals'
+import { PackTableColumnsType } from '../types'
+import { PackModalsHandlerType } from '../types/pack-modals'
 
 type GetTableColumnsType = (
   isMine: boolean,
-  deleteCard: PackModalsOnSubmitType<DeleteCardRequestType>,
-  updateCard: HandlerFunctionType
+  deleteCard: PackModalsHandlerType<DeleteCardRequestType>,
+  updateCard: PackModalsHandlerType<UpdateCardRequestType>
 ) => PackTableColumnsType[]
 
 export const getPackTableColumns: GetTableColumnsType = (

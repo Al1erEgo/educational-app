@@ -1,12 +1,21 @@
 import React from 'react'
 
 import { useModalContext } from '../../modal-provider/hooks'
-import { DeleteCardRequestType, NewCardRequestType } from '../api'
+import {
+  DeleteCardRequestType,
+  NewCardRequestType,
+  UpdateCardRequestType,
+} from '../api'
 import { ModalCard, ModalDelete } from '../components'
 import { PackMutationsObjType } from '../types'
-import { PackModalsHandlers } from '../types/pack-modals'
+import {
+  PackModalCardInitialValuesType,
+  PackModalsHandlersType,
+} from '../types/pack-modals'
 
-type UsePackModalsType = (mutations: PackMutationsObjType) => PackModalsHandlers
+type UsePackModalsType = (
+  mutations: PackMutationsObjType
+) => PackModalsHandlersType
 export const usePackModals: UsePackModalsType = mutations => {
   const { showModal, hideModal } = useModalContext()
   const { addCard, deleteCard, updateCard, updatePack, deletePack } = mutations
@@ -36,7 +45,22 @@ export const usePackModals: UsePackModalsType = mutations => {
     })
   }
 
-  const editCardModal = () => {}
+  const updateCardModal = (
+    payload: UpdateCardRequestType,
+    initialValues: PackModalCardInitialValuesType
+  ) => {
+    showModal({
+      title: 'Edit card',
+      content: (
+        <ModalCard
+          payload={payload}
+          initialValues={initialValues}
+          onSubmit={addCard.handler}
+          onCancel={hideModal}
+        />
+      ),
+    })
+  }
 
-  return { addCardModal, deleteCardModal }
+  return { addCardModal, updateCardModal, deleteCardModal }
 }

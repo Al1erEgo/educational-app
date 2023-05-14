@@ -11,7 +11,7 @@ import {
   PackMutationsObjType,
   PackTableParamsType,
 } from '../types'
-import { PackModalsHandlers } from '../types/pack-modals'
+import { PackModalsHandlersType } from '../types/pack-modals'
 
 import { usePackModals } from './use-pack-modals'
 
@@ -24,7 +24,7 @@ type UsePackHandlersType = (
   handleTableChange: HandleTableChangeType
   handleSearch: HandleSearchType
   buttonsHandlers: ButtonsHandlersType
-  modalHandlers: PackModalsHandlers
+  modalHandlers: PackModalsHandlersType
 }
 
 export const usePackHandlers: UsePackHandlersType = (

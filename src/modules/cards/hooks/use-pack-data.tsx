@@ -73,7 +73,7 @@ export const usePackData: UsePackDataType = () => {
   const tableColumns = getPackTableColumns(
     isOwnPack,
     modalHandlers.deleteCardModal,
-    mutations.updateCard.handler
+    modalHandlers.updateCardModal
   )
 
   const formattedTableData = getFormattedPackTableData(responseData)

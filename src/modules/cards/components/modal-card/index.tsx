@@ -1,31 +1,33 @@
-import React, { FC } from 'react'
+import React from 'react'
 
 import { Form, Input } from 'antd'
 import { Controller, useForm } from 'react-hook-form'
 
-import { NewCardRequestType, UpdateCardRequestType } from '../../api'
-import { ModalCardFormType, PackBaseModalType } from '../../types/pack-modals'
+import {
+  ModalCardFormType,
+  PackModalBaseType,
+  PackModalCardPayloadType,
+  PackModalCardType,
+} from '../../types/pack-modals'
 import { ModalButtons } from '../modal-buttons'
 
-type ModalCardType = PackBaseModalType<
-  NewCardRequestType | UpdateCardRequestType
->
-export const ModalCard: FC<ModalCardType> = ({
+export const ModalCard = <T extends PackModalCardPayloadType>({
   payload,
+  initialValues,
   onSubmit,
   onCancel,
-}) => {
+}: PackModalBaseType<T> & PackModalCardType) => {
   const { handleSubmit, control, setValue } = useForm({
     defaultValues: {
-      question: '',
-      answer: '',
+      question: initialValues?.question || '',
+      answer: initialValues?.answer || '',
     },
   })
 
   const handleAddCard = (inputData: ModalCardFormType) => {
     const submitData = {
       card: { ...payload.card, ...inputData },
-    }
+    } as T
 
     onSubmit(submitData)
     onCancel()

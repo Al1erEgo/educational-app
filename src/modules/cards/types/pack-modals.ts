@@ -2,26 +2,40 @@ import {
   DeleteCardRequestType,
   NewCardRequestType,
   UpdateCardRequestType,
-  UpdateCardsPackRequestType,
 } from '../api'
 
-export type PackBaseModalType<T> = {
+export type PackModalCardInitialValuesType =
+  | {
+      question?: string
+      answer?: string
+    }
+  | undefined
+
+export type PackModalsOnSubmitType<T> = (payload: T) => void
+
+export type PackModalBaseType<T> = {
   payload: T
   onSubmit: PackModalsOnSubmitType<T>
   onCancel: () => void
 }
 
-export type PackModalsPayloadType =
+export type PackModalCardType = {
+  initialValues?: PackModalCardInitialValuesType
+}
+
+export type PackModalCardPayloadType =
   | NewCardRequestType
-  | DeleteCardRequestType
   | UpdateCardRequestType
-  | UpdateCardsPackRequestType
 
-export type PackModalsOnSubmitType<T> = (payload: T) => void
+export type PackModalsHandlerType<T> = (
+  payload: T,
+  initialValues?: PackModalCardInitialValuesType
+) => void
 
-export type PackModalsHandlers = {
-  addCardModal: PackModalsOnSubmitType<NewCardRequestType>
-  deleteCardModal: PackModalsOnSubmitType<DeleteCardRequestType>
+export type PackModalsHandlersType = {
+  addCardModal: PackModalsHandlerType<NewCardRequestType>
+  updateCardModal: PackModalsHandlerType<UpdateCardRequestType>
+  deleteCardModal: PackModalsHandlerType<DeleteCardRequestType>
 }
 
 export type ModalCardFormType = {
