@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 
 import { DeleteCardRequestType } from '../../api'
+import { StyledModalWrapper } from '../../styles'
 import { PackModalBaseType } from '../../types/pack-modals'
 import { ModalButtons } from '../modal-buttons'
 
@@ -16,7 +17,7 @@ export const ModalDelete: FC<ModalDeleteType> = ({
   }
 
   return (
-    <>
+    <StyledModalWrapper>
       <p>Are you sure you want to delete the card?</p>
 
       <ModalButtons
@@ -24,6 +25,6 @@ export const ModalDelete: FC<ModalDeleteType> = ({
         onSubmit={handleDelete}
         onCancel={onCancel}
       />
-    </>
+    </StyledModalWrapper>
   )
 }

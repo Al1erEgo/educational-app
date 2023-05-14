@@ -3,6 +3,7 @@ import React from 'react'
 import { Form } from 'antd'
 import { useForm } from 'react-hook-form'
 
+import { StyledModalWrapper } from '../../styles'
 import {
   ModalCardFormType,
   PackModalBaseType,
@@ -37,7 +38,7 @@ export const ModalCard = <T extends PackModalCardPayloadType>({
     'cardsPack_id' in payload.card ? 'Add card' : 'Edit card'
 
   return (
-    <>
+    <StyledModalWrapper>
       <Form onFinish={handleSubmit(handleCardSubmit)}>
         <ModalFormInput name={'Question'} control={control} />
         <ModalFormInput name={'Answer'} control={control} />
@@ -48,6 +49,6 @@ export const ModalCard = <T extends PackModalCardPayloadType>({
           />
         </Form.Item>
       </Form>
-    </>
+    </StyledModalWrapper>
   )
 }

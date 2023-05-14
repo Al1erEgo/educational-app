@@ -11,10 +11,11 @@ type ModalFormInputType = {
 export const ModalFormInput: FC<ModalFormInputType> = ({ name, control }) => {
   return (
     <Form.Item>
+      <p>{name}:</p>
       <Controller
         name={name.toLowerCase()}
         control={control}
-        render={({ field }) => <Input {...field} placeholder={name} />}
+        render={({ field }) => <Input.TextArea {...field} />}
       />
     </Form.Item>
   )

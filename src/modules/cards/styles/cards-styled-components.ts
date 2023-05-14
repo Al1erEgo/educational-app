@@ -65,3 +65,7 @@ export const StyledRate = styled(Rate).attrs({
 })`
   font-size: 0.8rem;
 `
+
+export const StyledModalWrapper = styled.div`
+  margin-top: 1rem;
+`
