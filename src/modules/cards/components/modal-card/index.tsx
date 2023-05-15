@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 
 import { UploadOutlined } from '@ant-design/icons'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Button, Form, Select, Upload, UploadProps } from 'antd'
-import { RcFile } from 'antd/es/upload'
+import { Button, Form, Select, Upload, UploadFile, UploadProps } from 'antd'
+import { RcFile, UploadChangeParam } from 'antd/es/upload'
 import { Controller, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
@@ -18,6 +18,12 @@ import {
 } from '../../types/pack-modals'
 import { ModalButtons } from '../modal-buttons'
 import { ModalFormInput } from '../modal-form-input'
+
+type HandleChange2Type = (
+  event: UploadChangeParam<UploadFile<any>>,
+  fieldName: string
+    onChange:
+) => void
 
 const textSchema = yup.object({
   // question: yup.string().min(1).max(1000).required(),
@@ -101,7 +107,11 @@ export const ModalCard = <T extends PackModalCardPayloadType>({
     }
   }
 
-  const handleChange2 = () => {}
+  const handleChange2 = async (
+    { fileList: newFileList },
+    fieldName,
+    onChange
+  ) => {}
 
   //Button name depends on usage of ModalCard and type of payload
   const submitButtonName =
