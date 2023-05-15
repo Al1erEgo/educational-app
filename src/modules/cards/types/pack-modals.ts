@@ -27,6 +27,8 @@ export type PackModalsHandlersType = {
 export type ModalCardFormType = {
   question?: string
   answer?: string
+  questionImg?: string
+  answerImg?: string
 }
 
 export type ModalCardPictureType = {
@@ -34,4 +36,4 @@ export type ModalCardPictureType = {
   answerImg?: string
 }
 
-export type ModalCardFormatType = 'text' | 'picture'
+export type ModalCardFormatType = 'text' | 'img'

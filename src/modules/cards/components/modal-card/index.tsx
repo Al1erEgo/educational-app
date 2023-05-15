@@ -4,11 +4,9 @@ import { UploadOutlined } from '@ant-design/icons'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Button, Form, Select, Upload, UploadProps } from 'antd'
 import { RcFile } from 'antd/es/upload'
-import { UploadRequestOption } from 'rc-upload/lib/interface'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
-import { getBase64 } from '../../../auth/utils'
 import { SELECT_OPTIONS } from '../../constants/pack-modals'
 import { StyledModalWrapper } from '../../styles'
 import {
@@ -21,41 +19,61 @@ import {
 import { ModalButtons } from '../modal-buttons'
 import { ModalFormInput } from '../modal-form-input'
 
-const schema = yup.object({
-  question: yup.string().min(1).max(1000).required(),
-  answer: yup.string().min(1).max(1000).required(),
+const textSchema = yup.object({
+  // question: yup.string().min(1).max(1000).required(),
+  // answer: yup.string().min(1).max(1000).required(),
+  question: yup.string(),
+  answer: yup.string(),
 })
+const imgSchema = yup.object({
+  questionImg: yup.string().required(),
+  answerImg: yup.string().required(),
+})
+
+const getBase64 = (file: RcFile): Promise<string> =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader()
+
+    reader.readAsDataURL(file)
+    reader.onload = () => resolve(reader.result as string)
+    reader.onerror = error => reject(error)
+  })
 
 export const ModalCard = <T extends PackModalCardPayloadType>({
   payload,
   onSubmit,
   onCancel,
 }: PackModalBaseType<T>) => {
-  const cardFormatStateType =
-    payload.card.questionImg || payload.card.answerImg ? 'picture' : 'text'
+  const cardFormatInitStateType =
+    payload.card.questionImg || payload.card.answerImg ? 'img' : 'text'
 
-  const [format, setFormat] = useState<ModalCardFormatType>(cardFormatStateType)
-  const [cardPictures, setCardPictures] = useState<ModalCardPictureType>({
-    questionImg: payload.card.questionImg,
-    answerImg: payload.card.answerImg,
-  })
+  const [format, setFormat] = useState<ModalCardFormatType>(
+    cardFormatInitStateType
+  )
+
+  const schema = format === 'img' ? imgSchema : textSchema
 
   const {
     handleSubmit,
     control,
+    watch,
     setValue,
     formState: { errors, isDirty },
   } = useForm<ModalCardFormType>({
     defaultValues: {
       question: payload?.card.question || '',
       answer: payload?.card.answer || '',
+      questionImg: payload?.card.questionImg || '',
+      answerImg: payload?.card.answerImg || '',
     },
-    resolver: yupResolver(schema),
+    resolver: yupResolver(imgSchema),
     mode: 'all',
   })
 
+  console.log('watch', watch())
+
   const handleCardSubmit = (
-    inputData: ModalCardFormType | ModalCardPictureType
+    inputData: ModalCardFormType & ModalCardPictureType
   ) => {
     const submitData = {
       card: { ...payload.card, ...inputData },
@@ -66,34 +84,24 @@ export const ModalCard = <T extends PackModalCardPayloadType>({
   }
 
   const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
-    console.log(newFileList)
-    if (newFileList[0].originFileObj) {
+    if (newFileList[0]?.originFileObj) {
       const file = newFileList[0].originFileObj as RcFile
 
       if (file.size < 4000000) {
-        getBase64(file, url => {
-          setCardPictures(prevState => ({ ...prevState, questionImg: url }))
-        })
+        const url = getBase64(file)
+
         newFileList[0].status = 'success'
+
+        return url
       } else {
         console.error('Error: ', 'Файл слишком большого размера')
       }
+    } else {
+      return ''
     }
   }
 
-  const uploadHandler = (action: UploadRequestOption) => {
-    if (action.file) {
-      const file = action.file as RcFile
-
-      if (file.size < 4000000) {
-        getBase64(file, url => {
-          setCardPictures(prevState => ({ ...prevState, questionImg: url }))
-        })
-      } else {
-        console.error('Error: ', 'Файл слишком большого размера')
-      }
-    }
-  }
+  const handleChange2 = () => {}
 
   //Button name depends on usage of ModalCard and type of payload
   const submitButtonName =
@@ -109,23 +117,55 @@ export const ModalCard = <T extends PackModalCardPayloadType>({
         options={SELECT_OPTIONS}
       />
       {/*TODO выделить форму в отдельный компонент*/}
-      <Upload
-        showUploadList={true}
-        accept="image/*"
-        listType="picture"
-        onChange={handleChange}
+      <Form.Item
+        validateStatus={errors.questionImg ? 'error' : ''}
+        help={errors?.questionImg?.message}
       >
-        <Button icon={<UploadOutlined />}>Upload question</Button>
-      </Upload>
-      <Upload
-        showUploadList={true}
-        accept="image/*"
-        listType="picture"
-        onChange={handleChange}
-        customRequest={uploadHandler}
+        <p>Question Img:</p>
+        <Controller
+          name={'questionImg'}
+          control={control}
+          render={({ field }) => (
+            <Upload
+              showUploadList={true}
+              accept="image/*"
+              listType="picture"
+              onChange={async e => {
+                const file = await handleChange(e)
+
+                field.onChange(file)
+              }}
+              //onRemove={() => setValue(field.name, '')}
+            >
+              <Button icon={<UploadOutlined />}>Upload question</Button>
+            </Upload>
+          )}
+        />
+      </Form.Item>
+      <Form.Item
+        validateStatus={errors.answerImg ? 'error' : ''}
+        help={errors?.answerImg?.message}
       >
-        <Button icon={<UploadOutlined />}>Upload answer</Button>
-      </Upload>
+        <p>Answer Img:</p>
+        <Controller
+          name={'answerImg'}
+          control={control}
+          render={({ field }) => (
+            <Upload
+              showUploadList={true}
+              accept="image/*"
+              listType="picture"
+              onChange={async e => {
+                const file = await handleChange(e)
+
+                field.onChange(file)
+              }}
+            >
+              <Button icon={<UploadOutlined />}>Upload question</Button>
+            </Upload>
+          )}
+        />
+      </Form.Item>
       <Form onFinish={handleSubmit(handleCardSubmit)}>
         <ModalFormInput
           name={'Question'}
