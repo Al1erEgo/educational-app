@@ -60,13 +60,13 @@ export const usePacksHandlers: UsePacksHandlersType = (setPacksTableParams, pack
    @param sorter - Object containing current sorting parameters
    */
   const handlePacksTableChange: HandlePacksTableChangeType = (pagination, filters, sorter) => {
+    console.log('Table changed:', pagination, filters, sorter)
     setPacksTableParams(prevState => ({
       ...prevState,
       pagination,
       ...sorter,
     }))
   }
-
   /**
    Handler for changing slider values and updates the packs table parameters accordingly
    @param value - Value of slider
@@ -91,6 +91,8 @@ export const usePacksHandlers: UsePacksHandlersType = (setPacksTableParams, pack
         current: 1,
         pageSize: 10,
       },
+      field: '',
+      order: null,
       sortPacks: '',
       searchValue: '',
       minCardsCount: undefined,
@@ -161,3 +163,65 @@ export const usePacksHandlers: UsePacksHandlersType = (setPacksTableParams, pack
     handleDeleteOk,
   }
 }
+
+/*  const handlePacksTableChange: HandlePacksTableChangeType = (pagination, filters, sorter) => {
+ console.log('Table changed:', pagination, filters, sorter)
+
+ let sortingParam: any
+
+ if (Array.isArray(sorter)) {
+ sortingParam = sorter.map(item => `${item.order === 'ascend' ? 0 : 1}${item.field}`).join(',')
+ } else {
+ if (sorter.order && sorter.field) {
+ sortingParam = `${sorter.order === 'ascend' ? 0 : 1}${sorter.field}`
+ } else {
+ sortingParam = undefined
+ }
+ }
+
+ setPacksTableParams(prevState => ({
+ ...prevState,
+ pagination,
+ sorter: sorter as SorterResult<PackType>, // Add a type assertion here
+ sortPacks: sortingParam,
+ }))
+
+ }*/
+
+/*  const handlePacksTableChange: HandlePacksTableChangeType = (pagination, filters, sorter) => {
+ let newSorter: SorterResult<PackType> = {}
+
+ if (Array.isArray(sorter)) {
+ newSorter = sorter[0]
+ } else {
+ newSorter = sorter
+ }
+
+ newSorter = {
+ ...newSorter,
+ order: newSorter?.order ? newSorter.order : undefined,
+ field: newSorter?.field ? newSorter.field : undefined,
+ }
+
+ let sortingParam: string | undefined;
+
+ if (newSorter.order && newSorter.field) {
+ if (newSorter.order === 'ascend') {
+ newSorter.order = 'descend'
+ sortingParam = '0' + newSorter.field.toString()
+ } else {
+ newSorter.order = 'ascend'
+ sortingParam = '1' + newSorter.field.toString()
+ }
+ } else {
+ newSorter = {}
+ sortingParam = undefined
+ }
+
+ setPacksTableParams(prevState => ({
+ ...prevState,
+ pagination,
+ sorter: newSorter,
+ sortPacks: sortingParam,
+ }))
+ }*/

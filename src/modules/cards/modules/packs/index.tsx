@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { Skeleton } from 'antd'
+import styled from 'styled-components'
 
 import { useModalContext } from '../../../modal-provider/hooks'
 import { CardsHeader, CardsSearch } from '../../components'
@@ -42,28 +43,34 @@ export const Packs = () => {
         </StyledCardsTitleButton>
       </CardsHeader>
 
-      <Skeleton loading={isPacksDataLoading} paragraph={{ rows: 0 }}>
-        <StyledCardsToolbar>
-          <CardsSearch
-            searchValue={packsTableParams.searchValue}
-            onSearch={handlePacksSearch}
-            placeholder={'Enter pack name'}
-          />
-          <PacksButton
-            activeButton={packsTableParams.activeButton}
-            handleToggleButton={handleToggleButton}
-          />
-          <PacksSlider
-            state={packsTableParams}
-            handleSliderChange={handleSliderChange}
-            minCardsCount={data?.minCardsCount}
-            maxCardsCount={data?.maxCardsCount}
-          />
-          <PacksFilter clearFilters={handleClearFilters} />
-        </StyledCardsToolbar>
-      </Skeleton>
+      <InlineBlockDiv>
+        <Skeleton loading={isPacksDataLoading} active paragraph={{ rows: 3 }} title={false}>
+          <StyledCardsToolbar>
+            <CardsSearch
+              searchValue={packsTableParams.searchValue}
+              onSearch={handlePacksSearch}
+              placeholder={'Enter pack name'}
+            />
+            <PacksButton
+              activeButton={packsTableParams.activeButton}
+              handleToggleButton={handleToggleButton}
+            />
+            <PacksSlider
+              state={packsTableParams}
+              handleSliderChange={handleSliderChange}
+              minCardsCount={data?.minCardsCount}
+              maxCardsCount={data?.maxCardsCount}
+            />
+            <PacksFilter clearFilters={handleClearFilters} />
+          </StyledCardsToolbar>
+        </Skeleton>
+      </InlineBlockDiv>
 
       <PacksTable packsTableData={packsTableData} />
     </>
   )
 }
+
+const InlineBlockDiv = styled.div`
+  display: inline-block;
+`
