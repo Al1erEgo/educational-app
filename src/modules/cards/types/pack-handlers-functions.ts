@@ -6,11 +6,11 @@ import {
   NewCardRequestType,
   UpdateCardRequestType,
   UpdateCardsPackRequestType,
-} from '../../../api'
+} from '../api'
 
-import { CardType } from './index'
+import { PackCardType } from './index'
 
-type HandlerFunctionDataType =
+export type HandlerFunctionDataType =
   | NewCardRequestType
   | DeleteCardRequestType
   | UpdateCardRequestType
@@ -21,7 +21,7 @@ export type HandlerFunctionType = (data: HandlerFunctionDataType) => void
 export type HandleTableChangeType = (
   pagination: TablePaginationConfig,
   filters: Record<string, FilterValue | null>,
-  sorter: SorterResult<CardType> | SorterResult<CardType>[]
+  sorter: SorterResult<PackCardType> | SorterResult<PackCardType>[]
 ) => void
 
 export type HandleSearchType = (searchValue: string) => void

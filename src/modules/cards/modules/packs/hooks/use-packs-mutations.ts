@@ -3,7 +3,9 @@ import { MutationsPackObjType, MutationsWithConditionsPackType } from '../types'
 
 import { usePacksMutation } from './use-packs-mutation'
 
-type UsePackMutationsType = (refetchPack: () => void) => MutationsWithConditionsPackType
+type UsePackMutationsType = (
+  refetchPack: () => void
+) => MutationsWithConditionsPackType
 
 /**
  A custom hook that takes a function that refetches pack data and returns an array with the
@@ -33,13 +35,17 @@ export const usePacksMutations: UsePackMutationsType = refetchPack => {
    * An object containing the loading state of each mutation.
    * @type {Object}
    */
-  const actionsError = addPacks.errors || updatePacks.errors || deletePacks.errors
+  const actionsError =
+    addPacks.errors || updatePacks.errors || deletePacks.errors
 
   /**
    * An object containing the error state of each mutation.
    * @type {Object}
    */
-  const actionsLoading = addPacks.isLoadings || updatePacks.isLoadings || deletePacks.isLoadings
+  const actionsLoading =
+    addPacks.isLoadings || updatePacks.isLoadings || deletePacks.isLoadings
 
   return [mutations, actionsLoading, actionsError]
 }
+
+//TODO rename actions to mutations, isLoadings and errors to isLoading and error

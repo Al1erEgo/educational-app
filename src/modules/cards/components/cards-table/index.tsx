@@ -2,42 +2,40 @@ import React, { FC } from 'react'
 
 import { Table } from 'antd'
 
-import { CardsConditionProvider } from '../../../../components'
-import { useTableResize } from '../../../../hooks'
-import { TableDataType } from '../../../../types'
-import { getFormattedTableData } from '../../utils'
+import { useTableResize } from '../../hooks'
+import { CardsConditionProvider } from '../cards-table-condition-provider'
 
-type PackTableType = {
-  data: TableDataType
+type CardsTableType = {
+  tableData: any
 }
 
-export const PackTable: FC<PackTableType> = ({ data }) => {
+export const CardsTable: FC<CardsTableType> = ({ tableData }) => {
   const {
-    responseData,
+    formattedTableData,
     tableColumns,
     tableParams,
+    elementsCount,
     handleTableChange,
-    isPackDataLoading,
+    isDataLoading,
     serverError,
-  } = data
-  const tableHeight = useTableResize()
+  } = tableData
 
-  const formattedTableData = getFormattedTableData(responseData)
+  const tableHeight = useTableResize()
 
   return (
     <CardsConditionProvider error={serverError} type="table">
       <Table
-        loading={isPackDataLoading}
         size={'small'}
         columns={tableColumns}
         dataSource={formattedTableData}
+        loading={isDataLoading}
         onChange={handleTableChange}
         pagination={{
           ...tableParams.pagination,
           pageSizeOptions: ['10', '20', '50'],
           showQuickJumper: true,
           showSizeChanger: true,
-          total: responseData?.cardsTotalCount || 0,
+          total: elementsCount,
         }}
         scroll={{ scrollToFirstRowOnChange: true, y: tableHeight }}
       />

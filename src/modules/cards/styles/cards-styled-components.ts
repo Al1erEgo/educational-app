@@ -1,16 +1,8 @@
-import { Button, Typography } from 'antd'
+import { Button, Rate, Typography } from 'antd'
 import Title from 'antd/es/typography/Title'
-import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
 const { Text } = Typography
-
-export const StyledPacksHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-`
 
 export const StyledTitle = styled(Title).attrs({
   level: 2,
@@ -20,6 +12,7 @@ export const StyledTitle = styled(Title).attrs({
 `
 
 //TODO проверить надо ли оставить лоадинг условие
+//TODO перенести в tyles.ts рядом с index.tsx в Packs
 export const StyledCardsTitleButton = styled(Button).attrs(props => ({
   type: 'primary',
   htmlType: 'submit',
@@ -43,22 +36,6 @@ export const StyledCardsText = styled(Text)`
   font-weight: 500;
   line-height: 17px;
 `
-export const StyledBackToCardLink = styled(NavLink)`
-  position: absolute;
-  top: 30px;
-  text-decoration: none;
-  color: black;
-  line-height: 1.5rem;
-  margin-bottom: 20px;
-
-  &:hover {
-    opacity: 0.7;
-  }
-`
-
-export const StyledArrowImg = styled.img`
-  margin-right: 0.5rem;
-`
 
 export const StyledLearnCardButton = styled(Button).attrs({
   type: 'primary',
@@ -81,4 +58,14 @@ export const StyledLearnCard = styled.div`
   gap: 1rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+`
+
+export const StyledRate = styled(Rate).attrs({
+  disabled: true,
+})`
+  font-size: 0.8rem;
+`
+
+export const StyledModalWrapper = styled.div`
+  margin-top: 1rem;
 `

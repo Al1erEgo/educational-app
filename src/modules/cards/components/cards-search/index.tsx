@@ -13,24 +13,23 @@ type CardsSearchProps = CardsSearchWrapperProps & {
   searchValue: string
   onSearch: HandleSearchType
   placeholder: string
-  isLoading: boolean
+  disabled?: boolean
 }
 export const CardsSearch: FC<CardsSearchProps> = ({
   size = 'small',
   onSearch,
   searchValue,
   placeholder,
-  isLoading,
+  disabled,
 }) => {
-  const { handleOnSearchChange, localSearchValue } = useDebouncedSearchWithReset(
-    searchValue,
-    onSearch
-  )
+  const { handleOnSearchChange, localSearchValue } =
+    useDebouncedSearchWithReset(searchValue, onSearch)
 
   return (
     <Style size={size}>
       <StyledCardsText>Search</StyledCardsText>
       <Input.Search
+        disabled={disabled}
         placeholder={placeholder}
         enterButton={<SearchOutlined />}
         value={localSearchValue}
@@ -38,7 +37,6 @@ export const CardsSearch: FC<CardsSearchProps> = ({
         onSearch={onSearch}
         allowClear={true}
         maxLength={50}
-        disabled={isLoading}
       />
     </Style>
   )

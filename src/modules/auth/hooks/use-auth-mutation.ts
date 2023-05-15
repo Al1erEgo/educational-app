@@ -9,15 +9,22 @@ type OnSubmitMutationType = <T>(data?: T) => Promise<void>
 
 export type UseMutationReturnType<T> = [
   OnSubmitMutationType,
-  { trigger: CustomMutationTriggerType<T>; isLoading: boolean; isSuccess: boolean; error: unknown }
+  {
+    trigger: CustomMutationTriggerType<T>
+    isLoading: boolean
+    isSuccess: boolean
+    error: unknown
+  }
 ]
 
-type UseAuthMutationType = <T>(mutationArg: MutationType) => UseMutationReturnType<T>
+type UseAuthMutationType = <T>(
+  mutationArg: MutationType
+) => UseMutationReturnType<T>
 /**
-A hook that returns a mutation trigger function and a form submission function for a given mutation type.
-@param {MutationType} mutationArg - A string representing the type of mutation.
-@returns {Array} - An array containing a mutation trigger function and a form submission function.
-*/
+ A hook that returns a mutation trigger function and a form submission function for a given mutation type.
+ @param {MutationType} mutationArg - A string representing the type of mutation.
+ @returns {Array} - An array containing a mutation trigger function and a form submission function.
+ */
 
 //TODO убрать any
 export const useAuthMutation: UseAuthMutationType = mutationArg => {

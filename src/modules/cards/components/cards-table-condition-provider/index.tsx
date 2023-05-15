@@ -11,12 +11,9 @@ type CardsConditionProviderType = {
   type: 'card' | 'table'
 }
 
-export const CardsConditionProvider: FC<PropsWithChildren<CardsConditionProviderType>> = ({
-  children,
-  isLoading,
-  error,
-  type,
-}) => {
+export const CardsConditionProvider: FC<
+  PropsWithChildren<CardsConditionProviderType>
+> = ({ children, isLoading, error, type }) => {
   const skeletonRows = type === 'card' ? 5 : 10
 
   if (isLoading) {

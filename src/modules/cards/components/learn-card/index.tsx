@@ -1,12 +1,12 @@
 import { FC } from 'react'
 
 import {
-  LearnCardSuccess,
   CardsConditionProvider,
   LearnCardAnswerWithRate,
   LearnCardQuestion,
+  LearnCardSuccess,
 } from '../../components'
-import { StyledLearnCardButton, StyledLearnCard } from '../../styles'
+import { StyledLearnCard, StyledLearnCardButton } from '../../styles'
 import { LearnCardDataType, LearnHandlersType, LearnNames } from '../../types'
 
 type LearnCardType = {
@@ -16,16 +16,22 @@ type LearnCardType = {
 }
 
 export const LearnCard: FC<LearnCardType> = ({ card, cardHandlers, names }) => {
-  const { learnCardButtonHandler, handleNavigateToCards, setRate } = cardHandlers
+  const { learnCardButtonHandler, handleNavigateToCards, setRate } =
+    cardHandlers
   const { cardData, rate, showAnswer, isLoading, isSuccess, serverError } = card
   const { learnCardButtonName } = names
   const { answer, shots, question } = cardData || {}
 
-  if (isSuccess) return <LearnCardSuccess handleSuccess={handleNavigateToCards} />
+  if (isSuccess)
+    return <LearnCardSuccess handleSuccess={handleNavigateToCards} />
 
   return (
     <StyledLearnCard>
-      <CardsConditionProvider type="card" isLoading={isLoading} error={serverError}>
+      <CardsConditionProvider
+        type="card"
+        isLoading={isLoading}
+        error={serverError}
+      >
         <LearnCardQuestion shots={shots} question={question} />
         <LearnCardAnswerWithRate
           answer={answer}

@@ -20,7 +20,10 @@ type UsePacksMutationType = (
  @returns {Object} An object containing the mutation handlers and their corresponding loading and error states.
  */
 
-export const usePacksMutation: UsePacksMutationType = (mutationType, refetch) => {
+export const usePacksMutation: UsePacksMutationType = (
+  mutationType,
+  refetch
+) => {
   const { mutation, isRefetch } = packsMutations[mutationType]
 
   /**
@@ -40,5 +43,6 @@ export const usePacksMutation: UsePacksMutationType = (mutationType, refetch) =>
     }
   }
 
+  //TODO isLoading and error, not s
   return { handlers, isLoadings, errors }
 }

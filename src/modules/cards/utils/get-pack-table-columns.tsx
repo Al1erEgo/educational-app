@@ -1,16 +1,22 @@
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Space, Tooltip } from 'antd'
 
+import { DeleteCardRequestType, UpdateCardRequestType } from '../api'
 import { packTableColumns } from '../constants'
-import { HandlerFunctionType, PackTableColumnsType } from '../types'
+import { PackTableColumnsType } from '../types'
+import { PackModalsHandlerType } from '../types/pack-modals'
 
 type GetTableColumnsType = (
   isMine: boolean,
-  deleteCard: HandlerFunctionType,
-  updateCard: HandlerFunctionType
+  deleteCard: PackModalsHandlerType<DeleteCardRequestType>,
+  updateCard: PackModalsHandlerType<UpdateCardRequestType>
 ) => PackTableColumnsType[]
 
-export const getTableColumns: GetTableColumnsType = (isMine, deleteCard, updateCard) => {
+export const getPackTableColumns: GetTableColumnsType = (
+  isMine,
+  deleteCard,
+  updateCard
+) => {
   if (isMine) {
     return [
       ...packTableColumns,
@@ -22,7 +28,15 @@ export const getTableColumns: GetTableColumnsType = (isMine, deleteCard, updateC
           <Space size="middle">
             <Tooltip title="Edit">
               <EditOutlined
-                onClick={() => updateCard({ card: { _id: card.key, question: '11' } })}
+                onClick={() =>
+                  updateCard({
+                    card: {
+                      _id: card.key,
+                      question: card.question,
+                      answer: card.answer,
+                    },
+                  })
+                }
               />
             </Tooltip>
             <Tooltip title="Delete">

@@ -1,14 +1,21 @@
 import { FC } from 'react'
 
-import { CardsHeader, CardsSearch, BackToCardsButton } from '../../components'
+import {
+  BackToCardsButton,
+  CardsHeader,
+  CardsSearch,
+  CardsTable,
+  PackActionsButtons,
+} from '../../components'
+import { usePackData } from '../../hooks'
 import { StyledCardsToolbar } from '../../styles'
 
-import { PackActionsButtons, PackTable } from './components'
-import { usePackData } from './hooks'
-
 export const Pack: FC = () => {
-  const [{ packName, isEmptyPack, isOwnPack, buttonsHandlers }, { handleSearch }, tableData] =
-    usePackData()
+  const [
+    { packName, isEmptyPack, isOwnPack, buttonsHandlers },
+    { handleSearch },
+    tableData,
+  ] = usePackData()
 
   return (
     <>
@@ -17,6 +24,7 @@ export const Pack: FC = () => {
         <PackActionsButtons
           isEmptyPack={isEmptyPack}
           isOwnPack={isOwnPack}
+          disabled={tableData.isDataLoading}
           handlers={buttonsHandlers}
         />
       </CardsHeader>
@@ -26,9 +34,10 @@ export const Pack: FC = () => {
           placeholder={'Enter question for searching'}
           searchValue={tableData.tableParams.searchValue}
           onSearch={handleSearch}
+          disabled={tableData.isDataLoading}
         />
       </StyledCardsToolbar>
-      <PackTable data={tableData} />
+      <CardsTable tableData={tableData} />
     </>
   )
 }
