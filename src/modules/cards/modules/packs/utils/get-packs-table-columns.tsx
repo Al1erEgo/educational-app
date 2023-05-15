@@ -10,6 +10,10 @@ import { NavLink } from 'react-router-dom'
 
 import { LoginResponseType } from '../../../../auth/types'
 import { useModalContext } from '../../../../modal-provider/hooks'
+import {
+  DeletedCardsPackRequestType,
+  UpdateCardsPackRequestType,
+} from '../../../api'
 import { MY_BUTTON_NAME } from '../../../constants'
 import { DeleteModal, PacksModal } from '../components/packs-modals'
 import { packsTableColumns } from '../constants'
@@ -19,12 +23,15 @@ import {
   PacksTableDataColumnsType,
   PackType,
 } from '../types'
+import { PacksModalsHandlerType } from '../types/packs-modals'
 
 type GetPacksTableColumnsType = (
   activeButton: string,
   userData: LoginResponseType | undefined,
   handleOk: HandleOkType,
-  handleDeleteOk: HandleDeleteOkType
+  handleDeleteOk: HandleDeleteOkType,
+  deletePack: PacksModalsHandlerType<DeletedCardsPackRequestType>,
+  updatePackModal: PacksModalsHandlerType<UpdateCardsPackRequestType>
 ) => PacksTableDataColumnsType[]
 
 /**
@@ -39,7 +46,9 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
   activeButton,
   userData,
   handleOk,
-  handleDeleteOk
+  handleDeleteOk,
+  deletePack,
+  updatePackModal
 ) => {
   const { showModal } = useModalContext()
 
@@ -113,7 +122,7 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
             </Tooltip>
 
             <Tooltip title="Delete">
-              <DeleteOutlined onClick={handleDeleteClick} />
+              <DeleteOutlined onClick={() => deletePack({ id: pack._id })} />
             </Tooltip>
           </Space>
         ) : (

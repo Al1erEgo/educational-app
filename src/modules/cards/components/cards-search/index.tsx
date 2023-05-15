@@ -4,8 +4,8 @@ import { SearchOutlined } from '@ant-design/icons'
 import { Input } from 'antd'
 
 import { useDebouncedSearchWithReset } from '../../hooks'
-import { HandleSearchType } from '../../modules/pack/types'
 import { StyledCardsText } from '../../styles'
+import { HandleSearchType } from '../../types'
 
 import { CardsSearchWrapperProps, Style } from './style'
 

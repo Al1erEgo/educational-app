@@ -14,7 +14,9 @@ type HandlerFunctionPacksDataType =
   | DeletedCardsPackRequestType
   | UpdateCardsPackRequestType
 
-export type HandlerPacksFunctionType = (data: HandlerFunctionPacksDataType) => void
+export type HandlerPacksFunctionType = (
+  data: HandlerFunctionPacksDataType
+) => void
 
 export type HandlePacksTableChangeType = (
   pagination: TablePaginationConfig,
