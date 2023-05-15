@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { Skeleton } from 'antd'
 import styled from 'styled-components'
 
 import { useModalContext } from '../../../modal-provider/hooks'
@@ -44,26 +43,27 @@ export const Packs = () => {
       </CardsHeader>
 
       <InlineBlockDiv>
-        <Skeleton loading={isPacksDataLoading} active paragraph={{ rows: 3 }} title={false}>
-          <StyledCardsToolbar>
-            <CardsSearch
-              searchValue={packsTableParams.searchValue}
-              onSearch={handlePacksSearch}
-              placeholder={'Enter pack name'}
-            />
-            <PacksButton
-              activeButton={packsTableParams.activeButton}
-              handleToggleButton={handleToggleButton}
-            />
-            <PacksSlider
-              state={packsTableParams}
-              handleSliderChange={handleSliderChange}
-              minCardsCount={data?.minCardsCount}
-              maxCardsCount={data?.maxCardsCount}
-            />
-            <PacksFilter clearFilters={handleClearFilters} />
-          </StyledCardsToolbar>
-        </Skeleton>
+        <StyledCardsToolbar>
+          <CardsSearch
+            searchValue={packsTableParams.searchValue}
+            onSearch={handlePacksSearch}
+            placeholder={'Enter pack name'}
+            isLoading={isPacksDataLoading}
+          />
+          <PacksButton
+            activeButton={packsTableParams.activeButton}
+            handleToggleButton={handleToggleButton}
+            isLoading={isPacksDataLoading}
+          />
+          <PacksSlider
+            state={packsTableParams}
+            handleSliderChange={handleSliderChange}
+            minCardsCount={data?.minCardsCount}
+            maxCardsCount={data?.maxCardsCount}
+            isLoading={isPacksDataLoading}
+          />
+          <PacksFilter clearFilters={handleClearFilters} />
+        </StyledCardsToolbar>
       </InlineBlockDiv>
 
       <PacksTable packsTableData={packsTableData} />

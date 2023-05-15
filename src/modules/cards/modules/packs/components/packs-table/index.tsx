@@ -25,8 +25,9 @@ export const PacksTable: FC<PacksTableProps> = ({ packsTableData }) => {
   const formattedPacksTableData = getFormattedPacksTableData(data)
 
   return (
-    <CardsConditionProvider error={serverError} isLoading={isPacksDataLoading} type="table">
+    <CardsConditionProvider error={serverError} type="table">
       <StyledPacksTable
+        loading={isPacksDataLoading}
         size={'small'}
         columns={packsTableColumns}
         dataSource={formattedPacksTableData}

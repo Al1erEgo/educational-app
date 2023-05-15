@@ -13,6 +13,7 @@ type PacksSliderType = {
   minCardsCount?: number
   maxCardsCount?: number
   state: PacksTableParamsType
+  isLoading: boolean
 }
 
 export const PacksSlider: FC<PacksSliderType> = ({
@@ -20,6 +21,7 @@ export const PacksSlider: FC<PacksSliderType> = ({
   maxCardsCount = 110,
   handleSliderChange,
   state,
+  isLoading,
 }) => {
   const sliderKey = useSliderKeyUpdater(minCardsCount, maxCardsCount, state)
 
@@ -34,7 +36,7 @@ export const PacksSlider: FC<PacksSliderType> = ({
         max={maxCardsCount}
         step={1}
         onAfterChange={handleSliderChange}
-        disabled={minCardsCount === maxCardsCount}
+        disabled={minCardsCount === maxCardsCount || isLoading}
       />
     </StyledPacksSliderWrapper>
   )
