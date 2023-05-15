@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 
 import { UploadOutlined } from '@ant-design/icons'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { Button, Form, Select, Upload } from 'antd'
 import { useForm } from 'react-hook-form'
+import * as yup from 'yup'
 
 import { SELECT_OPTIONS } from '../../constants/pack-modals'
 import { StyledModalWrapper } from '../../styles'
@@ -15,6 +17,11 @@ import {
 } from '../../types/pack-modals'
 import { ModalButtons } from '../modal-buttons'
 import { ModalFormInput } from '../modal-form-input'
+
+const schema = yup.object({
+  question: yup.string().min(1).max(1000).required(),
+  answer: yup.string().min(1).max(1000).required(),
+})
 
 export const ModalCard = <T extends PackModalCardPayloadType>({
   payload,
@@ -30,11 +37,18 @@ export const ModalCard = <T extends PackModalCardPayloadType>({
     answerImg: payload.card.answerImg,
   })
 
-  const { handleSubmit, control, setValue } = useForm<ModalCardFormType>({
+  const {
+    handleSubmit,
+    control,
+    setValue,
+    formState: { errors, isDirty },
+  } = useForm<ModalCardFormType>({
     defaultValues: {
       question: payload?.card.question || '',
       answer: payload?.card.answer || '',
     },
+    resolver: yupResolver(schema),
+    mode: 'all',
   })
 
   const handleCardSubmit = (
@@ -65,24 +79,33 @@ export const ModalCard = <T extends PackModalCardPayloadType>({
       <Upload
         showUploadList={false}
         accept="image/*"
-        customRequest={uploadHandler}
+        //customRequest={uploadHandler}
       >
         <Button icon={<UploadOutlined />}>Upload question</Button>
       </Upload>
       <Upload
         showUploadList={false}
         accept="image/*"
-        customRequest={uploadHandler}
+        //customRequest={uploadHandler}
       >
         <Button icon={<UploadOutlined />}>Upload answer</Button>
       </Upload>
       <Form onFinish={handleSubmit(handleCardSubmit)}>
-        <ModalFormInput name={'Question'} control={control} />
-        <ModalFormInput name={'Answer'} control={control} />
+        <ModalFormInput
+          name={'Question'}
+          control={control}
+          error={errors.question}
+        />
+        <ModalFormInput
+          name={'Answer'}
+          control={control}
+          error={errors.answer}
+        />
         <Form.Item>
           <ModalButtons
             submitButtonName={submitButtonName}
             onCancel={onCancel}
+            disabled={!isDirty}
           />
         </Form.Item>
       </Form>
