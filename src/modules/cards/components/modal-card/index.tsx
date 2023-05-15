@@ -2,10 +2,13 @@ import React, { useState } from 'react'
 
 import { UploadOutlined } from '@ant-design/icons'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Button, Form, Select, Upload } from 'antd'
+import { Button, Form, Select, Upload, UploadProps } from 'antd'
+import { RcFile } from 'antd/es/upload'
+import { UploadRequestOption } from 'rc-upload/lib/interface'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
+import { getBase64 } from '../../../auth/utils'
 import { SELECT_OPTIONS } from '../../constants/pack-modals'
 import { StyledModalWrapper } from '../../styles'
 import {
@@ -62,6 +65,36 @@ export const ModalCard = <T extends PackModalCardPayloadType>({
     onCancel()
   }
 
+  const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
+    console.log(newFileList)
+    if (newFileList[0].originFileObj) {
+      const file = newFileList[0].originFileObj as RcFile
+
+      if (file.size < 4000000) {
+        getBase64(file, url => {
+          setCardPictures(prevState => ({ ...prevState, questionImg: url }))
+        })
+        newFileList[0].status = 'success'
+      } else {
+        console.error('Error: ', 'Файл слишком большого размера')
+      }
+    }
+  }
+
+  const uploadHandler = (action: UploadRequestOption) => {
+    if (action.file) {
+      const file = action.file as RcFile
+
+      if (file.size < 4000000) {
+        getBase64(file, url => {
+          setCardPictures(prevState => ({ ...prevState, questionImg: url }))
+        })
+      } else {
+        console.error('Error: ', 'Файл слишком большого размера')
+      }
+    }
+  }
+
   //Button name depends on usage of ModalCard and type of payload
   const submitButtonName =
     'cardsPack_id' in payload.card ? 'Add card' : 'Edit card'
@@ -77,16 +110,19 @@ export const ModalCard = <T extends PackModalCardPayloadType>({
       />
       {/*TODO выделить форму в отдельный компонент*/}
       <Upload
-        showUploadList={false}
+        showUploadList={true}
         accept="image/*"
-        //customRequest={uploadHandler}
+        listType="picture"
+        onChange={handleChange}
       >
         <Button icon={<UploadOutlined />}>Upload question</Button>
       </Upload>
       <Upload
-        showUploadList={false}
+        showUploadList={true}
         accept="image/*"
-        //customRequest={uploadHandler}
+        listType="picture"
+        onChange={handleChange}
+        customRequest={uploadHandler}
       >
         <Button icon={<UploadOutlined />}>Upload answer</Button>
       </Upload>
