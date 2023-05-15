@@ -9,14 +9,14 @@ import { AuthProvider } from '../modules/auth/components'
 import { GlobalStyle, ModuleContainer } from '../styles'
 
 export const App = () => {
-  const { isLoading } = useAuthMeQuery('auth')
+  const { isFetching } = useAuthMeQuery('auth')
   const { defaultPage } = useDefaultPage(MAIN_PATH.Cards, MAIN_PATH.Auth)
 
   return (
     <>
       <GlobalStyle />
       <Header />
-      <Loader isLoading={isLoading}>
+      <Loader isLoading={isFetching}>
         <ModuleContainer>
           <Routes>
             <Route path={MAIN_PATH.Root} element={defaultPage} />

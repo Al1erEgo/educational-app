@@ -7,13 +7,18 @@ import { PackActionsButtons, PackTable } from './components'
 import { usePackData } from './hooks'
 
 export const Pack: FC = () => {
-  const [{ packName, isOwnPack, buttonsHandlers }, { handleSearch }, tableData] = usePackData()
+  const [{ packName, isEmptyPack, isOwnPack, buttonsHandlers }, { handleSearch }, tableData] =
+    usePackData()
 
   return (
     <>
       <BackToCardsButton />
       <CardsHeader title={packName}>
-        <PackActionsButtons isOwnPack={isOwnPack} handlers={buttonsHandlers} />
+        <PackActionsButtons
+          isEmptyPack={isEmptyPack}
+          isOwnPack={isOwnPack}
+          handlers={buttonsHandlers}
+        />
       </CardsHeader>
       <StyledCardsToolbar>
         <CardsSearch

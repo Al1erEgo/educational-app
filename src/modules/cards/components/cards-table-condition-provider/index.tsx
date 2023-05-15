@@ -6,8 +6,8 @@ import { ErrorServerHandler } from '../../../../components'
 import { TableErrorType } from '../../types'
 
 type CardsConditionProviderType = {
-  error: TableErrorType
-  isLoading: boolean
+  error?: TableErrorType
+  isLoading?: boolean
   type: 'card' | 'table'
 }
 

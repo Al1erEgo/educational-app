@@ -11,7 +11,7 @@ type LearnCardAnswerWithRateType = {
   answer?: string
   isShow: boolean
   rate: number
-  setRate: () => void
+  setRate: (value: number | ((prevState: number) => number)) => void
 }
 
 export const LearnCardAnswerWithRate: FC<LearnCardAnswerWithRateType> = ({
@@ -30,4 +30,6 @@ export const LearnCardAnswerWithRate: FC<LearnCardAnswerWithRateType> = ({
         </StyledRateContainer>
       </>
     )
+
+  return null
 }

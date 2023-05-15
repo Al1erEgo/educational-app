@@ -1,6 +1,5 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 
-import { CardType } from '../../api'
 import {
   LearnCardSuccess,
   CardsConditionProvider,
@@ -8,42 +7,25 @@ import {
   LearnCardQuestion,
 } from '../../components'
 import { StyledLearnCardButton, StyledLearnCard } from '../../styles'
+import { LearnCardDataType, LearnHandlersType, LearnNames } from '../../types'
 
 type LearnCardType = {
-  error: unknown
-  cardData?: CardType
-  isLoading: boolean
-  isSuccess: boolean
-  handleNextCard: () => void
-  handleSuccess: () => void
-  rate: number
-  setRate: () => void
+  card: LearnCardDataType
+  cardHandlers: LearnHandlersType
+  names: LearnNames
 }
 
-export const LearnCard: FC<LearnCardType> = ({
-  error,
-  cardData,
-  isLoading,
-  isSuccess,
-  handleNextCard,
-  handleSuccess,
-  rate,
-  setRate,
-}) => {
+export const LearnCard: FC<LearnCardType> = ({ card, cardHandlers, names }) => {
+  const { learnCardButtonHandler, handleNavigateToCards, setRate } = cardHandlers
+  const { cardData, rate, showAnswer, isLoading, isSuccess, serverError } = card
+  const { learnCardButtonName } = names
   const { answer, shots, question } = cardData || {}
 
-  const [showAnswer, setShowAnswer] = useState<boolean>(false)
-
-  const handleShowAnswer = () => setShowAnswer(true)
-
-  const learnCardButtonName = showAnswer ? 'Next Card' : 'Show answer'
-  const learnCardButtonHandler = showAnswer ? handleNextCard : handleShowAnswer
-
-  if (isSuccess) return <LearnCardSuccess handleSuccess={handleSuccess} />
+  if (isSuccess) return <LearnCardSuccess handleSuccess={handleNavigateToCards} />
 
   return (
     <StyledLearnCard>
-      <CardsConditionProvider type="card" isLoading={isLoading} error={error}>
+      <CardsConditionProvider type="card" isLoading={isLoading} error={serverError}>
         <LearnCardQuestion shots={shots} question={question} />
         <LearnCardAnswerWithRate
           answer={answer}

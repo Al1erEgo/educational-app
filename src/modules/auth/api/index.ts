@@ -1,4 +1,4 @@
-import { rootApi } from '../../../store/root-api'
+import { rootApi } from '../../../store'
 import {
   AuthMeRequestType,
   AuthMeResponseType,
