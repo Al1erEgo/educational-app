@@ -28,3 +28,10 @@ export type ModalCardFormType = {
   question?: string
   answer?: string
 }
+
+export type ModalCardPictureType = {
+  questionImg?: string
+  answerImg?: string
+}
+
+export type ModalCardFormatType = 'text' | 'picture'

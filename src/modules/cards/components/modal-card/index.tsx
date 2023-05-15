@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-import { Form } from 'antd'
+import { UploadOutlined } from '@ant-design/icons'
+import { Button, Form, Select, Upload } from 'antd'
 import { useForm } from 'react-hook-form'
 
+import { SELECT_OPTIONS } from '../../constants/pack-modals'
 import { StyledModalWrapper } from '../../styles'
 import {
+  ModalCardFormatType,
   ModalCardFormType,
+  ModalCardPictureType,
   PackModalBaseType,
   PackModalCardPayloadType,
 } from '../../types/pack-modals'
@@ -17,6 +21,15 @@ export const ModalCard = <T extends PackModalCardPayloadType>({
   onSubmit,
   onCancel,
 }: PackModalBaseType<T>) => {
+  const cardFormatStateType =
+    payload.card.questionImg || payload.card.answerImg ? 'picture' : 'text'
+
+  const [format, setFormat] = useState<ModalCardFormatType>(cardFormatStateType)
+  const [cardPictures, setCardPictures] = useState<ModalCardPictureType>({
+    questionImg: payload.card.questionImg,
+    answerImg: payload.card.answerImg,
+  })
+
   const { handleSubmit, control, setValue } = useForm<ModalCardFormType>({
     defaultValues: {
       question: payload?.card.question || '',
@@ -24,7 +37,9 @@ export const ModalCard = <T extends PackModalCardPayloadType>({
     },
   })
 
-  const handleCardSubmit = (inputData: ModalCardFormType) => {
+  const handleCardSubmit = (
+    inputData: ModalCardFormType | ModalCardPictureType
+  ) => {
     const submitData = {
       card: { ...payload.card, ...inputData },
     } as T
@@ -39,6 +54,28 @@ export const ModalCard = <T extends PackModalCardPayloadType>({
 
   return (
     <StyledModalWrapper>
+      <p>Question format:</p>
+      <Select
+        style={{ width: '100%' }} //StyledComponent usage brakes down onChange
+        defaultValue={format}
+        onChange={setFormat}
+        options={SELECT_OPTIONS}
+      />
+      {/*TODO выделить форму в отдельный компонент*/}
+      <Upload
+        showUploadList={false}
+        accept="image/*"
+        customRequest={uploadHandler}
+      >
+        <Button icon={<UploadOutlined />}>Upload question</Button>
+      </Upload>
+      <Upload
+        showUploadList={false}
+        accept="image/*"
+        customRequest={uploadHandler}
+      >
+        <Button icon={<UploadOutlined />}>Upload answer</Button>
+      </Upload>
       <Form onFinish={handleSubmit(handleCardSubmit)}>
         <ModalFormInput name={'Question'} control={control} />
         <ModalFormInput name={'Answer'} control={control} />
