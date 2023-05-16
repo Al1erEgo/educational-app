@@ -3,11 +3,23 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 
 import { MAIN_PATH } from '../../../../../constants'
-import { CardType, useCardsPackQuery, useUpdateCardGradeMutation } from '../../../api'
-import { LearnCardDataType, LearnHandlersType, LearnNames } from '../../../types'
+import {
+  CardType,
+  useCardsPackQuery,
+  useUpdateCardGradeMutation,
+} from '../../../api'
+import {
+  LearnCardDataType,
+  LearnHandlersType,
+  LearnNames,
+} from '../../../types'
 import { wiseSortingCards } from '../utils'
 
-export type UseLearnDataType = () => [LearnNames, LearnHandlersType, LearnCardDataType]
+export type UseLearnDataType = () => [
+  LearnNames,
+  LearnHandlersType,
+  LearnCardDataType
+]
 
 export const useLearnData: UseLearnDataType = () => {
   const navigate = useNavigate()
@@ -32,8 +44,10 @@ export const useLearnData: UseLearnDataType = () => {
     { skip: !!sortedCards }
   )
 
-  const [updateGrade, { isLoading: isUpdateGradeLoading, error: updateGradeError }] =
-    useUpdateCardGradeMutation()
+  const [
+    updateGrade,
+    { isLoading: isUpdateGradeLoading, error: updateGradeError },
+  ] = useUpdateCardGradeMutation()
 
   const cardData = sortedCards && sortedCards[currentCard]
   const isLoading = isPackLoading || isUpdateGradeLoading || !sortedCards

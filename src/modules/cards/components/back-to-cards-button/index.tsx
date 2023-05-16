@@ -1,6 +1,7 @@
 import arrowBack from '../../../../assets/arrow-back.svg'
 import { MAIN_PATH } from '../../../../constants'
-import { StyledBackToCardLink, StyledArrowImg } from '../../styles'
+
+import { StyledArrowImg, StyledBackToCardLink } from './styles'
 
 export const BackToCardsButton = () => {
   return (

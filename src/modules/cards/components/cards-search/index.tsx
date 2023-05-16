@@ -4,8 +4,8 @@ import { SearchOutlined } from '@ant-design/icons'
 import { Input } from 'antd'
 
 import { useDebouncedSearchWithReset } from '../../hooks'
-import { HandleSearchType } from '../../modules/pack/types'
 import { StyledCardsText } from '../../styles'
+import { HandleSearchType } from '../../types'
 
 import { CardsSearchWrapperProps, Style } from './style'
 
@@ -13,22 +13,23 @@ type CardsSearchProps = CardsSearchWrapperProps & {
   searchValue: string
   onSearch: HandleSearchType
   placeholder: string
+  disabled?: boolean
 }
 export const CardsSearch: FC<CardsSearchProps> = ({
   size = 'small',
   onSearch,
   searchValue,
   placeholder,
+  disabled,
 }) => {
-  const { handleOnSearchChange, localSearchValue } = useDebouncedSearchWithReset(
-    searchValue,
-    onSearch
-  )
+  const { handleOnSearchChange, localSearchValue } =
+    useDebouncedSearchWithReset(searchValue, onSearch)
 
   return (
     <Style size={size}>
       <StyledCardsText>Search</StyledCardsText>
       <Input.Search
+        disabled={disabled}
         placeholder={placeholder}
         enterButton={<SearchOutlined />}
         value={localSearchValue}

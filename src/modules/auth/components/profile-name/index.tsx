@@ -20,12 +20,15 @@ export const ProfileName: FC<ProfileNamePropsType> = ({ userName }) => {
     { isLoading: isUpdating, error: updateUserNameError },
   ] = useFormData<UpdateUserNameType>('updateUserName')
 
-  const customChangeUserNameHandleSubmit = async (
+  const customHandleSubmit = async (
     value: string,
     field: ControllerRenderProps<FieldValues, 'name'>
   ) => {
     if (!value) {
-      setError('name', { type: 'custom', message: 'Name should be at least 1 character length' })
+      setError('name', {
+        type: 'custom',
+        message: 'Name should be at least 1 character length',
+      })
 
       return
     }
@@ -39,7 +42,10 @@ export const ProfileName: FC<ProfileNamePropsType> = ({ userName }) => {
 
   return (
     <>
-      <Form.Item validateStatus={errors?.name?.message ? 'error' : ''} help={errors?.name?.message}>
+      <Form.Item
+        validateStatus={errors?.name?.message ? 'error' : ''}
+        help={errors?.name?.message}
+      >
         <Controller
           name={'name'}
           control={control}
@@ -48,7 +54,7 @@ export const ProfileName: FC<ProfileNamePropsType> = ({ userName }) => {
             <>
               <StyledProfileParagraph
                 editable={{
-                  onChange: value => customChangeUserNameHandleSubmit(value, field),
+                  onChange: value => customHandleSubmit(value, field),
                 }}
                 disabled={isUpdating}
               >
@@ -58,7 +64,6 @@ export const ProfileName: FC<ProfileNamePropsType> = ({ userName }) => {
           )}
         />
       </Form.Item>
-
       <ErrorServerHandler error={updateUserNameError} />
     </>
   )

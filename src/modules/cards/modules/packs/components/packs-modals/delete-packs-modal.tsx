@@ -17,6 +17,8 @@ export const DeleteModal: FC<DeleteModalProps> = ({ onOk, packName }) => {
     onOk()
     hideModal()
   }
+
+  //TODO если передать hideModal вместо handleCancel на onClick кнопки - функционирование не изменится
   const handleCancel = () => hideModal()
 
   return (

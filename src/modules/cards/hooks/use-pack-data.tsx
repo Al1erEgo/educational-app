@@ -2,10 +2,18 @@ import { useState } from 'react'
 
 import { useParams, useSearchParams } from 'react-router-dom'
 
-import { useCardsPackQuery } from '../../../api'
-import { TableDataType } from '../../../types'
-import { ButtonsHandlersType, HandleSearchType, PackTableParamsType } from '../types'
-import { getSortingParam, getTableColumns } from '../utils'
+import { useCardsPackQuery } from '../api'
+import {
+  ButtonsHandlersType,
+  HandleSearchType,
+  PackTableParamsType,
+  TableDataType,
+} from '../types'
+import {
+  getFormattedPackTableData,
+  getPackTableColumns,
+  getSortingParam,
+} from '../utils'
 
 import { usePackHandlers } from './use-pack-handlers'
 import { usePackMutations } from './use-pack-mutations'
@@ -23,11 +31,9 @@ type UsePackDataType = () => [
 
 export const usePackData: UsePackDataType = () => {
   const { packId = '' } = useParams()
-
   const [searchParams, setSearchParams] = useSearchParams()
   const isOwnPack = searchParams.get('own') === 'true'
   const packName = searchParams.get('name') || ''
-  const isEmptyPack = searchParams.get('isEmpty') === 'true'
 
   const [tableParams, setTableParams] = useState<PackTableParamsType>({
     pagination: {
@@ -53,29 +59,34 @@ export const usePackData: UsePackDataType = () => {
     cardQuestion: tableParams.searchValue,
   })
 
-  const packMutations = usePackMutations(refetchPack)
-  const [{ deleteCard, updateCard }, actionsLoading, actionsError] = packMutations
+  const [mutations, mutationsLoading, mutationsError] =
+    usePackMutations(refetchPack)
 
-  const isPackDataLoading = isInitialLoading || isFetching || actionsLoading
-  const serverError = cardsPackQueryError || actionsError
+  const { handleTableChange, handleSearch, buttonsHandlers, modalHandlers } =
+    usePackHandlers(setTableParams, mutations, packId, packName)
 
-  const tableColumns = getTableColumns(isOwnPack, deleteCard.handler, updateCard.handler)
+  const isDataLoading = isInitialLoading || isFetching || mutationsLoading
+  const serverError = cardsPackQueryError || mutationsError
+  const elementsCount = responseData?.cardsTotalCount || 0
+  const isEmptyPack = !elementsCount
 
-  const { handleTableChange, handleSearch, buttonsHandlers } = usePackHandlers(
-    setTableParams,
-    packMutations,
-    packId,
-    packName
+  const tableColumns = getPackTableColumns(
+    isOwnPack,
+    modalHandlers.deleteCardModal,
+    modalHandlers.updateCardModal
   )
+
+  const formattedTableData = getFormattedPackTableData(responseData)
 
   return [
     { packName, isEmptyPack, isOwnPack, buttonsHandlers },
     { handleSearch },
     {
-      isPackDataLoading,
+      isDataLoading,
       handleTableChange,
       tableParams,
-      responseData,
+      formattedTableData,
+      elementsCount,
       tableColumns,
       serverError,
     },
