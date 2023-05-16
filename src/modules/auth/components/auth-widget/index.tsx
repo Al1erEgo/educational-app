@@ -8,13 +8,9 @@ import { useNavigateToOnclick } from '../../../../hooks'
 import { useAuthMeUpdateMutation } from '../../api'
 import { ABSOLUTE_AUTH_PATH } from '../../constants'
 import { useAuthorised, useAuthMutation } from '../../hooks'
+import { AuthWidgetAvatar } from '../auth-widget-avatar'
 
-import {
-  StyledAuthWidgetButton,
-  StyledUserDataWrapper,
-  StyledUserName,
-  StyledUserIconWidget,
-} from './styles'
+import { StyledAuthWidgetButton, StyledUserDataWrapper, StyledUserName } from './styles'
 
 export const AuthWidget: FC = () => {
   const { isAuthorised, data: userData } = useAuthorised()
@@ -40,11 +36,7 @@ export const AuthWidget: FC = () => {
     <>
       <StyledUserDataWrapper onClick={profileRedirect}>
         <StyledUserName>{userData.name}</StyledUserName>
-        {isLoading ? (
-          <Skeleton.Avatar active size={23} style={{ marginRight: '7px' }} />
-        ) : (
-          <StyledUserIconWidget src={userData.avatar} alt="avatar" />
-        )}
+        <AuthWidgetAvatar isLoading={isLoading} userData={userData} />
       </StyledUserDataWrapper>
       <StyledAuthWidgetButton icon={<LogoutOutlined />} onClick={handleLogOut}>
         Log out

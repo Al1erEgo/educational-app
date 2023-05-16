@@ -1,5 +1,6 @@
 export * from './auth-provider'
 export * from './auth-widget'
+export * from './auth-widget-avatar'
 export * from './confirmation-message'
 export * from './form-button'
 export * from './form-checkbox'

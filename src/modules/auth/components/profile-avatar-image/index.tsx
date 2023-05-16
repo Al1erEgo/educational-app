@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { FC } from 'react'
 
 import { UserOutlined } from '@ant-design/icons'
 import { Skeleton } from 'antd'
 
-export const ProfileAvatarImage = ({ avatar, isLoading }) => {
+type ProfileAvatarImageType = {
+  avatar: string
+  isLoading: boolean
+}
+
+export const ProfileAvatarImage: FC<ProfileAvatarImageType> = ({ avatar, isLoading }) => {
   if (isLoading) {
     return <Skeleton.Image active />
   }
