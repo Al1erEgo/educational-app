@@ -25,13 +25,15 @@ export type PacksModalsHandlersType = {
 }
 
 export type ModalPackFormType = {
-  question?: string
-  answer?: string
+  name?: string
+  deckCover?: string
+  private?: boolean
 }
 
 export type ModalPackPictureType = {
-  questionImg?: string
-  answerImg?: string
+  name?: string
+  deckCover?: string
+  private?: boolean
 }
 
 export type ModalPackFormatType = 'text' | 'picture'

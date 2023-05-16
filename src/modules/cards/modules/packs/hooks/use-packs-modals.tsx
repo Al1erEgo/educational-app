@@ -6,8 +6,8 @@ import {
   NewCardPacksRequestType,
   UpdateCardsPackRequestType,
 } from '../../../api'
-import { ModalCard } from '../../../components'
 import { ModalsDelete } from '../components/modal-delete'
+import { ModalPack } from '../components/modal-pack'
 import { MutationsPackObjType } from '../types'
 import { PacksModalsHandlersType } from '../types/packs-modals'
 
@@ -31,9 +31,9 @@ export const usePacksModals: UsePackModalsType = mutations => {
 
   const addPackModal = (payload: NewCardPacksRequestType) => {
     showModal({
-      title: 'Add new card',
+      title: 'Add new pack',
       content: (
-        <ModalCard
+        <ModalPack
           payload={payload}
           onSubmit={addPacks.handlers}
           onCancel={hideModal}
@@ -44,9 +44,9 @@ export const usePacksModals: UsePackModalsType = mutations => {
 
   const updatePackModal = (payload: UpdateCardsPackRequestType) => {
     showModal({
-      title: 'Edit card',
+      title: 'Edit pack',
       content: (
-        <ModalCard
+        <ModalPack
           payload={payload}
           onSubmit={updatePacks.handlers}
           onCancel={hideModal}

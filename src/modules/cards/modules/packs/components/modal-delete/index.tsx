@@ -18,7 +18,10 @@ export const ModalsDelete: FC<ModalDeleteType> = ({
 
   return (
     <StyledModalWrapper>
-      <p>Are you sure you want to delete the card?</p>
+      <p>
+        Are you sure you want to delete the pack <strong>{payload.name}</strong>
+        ?
+      </p>
 
       <ModalButtons
         submitButtonName={'Delete'}

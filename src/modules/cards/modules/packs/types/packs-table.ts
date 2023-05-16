@@ -35,7 +35,10 @@ export type PacksTableParamsType = SorterResult<PackType> & {
   activeButton: string
 }
 
-export type PacksTableErrorType = FetchBaseQueryError | SerializedError | undefined
+export type PacksTableErrorType =
+  | FetchBaseQueryError
+  | SerializedError
+  | undefined
 
 export type PacksTableDataType = {
   isPacksDataLoading: boolean
@@ -46,14 +49,8 @@ export type PacksTableDataType = {
   serverError: PacksTableErrorType
 }
 
-export type HandleAddNewPackType = (
-  id?: string,
-  name?: string,
-  isPrivate?: boolean
-) => void | Promise<void>
+export type HandleAddNewPackType = (name?: string, isPrivate?: boolean) => void
 
 export type HandleSliderChangeType = (value: number | [number, number]) => void
 export type HandleToggleButtonType = (buttonName: string) => void
 export type HandleClearFiltersType = () => void
-export type HandleOkType = (id?: string, newName?: string, isPrivate?: boolean) => void
-export type HandleDeleteOkType = (id?: string) => void

@@ -137,13 +137,15 @@ export type NewCardPacksRequestType = {
 
 export type DeletedCardsPackRequestType = {
   id?: string
+  name?: string
 }
 
 export type UpdateCardsPackRequestType = {
   cardsPack: {
-    _id: string
+    _id?: string
     name?: string
     private?: boolean
+    deckCover?: string
   }
 }
 
