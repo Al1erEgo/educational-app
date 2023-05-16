@@ -21,8 +21,8 @@ import { ModalFormInput } from '../modal-form-input'
 
 type HandleChange2Type = (
   event: UploadChangeParam<UploadFile<any>>,
-  fieldName: string
-    onChange:
+  fieldName: keyof ModalCardFormType,
+  onChange: (...event: any[]) => void
 ) => void
 
 const textSchema = yup.object({
@@ -64,6 +64,7 @@ export const ModalCard = <T extends PackModalCardPayloadType>({
     control,
     watch,
     setValue,
+    setError,
     formState: { errors, isDirty },
   } = useForm<ModalCardFormType>({
     defaultValues: {
@@ -107,11 +108,30 @@ export const ModalCard = <T extends PackModalCardPayloadType>({
     }
   }
 
-  const handleChange2 = async (
+  const handleChange2: HandleChange2Type = async (
     { fileList: newFileList },
     fieldName,
     onChange
-  ) => {}
+  ) => {
+    if (newFileList[0]?.originFileObj) {
+      const file = newFileList[0].originFileObj as RcFile
+
+      if (file.size < 4000000) {
+        const url = getBase64(file)
+
+        newFileList[0].status = 'success'
+
+        onChange(url)
+      } else {
+        setError(fieldName, {
+          type: 'custom',
+          message: 'Файл слишком большого размера',
+        })
+      }
+    } else {
+      onChange('')
+    }
+  }
 
   //Button name depends on usage of ModalCard and type of payload
   const submitButtonName =
