@@ -117,14 +117,14 @@ export const ModalCard = <T extends PackModalCardPayloadType>({
       const file = newFileList[0].originFileObj as RcFile
 
       if (file.size < 4000000) {
-        const url = getBase64(file)
+        const url = await getBase64(file)
 
-        newFileList[0].status = 'success'
+        //newFileList[0].status = 'success'
 
         onChange(url)
       } else {
         setError(fieldName, {
-          type: 'custom',
+          type: 'manual',
           message: 'Файл слишком большого размера',
         })
       }
@@ -160,11 +160,13 @@ export const ModalCard = <T extends PackModalCardPayloadType>({
               showUploadList={true}
               accept="image/*"
               listType="picture"
-              onChange={async e => {
-                const file = await handleChange(e)
-
-                field.onChange(file)
-              }}
+              onChange={e => handleChange2(e, field.name, field.onChange)}
+              beforeUpload={() => false}
+              // onChange={async e => {
+              //   const file = await handleChange(e)
+              //
+              //   field.onChange(file)
+              // }}
               //onRemove={() => setValue(field.name, '')}
             >
               <Button icon={<UploadOutlined />}>Upload question</Button>
