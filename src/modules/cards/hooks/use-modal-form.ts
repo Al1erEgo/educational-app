@@ -17,9 +17,8 @@ export const useModalForm = <
   payload: T
 ) => {
   const schema = modalSchemaMap[formType]
-
-  console.log('schema', schema)
   const defaultValues = getDefaultModalFormValues<T>(formType, payload)
+
   const {
     handleSubmit,
     control,

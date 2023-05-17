@@ -34,6 +34,8 @@ export const getPackTableColumns: GetTableColumnsType = (
                       _id: card.key,
                       question: card.question,
                       answer: card.answer,
+                      questionImg: card.questionImg,
+                      answerImg: card.answerImg,
                     },
                   })
                 }

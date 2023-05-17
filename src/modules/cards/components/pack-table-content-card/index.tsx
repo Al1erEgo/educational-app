@@ -7,13 +7,15 @@ import { PACK_TABLE_IMG_HEIGHT } from '../../constants/pack-table-content-card'
 const { Text } = Typography
 
 type PackTableContentCardType = {
-  content: string
+  textContent: string
+  imgContent?: string
 }
 export const PackTableContentCard: FC<PackTableContentCardType> = ({
-  content,
+  textContent,
+  imgContent,
 }) => {
-  if (content.startsWith('data:image'))
-    return <Image src={content} height={PACK_TABLE_IMG_HEIGHT} />
+  if (imgContent)
+    return <Image src={imgContent} height={PACK_TABLE_IMG_HEIGHT} />
 
-  return <Text>{content}</Text>
+  return <Text>{textContent}</Text>
 }

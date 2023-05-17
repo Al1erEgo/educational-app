@@ -37,7 +37,7 @@ export const ModalCard = <T extends PackModalCardPayloadType>({
   const [format, setFormat] = useState<ModalCardFormat>(cardFormatInitStateType)
 
   const { handleSubmit, control, errors, isDirty, setError, watch } =
-    useModalForm(format, payload)
+    useModalForm<T, ModalCardFormType>(format, payload)
 
   const handleCardSubmit = (inputData: ModalCardFormType) => {
     const submitData = {
@@ -94,6 +94,7 @@ export const ModalCard = <T extends PackModalCardPayloadType>({
           control={control}
           render={({ field }) => (
             <Upload
+              defaultFileList={[{ url: field.value }]}
               maxCount={1}
               accept="image/*"
               listType="picture"
