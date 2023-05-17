@@ -3,6 +3,8 @@ import { TablePaginationConfig } from 'antd/es/table/InternalTable'
 
 import {
   DeleteCardRequestType,
+  DeletedCardsPackRequestType,
+  NewCardPacksRequestType,
   NewCardRequestType,
   UpdateCardRequestType,
   UpdateCardsPackRequestType,
@@ -14,6 +16,8 @@ export type HandlerFunctionDataType =
   | NewCardRequestType
   | DeleteCardRequestType
   | UpdateCardRequestType
+  | NewCardPacksRequestType
+  | DeletedCardsPackRequestType
   | UpdateCardsPackRequestType
 
 export type HandlerFunctionType = (data: HandlerFunctionDataType) => void

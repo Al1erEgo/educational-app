@@ -1,13 +1,16 @@
 import { ChangeEventHandler, useEffect, useState } from 'react'
 
-import { HandleSearchType } from '../modules/pack/types'
+import { HandleSearchType } from '../types'
 
 type HandleOnSearchChangeType = ChangeEventHandler<HTMLInputElement>
 
 type UseDebouncedSearchWithResetType = (
   searchValue: string,
   onSearch: HandleSearchType
-) => { handleOnSearchChange: HandleOnSearchChangeType; localSearchValue: string }
+) => {
+  handleOnSearchChange: HandleOnSearchChangeType
+  localSearchValue: string
+}
 
 /**
  * A hook that debounces search input and resets the local search value when the outside search value resets.
@@ -26,7 +29,8 @@ export const useDebouncedSearchWithReset: UseDebouncedSearchWithResetType = (
 ) => {
   const [localSearchValue, setLocalSearchValue] = useState<string>(searchValue)
 
-  const handleOnSearchChange: HandleOnSearchChangeType = e => setLocalSearchValue(e.target.value)
+  const handleOnSearchChange: HandleOnSearchChangeType = e =>
+    setLocalSearchValue(e.target.value)
 
   // reset local search value when search value changes
   useEffect(() => {

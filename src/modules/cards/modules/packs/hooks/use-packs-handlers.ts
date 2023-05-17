@@ -1,35 +1,36 @@
-import { Dispatch, SetStateAction, useCallback } from 'react'
+import React, { useCallback } from 'react'
 
+import { usePackModals } from '../../../hooks'
+import { PackMutationsObjType } from '../../../types'
+import { PackModalsHandlersType } from '../../../types/pack-modals'
 import {
   HandleClearFiltersType,
   HandlePacksSearchType,
   HandlePacksTableChangeType,
   HandleSliderChangeType,
   HandleToggleButtonType,
-  MutationsPackObjType,
   PacksTableParamsType,
 } from '../types'
-import { PacksModalsHandlersType } from '../types/packs-modals'
-
-import { usePacksModals } from './use-packs-modals'
 
 type UsePacksHandlersType = (
-  setPacksTableParams: Dispatch<SetStateAction<PacksTableParamsType>>,
-  mutations: MutationsPackObjType
+  setPacksTableParams: React.Dispatch<
+    React.SetStateAction<PacksTableParamsType>
+  >,
+  mutations: PackMutationsObjType
 ) => {
   handlePacksTableChange: HandlePacksTableChangeType
   handlePacksSearch: HandlePacksSearchType
   handleSliderChange: HandleSliderChangeType
   handleToggleButton: HandleToggleButtonType
   handleClearFilters: HandleClearFiltersType
-  modalHandlers: PacksModalsHandlersType
+  modalHandlers: PackModalsHandlersType
 }
 
 export const usePacksHandlers: UsePacksHandlersType = (
   setPacksTableParams,
   mutations
 ) => {
-  const modalHandlers = usePacksModals(mutations)
+  const modalHandlers = usePackModals(mutations)
 
   const handlePacksSearch: HandlePacksSearchType = searchValue =>
     setPacksTableParams(prevState => ({ ...prevState, searchValue }))

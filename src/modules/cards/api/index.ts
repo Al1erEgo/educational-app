@@ -195,7 +195,7 @@ export type NewCardRequestType = {
 }
 
 export type DeleteCardRequestType = {
-  id: string
+  id?: string
 }
 
 export type UpdateCardRequestType = {
