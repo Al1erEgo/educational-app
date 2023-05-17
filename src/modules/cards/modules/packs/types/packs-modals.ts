@@ -21,7 +21,11 @@ export type PacksModalsHandlerType<T> = PacksModalsOnSubmitType<T>
 export type PacksModalsHandlersType = {
   addPackModal: PacksModalsHandlerType<NewCardPacksRequestType>
   updatePackModal: PacksModalsHandlerType<UpdateCardsPackRequestType>
-  deletePackModal: PacksModalsHandlerType<DeletedCardsPackRequestType>
+  deletePackModal: PacksModalsHandlerType<
+    DeletedCardsPackRequestType & {
+      name?: string
+    }
+  >
 }
 
 export type ModalPackFormType = {

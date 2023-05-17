@@ -21,7 +21,9 @@ import { PacksModalsHandlerType } from '../types/packs-modals'
 type GetPacksTableColumnsType = (
   activeButton: string,
   userData: LoginResponseType | undefined,
-  deletePack: PacksModalsHandlerType<DeletedCardsPackRequestType>,
+  deletePack: PacksModalsHandlerType<
+    DeletedCardsPackRequestType & { name?: string }
+  >,
   updatePack: PacksModalsHandlerType<UpdateCardsPackRequestType>
 ) => PacksTableDataColumnsType[]
 

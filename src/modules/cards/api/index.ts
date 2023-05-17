@@ -137,7 +137,6 @@ export type NewCardPacksRequestType = {
 
 export type DeletedCardsPackRequestType = {
   id?: string
-  name?: string
 }
 
 export type UpdateCardsPackRequestType = {

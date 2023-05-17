@@ -5,7 +5,9 @@ import { ModalButtons } from '../../../../components'
 import { StyledModalWrapper } from '../../../../styles'
 import { PacksModalBaseType } from '../../types/packs-modals'
 
-type ModalDeleteType = PacksModalBaseType<DeletedCardsPackRequestType>
+export type ModalDeleteType = PacksModalBaseType<
+  DeletedCardsPackRequestType & { name?: string }
+>
 export const ModalsDelete: FC<ModalDeleteType> = ({
   payload,
   onSubmit,
