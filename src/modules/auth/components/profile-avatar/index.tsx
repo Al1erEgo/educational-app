@@ -16,7 +16,9 @@ type PropsType = {
 }
 
 export const ProfileAvatar = ({ avatar }: PropsType) => {
-  const [trigger, { isLoading, isError, error: serverError }] = useAuthMeUpdateMutation({ fixedCacheKey: 'avatar' })
+  const [trigger, { isLoading, isError, error: serverError }] = useAuthMeUpdateMutation({
+    fixedCacheKey: 'avatar',
+  })
 
   const uploadHandler = (action: UploadRequestOption) => {
     if (action.file) {

@@ -2,7 +2,7 @@ import React from 'react'
 
 import { UserOutlined } from '@ant-design/icons'
 
-import { StyledSkeletonAvatar, StyledUserIconWidget } from '../auth-widget/styles'
+import { StyledSkeletonAvatar, StyledUserIconWidget } from './styles'
 
 export const AuthWidgetAvatar = ({ isLoading, userData }) => {
   if (isLoading) {

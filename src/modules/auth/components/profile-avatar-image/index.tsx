@@ -3,6 +3,8 @@ import React, { FC } from 'react'
 import { UserOutlined } from '@ant-design/icons'
 import { Skeleton } from 'antd'
 
+import { StyledProfileAvatar } from './styles'
+
 type ProfileAvatarImageType = {
   avatar: string
   isLoading: boolean
@@ -13,7 +15,7 @@ export const ProfileAvatarImage: FC<ProfileAvatarImageType> = ({ avatar, isLoadi
     return <Skeleton.Image active />
   }
   if (avatar) {
-    return <img src={avatar} alt="avatar" style={{ width: '100%' }} />
+    return <StyledProfileAvatar src={avatar} />
   }
 
   return <UserOutlined />

@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 
 import { LogoutOutlined } from '@ant-design/icons'
-import { Skeleton } from 'antd'
 import { useLocation } from 'react-router-dom'
 
 import { useNavigateToOnclick } from '../../../../hooks'
