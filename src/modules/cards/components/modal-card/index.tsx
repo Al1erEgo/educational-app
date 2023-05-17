@@ -63,7 +63,6 @@ export const ModalCard = <T extends PackModalCardPayloadType>({
     handleSubmit,
     control,
     watch,
-    setValue,
     setError,
     formState: { errors, isDirty },
   } = useForm<ModalCardFormType>({
@@ -119,13 +118,11 @@ export const ModalCard = <T extends PackModalCardPayloadType>({
       if (file.size < 4000000) {
         const url = await getBase64(file)
 
-        //newFileList[0].status = 'success'
-
         onChange(url)
       } else {
         setError(fieldName, {
           type: 'manual',
-          message: 'Файл слишком большого размера',
+          message: 'Size of picture too large',
         })
       }
     } else {
@@ -157,19 +154,15 @@ export const ModalCard = <T extends PackModalCardPayloadType>({
           control={control}
           render={({ field }) => (
             <Upload
-              showUploadList={true}
+              maxCount={1}
               accept="image/*"
               listType="picture"
               onChange={e => handleChange2(e, field.name, field.onChange)}
               beforeUpload={() => false}
-              // onChange={async e => {
-              //   const file = await handleChange(e)
-              //
-              //   field.onChange(file)
-              // }}
-              //onRemove={() => setValue(field.name, '')}
             >
-              <Button icon={<UploadOutlined />}>Upload question</Button>
+              <Button hidden={!!watch('questionImg')} icon={<UploadOutlined />}>
+                Upload question
+              </Button>
             </Upload>
           )}
         />
@@ -184,6 +177,7 @@ export const ModalCard = <T extends PackModalCardPayloadType>({
           control={control}
           render={({ field }) => (
             <Upload
+              maxCount={1}
               showUploadList={true}
               accept="image/*"
               listType="picture"
