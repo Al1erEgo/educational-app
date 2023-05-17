@@ -1,15 +1,20 @@
-import React from 'react'
+import React, { FC } from 'react'
 
 import { UserOutlined } from '@ant-design/icons'
 
 import { StyledSkeletonAvatar, StyledUserIconWidget } from './styles'
 
-export const AuthWidgetAvatar = ({ isLoading, userData }) => {
+type AuthWidgetAvatarType = {
+  isLoading: boolean
+  avatar: string | undefined
+}
+
+export const AuthWidgetAvatar: FC<AuthWidgetAvatarType> = ({ isLoading, avatar }) => {
   if (isLoading) {
     return <StyledSkeletonAvatar />
   }
-  if (userData.avatar) {
-    return <StyledUserIconWidget src={userData.avatar} />
+  if (avatar) {
+    return <StyledUserIconWidget src={avatar} />
   }
 
   return <UserOutlined />

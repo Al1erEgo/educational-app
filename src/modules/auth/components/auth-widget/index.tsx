@@ -20,7 +20,9 @@ export const AuthWidget: FC = () => {
 
   const location = useLocation()
 
-  const [trigger, { isLoading }] = useAuthMeUpdateMutation({ fixedCacheKey: 'avatar' })
+  const [trigger, { isLoading }] = useAuthMeUpdateMutation({
+    fixedCacheKey: 'avatar',
+  })
 
   const unauthorisedButtonProps =
     location.pathname === '/auth/sign-up'
@@ -34,8 +36,8 @@ export const AuthWidget: FC = () => {
   return (
     <>
       <StyledUserDataWrapper onClick={profileRedirect}>
-        <StyledUserName>{userData.name}</StyledUserName>
-        <AuthWidgetAvatar isLoading={isLoading} userData={userData} />
+        <StyledUserName>{userData ? userData.name : 'No name'}</StyledUserName>
+        <AuthWidgetAvatar isLoading={isLoading} avatar={userData?.avatar} />
       </StyledUserDataWrapper>
       <StyledAuthWidgetButton icon={<LogoutOutlined />} onClick={handleLogOut}>
         Log out
