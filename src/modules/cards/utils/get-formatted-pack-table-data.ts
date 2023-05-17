@@ -9,8 +9,8 @@ export const getFormattedPackTableData: getFormattedTableDataType =
   tableData => {
     const formattedTableData = tableData?.cards.map(card => ({
       key: card._id,
-      question: card.question,
-      answer: card.answer,
+      question: card.questionImg || card.question,
+      answer: card.answerImg || card.answer,
       updated: new Date(card.updated).toLocaleDateString('ru-RU'),
       grade: card.grade,
     }))

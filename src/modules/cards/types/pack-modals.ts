@@ -36,4 +36,7 @@ export type ModalCardPictureType = {
   answerImg?: string
 }
 
-export type ModalCardFormatType = 'text' | 'img'
+export enum ModalCardFormat {
+  TEXT = 'text',
+  IMG = 'img',
+}
