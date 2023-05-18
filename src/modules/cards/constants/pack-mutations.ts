@@ -5,6 +5,7 @@ import {
   useDeleteCardMutation,
   useDeleteCardsPackMutation,
   useNewCardMutation,
+  useNewCardsPackMutation,
   useUpdateCardMutation,
   useUpdateCardsPackMutation,
 } from '../api'
@@ -20,6 +21,7 @@ export const packMutations: PackMutationsType = {
   addCard: { mutation: useNewCardMutation, isRefetch: true },
   deleteCard: { mutation: useDeleteCardMutation, isRefetch: true },
   updateCard: { mutation: useUpdateCardMutation, isRefetch: true },
-  updatePack: { mutation: useUpdateCardsPackMutation, isRefetch: true },
-  deletePack: { mutation: useDeleteCardsPackMutation, isRefetch: false },
+  addCards: { mutation: useNewCardsPackMutation, isRefetch: true },
+  updateCards: { mutation: useUpdateCardsPackMutation, isRefetch: true },
+  deleteCards: { mutation: useDeleteCardsPackMutation, isRefetch: false },
 } as const

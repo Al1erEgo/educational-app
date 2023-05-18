@@ -15,7 +15,7 @@ export const ModalButtons: FC<ModalButtonsType> = ({
   onSubmit,
   onCancel,
   submitButtonName,
-  disabled = true,
+  disabled,
 }) => {
   return (
     <StyledModalButtonsContainer>

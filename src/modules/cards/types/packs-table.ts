@@ -3,20 +3,21 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { SorterResult } from 'antd/es/table/interface'
 import { TablePaginationConfig } from 'antd/es/table/InternalTable'
 
-import { CardPacksResponseType } from '../../../api'
+import { CardPacksResponseType } from '../api'
 
 import { HandlePacksTableChangeType } from './packs-handler-functions'
 
 export type PackType = {
   key?: string
-  _id?: string
+  _id: string
   user_id?: string
-  name?: string
+  name: string
   cardsCount?: number
   created?: string
   updated?: string
   user_name?: string
-  isPrivate?: boolean
+  isPrivate: boolean
+  deckCover: any
 }
 
 export type PacksTableDataColumnsType = {
@@ -35,7 +36,10 @@ export type PacksTableParamsType = SorterResult<PackType> & {
   activeButton: string
 }
 
-export type PacksTableErrorType = FetchBaseQueryError | SerializedError | undefined
+export type PacksTableErrorType =
+  | FetchBaseQueryError
+  | SerializedError
+  | undefined
 
 export type PacksTableDataType = {
   isPacksDataLoading: boolean
@@ -46,14 +50,6 @@ export type PacksTableDataType = {
   serverError: PacksTableErrorType
 }
 
-export type HandleAddNewPackType = (
-  id?: string,
-  name?: string,
-  isPrivate?: boolean
-) => void | Promise<void>
-
 export type HandleSliderChangeType = (value: number | [number, number]) => void
 export type HandleToggleButtonType = (buttonName: string) => void
 export type HandleClearFiltersType = () => void
-export type HandleOkType = (id?: string, newName?: string, isPrivate?: boolean) => void
-export type HandleDeleteOkType = (id?: string) => void

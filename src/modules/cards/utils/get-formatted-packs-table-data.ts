@@ -1,4 +1,4 @@
-import { CardPacksResponseType } from '../../../api'
+import { CardPacksResponseType } from '../api'
 import { PackType } from '../types'
 
 export type getFormattedPacksTableDataType = (

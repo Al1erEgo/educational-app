@@ -17,7 +17,7 @@ export const CardsConditionProvider: FC<
   const skeletonRows = type === 'card' ? 5 : 10
 
   if (isLoading) {
-    return <Skeleton paragraph={{ rows: skeletonRows }} active />
+    return <Skeleton paragraph={{ rows: skeletonRows }} active title={false} />
   }
   if (error) {
     return <ErrorServerHandler error={error} />

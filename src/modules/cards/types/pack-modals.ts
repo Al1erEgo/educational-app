@@ -4,6 +4,8 @@ import {
   UpdateCardRequestType,
 } from '../api'
 
+import { PacksModalsHandlersType } from './packs-modals'
+
 export type PackModalsOnSubmitType<T> = (payload: T) => void
 
 export type PackModalBaseType<T> = {
@@ -22,7 +24,7 @@ export type PackModalsHandlersType = {
   addCardModal: PackModalsHandlerType<NewCardRequestType>
   updateCardModal: PackModalsHandlerType<UpdateCardRequestType>
   deleteCardModal: PackModalsHandlerType<DeleteCardRequestType>
-}
+} & PacksModalsHandlersType
 
 export type ModalCardFormType = {
   question?: string
