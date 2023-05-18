@@ -1,4 +1,4 @@
-import { ModalCardFormType } from '../types/pack-modals'
+import { ModalCardFormDataType } from '../types/pack-modals'
 
 export const getModalFormControllerName = (name: string, suffix: string = '') =>
-  (name.toLowerCase() + suffix) as keyof ModalCardFormType
+  (name.toLowerCase() + suffix) as keyof ModalCardFormDataType

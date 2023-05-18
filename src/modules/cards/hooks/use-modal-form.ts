@@ -4,14 +4,14 @@ import { useForm } from 'react-hook-form'
 import { modalSchemaMap } from '../constants'
 import {
   ModalCardFormat,
-  ModalCardFormType,
+  ModalCardFormDataType,
   PackModalCardPayloadType,
 } from '../types/pack-modals'
 import { getDefaultModalFormValues } from '../utils'
 
 export const useModalForm = <
   T extends PackModalCardPayloadType,
-  D extends ModalCardFormType
+  D extends ModalCardFormDataType
 >(
   formType: ModalCardFormat,
   payload: T
@@ -25,7 +25,7 @@ export const useModalForm = <
     formState: { errors, isDirty },
     setError,
     watch,
-  } = useForm<ModalCardFormType>({
+  } = useForm<ModalCardFormDataType>({
     mode: 'all',
     resolver: yupResolver(schema),
     defaultValues,

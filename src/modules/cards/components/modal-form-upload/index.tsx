@@ -11,17 +11,17 @@ import {
 } from 'react-hook-form'
 import { FieldValues } from 'react-hook-form/dist/types'
 
-import { ModalCardFormType } from '../../types/pack-modals'
+import { ModalCardFormDataType } from '../../types/pack-modals'
 import { getBase64, getModalFormControllerName } from '../../utils'
 
 type ModalFormUploadType = {
   name: string
   control: Control
   error?: any
-  setError: UseFormSetError<ModalCardFormType>
+  setError: UseFormSetError<ModalCardFormDataType>
 }
 
-type HandleUploadChangeType = <T extends keyof ModalCardFormType>(
+type HandleUploadChangeType = <T extends keyof ModalCardFormDataType>(
   event: UploadChangeParam<UploadFile<any>>,
   field: ControllerRenderProps<FieldValues, T>
 ) => void
@@ -54,6 +54,7 @@ export const ModalFormUpload: FC<ModalFormUploadType> = ({
 
         onChange(url)
       } else {
+        newFileList[0].status = 'error'
         setError(name, {
           type: 'manual',
           message: 'Size of picture too large',

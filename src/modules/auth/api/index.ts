@@ -31,7 +31,6 @@ export const authApi = rootApi.injectEndpoints({
         url: 'auth/login',
         method: 'POST',
         body: requestData,
-        invalidatesTags: ['authMe'],
       }),
       onQueryStarted: async ({}: any, { dispatch, queryFulfilled }) => {
         try {
@@ -57,14 +56,15 @@ export const authApi = rootApi.injectEndpoints({
         url: 'auth/me',
         method: 'put',
         body: requestData,
-        invalidatesTags: ['authMe'],
       }),
 
       onQueryStarted: async ({}: any, { dispatch, queryFulfilled }) => {
         try {
           const { data } = await queryFulfilled
 
-          dispatch(authApi.util.upsertQueryData('authMe', 'auth', data.updatedUser))
+          dispatch(
+            authApi.util.upsertQueryData('authMe', 'auth', data.updatedUser)
+          )
         } catch (e) {
           return
         }
@@ -79,7 +79,10 @@ export const authApi = rootApi.injectEndpoints({
       invalidatesTags: ['authMe'],
     }),
 
-    requestPasswordReset: builder.mutation<PasswordResetResponseType, PasswordResetRequestType>({
+    requestPasswordReset: builder.mutation<
+      PasswordResetResponseType,
+      PasswordResetRequestType
+    >({
       query: (requestData: PasswordResetRequestType) => ({
         url: 'auth/forgot',
         method: 'POST',
@@ -91,7 +94,10 @@ export const authApi = rootApi.injectEndpoints({
       }),
     }),
 
-    setNewPassword: builder.mutation<SetNewPasswordResponseType, SetNewPasswordRequestType>({
+    setNewPassword: builder.mutation<
+      SetNewPasswordResponseType,
+      SetNewPasswordRequestType
+    >({
       query: (requestData: SetNewPasswordRequestType) => ({
         url: 'auth/set-new-password',
         method: 'POST',

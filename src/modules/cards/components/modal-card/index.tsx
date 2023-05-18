@@ -10,7 +10,7 @@ import {
   PackModalCardPayloadType,
 } from '../../types/pack-modals'
 import { getInitModalCardType } from '../../utils'
-import { ModalForm } from '../modal-form'
+import { ModalCardForm } from '../modal-card-form'
 
 export const ModalCard = <T extends PackModalCardPayloadType>({
   payload,
@@ -30,7 +30,7 @@ export const ModalCard = <T extends PackModalCardPayloadType>({
         onChange={setFormat}
         options={SELECT_OPTIONS}
       />
-      <ModalForm
+      <ModalCardForm
         format={format}
         payload={payload}
         onSubmit={onSubmit}

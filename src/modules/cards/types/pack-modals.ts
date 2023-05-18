@@ -24,7 +24,7 @@ export type PackModalsHandlersType = {
   deleteCardModal: PackModalsHandlerType<DeleteCardRequestType>
 }
 
-export type ModalCardFormType = {
+export type ModalCardFormDataType = {
   question?: string
   answer?: string
   questionImg?: string
