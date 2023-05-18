@@ -17,23 +17,29 @@ export const useCardsMutations: UsePackMutationsType = refetchPack => {
     mutations[name] = useCardsMutation(name, refetchPack)
   })
 
-  const { addCard, deleteCard, updateCard, addPack, updatePack, deletePack } =
-    mutations
+  const {
+    addCard,
+    deleteCard,
+    updateCard,
+    addCards,
+    updateCards,
+    deleteCards,
+  } = mutations
 
   const mutationsError =
     addCard.error ||
     deleteCard.error ||
     updateCard.error ||
-    addPack.error ||
-    updatePack.error ||
-    deletePack.error
+    addCards.error ||
+    updateCards.error ||
+    deleteCards.error
   const mutationsLoading =
     addCard.isLoading ||
     deleteCard.isLoading ||
     updateCard.isLoading ||
-    addPack.isLoading ||
-    updatePack.isLoading ||
-    deletePack.isLoading
+    addCards.isLoading ||
+    updateCards.isLoading ||
+    deleteCards.isLoading
 
   return [mutations, mutationsLoading, mutationsError]
 }

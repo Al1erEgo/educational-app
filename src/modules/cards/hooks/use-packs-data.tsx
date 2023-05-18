@@ -9,7 +9,6 @@ import {
   HandleSliderChangeType,
   HandleToggleButtonType,
   PackModalsHandlersType,
-  PacksModalsHandlersType,
   PacksTableDataType,
   PacksTableParamsType,
 } from '../types'
@@ -23,7 +22,7 @@ type UsePacksDataType = () => [
   { handleSliderChange: HandleSliderChangeType },
   { handleToggleButton: HandleToggleButtonType },
   { handleClearFilters: HandleClearFiltersType },
-  { modalHandlers: PackModalsHandlersType & PacksModalsHandlersType }
+  { modalHandlers: PackModalsHandlersType }
 ]
 
 export const usePacksData: UsePacksDataType = () => {

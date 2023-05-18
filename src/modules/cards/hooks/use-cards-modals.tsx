@@ -17,8 +17,14 @@ type UsePackModalsType = (
 ) => PackModalsHandlersType
 export const useCardsModals: UsePackModalsType = mutations => {
   const { showModal, hideModal } = useModalContext()
-  const { addCard, deleteCard, updateCard, addPack, updatePack, deletePack } =
-    mutations
+  const {
+    addCard,
+    deleteCard,
+    updateCard,
+    addCards,
+    updateCards,
+    deleteCards,
+  } = mutations
 
   const deleteCardModal = (payload: DeleteCardRequestType) =>
     showModal({
@@ -63,7 +69,7 @@ export const useCardsModals: UsePackModalsType = mutations => {
       content: (
         <ModalDelete
           payload={payload}
-          onSubmit={deletePack.handler}
+          onSubmit={deleteCards.handler}
           onCancel={hideModal}
         />
       ),
@@ -75,7 +81,7 @@ export const useCardsModals: UsePackModalsType = mutations => {
       content: (
         <ModalPack
           payload={payload}
-          onSubmit={addPack.handler}
+          onSubmit={addCards.handler}
           onCancel={hideModal}
         />
       ),
@@ -88,7 +94,7 @@ export const useCardsModals: UsePackModalsType = mutations => {
       content: (
         <ModalPack
           payload={payload}
-          onSubmit={updatePack.handler}
+          onSubmit={updateCards.handler}
           onCancel={hideModal}
         />
       ),
