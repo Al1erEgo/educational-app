@@ -11,6 +11,7 @@ import {
 } from 'react-hook-form'
 import { FieldValues } from 'react-hook-form/dist/types'
 
+import { usePreview } from '../../hooks'
 import { ModalCardFormDataType } from '../../types'
 import { getBase64, getModalFormControllerName } from '../../utils'
 
@@ -32,6 +33,8 @@ export const ModalFormUpload: FC<ModalFormUploadType> = ({
   error,
   setError,
 }) => {
+  const { preview, handlePreview } = usePreview()
+
   const uploadControllerName = getModalFormControllerName(name, 'Img')
 
   const getDefaultImage = (img: string): UploadFile<any>[] => {
@@ -78,7 +81,7 @@ export const ModalFormUpload: FC<ModalFormUploadType> = ({
             accept="image/*"
             listType="picture"
             onChange={e => handleUploadChange(e, field)}
-            onPreview={() => {}}
+            onPreview={() => handlePreview(field.value)}
             beforeUpload={() => false}
           >
             {!field.value && (
@@ -87,6 +90,7 @@ export const ModalFormUpload: FC<ModalFormUploadType> = ({
           </Upload>
         )}
       />
+      {preview}
     </Form.Item>
   )
 }
