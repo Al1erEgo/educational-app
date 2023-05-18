@@ -2,8 +2,8 @@ import React, { FC } from 'react'
 
 import { Slider } from 'antd'
 
-import { StyledCardsText } from '../../../../styles'
-import { useSliderKeyUpdater } from '../../hooks/use-slider-key-updater'
+import { useSliderKeyUpdater } from '../../hooks'
+import { StyledCardsText } from '../../styles'
 import { HandleSliderChangeType, PacksTableParamsType } from '../../types'
 
 import { StyledPacksSliderWrapper } from './styles'

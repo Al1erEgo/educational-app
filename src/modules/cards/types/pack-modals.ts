@@ -6,7 +6,8 @@ import {
   UpdateCardRequestType,
   UpdateCardsPackRequestType,
 } from '../api'
-import { PacksModalsHandlerType } from '../modules/packs/types/packs-modals'
+
+import { PacksModalsHandlerType } from './packs-modals'
 
 export type PackModalsOnSubmitType<T> = (payload: T) => void
 

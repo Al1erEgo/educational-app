@@ -5,9 +5,9 @@ import {
   DeletedCardsPackRequestType,
   NewCardPacksRequestType,
   UpdateCardsPackRequestType,
-} from '../../../api'
+} from '../api'
 
-import { PackType } from './index'
+import { PackType } from './packs-table'
 
 type HandlerFunctionPacksDataType =
   | NewCardPacksRequestType

@@ -9,10 +9,8 @@ import {
   UpdateCardRequestType,
   UpdateCardsPackRequestType,
 } from '../api'
-import { ModalCard, ModalDelete } from '../components'
-import { ModalPack } from '../modules/packs/components/modal-pack'
-import { PackMutationsObjType } from '../types'
-import { PackModalsHandlersType } from '../types/pack-modals'
+import { ModalCard, ModalDelete, ModalPack } from '../components'
+import { PackModalsHandlersType, PackMutationsObjType } from '../types'
 
 type UsePackModalsType = (
   mutations: PackMutationsObjType

@@ -2,7 +2,7 @@ import {
   DeletedCardsPackRequestType,
   NewCardPacksRequestType,
   UpdateCardsPackRequestType,
-} from '../../../api'
+} from '../api'
 
 export type PacksModalsOnSubmitType<T> = (payload: T) => void
 

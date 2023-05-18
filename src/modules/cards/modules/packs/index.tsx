@@ -1,10 +1,15 @@
 import React from 'react'
 
-import { CardsHeader, CardsSearch } from '../../components'
+import {
+  CardsHeader,
+  CardsSearch,
+  PacksButton,
+  PacksFilter,
+  PacksSlider,
+  PacksTable,
+} from '../../components'
+import { usePacksData } from '../../hooks'
 import { StyledCardsTitleButton, StyledCardsToolbar } from '../../styles'
-
-import { PacksButton, PacksFilter, PacksSlider, PacksTable } from './components'
-import { usePacksData } from './hooks'
 
 export const Packs = () => {
   const [

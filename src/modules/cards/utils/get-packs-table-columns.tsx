@@ -8,15 +8,14 @@ import {
 import { Space, Tooltip } from 'antd'
 import { NavLink } from 'react-router-dom'
 
-import { LoginResponseType } from '../../../../auth/types'
+import { LoginResponseType } from '../../auth/types'
+import { DeletedCardsPackRequestType, UpdateCardsPackRequestType } from '../api'
+import { MY_BUTTON_NAME, packsTableColumns } from '../constants'
 import {
-  DeletedCardsPackRequestType,
-  UpdateCardsPackRequestType,
-} from '../../../api'
-import { MY_BUTTON_NAME } from '../../../constants'
-import { packsTableColumns } from '../constants'
-import { PacksTableDataColumnsType, PackType } from '../types'
-import { PacksModalsHandlerType } from '../types/packs-modals'
+  PacksModalsHandlerType,
+  PacksTableDataColumnsType,
+  PackType,
+} from '../types'
 
 type GetPacksTableColumnsType = (
   activeButton: string,

@@ -6,16 +6,16 @@ import { Button, Checkbox, Form, Select, Upload } from 'antd'
 import { Controller, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
-import { ModalButtons, ModalFormInput } from '../../../../components'
-import { SELECT_OPTIONS } from '../../../../constants/pack-modals'
-import { StyledModalWrapper } from '../../../../styles'
+import { SELECT_OPTIONS } from '../../constants/pack-modals'
+import { StyledModalWrapper } from '../../styles'
 import {
   ModalPackFormatType,
   ModalPackFormType,
   ModalPackPictureType,
   PacksModalBaseType,
   PacksModalPayloadType,
-} from '../../types/packs-modals'
+} from '../../types'
+import { ModalButtons, ModalFormInput } from '../index'
 
 const schema = yup.object({
   name: yup.string().min(1).max(100).required(),

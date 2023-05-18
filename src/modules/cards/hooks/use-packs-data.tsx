@@ -1,23 +1,21 @@
 import { useState } from 'react'
 
-import { useAuthorised } from '../../../../auth/hooks'
-import { useCardPacksQuery } from '../../../api'
-import { MY_BUTTON_NAME } from '../../../constants'
-import { useCardsMutations } from '../../../hooks'
-import { PackModalsHandlersType } from '../../../types/pack-modals'
-import { getSortingParam } from '../../../utils'
+import { useAuthorised } from '../../auth/hooks'
+import { useCardPacksQuery } from '../api'
+import { MY_BUTTON_NAME } from '../constants'
 import {
   HandleClearFiltersType,
   HandlePacksSearchType,
   HandleSliderChangeType,
   HandleToggleButtonType,
+  PackModalsHandlersType,
+  PacksModalsHandlersType,
   PacksTableDataType,
   PacksTableParamsType,
 } from '../types'
-import { PacksModalsHandlersType } from '../types/packs-modals'
-import { getPacksTableColumns } from '../utils'
+import { getPacksTableColumns, getSortingParam } from '../utils'
 
-import { usePacksHandlers } from './use-packs-handlers'
+import { useCardsMutations, usePacksHandlers } from './index'
 
 type UsePacksDataType = () => [
   { handlePacksSearch: HandlePacksSearchType },

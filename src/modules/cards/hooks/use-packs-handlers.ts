@@ -1,16 +1,17 @@
 import React, { useCallback } from 'react'
 
-import { useCardsModals } from '../../../hooks'
-import { PackMutationsObjType } from '../../../types'
-import { PackModalsHandlersType } from '../../../types/pack-modals'
 import {
   HandleClearFiltersType,
   HandlePacksSearchType,
   HandlePacksTableChangeType,
   HandleSliderChangeType,
   HandleToggleButtonType,
+  PackModalsHandlersType,
+  PackMutationsObjType,
   PacksTableParamsType,
 } from '../types'
+
+import { useCardsModals } from './index'
 
 type UsePacksHandlersType = (
   setPacksTableParams: React.Dispatch<
