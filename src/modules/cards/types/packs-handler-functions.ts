@@ -1,22 +1,7 @@
 import { FilterValue, SorterResult } from 'antd/es/table/interface'
 import { TablePaginationConfig } from 'antd/es/table/InternalTable'
 
-import {
-  DeletedCardsPackRequestType,
-  NewCardPacksRequestType,
-  UpdateCardsPackRequestType,
-} from '../api'
-
 import { PackType } from './packs-table'
-
-type HandlerFunctionPacksDataType =
-  | NewCardPacksRequestType
-  | DeletedCardsPackRequestType
-  | UpdateCardsPackRequestType
-
-export type HandlerPacksFunctionType = (
-  data: HandlerFunctionPacksDataType
-) => void
 
 export type HandlePacksTableChangeType = (
   pagination: TablePaginationConfig,
