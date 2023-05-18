@@ -49,8 +49,6 @@ export type PacksTableDataType = {
   serverError: PacksTableErrorType
 }
 
-export type HandleAddNewPackType = (name?: string, isPrivate?: boolean) => void
-
 export type HandleSliderChangeType = (value: number | [number, number]) => void
 export type HandleToggleButtonType = (buttonName: string) => void
 export type HandleClearFiltersType = () => void
