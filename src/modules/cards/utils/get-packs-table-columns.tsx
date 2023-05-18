@@ -48,7 +48,7 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
       sorter: true,
       render: (text: string, pack: PackType) => (
         <NavLink
-          to={`/cards/packs/${pack._id}?name=${pack.name}&own=${
+          to={`/cards/packs/${pack?._id}?name=${pack?.name}&own=${
             pack?.user_id === userData?._id
           }`}
         >
@@ -61,10 +61,10 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
       title: 'Actions',
       dataIndex: 'actions',
       render: (text: string, pack: PackType) => {
-        const hasCards = pack.cardsCount ? pack.cardsCount > 0 : false
+        const hasCards = pack?.cardsCount ? pack.cardsCount > 0 : false
 
         const learnAction = hasCards ? (
-          <NavLink to={`/cards/learn/${pack._id}?name=${pack.name}`}>
+          <NavLink to={`/cards/learn/${pack?._id}?name=${pack?.name}`}>
             <InfoCircleTwoTone />
           </NavLink>
         ) : (
@@ -81,11 +81,12 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
             <Tooltip title="Edit">
               <EditOutlined
                 onClick={() =>
-                  updatePack({
+                  updatePack?.({
                     cardsPack: {
-                      _id: pack._id,
-                      name: pack.name,
-                      private: pack.isPrivate,
+                      _id: pack?._id,
+                      name: pack?.name,
+                      private: pack?.isPrivate,
+                      deckCover: pack?.deckCover,
                     },
                   })
                 }
@@ -94,7 +95,9 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
 
             <Tooltip title="Delete">
               <DeleteOutlined
-                onClick={() => deletePack({ id: pack._id, name: pack.name })}
+                onClick={() =>
+                  deletePack?.({ id: pack?._id, name: pack?.name })
+                }
               />
             </Tooltip>
           </Space>

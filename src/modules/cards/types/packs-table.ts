@@ -9,14 +9,15 @@ import { HandlePacksTableChangeType } from './packs-handler-functions'
 
 export type PackType = {
   key?: string
-  _id?: string
+  _id: string
   user_id?: string
-  name?: string
+  name: string
   cardsCount?: number
   created?: string
   updated?: string
   user_name?: string
-  isPrivate?: boolean
+  isPrivate: boolean
+  deckCover: any
 }
 
 export type PacksTableDataColumnsType = {
