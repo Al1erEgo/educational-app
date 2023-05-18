@@ -17,7 +17,7 @@ import { PackModalsHandlersType } from '../types/pack-modals'
 type UsePackModalsType = (
   mutations: PackMutationsObjType
 ) => PackModalsHandlersType
-export const usePackModals: UsePackModalsType = mutations => {
+export const useCardsModals: UsePackModalsType = mutations => {
   const { showModal, hideModal } = useModalContext()
   const { addCard, deleteCard, updateCard, addPack, updatePack, deletePack } =
     mutations

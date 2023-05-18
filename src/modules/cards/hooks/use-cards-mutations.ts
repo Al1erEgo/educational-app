@@ -4,17 +4,17 @@ import {
   PacksMutationsWithConditionsType,
 } from '../types'
 
-import { usePackMutation } from './use-pack-mutation'
+import { useCardsMutation } from './use-cards-mutation'
 
 type UsePackMutationsType = (
   refetchPack: () => void
 ) => PacksMutationsWithConditionsType
 
-export const usePackMutations: UsePackMutationsType = refetchPack => {
+export const useCardsMutations: UsePackMutationsType = refetchPack => {
   const mutations: PackMutationsObjType = {}
 
   Object.keys(packMutations).forEach(name => {
-    mutations[name] = usePackMutation(name, refetchPack)
+    mutations[name] = useCardsMutation(name, refetchPack)
   })
 
   const { addCard, deleteCard, updateCard, addPack, updatePack, deletePack } =

@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 
-import { usePackModals } from '../../../hooks'
+import { useCardsModals } from '../../../hooks'
 import { PackMutationsObjType } from '../../../types'
 import { PackModalsHandlersType } from '../../../types/pack-modals'
 import {
@@ -30,7 +30,7 @@ export const usePacksHandlers: UsePacksHandlersType = (
   setPacksTableParams,
   mutations
 ) => {
-  const modalHandlers = usePackModals(mutations)
+  const modalHandlers = useCardsModals(mutations)
 
   const handlePacksSearch: HandlePacksSearchType = searchValue =>
     setPacksTableParams(prevState => ({ ...prevState, searchValue }))

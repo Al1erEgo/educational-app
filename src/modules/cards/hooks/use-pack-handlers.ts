@@ -13,7 +13,7 @@ import {
 } from '../types'
 import { PackModalsHandlersType } from '../types/pack-modals'
 
-import { usePackModals } from './use-pack-modals'
+import { useCardsModals } from './use-cards-modals'
 
 type UsePackHandlersType = (
   setTableParams: Dispatch<SetStateAction<PackTableParamsType>>,
@@ -35,7 +35,7 @@ export const usePackHandlers: UsePackHandlersType = (
 ) => {
   const navigate = useNavigate()
   const { addCard, updateCard, updatePack, deletePack } = mutations
-  const modalHandlers = usePackModals(mutations)
+  const modalHandlers = useCardsModals(mutations)
 
   const handleSearch: HandleSearchType = searchValue =>
     setTableParams(prevState => ({ ...prevState, searchValue }))

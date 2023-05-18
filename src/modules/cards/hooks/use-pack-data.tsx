@@ -15,8 +15,8 @@ import {
   getSortingParam,
 } from '../utils'
 
+import { useCardsMutations } from './use-cards-mutations'
 import { usePackHandlers } from './use-pack-handlers'
-import { usePackMutations } from './use-pack-mutations'
 
 type UsePackDataType = () => [
   {
@@ -60,7 +60,7 @@ export const usePackData: UsePackDataType = () => {
   })
 
   const [mutations, mutationsLoading, mutationsError] =
-    usePackMutations(refetchPack)
+    useCardsMutations(refetchPack)
 
   const { handleTableChange, handleSearch, buttonsHandlers, modalHandlers } =
     usePackHandlers(setTableParams, mutations, packId, packName)

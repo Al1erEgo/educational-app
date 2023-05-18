@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useAuthorised } from '../../../../auth/hooks'
 import { useCardPacksQuery } from '../../../api'
 import { MY_BUTTON_NAME } from '../../../constants'
-import { usePackMutations } from '../../../hooks'
+import { useCardsMutations } from '../../../hooks'
 import { PackModalsHandlersType } from '../../../types/pack-modals'
 import { getSortingParam } from '../../../utils'
 import {
@@ -63,7 +63,7 @@ export const usePacksData: UsePacksDataType = () => {
   })
 
   const [mutations, actionsLoading, actionsError] =
-    usePackMutations(refetchPacks)
+    useCardsMutations(refetchPacks)
 
   const isPacksDataLoading = isPacksLoading || isPacksFetching || actionsLoading
 
