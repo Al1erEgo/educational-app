@@ -11,6 +11,8 @@ export const getFormattedPackTableData: getFormattedTableDataType =
       key: card._id,
       question: card.question,
       answer: card.answer,
+      questionImg: card.questionImg,
+      answerImg: card.answerImg,
       updated: new Date(card.updated).toLocaleDateString('ru-RU'),
       grade: card.grade,
     }))

@@ -149,8 +149,10 @@ export type UpdateCardsPackRequestType = {
 }
 
 export type CardType = {
-  answer: string
   question: string
+  answer: string
+  questionImg?: string
+  answerImg?: string
   cardsPack_id: string
   grade: number
   shots: number

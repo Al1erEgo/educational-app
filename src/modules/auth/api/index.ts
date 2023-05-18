@@ -57,19 +57,18 @@ export const authApi = rootApi.injectEndpoints({
         method: 'put',
         body: requestData,
       }),
-      invalidatesTags: ['authMe'],
 
-      /*      onQueryStarted: async ({}: any, { dispatch, queryFulfilled }) => {
-			 try {
-			 const { data } = await queryFulfilled
+      onQueryStarted: async ({}: any, { dispatch, queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled
 
-			 dispatch(
-			 authApi.util.upsertQueryData('authMe', 'auth', data.updatedUser)
-			 )
-			 } catch (e) {
-			 return
-			 }
-			 },*/
+          dispatch(
+            authApi.util.upsertQueryData('authMe', 'auth', data.updatedUser)
+          )
+        } catch (e) {
+          return
+        }
+      },
     }),
 
     authMeLogOut: builder.mutation<LogOutResponseType, LogOutRequestType>({

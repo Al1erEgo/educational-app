@@ -3,7 +3,7 @@ import { TablePaginationConfig } from 'antd/es/table/InternalTable'
 
 export type PackTableColumnsType = {
   title: string
-  dataIndex: string
+  dataIndex: string | string[]
   sorter?: boolean
   width?: string
   render?: (text: string, record: PackCardType) => JSX.Element
@@ -17,6 +17,8 @@ export type PackTableParamsType = SorterResult<PackCardType> & {
 export type PackCardType = {
   question: string
   answer: string
+  questionImg?: string
+  answerImg?: string
   updated: string
   grade: number
   key: string
