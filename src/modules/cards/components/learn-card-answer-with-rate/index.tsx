@@ -4,7 +4,8 @@ import { Rate, Typography } from 'antd'
 
 import { rateDescriptions } from '../../constants'
 
-import { StyledRateContainer } from './style'
+import { StyledRateContainer } from './styles'
+
 const { Text } = Typography
 
 type LearnCardAnswerWithRateType = {

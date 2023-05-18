@@ -6,13 +6,13 @@ import { Button, Checkbox, Form, Select, Upload } from 'antd'
 import { Controller, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
-import { SELECT_OPTIONS } from '../../constants/pack-modals'
+import { SELECT_OPTIONS } from '../../constants'
 import { StyledModalWrapper } from '../../styles'
 import {
+  CardsModalBaseType,
   ModalPackFormatType,
   ModalPackFormType,
   ModalPackPictureType,
-  PacksModalBaseType,
   PacksModalPayloadType,
 } from '../../types'
 import { ModalButtons, ModalFormInput } from '../index'
@@ -25,7 +25,7 @@ export const ModalPack = <T extends PacksModalPayloadType>({
   payload,
   onSubmit,
   onCancel,
-}: PacksModalBaseType<T>) => {
+}: CardsModalBaseType<T>) => {
   const packFormatStateType = payload.cardsPack.deckCover ? 'picture' : 'text'
 
   const [format, setFormat] = useState<ModalPackFormatType>(packFormatStateType)

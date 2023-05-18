@@ -12,7 +12,7 @@ import { LoginResponseType } from '../../auth/types'
 import { DeletedCardsPackRequestType, UpdateCardsPackRequestType } from '../api'
 import { MY_BUTTON_NAME, packsTableColumns } from '../constants'
 import {
-  PacksModalsHandlerType,
+  CardsModalsHandlerType,
   PacksTableDataColumnsType,
   PackType,
 } from '../types'
@@ -20,10 +20,10 @@ import {
 type GetPacksTableColumnsType = (
   activeButton: string,
   userData: LoginResponseType | undefined,
-  deletePack: PacksModalsHandlerType<
+  deletePack: CardsModalsHandlerType<
     DeletedCardsPackRequestType & { name?: string }
   >,
-  updatePack: PacksModalsHandlerType<UpdateCardsPackRequestType>
+  updatePack: CardsModalsHandlerType<UpdateCardsPackRequestType>
 ) => PacksTableDataColumnsType[]
 
 /**

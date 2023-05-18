@@ -6,10 +6,10 @@ import {
   ModalCardFormat,
   ModalCardFormDataType,
   PackModalCardPayloadType,
-} from '../types/pack-modals'
+} from '../types'
 import { getDefaultModalFormValues } from '../utils'
 
-export const useModalForm = <
+export const useCardsModalForm = <
   T extends PackModalCardPayloadType,
   D extends ModalCardFormDataType
 >(

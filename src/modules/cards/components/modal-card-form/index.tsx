@@ -2,18 +2,18 @@ import React from 'react'
 
 import { Form } from 'antd'
 
-import { useModalForm } from '../../hooks'
+import { useCardsModalForm } from '../../hooks'
 import {
+  CardsModalBaseType,
   ModalCardFormat,
   ModalCardFormDataType,
-  PackModalBaseType,
   PackModalCardPayloadType,
-} from '../../types/pack-modals'
+} from '../../types'
 import { ModalButtons } from '../modal-buttons'
 import { ModalFormInput } from '../modal-form-input'
 import { ModalFormUpload } from '../modal-form-upload'
 
-type ModalCardFormType<T> = PackModalBaseType<T> & { format: ModalCardFormat }
+type ModalCardFormType<T> = CardsModalBaseType<T> & { format: ModalCardFormat }
 export const ModalCardForm = <T extends PackModalCardPayloadType>({
   format,
   payload,
@@ -21,7 +21,7 @@ export const ModalCardForm = <T extends PackModalCardPayloadType>({
   onCancel,
 }: ModalCardFormType<T>) => {
   const { handleSubmit, control, errors, isDirty, setError, watch } =
-    useModalForm<T, ModalCardFormDataType>(format, payload)
+    useCardsModalForm<T, ModalCardFormDataType>(format, payload)
 
   const handleModalFormSubmit = (inputData: ModalCardFormDataType) => {
     const submitData = {

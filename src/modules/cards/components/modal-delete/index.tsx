@@ -2,12 +2,12 @@ import React, { FC } from 'react'
 
 import { DeleteCardRequestType, DeletedCardsPackRequestType } from '../../api'
 import { StyledModalWrapper } from '../../styles'
-import { PackModalBaseType } from '../../types/pack-modals'
+import { CardsModalBaseType } from '../../types'
 import { ModalButtons } from '../modal-buttons'
 
 type ModalDeleteType =
-  | PackModalBaseType<DeletedCardsPackRequestType & { name?: string }>
-  | PackModalBaseType<DeleteCardRequestType>
+  | CardsModalBaseType<DeletedCardsPackRequestType & { name?: string }>
+  | CardsModalBaseType<DeleteCardRequestType>
 export const ModalDelete: FC<ModalDeleteType> = ({
   payload,
   onSubmit,

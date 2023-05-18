@@ -11,7 +11,7 @@ import {
 } from 'react-hook-form'
 import { FieldValues } from 'react-hook-form/dist/types'
 
-import { ModalCardFormDataType } from '../../types/pack-modals'
+import { ModalCardFormDataType } from '../../types'
 import { getBase64, getModalFormControllerName } from '../../utils'
 
 type ModalFormUploadType = {

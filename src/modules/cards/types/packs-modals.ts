@@ -4,24 +4,16 @@ import {
   UpdateCardsPackRequestType,
 } from '../api'
 
-export type PacksModalsOnSubmitType<T> = (payload: T) => void
-
-export type PacksModalBaseType<T> = {
-  payload: T
-  onSubmit: PacksModalsOnSubmitType<T>
-  onCancel: () => void
-}
+import { CardsModalsHandlerType } from './cards-modals'
 
 export type PacksModalPayloadType =
   | NewCardPacksRequestType
   | UpdateCardsPackRequestType
 
-export type PacksModalsHandlerType<T> = PacksModalsOnSubmitType<T>
-
 export type PacksModalsHandlersType = {
-  addPackModal: PacksModalsHandlerType<NewCardPacksRequestType>
-  updatePackModal: PacksModalsHandlerType<UpdateCardsPackRequestType>
-  deletePackModal: PacksModalsHandlerType<
+  addPackModal: CardsModalsHandlerType<NewCardPacksRequestType>
+  updatePackModal: CardsModalsHandlerType<UpdateCardsPackRequestType>
+  deletePackModal: CardsModalsHandlerType<
     DeletedCardsPackRequestType & {
       name?: string
     }

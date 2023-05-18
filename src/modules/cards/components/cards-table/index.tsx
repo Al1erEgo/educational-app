@@ -5,6 +5,7 @@ import { Table } from 'antd'
 import { useTableResize } from '../../hooks'
 import { CardsConditionProvider } from '../cards-table-condition-provider'
 
+//TODO fix any
 type CardsTableType = {
   tableData: any
 }

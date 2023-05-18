@@ -9,7 +9,10 @@ type LearnCardQuestionType = {
   shots?: number
 }
 
-export const LearnCardQuestion: FC<LearnCardQuestionType> = ({ question, shots }) => {
+export const LearnCardQuestion: FC<LearnCardQuestionType> = ({
+  question,
+  shots,
+}) => {
   return (
     <>
       <div>

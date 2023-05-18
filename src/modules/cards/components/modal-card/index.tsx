@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 
 import { Select } from 'antd'
 
-import { SELECT_OPTIONS } from '../../constants/pack-modals'
+import { SELECT_OPTIONS } from '../../constants'
 import { StyledModalWrapper } from '../../styles'
 import {
+  CardsModalBaseType,
   ModalCardFormat,
-  PackModalBaseType,
   PackModalCardPayloadType,
-} from '../../types/pack-modals'
+} from '../../types'
 import { getInitModalCardType } from '../../utils'
 import { ModalCardForm } from '../modal-card-form'
 
@@ -16,7 +16,7 @@ export const ModalCard = <T extends PackModalCardPayloadType>({
   payload,
   onSubmit,
   onCancel,
-}: PackModalBaseType<T>) => {
+}: CardsModalBaseType<T>) => {
   const [format, setFormat] = useState<ModalCardFormat>(
     getInitModalCardType(payload)
   )

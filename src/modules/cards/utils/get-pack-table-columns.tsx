@@ -3,13 +3,12 @@ import { Space, Tooltip } from 'antd'
 
 import { DeleteCardRequestType, UpdateCardRequestType } from '../api'
 import { packTableColumns } from '../constants'
-import { PackTableColumnsType } from '../types'
-import { PackModalsHandlerType } from '../types/pack-modals'
+import { CardsModalsHandlerType, PackTableColumnsType } from '../types'
 
 type GetTableColumnsType = (
   isMine: boolean,
-  deleteCard: PackModalsHandlerType<DeleteCardRequestType>,
-  updateCard: PackModalsHandlerType<UpdateCardRequestType>
+  deleteCard: CardsModalsHandlerType<DeleteCardRequestType>,
+  updateCard: CardsModalsHandlerType<UpdateCardRequestType>
 ) => PackTableColumnsType[]
 
 export const getPackTableColumns: GetTableColumnsType = (
