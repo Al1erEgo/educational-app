@@ -106,6 +106,7 @@ export type CardsPackType = {
   updated: string
   user_name: string
   private: boolean
+  deckCover: string
 }
 
 export type CardPacksResponseType = {

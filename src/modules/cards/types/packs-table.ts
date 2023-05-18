@@ -17,7 +17,7 @@ export type PackType = {
   updated?: string
   user_name?: string
   isPrivate: boolean
-  deckCover: any
+  deckCover: string
 }
 
 export type PacksTableDataColumnsType = {

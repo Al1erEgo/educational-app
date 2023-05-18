@@ -17,6 +17,7 @@ export const getFormattedPacksTableData: getFormattedPacksTableDataType =
       updated: new Date(pack.updated).toLocaleDateString('ru-RU'),
       user_name: pack.user_name,
       isPrivate: pack.private,
+      deckCover: pack.deckCover,
     }))
 
     return formattedPacksTableData
