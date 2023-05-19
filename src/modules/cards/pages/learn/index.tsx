@@ -1,9 +1,8 @@
 import { FC } from 'react'
 
 import { BackToCardsButton, LearnCard } from '../../components'
+import { useLearnData } from '../../hooks'
 import { StyledTitle } from '../../styles'
-
-import { useLearnData } from './hooks'
 
 export const Learn: FC = () => {
   const [names, cardHandlers, card] = useLearnData()
