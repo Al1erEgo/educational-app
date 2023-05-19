@@ -45,6 +45,7 @@ export const ModalFormUpload: FC<ModalFormUploadType> = ({
     }
   }
 
+  //TODO переделать if
   const handleUploadChange: HandleUploadChangeType = async (
     { fileList: newFileList },
     { name, onChange }
