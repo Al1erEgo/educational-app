@@ -48,7 +48,7 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
       sorter: true,
       render: (text: string, pack: PackType) => (
         <NavLink
-          to={`/cards/packs/${pack?._id}?name=${pack?.name}&own=${
+          to={`/cards/pack/${pack?._id}?name=${pack?.name}&own=${
             pack?.user_id === userData?._id
           }`}
         >

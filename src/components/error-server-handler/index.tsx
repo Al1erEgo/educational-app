@@ -1,16 +1,22 @@
 import { FC } from 'react'
 
 import { StyledErrorText } from '../../modules/auth/styles'
-import { isFetchBaseQueryError } from '../../utils'
+import { isErrorJsonInData, isErrorMessageInData } from '../../utils'
 
 type ErrorServerHandlerType = {
   error: unknown
 }
 
 export const ErrorServerHandler: FC<ErrorServerHandlerType> = ({ error }) => {
-  if (isFetchBaseQueryError(error)) {
-    return <StyledErrorText>{error.data.error}</StyledErrorText>
+  let errorMessage = ''
+
+  if (isErrorJsonInData(error)) {
+    errorMessage = error.data.match(/<pre>(.*?)<\/pre>/)?.[1] || ''
   }
 
-  return null
+  if (isErrorMessageInData(error)) {
+    errorMessage = error.data.error
+  }
+
+  return <StyledErrorText>{errorMessage}</StyledErrorText>
 }
