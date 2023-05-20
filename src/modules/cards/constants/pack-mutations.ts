@@ -21,7 +21,7 @@ export const packMutations: PackMutationsType = {
   addCard: { mutation: useNewCardMutation, isRefetch: true },
   deleteCard: { mutation: useDeleteCardMutation, isRefetch: true },
   updateCard: { mutation: useUpdateCardMutation, isRefetch: true },
-  addCards: { mutation: useNewCardsPackMutation, isRefetch: true },
-  updateCards: { mutation: useUpdateCardsPackMutation, isRefetch: true },
-  deleteCards: { mutation: useDeleteCardsPackMutation, isRefetch: false },
+  addCardsPack: { mutation: useNewCardsPackMutation, isRefetch: true },
+  updateCardsPack: { mutation: useUpdateCardsPackMutation, isRefetch: true },
+  deleteCardsPack: { mutation: useDeleteCardsPackMutation, isRefetch: false },
 } as const

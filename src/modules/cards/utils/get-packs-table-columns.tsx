@@ -81,7 +81,7 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
             <Tooltip title="Edit">
               <EditOutlined
                 onClick={() =>
-                  updatePack?.({
+                  updatePack({
                     cardsPack: {
                       _id: pack?._id,
                       name: pack?.name,
@@ -95,9 +95,7 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
 
             <Tooltip title="Delete">
               <DeleteOutlined
-                onClick={() =>
-                  deletePack?.({ id: pack?._id, name: pack?.name })
-                }
+                onClick={() => deletePack({ id: pack?._id, name: pack?.name })}
               />
             </Tooltip>
           </Space>
