@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 
 import { UploadOutlined } from '@ant-design/icons'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Button, Checkbox, Form, Select, Upload } from 'antd'
-import { Controller, useForm } from 'react-hook-form'
+import { Button, Form, Select, Upload } from 'antd'
+import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
 import { SELECT_OPTIONS } from '../../constants'
@@ -16,6 +16,7 @@ import {
   PacksModalPayloadType,
 } from '../../types'
 import { ModalButtons, ModalFormInput } from '../index'
+import { ModalFormCheckbox } from '../modal-form-checkbox'
 
 const schema = yup.object({
   name: yup.string().min(1).max(100).required(),
@@ -79,30 +80,17 @@ export const ModalPack = <T extends PacksModalPayloadType>({
       <Form onFinish={handleSubmit(handleCardSubmit)}>
         <ModalFormInput name="Name" control={control} error={errors.name} />
 
-        <Form.Item>
-          <Controller
-            name="private"
-            control={control}
-            defaultValue={payload.cardsPack.private || false}
-            render={({ field }) => (
-              <Checkbox
-                {...field}
-                checked={field.value}
-                onChange={e => field.onChange(e.target.checked)}
-              >
-                Private Pack
-              </Checkbox>
-            )}
-          />
-        </Form.Item>
+        <ModalFormCheckbox
+          name="private"
+          control={control}
+          defaultValue={payload.cardsPack.private || false}
+        />
 
-        <Form.Item>
-          <ModalButtons
-            submitButtonName={submitButtonName}
-            onCancel={onCancel}
-            disabled={!isDirty}
-          />
-        </Form.Item>
+        <ModalButtons
+          submitButtonName={submitButtonName}
+          onCancel={onCancel}
+          disabled={!isDirty}
+        />
       </Form>
     </StyledModalWrapper>
   )

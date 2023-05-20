@@ -68,13 +68,11 @@ export const ModalCardForm = <T extends PackModalCardPayloadType>({
           />
         </>
       )}
-      <Form.Item>
-        <ModalButtons
-          submitButtonName={submitButtonName}
-          onCancel={onCancel}
-          disabled={!isDirty}
-        />
-      </Form.Item>
+      <ModalButtons
+        submitButtonName={submitButtonName}
+        onCancel={onCancel}
+        disabled={!isDirty}
+      />
     </Form>
   )
 }

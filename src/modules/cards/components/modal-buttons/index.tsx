@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-import { Button } from 'antd'
+import { Button, Form } from 'antd'
 
 import { StyledModalButtonsContainer, StyledModalSubmitButton } from './styles'
 
@@ -18,11 +18,13 @@ export const ModalButtons: FC<ModalButtonsType> = ({
   disabled,
 }) => {
   return (
-    <StyledModalButtonsContainer>
-      <Button onClick={onCancel}>Cancel</Button>
-      <StyledModalSubmitButton disabled={disabled} onClick={onSubmit}>
-        {submitButtonName}
-      </StyledModalSubmitButton>
-    </StyledModalButtonsContainer>
+    <Form.Item>
+      <StyledModalButtonsContainer>
+        <Button onClick={onCancel}>Cancel</Button>
+        <StyledModalSubmitButton disabled={disabled} onClick={onSubmit}>
+          {submitButtonName}
+        </StyledModalSubmitButton>
+      </StyledModalButtonsContainer>
+    </Form.Item>
   )
 }
