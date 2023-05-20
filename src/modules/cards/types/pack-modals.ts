@@ -11,7 +11,7 @@ export type PackModalCardPayloadType =
   | NewCardRequestType
   | UpdateCardRequestType
 
-export type PackModalsHandlersType = {
+export type CardsModalsHandlersType = {
   addCardModal: CardsModalsHandlerType<NewCardRequestType>
   updateCardModal: CardsModalsHandlerType<UpdateCardRequestType>
   deleteCardModal: CardsModalsHandlerType<DeleteCardRequestType>

@@ -1,13 +1,13 @@
 import React, { useCallback } from 'react'
 
 import {
+  CardsModalsHandlersType,
+  CardsMutationsObjType,
   HandleClearFiltersType,
   HandlePacksSearchType,
   HandlePacksTableChangeType,
   HandleSliderChangeType,
   HandleToggleButtonType,
-  PackModalsHandlersType,
-  PackMutationsObjType,
   PacksTableParamsType,
 } from '../types'
 
@@ -17,14 +17,14 @@ type UsePacksHandlersType = (
   setPacksTableParams: React.Dispatch<
     React.SetStateAction<PacksTableParamsType>
   >,
-  mutations: PackMutationsObjType
+  mutations: CardsMutationsObjType
 ) => {
   handlePacksTableChange: HandlePacksTableChangeType
   handlePacksSearch: HandlePacksSearchType
   handleSliderChange: HandleSliderChangeType
   handleToggleButton: HandleToggleButtonType
   handleClearFilters: HandleClearFiltersType
-  modalHandlers: PackModalsHandlersType
+  modalHandlers: CardsModalsHandlersType
 }
 
 export const usePacksHandlers: UsePacksHandlersType = (

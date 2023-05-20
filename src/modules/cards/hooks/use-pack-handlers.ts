@@ -6,10 +6,10 @@ import { MAIN_PATH } from '../../../constants'
 import { ABSOLUTE_CARD_PATH } from '../constants'
 import {
   ButtonsHandlersType,
+  CardsModalsHandlersType,
+  CardsMutationsObjType,
   HandleSearchType,
   HandleTableChangeType,
-  PackModalsHandlersType,
-  PackMutationsObjType,
   PackTableParamsType,
 } from '../types'
 
@@ -17,14 +17,14 @@ import { useCardsModals } from './use-cards-modals'
 
 type UsePackHandlersType = (
   setTableParams: Dispatch<SetStateAction<PackTableParamsType>>,
-  mutations: PackMutationsObjType,
+  mutations: CardsMutationsObjType,
   packId: string,
   packName: string
 ) => {
   handleTableChange: HandleTableChangeType
   handleSearch: HandleSearchType
   buttonsHandlers: ButtonsHandlersType
-  modalHandlers: PackModalsHandlersType
+  modalHandlers: CardsModalsHandlersType
 }
 
 export const usePackHandlers: UsePackHandlersType = (

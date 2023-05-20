@@ -10,12 +10,12 @@ import {
   UpdateCardsPackRequestType,
 } from '../api'
 import { ModalCard, ModalDelete, ModalPack } from '../components'
-import { PackModalsHandlersType, PackMutationsObjType } from '../types'
+import { CardsModalsHandlersType, CardsMutationsObjType } from '../types'
 
-type UsePackModalsType = (
-  mutations: PackMutationsObjType
-) => PackModalsHandlersType
-export const useCardsModals: UsePackModalsType = mutations => {
+type UseCardsModalsType = (
+  mutations: CardsMutationsObjType
+) => CardsModalsHandlersType
+export const useCardsModals: UseCardsModalsType = mutations => {
   const { showModal, hideModal } = useModalContext()
   const {
     addCard,

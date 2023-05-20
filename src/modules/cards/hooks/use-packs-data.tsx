@@ -4,11 +4,11 @@ import { useAuthorised } from '../../auth/hooks'
 import { useCardPacksQuery } from '../api'
 import { MY_BUTTON_NAME } from '../constants'
 import {
+  CardsModalsHandlersType,
   HandleClearFiltersType,
   HandlePacksSearchType,
   HandleSliderChangeType,
   HandleToggleButtonType,
-  PackModalsHandlersType,
   PacksTableDataType,
   PacksTableParamsType,
 } from '../types'
@@ -22,7 +22,7 @@ type UsePacksDataType = () => [
   { handleSliderChange: HandleSliderChangeType },
   { handleToggleButton: HandleToggleButtonType },
   { handleClearFilters: HandleClearFiltersType },
-  { modalHandlers: PackModalsHandlersType }
+  { modalHandlers: CardsModalsHandlersType }
 ]
 
 export const usePacksData: UsePacksDataType = () => {

@@ -2,12 +2,12 @@ import { useCardsMutation } from '../hooks'
 
 import { TableErrorType } from './index'
 
-export type PackMutationsObjType = {
+export type CardsMutationsObjType = {
   [key: string]: ReturnType<typeof useCardsMutation>
 }
 
-export type PacksMutationsWithConditionsType = [
-  PackMutationsObjType,
+export type CardsMutationsWithConditionsType = [
+  CardsMutationsObjType,
   boolean,
   TableErrorType
 ]
