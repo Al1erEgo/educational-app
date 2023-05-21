@@ -1,7 +1,7 @@
 import { Form } from 'antd'
 
 import { ErrorServerHandler } from '../../../../components'
-import { FormButton, FormInput, FormCheckbox } from '../../components'
+import { FormButton, FormCheckbox, FormInput } from '../../components'
 import { ABSOLUTE_AUTH_PATH } from '../../constants'
 import { useFormData } from '../../hooks'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../../styles'
@@ -18,7 +18,11 @@ export const SignIn = () => {
       <Form onFinish={handleSubmit(onSubmit)}>
         <FormInput name="email" control={control} error={errors.email} />
         <FormInput name="password" control={control} error={errors.password} />
-        <FormCheckbox name="rememberMe" control={control} />
+        <FormCheckbox
+          name="rememberMe"
+          control={control}
+          defaultValue={false}
+        />
         <StyledForgotPasswordLink to={ABSOLUTE_AUTH_PATH.ResetPassword}>
           Forgot password?
         </StyledForgotPasswordLink>

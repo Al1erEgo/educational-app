@@ -20,12 +20,8 @@ export const ModalFormCheckbox: React.FC<ModalFormCheckboxType> = ({
         name={name}
         control={control}
         defaultValue={defaultValue}
-        render={({ field }) => (
-          <Checkbox
-            {...field}
-            checked={field.value}
-            onChange={e => field.onChange(e.target.checked)}
-          >
+        render={({ field: { value, onChange } }) => (
+          <Checkbox checked={value} onChange={e => onChange(e.target.checked)}>
             Private Pack
           </Checkbox>
         )}

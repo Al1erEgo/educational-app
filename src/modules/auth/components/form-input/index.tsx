@@ -12,22 +12,31 @@ type FormInputType = {
 export const FormInput = ({ name, control, error }: FormInputType) => {
   const { type, placeholder, rules, autoComplete } = inputs[name]
 
+  const validateStatus = error ? 'error' : ''
+  const help = error ? error.message : undefined
+
   return (
-    <Form.Item validateStatus={error ? 'error' : ''} help={error?.message}>
-      <>
-        <Controller
-          name={name}
-          control={control}
-          rules={rules}
-          render={({ field }) =>
-            type === 'password' ? (
-              <Input.Password {...field} placeholder={placeholder} autoComplete={autoComplete} />
-            ) : (
-              <Input {...field} placeholder={placeholder} autoComplete={autoComplete} />
-            )
-          }
-        />
-      </>
+    <Form.Item validateStatus={validateStatus} help={help}>
+      <Controller
+        name={name}
+        control={control}
+        rules={rules}
+        render={({ field }) =>
+          type === 'password' ? (
+            <Input.Password
+              {...field}
+              placeholder={placeholder}
+              autoComplete={autoComplete}
+            />
+          ) : (
+            <Input
+              {...field}
+              placeholder={placeholder}
+              autoComplete={autoComplete}
+            />
+          )
+        }
+      />
     </Form.Item>
   )
 }

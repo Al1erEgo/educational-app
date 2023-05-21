@@ -4,29 +4,24 @@ import { Checkbox, Form } from 'antd'
 import { Control, Controller } from 'react-hook-form'
 
 type FormCheckboxType = {
-  name: 'rememberMe'
-  control: Control<any>
+  name: string
+  control: Control
+  defaultValue: boolean
 }
 
-export const FormCheckbox: FC<FormCheckboxType> = ({ name, control }) => {
+export const FormCheckbox: FC<FormCheckboxType> = ({
+  name,
+  control,
+  defaultValue,
+}) => {
   return (
-    <Form.Item
-      name={name}
-      valuePropName="checked"
-      wrapperCol={{
-        offset: 0,
-        span: 16,
-      }}
-    >
+    <Form.Item>
       <Controller
         name={name}
         control={control}
-        render={({ field }) => (
-          <Checkbox
-            name={field.name}
-            checked={field.value}
-            onChange={e => field.onChange(e.target.checked)}
-          >
+        defaultValue={defaultValue}
+        render={({ field: { value, onChange } }) => (
+          <Checkbox checked={value} onChange={e => onChange(e.target.checked)}>
             Remember me
           </Checkbox>
         )}
