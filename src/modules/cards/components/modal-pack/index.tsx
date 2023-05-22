@@ -7,15 +7,12 @@ import { StyledModalWrapper } from '../../styles'
 import {
   CardsModalBaseType,
   ModalCardsFormat,
-  PackModalCardPayloadType,
   PacksModalPayloadType,
 } from '../../types'
 import { getInitModalPackType } from '../../utils'
 import { ModalPackForm } from '../modal-pack-form'
 
-export const ModalPack = <
-  T extends PackModalCardPayloadType & PacksModalPayloadType
->({
+export const ModalPack = <T extends PacksModalPayloadType>({
   payload,
   onSubmit,
   onCancel,

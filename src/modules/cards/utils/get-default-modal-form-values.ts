@@ -1,41 +1,32 @@
-import {
-  ModalCardFormDataType,
-  ModalCardsFormat,
-  ModalPackFormDataType,
-  PackModalCardPayloadType,
-  PacksModalPayloadType,
-} from '../types'
+import { CardsModalPayloadType, ModalCardsFormat } from '../types'
 
-export const getDefaultModalFormValues = <
-  T extends PackModalCardPayloadType & PacksModalPayloadType,
-  D extends ModalCardFormDataType & ModalPackFormDataType
->(
+export const getDefaultModalFormValues = <T extends CardsModalPayloadType>(
   formType: ModalCardsFormat,
   payload: T
 ) => {
-  if (formType === ModalCardsFormat.IMG) {
+  if (formType === ModalCardsFormat.IMG && 'card' in payload) {
     return {
-      questionImg: payload.card?.questionImg || '',
-      answerImg: payload.card?.answerImg || '',
+      questionImg: payload.card.questionImg || '',
+      answerImg: payload.card.answerImg || '',
     }
   }
-  if (formType === ModalCardsFormat.TEXT) {
+  if (formType === ModalCardsFormat.TEXT && 'card' in payload) {
     return {
-      question: payload.card?.question || '',
-      answer: payload.card?.answer || '',
+      question: payload.card.question || '',
+      answer: payload.card.answer || '',
     }
   }
-  if (formType === ModalCardsFormat.IMGPACK) {
+  if (formType === ModalCardsFormat.IMGPACK && 'cardsPack' in payload) {
     return {
-      name: payload.cardsPack?.name || '',
-      deckCover: payload.cardsPack?.deckCover || '',
-      private: payload.cardsPack?.private || false,
+      name: payload.cardsPack.name || '',
+      deckCover: payload.cardsPack.deckCover || '',
+      private: payload.cardsPack.private || false,
     }
   }
-  if (formType === ModalCardsFormat.TEXTPACK) {
+  if (formType === ModalCardsFormat.TEXTPACK && 'cardsPack' in payload) {
     return {
-      name: payload.cardsPack?.name || '',
-      private: payload.cardsPack?.private || false,
+      name: payload.cardsPack.name || '',
+      private: payload.cardsPack.private || false,
     }
   }
 }

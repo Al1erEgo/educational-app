@@ -3,17 +3,16 @@ import { DeepPartial, useForm } from 'react-hook-form'
 
 import { modalSchemaMap } from '../constants'
 import {
+  CardsModalPayloadType,
   ModalCardFormDataType,
   ModalCardsFormat,
   ModalPackFormDataType,
-  PackModalCardPayloadType,
-  PacksModalPayloadType,
 } from '../types'
 import { getDefaultModalFormValues } from '../utils'
 
 export const useCardsModalForm = <
-  T extends PackModalCardPayloadType & PacksModalPayloadType,
-  D extends ModalCardFormDataType & ModalPackFormDataType
+  T extends CardsModalPayloadType,
+  D extends ModalCardFormDataType | ModalPackFormDataType
 >(
   formType: ModalCardsFormat,
   payload: T

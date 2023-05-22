@@ -141,11 +141,11 @@ export type DeletedCardsPackRequestType = {
 }
 
 export type UpdateCardsPackRequestType = {
-  cardsPack?: {
+  cardsPack: {
     _id: string
-    name: string
-    private: boolean
-    deckCover: string
+    name?: string
+    private?: boolean
+    deckCover?: string
   }
 }
 
@@ -202,8 +202,8 @@ export type DeleteCardRequestType = {
 }
 
 export type UpdateCardRequestType = {
-  card?: {
-    _id?: string
+  card: {
+    _id: string
     question?: string
     answer?: string
     grade?: number

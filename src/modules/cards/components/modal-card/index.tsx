@@ -8,14 +8,11 @@ import {
   CardsModalBaseType,
   ModalCardsFormat,
   PackModalCardPayloadType,
-  PacksModalPayloadType,
 } from '../../types'
 import { getInitModalCardType } from '../../utils'
 import { ModalCardForm } from '../modal-card-form'
 
-export const ModalCard = <
-  T extends PackModalCardPayloadType & PacksModalPayloadType
->({
+export const ModalCard = <T extends PackModalCardPayloadType>({
   payload,
   onSubmit,
   onCancel,
