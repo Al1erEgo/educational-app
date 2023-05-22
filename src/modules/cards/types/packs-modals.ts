@@ -20,16 +20,8 @@ export type PacksModalsHandlersType = {
   >
 }
 
-export type ModalPackFormType = {
+export type ModalPackFormDataType = {
   name?: string
   deckCover?: string
   private?: boolean
 }
-
-export type ModalPackPictureType = {
-  name?: string
-  deckCover?: string
-  private?: boolean
-}
-
-export type ModalPackFormatType = 'text' | 'picture'

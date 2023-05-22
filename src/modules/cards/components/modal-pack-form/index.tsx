@@ -1,56 +1,36 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-import { UploadOutlined } from '@ant-design/icons'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { Button, Form, Select, Upload } from 'antd'
-import { useForm } from 'react-hook-form'
-import * as yup from 'yup'
+import { Form } from 'antd'
 
-import { SELECT_OPTIONS } from '../../constants'
+import { useCardsModalForm } from '../../hooks'
 import { StyledModalWrapper } from '../../styles'
 import {
   CardsModalBaseType,
-  ModalPackFormatType,
-  ModalPackFormType,
-  ModalPackPictureType,
+  ModalCardsFormat,
+  ModalPackFormDataType,
   PacksModalPayloadType,
 } from '../../types'
-import { ModalButtons, ModalFormInput } from '../index'
+import { ModalButtons, ModalFormInput, ModalFormUpload } from '../index'
 import { ModalFormCheckbox } from '../modal-form-checkbox'
 
-const schema = yup.object({
-  name: yup.string().min(1).max(100).required(),
-})
+type ModalPackFormType<T> = CardsModalBaseType<T> & {
+  format: ModalCardsFormat
+}
 
-export const ModalPack = <T extends PacksModalPayloadType>({
+export const ModalPackForm = <T extends PacksModalPayloadType>({
+  format,
   payload,
   onSubmit,
   onCancel,
-}: CardsModalBaseType<T>) => {
-  const packFormatStateType = payload.cardsPack.deckCover ? 'picture' : 'text'
+}: ModalPackFormType<T>) => {
+  const { handleSubmit, control, errors, isDirty, setError, watch } =
+    useCardsModalForm<T, ModalPackFormDataType>(format, payload)
 
-  const [format, setFormat] = useState<ModalPackFormatType>(packFormatStateType)
-  const [cardPictures, setCardPictures] = useState<ModalPackPictureType>({
-    name: payload.cardsPack.name,
-    deckCover: payload.cardsPack.deckCover,
-  })
+  console.log('payload', payload)
+  console.log('format', format)
 
-  const {
-    handleSubmit,
-    control,
-    setValue,
-    formState: { errors, isDirty },
-  } = useForm<ModalPackFormType>({
-    defaultValues: {
-      name: payload.cardsPack.name || '',
-      deckCover: payload.cardsPack.deckCover || '',
-      private: payload.cardsPack.private || false,
-    },
-    resolver: yupResolver(schema),
-    mode: 'all',
-  })
-
-  const handleCardSubmit = (inputData: ModalPackFormType) => {
+  const handlePackSubmit = (inputData: ModalPackFormDataType) => {
+    debugger
     const submitData = {
       cardsPack: { ...payload.cardsPack, ...inputData },
     } as T
@@ -59,31 +39,35 @@ export const ModalPack = <T extends PacksModalPayloadType>({
     onCancel()
   }
 
-  const submitButtonName = '_id' in payload.cardsPack ? 'Edit pack' : 'Add pack'
+  const submitButtonName =
+    payload.cardsPack && '_id' in payload.cardsPack ? 'Edit pack' : 'Add pack'
 
   return (
     <StyledModalWrapper>
-      <Select
-        style={{ width: '100%' }}
-        defaultValue={format}
-        onChange={setFormat}
-        options={SELECT_OPTIONS}
-      />
-      <Upload
-        showUploadList={false}
-        accept="image/*"
-        //customRequest={uploadHandler}
-      >
-        <Button icon={<UploadOutlined />}>Upload cover</Button>
-      </Upload>
-
-      <Form onFinish={handleSubmit(handleCardSubmit)}>
-        <ModalFormInput name="Name" control={control} error={errors.name} />
+      <Form onFinish={handleSubmit(handlePackSubmit)}>
+        {format === ModalCardsFormat.IMGPACK && (
+          <>
+            <ModalFormUpload
+              name="Cover"
+              control={control}
+              error={errors.deckCover}
+              setError={setError}
+            />
+            <ModalFormInput
+              name={'Name'}
+              control={control}
+              error={errors.name}
+            />
+          </>
+        )}
+        {format === ModalCardsFormat.TEXTPACK && (
+          <ModalFormInput name={'Name'} control={control} error={errors.name} />
+        )}
 
         <ModalFormCheckbox
           name="private"
           control={control}
-          defaultValue={payload.cardsPack.private || false}
+          defaultValue={payload.cardsPack?.private || false}
         />
 
         <ModalButtons

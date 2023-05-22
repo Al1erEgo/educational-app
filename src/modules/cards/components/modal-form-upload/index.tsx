@@ -11,17 +11,23 @@ import {
 } from 'react-hook-form'
 import { FieldValues } from 'react-hook-form/dist/types'
 
-import { ModalCardFormDataType } from '../../types'
-import { getBase64, getModalFormControllerName } from '../../utils'
+import { ModalCardFormDataType, ModalPackFormDataType } from '../../types'
+import {
+  getBase64,
+  getModalFormControllerName,
+  getModalPackFormControllerName,
+} from '../../utils'
 
 type ModalFormUploadType = {
   name: string
   control: Control
   error?: any
-  setError: UseFormSetError<ModalCardFormDataType>
+  setError: UseFormSetError<ModalCardFormDataType & ModalPackFormDataType>
 }
 
-type HandleUploadChangeType = <T extends keyof ModalCardFormDataType>(
+type HandleUploadChangeType = <
+  T extends keyof (ModalCardFormDataType & ModalPackFormDataType)
+>(
   event: UploadChangeParam<UploadFile<any>>,
   field: ControllerRenderProps<FieldValues, T>
 ) => void
@@ -32,7 +38,10 @@ export const ModalFormUpload: FC<ModalFormUploadType> = ({
   error,
   setError,
 }) => {
-  const uploadControllerName = getModalFormControllerName(name, 'Img')
+  const uploadControllerName =
+    name === 'Question' || name === 'Answer'
+      ? getModalFormControllerName(name, 'Img')
+      : getModalPackFormControllerName('deck', name)
 
   const getDefaultImage = (img: string): UploadFile<any>[] => {
     if (img) {

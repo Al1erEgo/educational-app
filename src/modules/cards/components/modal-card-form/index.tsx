@@ -5,15 +5,17 @@ import { Form } from 'antd'
 import { useCardsModalForm } from '../../hooks'
 import {
   CardsModalBaseType,
-  ModalCardFormat,
   ModalCardFormDataType,
+  ModalCardsFormat,
   PackModalCardPayloadType,
 } from '../../types'
 import { ModalButtons } from '../modal-buttons'
 import { ModalFormInput } from '../modal-form-input'
 import { ModalFormUpload } from '../modal-form-upload'
 
-type ModalCardFormType<T> = CardsModalBaseType<T> & { format: ModalCardFormat }
+type ModalCardFormType<T> = CardsModalBaseType<T> & {
+  format: ModalCardsFormat
+}
 export const ModalCardForm = <T extends PackModalCardPayloadType>({
   format,
   payload,
@@ -34,11 +36,11 @@ export const ModalCardForm = <T extends PackModalCardPayloadType>({
 
   //Button name depends on usage of ModalCard and type of payload
   const submitButtonName =
-    'cardsPack_id' in payload.card ? 'Add card' : 'Edit card'
+    payload.card && 'cardsPack_id' in payload.card ? 'Add card' : 'Edit card'
 
   return (
     <Form onFinish={handleSubmit(handleModalFormSubmit)}>
-      {format === ModalCardFormat.IMG && (
+      {format === ModalCardsFormat.IMG && (
         <>
           <ModalFormUpload
             name={'Question'}
@@ -54,7 +56,7 @@ export const ModalCardForm = <T extends PackModalCardPayloadType>({
           />
         </>
       )}
-      {format === ModalCardFormat.TEXT && (
+      {format === ModalCardsFormat.TEXT && (
         <>
           <ModalFormInput
             name={'Question'}

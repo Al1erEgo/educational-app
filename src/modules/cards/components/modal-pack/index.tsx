@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { Select } from 'antd'
 
-import { SELECT_OPTIONS } from '../../constants'
+import { SELECT_PACK_OPTIONS } from '../../constants'
 import { StyledModalWrapper } from '../../styles'
 import {
   CardsModalBaseType,
@@ -10,10 +10,10 @@ import {
   PackModalCardPayloadType,
   PacksModalPayloadType,
 } from '../../types'
-import { getInitModalCardType } from '../../utils'
-import { ModalCardForm } from '../modal-card-form'
+import { getInitModalPackType } from '../../utils'
+import { ModalPackForm } from '../modal-pack-form'
 
-export const ModalCard = <
+export const ModalPack = <
   T extends PackModalCardPayloadType & PacksModalPayloadType
 >({
   payload,
@@ -21,19 +21,19 @@ export const ModalCard = <
   onCancel,
 }: CardsModalBaseType<T>) => {
   const [format, setFormat] = useState<ModalCardsFormat>(
-    getInitModalCardType(payload)
+    getInitModalPackType(payload)
   )
 
   return (
     <StyledModalWrapper>
-      <p>Card format:</p>
+      <p>Pack format:</p>
       <Select
         style={{ width: '100%' }} //StyledComponent usage brakes down onChange
         defaultValue={format}
         onChange={setFormat}
-        options={SELECT_OPTIONS}
+        options={SELECT_PACK_OPTIONS}
       />
-      <ModalCardForm
+      <ModalPackForm
         format={format}
         payload={payload}
         onSubmit={onSubmit}

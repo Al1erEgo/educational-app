@@ -10,6 +10,7 @@ import { NavLink } from 'react-router-dom'
 
 import { LoginResponseType } from '../../auth/types'
 import { DeletedCardsPackRequestType, UpdateCardsPackRequestType } from '../api'
+import { PackTableContentCard } from '../components'
 import { MY_BUTTON_NAME, packsTableColumns } from '../constants'
 import {
   CardsModalsHandlerType,
@@ -42,6 +43,16 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
   updatePack
 ) => {
   return [
+    {
+      title: 'Cover',
+      dataIndex: 'cover',
+      render: (_, pack: PackType) => (
+        <PackTableContentCard
+          textContent={'no cover'}
+          imgContent={pack.deckCover}
+        />
+      ),
+    },
     {
       title: 'Name',
       dataIndex: 'name',

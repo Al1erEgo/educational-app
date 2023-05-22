@@ -1,23 +1,29 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useForm } from 'react-hook-form'
+import { DeepPartial, useForm } from 'react-hook-form'
 
 import { modalSchemaMap } from '../constants'
 import {
-  ModalCardFormat,
   ModalCardFormDataType,
+  ModalCardsFormat,
+  ModalPackFormDataType,
   PackModalCardPayloadType,
+  PacksModalPayloadType,
 } from '../types'
 import { getDefaultModalFormValues } from '../utils'
 
 export const useCardsModalForm = <
-  T extends PackModalCardPayloadType,
-  D extends ModalCardFormDataType
+  T extends PackModalCardPayloadType & PacksModalPayloadType,
+  D extends ModalCardFormDataType & ModalPackFormDataType
 >(
-  formType: ModalCardFormat,
+  formType: ModalCardsFormat,
   payload: T
 ) => {
   const schema = modalSchemaMap[formType]
-  const defaultValues = getDefaultModalFormValues<T>(formType, payload)
+
+  const defaultValues = getDefaultModalFormValues<T, D>(
+    formType,
+    payload
+  ) as DeepPartial<D>
 
   const {
     handleSubmit,
@@ -25,7 +31,7 @@ export const useCardsModalForm = <
     formState: { errors, isDirty },
     setError,
     watch,
-  } = useForm<ModalCardFormDataType>({
+  } = useForm<D>({
     mode: 'all',
     resolver: yupResolver(schema),
     defaultValues,
