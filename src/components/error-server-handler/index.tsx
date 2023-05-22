@@ -1,7 +1,7 @@
 import { FC } from 'react'
 
 import { StyledErrorText } from '../../modules/auth/styles'
-import { isErrorJsonInData, isErrorMessageInData } from '../../utils'
+import { isErrorHTMLInData, isErrorMessageInData } from '../../utils'
 
 type ErrorServerHandlerType = {
   error: unknown
@@ -10,7 +10,7 @@ type ErrorServerHandlerType = {
 export const ErrorServerHandler: FC<ErrorServerHandlerType> = ({ error }) => {
   let errorMessage = ''
 
-  if (isErrorJsonInData(error)) {
+  if (isErrorHTMLInData(error)) {
     errorMessage = error.data.match(/<pre>(.*?)<\/pre>/)?.[1] || ''
   }
 

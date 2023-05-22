@@ -14,13 +14,13 @@ export const isErrorMessageInData = (
   )
 }
 
-type ErrorJsonInData = {
+type ErrorHTMLInData = {
   status: string
   originalStatus: number
   error: string
   data: string
 }
-export const isErrorJsonInData = (error: unknown): error is ErrorJsonInData => {
+export const isErrorHTMLInData = (error: unknown): error is ErrorHTMLInData => {
   return (
     typeof error === 'object' &&
     error != null &&
