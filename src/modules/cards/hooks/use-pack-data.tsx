@@ -21,6 +21,7 @@ import { usePackHandlers } from './use-pack-handlers'
 type UsePackDataType = () => [
   {
     packName: string
+    packDeckCover?: string
     isEmptyPack: boolean
     isOwnPack: boolean
     buttonsHandlers: ButtonsHandlersType
@@ -69,6 +70,7 @@ export const usePackData: UsePackDataType = () => {
   const serverError = cardsPackQueryError || mutationsError
   const elementsCount = responseData?.cardsTotalCount || 0
   const isEmptyPack = !elementsCount
+  const packDeckCover = responseData?.packDeckCover
 
   const tableColumns = getPackTableColumns(
     isOwnPack,
@@ -79,7 +81,7 @@ export const usePackData: UsePackDataType = () => {
   const formattedTableData = getFormattedPackTableData(responseData)
 
   return [
-    { packName, isEmptyPack, isOwnPack, buttonsHandlers },
+    { packName, packDeckCover, isEmptyPack, isOwnPack, buttonsHandlers },
     { handleSearch },
     {
       isDataLoading,

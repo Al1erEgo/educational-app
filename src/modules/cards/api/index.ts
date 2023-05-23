@@ -165,6 +165,8 @@ export type CardType = {
 
 export type CardsResponseType = {
   cards: CardType[]
+  packName: string
+  packDeckCover: string
   cardsTotalCount: number
   maxGrade: number
   minGrade: number
@@ -172,6 +174,7 @@ export type CardsResponseType = {
   pageCount: number
   packUserId: string
 }
+
 type CardsRequestType = {
   cardAnswer?: string
   cardQuestion?: string
