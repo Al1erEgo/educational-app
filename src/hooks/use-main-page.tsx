@@ -13,7 +13,11 @@ type UseDefaultPageType = (
 export const useDefaultPage: UseDefaultPageType = (userRoute, guestRoute) => {
   const { isAuthorised } = useAuthorised()
 
-  const defaultPage = isAuthorised ? <Navigate to={userRoute} /> : <Navigate to={guestRoute} />
+  const defaultPage = isAuthorised ? (
+    <Navigate to={userRoute} />
+  ) : (
+    <Navigate to={guestRoute} />
+  )
 
   return { defaultPage }
 }

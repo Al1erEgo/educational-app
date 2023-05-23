@@ -8,7 +8,10 @@ type FormButtonType = {
   loading: boolean
 }
 
-export const FormButton: FC<PropsWithChildren<FormButtonType>> = ({ loading, children }) => {
+export const FormButton: FC<PropsWithChildren<FormButtonType>> = ({
+  loading,
+  children,
+}) => {
   return (
     <Form.Item>
       <StyledAuthButton loading={loading}>{children}</StyledAuthButton>

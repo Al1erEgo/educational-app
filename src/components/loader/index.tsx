@@ -8,7 +8,10 @@ type LoaderPropsType = {
   isLoading: boolean
 }
 
-export const Loader: React.FC<PropsWithChildren<LoaderPropsType>> = ({ isLoading, children }) => {
+export const Loader: React.FC<PropsWithChildren<LoaderPropsType>> = ({
+  isLoading,
+  children,
+}) => {
   return isLoading ? (
     <StyledLoaderContainer>
       <Spin tip="Loading" size="large" />

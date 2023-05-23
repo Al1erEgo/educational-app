@@ -16,9 +16,10 @@ type PropsType = {
 }
 
 export const ProfileAvatar = ({ avatar }: PropsType) => {
-  const [trigger, { isLoading, isError, error: serverError }] = useAuthMeUpdateMutation({
-    fixedCacheKey: 'avatar',
-  })
+  const [trigger, { isLoading, isError, error: serverError }] =
+    useAuthMeUpdateMutation({
+      fixedCacheKey: 'avatar',
+    })
 
   const uploadHandler = (action: UploadRequestOption) => {
     if (action.file) {
@@ -37,7 +38,11 @@ export const ProfileAvatar = ({ avatar }: PropsType) => {
   return (
     <>
       <StyledAvatarGroup>
-        <Upload showUploadList={false} accept="image/*" customRequest={uploadHandler}>
+        <Upload
+          showUploadList={false}
+          accept="image/*"
+          customRequest={uploadHandler}
+        >
           <Avatar
             shape="square"
             size={96}
