@@ -19,7 +19,7 @@ const textRules = yup
   .min(1)
   .max(1000)
   .required('Input should be filled in!')
-const imgNameRules = yup.string().required('Image required!!!!')
+const imgNameRules = yup.string()
 const textNameRules = yup
   .string()
   .min(1)
@@ -45,15 +45,3 @@ export const modalSchemaMap = {
     private: yup.boolean(),
   }),
 }
-
-/*export const modalPackSchemaMap = {
- img: yup.object<ModalPackSchema>({
- name: textNameRules,
- deckCover: imgNameRules,
- private: yup.boolean(),
- }),
- text: yup.object<ModalPackSchema>({
- name: textNameRules,
- private: yup.boolean(),
- }),
- }*/

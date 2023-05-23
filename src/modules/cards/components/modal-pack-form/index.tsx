@@ -41,24 +41,13 @@ export const ModalPackForm = <T extends PacksModalPayloadType>({
   return (
     <StyledModalWrapper>
       <Form onFinish={handleSubmit(handlePackSubmit)}>
-        {format === ModalCardsFormat.IMGPACK && (
-          <>
-            <ModalFormUpload
-              name="Cover"
-              control={control}
-              error={errors.deckCover}
-              setError={setError}
-            />
-            <ModalFormInput
-              name={'Name'}
-              control={control}
-              error={errors.name}
-            />
-          </>
-        )}
-        {format === ModalCardsFormat.TEXTPACK && (
-          <ModalFormInput name={'Name'} control={control} error={errors.name} />
-        )}
+        <ModalFormUpload
+          name="Cover"
+          control={control}
+          error={errors.deckCover}
+          setError={setError}
+        />
+        <ModalFormInput name={'Name'} control={control} error={errors.name} />
 
         <ModalFormCheckbox
           name="private"
