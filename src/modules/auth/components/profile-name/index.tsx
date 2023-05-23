@@ -1,13 +1,14 @@
-import { FC, useEffect } from 'react'
+import { FC, useEffect, useState } from 'react'
 
-import { Form } from 'antd'
-import { Controller, ControllerRenderProps } from 'react-hook-form'
-import { FieldValues } from 'react-hook-form/dist/types'
+import { CheckOutlined, EditOutlined, CloseOutlined } from '@ant-design/icons'
+import { Form, Space } from 'antd'
 
-import { ErrorServerHandler } from '../../../../components'
 import { useFormData } from '../../hooks'
-import { StyledProfileParagraph } from '../../pages/profile/styles'
 import { UpdateUserNameType } from '../../types'
+import { StyledUserName } from '../auth-widget/styles'
+import { FormInput } from '../form-input'
+
+import { StyledProfileNameButton } from './styles'
 
 type ProfileNamePropsType = {
   userName: string
@@ -16,55 +17,52 @@ type ProfileNamePropsType = {
 export const ProfileName: FC<ProfileNamePropsType> = ({ userName }) => {
   const [
     onSubmit,
-    { handleSubmit, control, errors, setValue, setError },
-    { isLoading: isUpdating, error: updateUserNameError },
+    { handleSubmit, control, errors, setValue, setError, watch },
+    { isLoading: isUpdating, error: updateUserNameError, trigger: trigger },
   ] = useFormData<UpdateUserNameType>('updateUserName')
 
-  const customHandleSubmit = async (
-    value: string,
-    field: ControllerRenderProps<FieldValues, 'name'>
-  ) => {
-    if (!value) {
-      setError('name', {
-        type: 'custom',
-        message: 'Name should be at least 1 character length',
-      })
+  console.log(errors)
+  const [isEdit, setIsEdit] = useState(false)
 
-      return
-    }
-    if (value === userName) return
-    field.onBlur()
-    field.onChange(value)
-    handleSubmit(onSubmit)(value)
+  const editNameSubmit = () => {
+    setIsEdit(false)
+    setValue('name', userName)
   }
 
   useEffect(() => setValue('name', userName), [])
 
-  return (
-    <>
-      <Form.Item
-        validateStatus={errors?.name?.message ? 'error' : ''}
-        help={errors?.name?.message}
-      >
-        <Controller
-          name={'name'}
-          control={control}
-          rules={{ required: true }}
-          render={({ field }) => (
-            <>
-              <StyledProfileParagraph
-                editable={{
-                  onChange: value => customHandleSubmit(value, field),
-                }}
-                disabled={isUpdating}
-              >
-                {field.value}
-              </StyledProfileParagraph>
-            </>
-          )}
-        />
+  return isEdit ? (
+    <Form onFinish={handleSubmit(onSubmit)}>
+      <Form.Item validateStatus={errors.name ? 'error' : ''} help={errors.name?.message}>
+        <Space.Compact style={{ width: '250px', height: '30px', marginBottom: '25px' }}>
+          <FormInput name="name" control={control} />
+          <StyledProfileNameButton onClick={editNameSubmit} danger>
+            <CloseOutlined />
+          </StyledProfileNameButton>
+          <StyledProfileNameButton htmlType={'submit'} style={{ border: '1px solid #1677ff' }}>
+            <Space>
+              <CheckOutlined style={{ color: 'blue' }} />
+            </Space>
+          </StyledProfileNameButton>
+        </Space.Compact>
       </Form.Item>
-      <ErrorServerHandler error={updateUserNameError} />
-    </>
+    </Form>
+  ) : (
+    <span style={{ marginBottom: '52px' }}>
+      <StyledUserName
+        style={{ fontSize: '1.2em' }}
+        onClick={() => {
+          setIsEdit(true)
+        }}
+      >
+        {userName}
+      </StyledUserName>
+      <EditOutlined
+        onClick={() => {
+          setIsEdit(true)
+        }}
+        style={{ color: 'blue', cursor: 'pointer', fontSize: '16px' }}
+      />
+    </span>
   )
 }

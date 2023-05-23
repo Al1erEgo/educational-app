@@ -1,3 +1,5 @@
+import { FC, PropsWithChildren } from 'react'
+
 import { Form, Input } from 'antd'
 import { Control, Controller, FieldError } from 'react-hook-form'
 
@@ -9,7 +11,12 @@ type FormInputType = {
   error?: FieldError | undefined
 }
 
-export const FormInput = ({ name, control, error }: FormInputType) => {
+export const FormInput: FC<PropsWithChildren<FormInputType>> = ({
+  name,
+  control,
+  error,
+  children,
+}) => {
   const { type, placeholder, rules, autoComplete } = inputs[name]
 
   const validateStatus = error ? 'error' : ''

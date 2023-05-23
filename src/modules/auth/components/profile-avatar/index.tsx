@@ -12,7 +12,7 @@ import { getBase64 } from '../../utils'
 import { ProfileAvatarImage } from '../profile-avatar-image'
 
 type PropsType = {
-  avatar: string
+  avatar: string | undefined
 }
 
 export const ProfileAvatar = ({ avatar }: PropsType) => {
