@@ -16,7 +16,7 @@
 
 import React, { useState } from 'react'
 
-import { ModalConfig, ModalContextType } from '../types/types'
+import { ModalConfig, ModalContextType } from '@/modules/modal-provider/types'
 
 /**
  A custom React hook for managing modal state.

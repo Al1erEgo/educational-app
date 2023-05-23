@@ -2,12 +2,12 @@ import React from 'react'
 
 import { Route, Routes, useResolvedPath } from 'react-router-dom'
 
-import { Error404 } from '../../components'
-import { useDefaultPage } from '../../hooks'
-
 import { AuthProvider, GuestProvider } from './components'
 import { AUTH_PATH } from './constants'
 import { NewPassword, Profile, ResetPassword, SignIn, SignUp } from './pages'
+
+import { Error404 } from '@/components'
+import { useDefaultPage } from '@/hooks'
 
 export const Auth = () => {
   const path = useResolvedPath('')

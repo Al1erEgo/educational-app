@@ -3,10 +3,9 @@ import React, { FC } from 'react'
 import { LogoutOutlined } from '@ant-design/icons'
 import { useLocation } from 'react-router-dom'
 
-import { useNavigateToOnclick } from '../../../../hooks'
 import { useAuthMeUpdateMutation } from '../../api'
 import { ABSOLUTE_AUTH_PATH } from '../../constants'
-import { useAuthorised, useAuthMutation } from '../../hooks'
+import { useAuthMutation, useAuthorised } from '../../hooks'
 import { AuthWidgetAvatar } from '../auth-widget-avatar'
 
 import {
@@ -14,6 +13,8 @@ import {
   StyledUserDataWrapper,
   StyledUserName,
 } from './styles'
+
+import { useNavigateToOnclick } from '@/hooks'
 
 export const AuthWidget: FC = () => {
   const { isAuthorised, data: userData } = useAuthorised()

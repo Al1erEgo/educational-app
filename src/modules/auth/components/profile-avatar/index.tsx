@@ -4,12 +4,13 @@ import { Avatar, Upload } from 'antd'
 import { RcFile } from 'antd/es/upload'
 import { UploadRequestOption } from 'rc-upload/lib/interface'
 
-import { ErrorServerHandler } from '../../../../components'
 import { useAuthMeUpdateMutation } from '../../api'
 import { StyledAvatarGroup } from '../../pages/profile/styles'
 import { StyledErrorText } from '../../styles'
 import { getBase64 } from '../../utils'
 import { ProfileAvatarImage } from '../profile-avatar-image'
+
+import { ErrorServerHandler } from '@/components'
 
 type PropsType = {
   avatar: string

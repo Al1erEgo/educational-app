@@ -1,4 +1,4 @@
-import { MAIN_PATH } from '../../../constants'
+import { MAIN_PATH } from '@/constants'
 
 export enum AUTH_PATH {
   Root = '/',

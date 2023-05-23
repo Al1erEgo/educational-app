@@ -1,11 +1,12 @@
 import { Form } from 'antd'
 
-import { ErrorServerHandler } from '../../../../components'
 import { ConfirmationMessage, FormButton, FormInput } from '../../components'
 import { ABSOLUTE_AUTH_PATH } from '../../constants'
 import { useFormData } from '../../hooks'
 import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../../styles'
 import { SignUpFormInputs } from '../../types'
+
+import { ErrorServerHandler } from '@/components'
 
 export const SignUp = () => {
   const [

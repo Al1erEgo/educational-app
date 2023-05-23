@@ -1,7 +1,6 @@
 import { Form } from 'antd'
 
-import { ErrorServerHandler } from '../../../../components'
-import { FormButton, FormInput, ConfirmationMessage } from '../../components'
+import { ConfirmationMessage, FormButton, FormInput } from '../../components'
 import { ABSOLUTE_AUTH_PATH } from '../../constants'
 import { useFormData } from '../../hooks'
 import {
@@ -12,6 +11,8 @@ import {
   StyledText,
 } from '../../styles'
 import { ResetPasswordFormInputs } from '../../types'
+
+import { ErrorServerHandler } from '@/components'
 
 export const ResetPassword = () => {
   const [

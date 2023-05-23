@@ -2,20 +2,21 @@ import { FC, useEffect } from 'react'
 
 import { Form } from 'antd'
 
-import { useNavigateToOnclick } from '../../../../hooks'
 import {
   confirmationMessagesArguments,
   confirmationMessageTimeout,
 } from '../../constants'
 import {
   cardHeadStyle,
+  StyledAuthButton,
   StyledCard,
   StyledText,
-  StyledAuthButton,
 } from '../../styles'
 import { ConfirmationMessagesArgumentsType } from '../../types'
 
 import { StyledCheckEmailImage } from './styles'
+
+import { useNavigateToOnclick } from '@/hooks'
 
 type ConfirmationMessageType = {
   variant: keyof ConfirmationMessagesArgumentsType
