@@ -2,7 +2,7 @@ import React, { FC, PropsWithChildren } from 'react'
 
 import { Skeleton } from 'antd'
 
-import { ErrorServerHandler } from '../../../../components'
+import { ErrorMessageHandler } from '../../../../components'
 import { TableErrorType } from '../../types'
 
 type CardsConditionProviderType = {
@@ -20,7 +20,7 @@ export const CardsConditionProvider: FC<
     return <Skeleton paragraph={{ rows: skeletonRows }} active title={false} />
   }
   if (error) {
-    return <ErrorServerHandler error={error} />
+    return <ErrorMessageHandler serverError={error} />
   }
 
   return <>{children}</>

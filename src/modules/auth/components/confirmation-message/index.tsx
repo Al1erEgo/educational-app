@@ -9,9 +9,9 @@ import {
 } from '../../constants'
 import {
   cardHeadStyle,
+  StyledAuthButton,
   StyledCard,
   StyledText,
-  StyledAuthButton,
 } from '../../styles'
 import { ConfirmationMessagesArgumentsType } from '../../types'
 
@@ -28,6 +28,7 @@ export const ConfirmationMessage: FC<ConfirmationMessageType> = ({
 }) => {
   const { title, redirectPath, timer, image, text } =
     confirmationMessagesArguments[variant]
+
   const redirect = useNavigateToOnclick(redirectPath)
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 import { Form } from 'antd'
 
-import { ErrorServerHandler } from '../../../../components'
+import { ErrorMessageHandler } from '../../../../components'
 import { ConfirmationMessage, FormButton, FormInput } from '../../components'
 import { ABSOLUTE_AUTH_PATH } from '../../constants'
 import { useFormData } from '../../hooks'
@@ -28,7 +28,7 @@ export const SignUp = () => {
           control={control}
           error={errors['confirm password']}
         />
-        <ErrorServerHandler error={error} />
+        <ErrorMessageHandler serverError={error} />
         <FormButton loading={isLoading}>Sign Up</FormButton>
       </Form>
       <StyledP>Already have an account?</StyledP>

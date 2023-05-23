@@ -4,7 +4,7 @@ import { Form } from 'antd'
 import { Controller, ControllerRenderProps } from 'react-hook-form'
 import { FieldValues } from 'react-hook-form/dist/types'
 
-import { ErrorServerHandler } from '../../../../components'
+import { ErrorMessageHandler } from '../../../../components'
 import { useFormData } from '../../hooks'
 import { StyledProfileParagraph } from '../../pages/profile/styles'
 import { UpdateUserNameType } from '../../types'
@@ -64,7 +64,7 @@ export const ProfileName: FC<ProfileNamePropsType> = ({ userName }) => {
           )}
         />
       </Form.Item>
-      <ErrorServerHandler error={updateUserNameError} />
+      <ErrorMessageHandler serverError={updateUserNameError} />
     </>
   )
 }

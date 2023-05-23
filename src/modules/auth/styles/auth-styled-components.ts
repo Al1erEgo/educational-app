@@ -1,6 +1,7 @@
 import { Button, Card, Typography } from 'antd'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
+
 export const { Text } = Typography
 
 export const StyledP = styled.p`
@@ -31,6 +32,7 @@ export const StyledNavLink = styled(NavLink)`
 `
 
 export const StyledErrorText = styled(Text)`
+  height: 1rem;
   display: block;
   text-align: center;
   color: #ff4c4c;
