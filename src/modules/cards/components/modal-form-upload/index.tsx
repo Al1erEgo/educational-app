@@ -15,7 +15,7 @@ import { usePreview } from '../../hooks'
 import { ModalCardFormDataType, ModalPackFormDataType } from '../../types'
 import {
   getBase64,
-  getModalFormControllerName,
+  getModalCardFormControllerName,
   getModalPackFormControllerName,
 } from '../../utils'
 
@@ -41,7 +41,7 @@ export const ModalFormUpload: FC<ModalFormUploadType> = ({
 }) => {
   const uploadControllerName =
     name === 'Question' || name === 'Answer'
-      ? getModalFormControllerName(name, 'Img')
+      ? getModalCardFormControllerName(name, 'Img')
       : getModalPackFormControllerName('deck', name)
   const { preview, handlePreview } = usePreview()
 

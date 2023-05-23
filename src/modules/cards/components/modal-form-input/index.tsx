@@ -3,7 +3,7 @@ import React, { FC } from 'react'
 import { Form, Input } from 'antd'
 import { Control, Controller } from 'react-hook-form'
 
-import { getModalFormControllerName } from '../../utils'
+import { getModalCardFormControllerName } from '../../utils'
 
 type ModalFormInputType = {
   name: string
@@ -16,7 +16,7 @@ export const ModalFormInput: FC<ModalFormInputType> = ({
   control,
   error,
 }) => {
-  const controllerName = getModalFormControllerName(name)
+  const controllerName = getModalCardFormControllerName(name)
 
   return (
     <Form.Item validateStatus={error ? 'error' : ''} help={error?.message}>
