@@ -2,7 +2,7 @@ import { FC } from 'react'
 
 import { Image, Typography } from 'antd'
 
-import { PACK_TABLE_IMG_HEIGHT } from '../../constants/pack-table-content-card'
+import { PACK_TABLE_IMG_HEIGHT } from '../../constants'
 
 const { Text } = Typography
 

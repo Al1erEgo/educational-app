@@ -9,8 +9,7 @@ import {
   UpdateCardRequestType,
   UpdateCardsPackRequestType,
 } from '../api'
-import { ModalCard, ModalDelete } from '../components'
-import { ModalPack } from '../components/modal-pack'
+import { ModalCard, ModalDelete, ModalPack } from '../components'
 import { CardsModalsHandlersType, CardsMutationsObjType } from '../types'
 
 type UseCardsModalsType = (

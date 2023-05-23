@@ -26,11 +26,7 @@ export const ModalPackForm = <T extends PacksModalPayloadType>({
   const { handleSubmit, control, errors, isDirty, setError, watch } =
     useCardsModalForm<T, ModalPackFormDataType>(format, payload)
 
-  console.log('payload', payload)
-  console.log('format', format)
-
   const handlePackSubmit = (inputData: ModalPackFormDataType) => {
-    debugger
     const submitData = {
       cardsPack: { ...payload.cardsPack, ...inputData },
     } as T
