@@ -24,48 +24,45 @@ export const ProfileName: FC<ProfileNamePropsType> = ({ userName }) => {
   console.log(errors)
   const [isEdit, setIsEdit] = useState(false)
 
+  const editNameSubmit = () => {
+    setIsEdit(false)
+    setValue('name', userName)
+  }
+
   useEffect(() => setValue('name', userName), [])
 
   return isEdit ? (
     <Form onFinish={handleSubmit(onSubmit)}>
-      <>
+      <Form.Item validateStatus={errors.name ? 'error' : ''} help={errors.name?.message}>
         <Space.Compact style={{ width: '250px', height: '30px', marginBottom: '25px' }}>
-          <FormInput name="name" control={control} error={errors.name}>
-            <StyledProfileNameButton
-              onClick={() => {
-                setIsEdit(false)
-                setValue('name', userName)
-              }}
-              danger
-            >
-              <CloseOutlined />
-            </StyledProfileNameButton>
-            <StyledProfileNameButton htmlType={'submit'} style={{ border: '1px solid #1677ff' }}>
-              <Space>
-                <CheckOutlined style={{ color: 'blue' }} />
-              </Space>
-            </StyledProfileNameButton>
-          </FormInput>
+          <FormInput name="name" control={control} />
+          <StyledProfileNameButton onClick={editNameSubmit} danger>
+            <CloseOutlined />
+          </StyledProfileNameButton>
+          <StyledProfileNameButton htmlType={'submit'} style={{ border: '1px solid #1677ff' }}>
+            <Space>
+              <CheckOutlined style={{ color: 'blue' }} />
+            </Space>
+          </StyledProfileNameButton>
         </Space.Compact>
-      </>
+      </Form.Item>
     </Form>
   ) : (
-    <span style={{ marginBottom: '28px' }}>
+    <span style={{ marginBottom: '52px' }}>
       <StyledUserName
+        style={{ fontSize: '1.2em' }}
         onClick={() => {
           setIsEdit(true)
         }}
       >
         {userName}
       </StyledUserName>
-      <span>
-        <EditOutlined
-          onClick={() => {
-            setIsEdit(true)
-          }}
-          style={{ color: 'blue', cursor: 'pointer' }}
-        />
-      </span>
+      <EditOutlined
+        onClick={() => {
+          setIsEdit(true)
+        }}
+        style={{ color: 'blue', cursor: 'pointer', fontSize: '16px' }}
+      />
     </span>
   )
 }
