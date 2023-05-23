@@ -23,10 +23,4 @@ export const getDefaultModalFormValues = <T extends CardsModalPayloadType>(
       private: payload.cardsPack.private || false,
     }
   }
-  if (formType === ModalCardsFormat.TEXTPACK && 'cardsPack' in payload) {
-    return {
-      name: payload.cardsPack.name || '',
-      private: payload.cardsPack.private || false,
-    }
-  }
 }

@@ -27,6 +27,5 @@ export type ModalCardFormDataType = {
 export enum ModalCardsFormat {
   TEXT = 'text',
   IMG = 'img',
-  TEXTPACK = 'textPack',
   IMGPACK = 'imgPack',
 }

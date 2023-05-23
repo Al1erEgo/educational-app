@@ -2,6 +2,7 @@ import React from 'react'
 
 import { Form } from 'antd'
 
+import { MODAL_PACK_FORMAT } from '../../constants'
 import { useCardsModalForm } from '../../hooks'
 import { StyledModalWrapper } from '../../styles'
 import {
@@ -18,7 +19,7 @@ type ModalPackFormType<T> = CardsModalBaseType<T> & {
 }
 
 export const ModalPackForm = <T extends PacksModalPayloadType>({
-  format,
+  format = MODAL_PACK_FORMAT,
   payload,
   onSubmit,
   onCancel,

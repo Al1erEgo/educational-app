@@ -40,8 +40,4 @@ export const modalSchemaMap = {
     deckCover: imgNameRules,
     private: yup.boolean(),
   }),
-  textPack: yup.object<ModalPackSchema>({
-    name: textNameRules,
-    private: yup.boolean(),
-  }),
 }
