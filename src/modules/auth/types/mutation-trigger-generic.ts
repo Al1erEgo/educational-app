@@ -12,7 +12,13 @@ import { AuthApiResponseTypes } from './api'
 export type CustomMutationTriggerType<T> = MutationTrigger<
   MutationDefinition<
     T,
-    BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, {}, FetchBaseQueryMeta>,
+    BaseQueryFn<
+      string | FetchArgs,
+      unknown,
+      FetchBaseQueryError,
+      {},
+      FetchBaseQueryMeta
+    >,
     'authMe',
     AuthApiResponseTypes,
     'cards'

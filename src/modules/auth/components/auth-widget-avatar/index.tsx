@@ -9,7 +9,10 @@ type AuthWidgetAvatarType = {
   avatar: string | undefined
 }
 
-export const AuthWidgetAvatar: FC<AuthWidgetAvatarType> = ({ isLoading, avatar }) => {
+export const AuthWidgetAvatar: FC<AuthWidgetAvatarType> = ({
+  isLoading,
+  avatar,
+}) => {
   if (isLoading) {
     return <StyledSkeletonAvatar />
   }

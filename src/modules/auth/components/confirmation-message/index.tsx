@@ -3,8 +3,16 @@ import { FC, useEffect } from 'react'
 import { Form } from 'antd'
 
 import { useNavigateToOnclick } from '../../../../hooks'
-import { confirmationMessagesArguments, confirmationMessageTimeout } from '../../constants'
-import { cardHeadStyle, StyledCard, StyledText, StyledAuthButton } from '../../styles'
+import {
+  confirmationMessagesArguments,
+  confirmationMessageTimeout,
+} from '../../constants'
+import {
+  cardHeadStyle,
+  StyledCard,
+  StyledText,
+  StyledAuthButton,
+} from '../../styles'
 import { ConfirmationMessagesArgumentsType } from '../../types'
 
 import { StyledCheckEmailImage } from './styles'
@@ -14,8 +22,12 @@ type ConfirmationMessageType = {
   email?: string
 }
 
-export const ConfirmationMessage: FC<ConfirmationMessageType> = ({ variant, email }) => {
-  const { title, redirectPath, timer, image, text } = confirmationMessagesArguments[variant]
+export const ConfirmationMessage: FC<ConfirmationMessageType> = ({
+  variant,
+  email,
+}) => {
+  const { title, redirectPath, timer, image, text } =
+    confirmationMessagesArguments[variant]
   const redirect = useNavigateToOnclick(redirectPath)
 
   useEffect(() => {

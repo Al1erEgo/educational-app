@@ -9,7 +9,11 @@ import { ABSOLUTE_AUTH_PATH } from '../../constants'
 import { useAuthorised, useAuthMutation } from '../../hooks'
 import { AuthWidgetAvatar } from '../auth-widget-avatar'
 
-import { StyledAuthWidgetButton, StyledUserDataWrapper, StyledUserName } from './styles'
+import {
+  StyledAuthWidgetButton,
+  StyledUserDataWrapper,
+  StyledUserName,
+} from './styles'
 
 export const AuthWidget: FC = () => {
   const { isAuthorised, data: userData } = useAuthorised()
@@ -30,7 +34,9 @@ export const AuthWidget: FC = () => {
       : { children: 'Sign up', onClick: signUpRedirect }
 
   if (!isAuthorised) {
-    return <StyledAuthWidgetButton type={'primary'} {...unauthorisedButtonProps} />
+    return (
+      <StyledAuthWidgetButton type={'primary'} {...unauthorisedButtonProps} />
+    )
   }
 
   return (

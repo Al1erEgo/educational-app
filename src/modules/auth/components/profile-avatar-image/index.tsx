@@ -10,7 +10,10 @@ type ProfileAvatarImageType = {
   isLoading: boolean
 }
 
-export const ProfileAvatarImage: FC<ProfileAvatarImageType> = ({ avatar, isLoading }) => {
+export const ProfileAvatarImage: FC<ProfileAvatarImageType> = ({
+  avatar,
+  isLoading,
+}) => {
   if (isLoading) {
     return <Skeleton.Image active />
   }

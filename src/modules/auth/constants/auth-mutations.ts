@@ -14,7 +14,10 @@ import {
 import { ABSOLUTE_AUTH_PATH } from './index'
 
 type AuthMutationsType = {
-  [key: string]: { mutation: UseMutation<MutationDefinition<any, any, string, any>>; path?: string }
+  [key: string]: {
+    mutation: UseMutation<MutationDefinition<any, any, string, any>>
+    path?: string
+  }
 }
 
 export const authMutations: AuthMutationsType = {

@@ -7,13 +7,21 @@ import { ErrorServerHandler } from '../../../../components'
 import { FormButton, FormInput, ConfirmationMessage } from '../../components'
 import { ABSOLUTE_AUTH_PATH } from '../../constants'
 import { useFormData } from '../../hooks'
-import { cardHeadStyle, StyledCard, StyledNavLink, StyledText } from '../../styles'
+import {
+  cardHeadStyle,
+  StyledCard,
+  StyledNavLink,
+  StyledText,
+} from '../../styles'
 import { NewPasswordFormInputs } from '../../types'
 
 export const NewPassword: FC = () => {
   const { token } = useParams()
-  const [onSubmit, { handleSubmit, control, setError, errors }, { isLoading, error, isSuccess }] =
-    useFormData<NewPasswordFormInputs>('newPassword')
+  const [
+    onSubmit,
+    { handleSubmit, control, setError, errors },
+    { isLoading, error, isSuccess },
+  ] = useFormData<NewPasswordFormInputs>('newPassword')
 
   const handleNewPasswordSubmit = async (data: NewPasswordFormInputs) => {
     if (!token) {
@@ -38,7 +46,9 @@ export const NewPassword: FC = () => {
         <ErrorServerHandler error={error} />
         <FormButton loading={isLoading}>Create new Password</FormButton>
       </Form>
-      <StyledNavLink to={ABSOLUTE_AUTH_PATH.ResetPassword}>Back to Send Email form</StyledNavLink>
+      <StyledNavLink to={ABSOLUTE_AUTH_PATH.ResetPassword}>
+        Back to Send Email form
+      </StyledNavLink>
     </StyledCard>
   )
 }

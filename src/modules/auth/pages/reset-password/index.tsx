@@ -4,15 +4,26 @@ import { ErrorServerHandler } from '../../../../components'
 import { FormButton, FormInput, ConfirmationMessage } from '../../components'
 import { ABSOLUTE_AUTH_PATH } from '../../constants'
 import { useFormData } from '../../hooks'
-import { cardHeadStyle, StyledCard, StyledNavLink, StyledP, StyledText } from '../../styles'
+import {
+  cardHeadStyle,
+  StyledCard,
+  StyledNavLink,
+  StyledP,
+  StyledText,
+} from '../../styles'
 import { ResetPasswordFormInputs } from '../../types'
 
 export const ResetPassword = () => {
-  const [onSubmit, { handleSubmit, watch, control, errors }, { isLoading, isSuccess, error }] =
-    useFormData<ResetPasswordFormInputs>('resetPassword')
+  const [
+    onSubmit,
+    { handleSubmit, watch, control, errors },
+    { isLoading, isSuccess, error },
+  ] = useFormData<ResetPasswordFormInputs>('resetPassword')
 
   if (isSuccess) {
-    return <ConfirmationMessage variant={'resetPassword'} email={watch().email} />
+    return (
+      <ConfirmationMessage variant={'resetPassword'} email={watch().email} />
+    )
   }
 
   return (
@@ -29,7 +40,9 @@ export const ResetPassword = () => {
       </Form>
       <StyledP>Did you remember your password?</StyledP>
 
-      <StyledNavLink to={ABSOLUTE_AUTH_PATH.SignIn}>Try logging in</StyledNavLink>
+      <StyledNavLink to={ABSOLUTE_AUTH_PATH.SignIn}>
+        Try logging in
+      </StyledNavLink>
     </StyledCard>
   )
 }
