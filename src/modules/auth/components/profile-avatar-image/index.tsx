@@ -4,7 +4,7 @@ import { UserOutlined } from '@ant-design/icons'
 import { Skeleton } from 'antd'
 
 type ProfileAvatarImageType = {
-  avatar: string
+  avatar: string | undefined
   isLoading: boolean
 }
 

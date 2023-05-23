@@ -15,7 +15,7 @@ export const useFormWithValidation = <T extends FieldValues>(formType: FormType)
     watch,
     setValue,
   } = useForm<T>({
-    mode: 'onBlur',
+    mode: 'all',
     resolver: yupResolver(schema),
   })
 

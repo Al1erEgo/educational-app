@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 
 import { LogoutOutlined } from '@ant-design/icons'
+import { Tooltip } from 'antd'
 import { useLocation } from 'react-router-dom'
 
 import { useNavigateToOnclick } from '../../../../hooks'
@@ -33,10 +34,14 @@ export const AuthWidget: FC = () => {
     return <StyledAuthWidgetButton type={'primary'} {...unauthorisedButtonProps} />
   }
 
+  const userName = userData ? userData.name : 'No name'
+
   return (
     <>
       <StyledUserDataWrapper onClick={profileRedirect}>
-        <StyledUserName>{userData ? userData.name : 'No name'}</StyledUserName>
+        <Tooltip title={userName}>
+          <StyledUserName>{userName}</StyledUserName>
+        </Tooltip>
         <AuthWidgetAvatar isLoading={isLoading} avatar={userData?.avatar} />
       </StyledUserDataWrapper>
       <StyledAuthWidgetButton icon={<LogoutOutlined />} onClick={handleLogOut}>

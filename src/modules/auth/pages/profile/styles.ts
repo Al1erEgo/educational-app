@@ -14,12 +14,6 @@ export const StyledAvatarGroup = styled(Avatar.Group)`
   margin-bottom: 1.7rem;
 `
 
-export const StyledProfileParagraph = styled(Paragraph)`
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.7rem;
-`
-
 export const StyledProfileText = styled(Text)`
   margin-top: 0.9rem;
   font-size: 0.9rem;

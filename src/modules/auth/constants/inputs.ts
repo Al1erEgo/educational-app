@@ -23,4 +23,12 @@ export const inputs = {
     placeholder: 'Confirm password',
     autoComplete: 'new-password',
   },
+  name: {
+    name: 'name' as const,
+    controlName: 'name' as const,
+    type: undefined,
+    rules: { required: true },
+    placeholder: '',
+    autoComplete: undefined,
+  },
 }

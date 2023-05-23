@@ -14,6 +14,9 @@ export const StyledUserDataWrapper = styled.div`
   cursor: pointer;
 `
 export const StyledUserName = styled.span`
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   border-bottom: 1px dashed #1677ff;
   margin-right: 7px;
   font-family: 'Montserrat', sans-serif;
