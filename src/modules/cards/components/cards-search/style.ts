@@ -12,4 +12,5 @@ export const StyledCardsHeaderChildrenWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  margin-left: 2rem;
 `
