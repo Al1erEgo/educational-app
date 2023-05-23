@@ -1,23 +1,29 @@
 import { FC, PropsWithChildren } from 'react'
 
 import { StyledTitle } from '../../styles'
-import { StyledCardsHeaderChildrenWrapper } from '../cards-search/style'
+import { PackTableContentCard } from '../pack-table-content-card'
 
-import { StyledCardsHeader } from './styles'
+import {
+  StyledCardsHeaderInfoWrapper,
+  StyledCardsHeaderWrapper,
+} from './styles'
 
 type PacksHeaderProps = {
   title: string
+  image?: string
 }
 export const CardsHeader: FC<PropsWithChildren<PacksHeaderProps>> = ({
   title,
+  image,
   children,
 }) => {
   return (
-    <StyledCardsHeader>
-      <StyledTitle>{title}</StyledTitle>
-      <StyledCardsHeaderChildrenWrapper>
-        {children}
-      </StyledCardsHeaderChildrenWrapper>
-    </StyledCardsHeader>
+    <StyledCardsHeaderWrapper>
+      <StyledCardsHeaderInfoWrapper>
+        <StyledTitle>{title}</StyledTitle>
+        <PackTableContentCard imgContent={image} />
+      </StyledCardsHeaderInfoWrapper>
+      {children}
+    </StyledCardsHeaderWrapper>
   )
 }

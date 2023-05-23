@@ -10,7 +10,7 @@ type CardsContentCardType = {
   textContent?: string
   imgContent?: string
 }
-export const CardsContentCard: FC<CardsContentCardType> = ({
+export const PackTableContentCard: FC<CardsContentCardType> = ({
   textContent,
   imgContent,
 }) => {

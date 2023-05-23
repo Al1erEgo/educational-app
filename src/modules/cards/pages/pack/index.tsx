@@ -2,7 +2,6 @@ import { FC } from 'react'
 
 import {
   BackToCardsButton,
-  CardsContentCard,
   CardsHeader,
   CardsSearch,
   CardsTable,
@@ -21,8 +20,7 @@ export const Pack: FC = () => {
   return (
     <>
       <BackToCardsButton />
-      <CardsHeader title={packName}>
-        <CardsContentCard imgContent={packDeckCover} />
+      <CardsHeader title={packName} image={packDeckCover}>
         <PackActionsButtons
           isEmptyPack={isEmptyPack}
           isOwnPack={isOwnPack}
