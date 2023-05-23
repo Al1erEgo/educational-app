@@ -9,6 +9,7 @@ export const StyledTitle = styled(Title).attrs({
 })`
   text-align: center;
   margin: 0;
+  width: fit-content;
 `
 
 //TODO проверить надо ли оставить лоадинг условие

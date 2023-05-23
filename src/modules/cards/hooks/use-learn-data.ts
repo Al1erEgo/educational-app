@@ -2,17 +2,9 @@ import { useEffect, useState } from 'react'
 
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 
-import { MAIN_PATH } from '../../../../../constants'
-import {
-  CardType,
-  useCardsPackQuery,
-  useUpdateCardGradeMutation,
-} from '../../../api'
-import {
-  LearnCardDataType,
-  LearnHandlersType,
-  LearnNames,
-} from '../../../types'
+import { MAIN_PATH } from '../../../constants'
+import { CardType, useCardsPackQuery, useUpdateCardGradeMutation } from '../api'
+import { LearnCardDataType, LearnHandlersType, LearnNames } from '../types'
 import { wiseSortingCards } from '../utils'
 
 export type UseLearnDataType = () => [

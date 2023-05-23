@@ -1,6 +1,7 @@
 import { FC, PropsWithChildren } from 'react'
 
 import { StyledTitle } from '../../styles'
+import { StyledCardsHeaderChildrenWrapper } from '../cards-search/style'
 
 import { StyledCardsHeader } from './styles'
 
@@ -14,7 +15,9 @@ export const CardsHeader: FC<PropsWithChildren<PacksHeaderProps>> = ({
   return (
     <StyledCardsHeader>
       <StyledTitle>{title}</StyledTitle>
-      {children}
+      <StyledCardsHeaderChildrenWrapper>
+        {children}
+      </StyledCardsHeaderChildrenWrapper>
     </StyledCardsHeader>
   )
 }

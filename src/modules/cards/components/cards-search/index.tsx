@@ -7,7 +7,7 @@ import { useDebouncedSearchWithReset } from '../../hooks'
 import { StyledCardsText } from '../../styles'
 import { HandleSearchType } from '../../types'
 
-import { CardsSearchWrapperProps, Style } from './style'
+import { CardsSearchWrapperProps, StyledCardsSearchWrapper } from './style'
 
 type CardsSearchProps = CardsSearchWrapperProps & {
   searchValue: string
@@ -26,7 +26,7 @@ export const CardsSearch: FC<CardsSearchProps> = ({
     useDebouncedSearchWithReset(searchValue, onSearch)
 
   return (
-    <Style size={size}>
+    <StyledCardsSearchWrapper size={size}>
       <StyledCardsText>Search</StyledCardsText>
       <Input.Search
         disabled={disabled}
@@ -38,6 +38,6 @@ export const CardsSearch: FC<CardsSearchProps> = ({
         allowClear={true}
         maxLength={50}
       />
-    </Style>
+    </StyledCardsSearchWrapper>
   )
 }

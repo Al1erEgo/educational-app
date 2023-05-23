@@ -2,6 +2,7 @@ import { FC } from 'react'
 
 import {
   BackToCardsButton,
+  CardsContentCard,
   CardsHeader,
   CardsSearch,
   CardsTable,
@@ -12,7 +13,7 @@ import { StyledCardsToolbar } from '../../styles'
 
 export const Pack: FC = () => {
   const [
-    { packName, isEmptyPack, isOwnPack, buttonsHandlers },
+    { packName, packDeckCover, isEmptyPack, isOwnPack, buttonsHandlers },
     { handleSearch },
     tableData,
   ] = usePackData()
@@ -21,6 +22,7 @@ export const Pack: FC = () => {
     <>
       <BackToCardsButton />
       <CardsHeader title={packName}>
+        <CardsContentCard imgContent={packDeckCover} />
         <PackActionsButtons
           isEmptyPack={isEmptyPack}
           isOwnPack={isOwnPack}

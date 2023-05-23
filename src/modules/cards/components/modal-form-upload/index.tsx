@@ -17,6 +17,9 @@ import {
   getModalFormControllerName,
   getModalPackFormControllerName,
 } from '../../utils'
+import { usePreview } from '../../hooks'
+import { ModalCardFormDataType } from '../../types'
+import { getBase64, getModalFormControllerName } from '../../utils'
 
 type ModalFormUploadType = {
   name: string
@@ -42,6 +45,7 @@ export const ModalFormUpload: FC<ModalFormUploadType> = ({
     name === 'Question' || name === 'Answer'
       ? getModalFormControllerName(name, 'Img')
       : getModalPackFormControllerName('deck', name)
+  const { preview, handlePreview } = usePreview()
 
   const getDefaultImage = (img: string): UploadFile<any>[] => {
     if (img) {
@@ -58,7 +62,7 @@ export const ModalFormUpload: FC<ModalFormUploadType> = ({
     if (newFileList[0]?.originFileObj) {
       const file = newFileList[0].originFileObj as RcFile
 
-      if (file.size < 4000000) {
+      if (file.size < 570000) {
         const url = await getBase64(file)
 
         onChange(url)
@@ -87,7 +91,7 @@ export const ModalFormUpload: FC<ModalFormUploadType> = ({
             accept="image/*"
             listType="picture"
             onChange={e => handleUploadChange(e, field)}
-            onPreview={() => {}}
+            onPreview={() => handlePreview(field.value)}
             beforeUpload={() => false}
           >
             {!field.value && (
@@ -96,6 +100,7 @@ export const ModalFormUpload: FC<ModalFormUploadType> = ({
           </Upload>
         )}
       />
+      {preview}
     </Form.Item>
   )
 }

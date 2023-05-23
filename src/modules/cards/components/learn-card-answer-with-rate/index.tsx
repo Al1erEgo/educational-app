@@ -3,6 +3,7 @@ import { FC } from 'react'
 import { Rate, Typography } from 'antd'
 
 import { rateDescriptions } from '../../constants'
+import { CardsContentCard } from '../cards-content-card'
 
 import { StyledRateContainer } from './styles'
 
@@ -10,6 +11,7 @@ const { Text } = Typography
 
 type LearnCardAnswerWithRateType = {
   answer?: string
+  answerImg?: string
   isShow: boolean
   rate: number
   setRate: (value: number | ((prevState: number) => number)) => void
@@ -17,6 +19,7 @@ type LearnCardAnswerWithRateType = {
 
 export const LearnCardAnswerWithRate: FC<LearnCardAnswerWithRateType> = ({
   answer,
+  answerImg,
   isShow,
   rate,
   setRate,
@@ -24,7 +27,7 @@ export const LearnCardAnswerWithRate: FC<LearnCardAnswerWithRateType> = ({
   if (isShow)
     return (
       <>
-        <Text>{answer}</Text>
+        <CardsContentCard textContent={answer} imgContent={answerImg} />
         <StyledRateContainer>
           <Text strong>Rate yourself: </Text>
           <Rate tooltips={rateDescriptions} onChange={setRate} value={rate} />

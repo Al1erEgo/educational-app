@@ -22,7 +22,7 @@ export const ModalCardForm = <T extends PackModalCardPayloadType>({
   onSubmit,
   onCancel,
 }: ModalCardFormType<T>) => {
-  const { handleSubmit, control, errors, isDirty, setError, watch } =
+  const { handleSubmit, control, errors, isDirty, setError } =
     useCardsModalForm<T, ModalCardFormDataType>(format, payload)
 
   const handleModalFormSubmit = (inputData: ModalCardFormDataType) => {

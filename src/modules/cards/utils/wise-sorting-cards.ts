@@ -1,4 +1,4 @@
-import { CardType } from '../../../api'
+import { CardType } from '../api'
 
 type WiseSortingCardsType = (cards: CardType[]) => CardType[]
 

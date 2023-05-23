@@ -4,7 +4,7 @@ export const CARD_PATH = {
   Root: '/',
   Learn: '/learn',
   Packs: '/packs',
-  Pack: '/packs/:packId',
+  Pack: '/pack/:packId',
   Error: '*',
 } as const
 

@@ -20,7 +20,7 @@ export const LearnCard: FC<LearnCardType> = ({ card, cardHandlers, names }) => {
     cardHandlers
   const { cardData, rate, showAnswer, isLoading, isSuccess, serverError } = card
   const { learnCardButtonName } = names
-  const { answer, shots, question } = cardData || {}
+  const { question, questionImg, answer, answerImg, shots } = cardData || {}
 
   if (isSuccess)
     return <LearnCardSuccess handleSuccess={handleNavigateToCards} />
@@ -32,9 +32,14 @@ export const LearnCard: FC<LearnCardType> = ({ card, cardHandlers, names }) => {
         isLoading={isLoading}
         error={serverError}
       >
-        <LearnCardQuestion shots={shots} question={question} />
+        <LearnCardQuestion
+          shots={shots}
+          question={question}
+          questionImg={questionImg}
+        />
         <LearnCardAnswerWithRate
           answer={answer}
+          answerImg={answerImg}
           isShow={showAnswer}
           rate={rate}
           setRate={setRate}
