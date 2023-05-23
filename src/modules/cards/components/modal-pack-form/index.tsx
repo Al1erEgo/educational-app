@@ -7,25 +7,21 @@ import { useCardsModalForm } from '../../hooks'
 import { StyledModalWrapper } from '../../styles'
 import {
   CardsModalBaseType,
-  ModalCardsFormat,
   ModalPackFormDataType,
   PacksModalPayloadType,
 } from '../../types'
 import { ModalButtons, ModalFormInput, ModalFormUpload } from '../index'
 import { ModalFormCheckbox } from '../modal-form-checkbox'
 
-type ModalPackFormType<T> = CardsModalBaseType<T> & {
-  format: ModalCardsFormat
-}
+type ModalPackFormType<T> = CardsModalBaseType<T>
 
 export const ModalPackForm = <T extends PacksModalPayloadType>({
-  format = MODAL_PACK_FORMAT,
   payload,
   onSubmit,
   onCancel,
 }: ModalPackFormType<T>) => {
   const { handleSubmit, control, errors, isDirty, setError, watch } =
-    useCardsModalForm<T, ModalPackFormDataType>(format, payload)
+    useCardsModalForm<T, ModalPackFormDataType>(MODAL_PACK_FORMAT, payload)
 
   const handlePackSubmit = (inputData: ModalPackFormDataType) => {
     const submitData = {
