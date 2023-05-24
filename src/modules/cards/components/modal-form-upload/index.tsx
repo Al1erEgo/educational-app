@@ -60,7 +60,7 @@ export const ModalFormUpload: FC<ModalFormUploadType> = ({
     if (newFileList[0]?.originFileObj) {
       const file = newFileList[0].originFileObj as RcFile
 
-      if (file.size < 570000) {
+      if (file.size < 57000) {
         const url = await getBase64(file)
 
         onChange(url)
