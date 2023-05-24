@@ -14,9 +14,13 @@
  * @property {Object} showModal - The configuration for the modal to be displayed.
  */
 
-import React, { useState } from 'react'
+import { useState } from 'react'
 
-import { ModalConfig, ModalContextType } from '@/modules/modal-provider/types'
+import {
+  ModalConfig,
+  ModalContextType,
+  UseCustomModalType,
+} from '@/modules/modal-provider/types'
 
 /**
  A custom React hook for managing modal state.
@@ -24,7 +28,7 @@ import { ModalConfig, ModalContextType } from '@/modules/modal-provider/types'
  @returns {ModalContextType} An object containing the current modal configuration,
  as well as functions to show and hide the modal.
  */
-export const useCustomModal = (): ModalContextType => {
+export const useCustomModal: UseCustomModalType = () => {
   /**
    * The current modal configuration.
    * @type {ModalConfig}

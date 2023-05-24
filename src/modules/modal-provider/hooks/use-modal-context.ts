@@ -6,12 +6,7 @@ import { ModalContextType } from '@/modules/modal-provider/types'
  A context object for managing modal state and providing it to child components.
  @type {React.Context<ModalContextType>}
  */
-//TODO надо ли шарить modalConfig через контекст?
 export const ModalContext = createContext<ModalContextType>({
-  modalConfig: {
-    title: '',
-    content: null,
-  },
   showModal: () => {},
   hideModal: () => {},
 })
