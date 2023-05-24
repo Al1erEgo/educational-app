@@ -1,7 +1,6 @@
 import { UseMutation } from '@reduxjs/toolkit/dist/query/react/buildHooks'
 import { MutationDefinition } from '@reduxjs/toolkit/query'
 
-import { MAIN_PATH } from '../../../constants'
 import {
   useAuthMeLogOutMutation,
   useAuthMeUpdateMutation,
@@ -12,6 +11,8 @@ import {
 } from '../api'
 
 import { ABSOLUTE_AUTH_PATH } from './index'
+
+import { MAIN_PATH } from '@/constants'
 
 type AuthMutationsType = {
   [key: string]: {

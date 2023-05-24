@@ -1,6 +1,6 @@
 import { Form } from 'antd'
 
-import { ErrorServerHandler } from '../../../../components'
+import { ErrorMessageHandler } from '../../../../components'
 import { FormButton, FormCheckbox, FormInput } from '../../components'
 import { ABSOLUTE_AUTH_PATH } from '../../constants'
 import { useFormData } from '../../hooks'
@@ -27,7 +27,7 @@ export const SignIn = () => {
           Forgot password?
         </StyledForgotPasswordLink>
 
-        <ErrorServerHandler error={error} />
+        <ErrorMessageHandler serverError={error} />
 
         <FormButton loading={isLoading}>Sign In</FormButton>
       </Form>

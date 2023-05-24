@@ -1,7 +1,7 @@
 import { Form } from 'antd'
 
-import { ErrorServerHandler } from '../../../../components'
-import { FormButton, FormInput, ConfirmationMessage } from '../../components'
+import { ErrorMessageHandler } from '../../../../components'
+import { ConfirmationMessage, FormButton, FormInput } from '../../components'
 import { ABSOLUTE_AUTH_PATH } from '../../constants'
 import { useFormData } from '../../hooks'
 import {
@@ -34,7 +34,7 @@ export const ResetPassword = () => {
           Enter your email address and we will send you further instructions
         </StyledText>
 
-        <ErrorServerHandler error={error} />
+        <ErrorMessageHandler serverError={error} />
 
         <FormButton loading={isLoading}>Send Instructions</FormButton>
       </Form>

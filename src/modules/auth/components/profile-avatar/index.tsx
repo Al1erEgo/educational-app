@@ -1,36 +1,35 @@
-import React from 'react'
+import React, { FC, useState } from 'react'
 
 import { Avatar, Upload } from 'antd'
 import { RcFile } from 'antd/es/upload'
 import { UploadRequestOption } from 'rc-upload/lib/interface'
 
-import { ErrorServerHandler } from '../../../../components'
+import { ErrorMessageHandler } from '../../../../components'
 import { useAuthMeUpdateMutation } from '../../api'
 import { StyledAvatarGroup } from '../../pages/profile/styles'
-import { StyledErrorText } from '../../styles'
 import { getBase64 } from '../../utils'
 import { ProfileAvatarImage } from '../profile-avatar-image'
 
-type PropsType = {
-  avatar: string | undefined
+type ProfileAvatarType = {
+  avatar: string
 }
 
-export const ProfileAvatar = ({ avatar }: PropsType) => {
-  const [trigger, { isLoading, isError, error: serverError }] =
-    useAuthMeUpdateMutation({
-      fixedCacheKey: 'avatar',
-    })
+export const ProfileAvatar: FC<ProfileAvatarType> = ({ avatar }) => {
+  const [customError, setCustomError] = useState<string>('')
+  const [trigger, { isLoading, error: serverError }] = useAuthMeUpdateMutation({
+    fixedCacheKey: 'avatar',
+  })
 
-  const uploadHandler = (action: UploadRequestOption) => {
+  const handleUploadAvatar = (action: UploadRequestOption) => {
     if (action.file) {
       const file = action.file as RcFile
 
-      if (file.size < 4000000) {
+      if (file.size < 1100000) {
         getBase64(file, url => {
           trigger({ avatar: url })
         })
       } else {
-        console.error('Error: ', 'Файл слишком большого размера')
+        setCustomError('Image Too Large, should be less than 100kb!')
       }
     }
   }
@@ -41,7 +40,7 @@ export const ProfileAvatar = ({ avatar }: PropsType) => {
         <Upload
           showUploadList={false}
           accept="image/*"
-          customRequest={uploadHandler}
+          customRequest={handleUploadAvatar}
         >
           <Avatar
             shape="square"
@@ -50,8 +49,7 @@ export const ProfileAvatar = ({ avatar }: PropsType) => {
           />
         </Upload>
       </StyledAvatarGroup>
-      <ErrorServerHandler error={serverError} />
-      <StyledErrorText>{isError && 'Size too large!'}</StyledErrorText>
+      <ErrorMessageHandler serverError={serverError} textError={customError} />
     </>
   )
 }

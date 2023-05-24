@@ -3,8 +3,8 @@ import { FC } from 'react'
 import { Form } from 'antd'
 import { useParams } from 'react-router-dom'
 
-import { ErrorServerHandler } from '../../../../components'
-import { FormButton, FormInput, ConfirmationMessage } from '../../components'
+import { ErrorMessageHandler } from '../../../../components'
+import { ConfirmationMessage, FormButton, FormInput } from '../../components'
 import { ABSOLUTE_AUTH_PATH } from '../../constants'
 import { useFormData } from '../../hooks'
 import {
@@ -43,7 +43,7 @@ export const NewPassword: FC = () => {
         <StyledText type="secondary">
           Create new password and we will send you further instructions to email
         </StyledText>
-        <ErrorServerHandler error={error} />
+        <ErrorMessageHandler serverError={error} />
         <FormButton loading={isLoading}>Create new Password</FormButton>
       </Form>
       <StyledNavLink to={ABSOLUTE_AUTH_PATH.ResetPassword}>

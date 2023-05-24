@@ -1,12 +1,12 @@
 import { Route, Routes } from 'react-router-dom'
 
-import { Error404, Header, Loader } from '../components'
-import { MAIN_PATH } from '../constants'
-import { useDefaultPage } from '../hooks'
-import { Auth, Cards, ModalProvider } from '../modules'
-import { useAuthMeQuery } from '../modules/auth/api'
-import { AuthProvider } from '../modules/auth/components'
-import { GlobalStyle, ModuleContainer } from '../styles'
+import { Error404, Header, Loader } from '@/components'
+import { MAIN_PATH } from '@/constants'
+import { useDefaultPage } from '@/hooks'
+import { Auth, Cards, ModalProvider } from '@/modules'
+import { useAuthMeQuery } from '@/modules/auth/api'
+import { AuthProvider } from '@/modules/auth/components'
+import { GlobalStyle, ModuleContainer } from '@/styles'
 
 export const App = () => {
   const { isFetching } = useAuthMeQuery('auth')

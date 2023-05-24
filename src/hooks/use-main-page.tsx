@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom'
 
-import { useAuthorised } from '../modules/auth/hooks'
+import { useAuthorised } from '@/modules/auth/hooks'
 
 type UseDefaultPageType = (
   userRoute: string,

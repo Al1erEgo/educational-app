@@ -1,4 +1,4 @@
-import { rootApi } from '../../../store'
+import { rootApi } from '@/store'
 
 export const cardsApi = rootApi.injectEndpoints({
   endpoints: builder => ({

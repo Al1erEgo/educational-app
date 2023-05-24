@@ -2,20 +2,21 @@ import { FC, useEffect } from 'react'
 
 import { Form } from 'antd'
 
-import { useNavigateToOnclick } from '../../../../hooks'
 import {
   confirmationMessagesArguments,
   confirmationMessageTimeout,
 } from '../../constants'
 import {
   cardHeadStyle,
+  StyledAuthButton,
   StyledCard,
   StyledText,
-  StyledAuthButton,
 } from '../../styles'
 import { ConfirmationMessagesArgumentsType } from '../../types'
 
 import { StyledCheckEmailImage } from './styles'
+
+import { useNavigateToOnclick } from '@/hooks'
 
 type ConfirmationMessageType = {
   variant: keyof ConfirmationMessagesArgumentsType
@@ -28,6 +29,7 @@ export const ConfirmationMessage: FC<ConfirmationMessageType> = ({
 }) => {
   const { title, redirectPath, timer, image, text } =
     confirmationMessagesArguments[variant]
+
   const redirect = useNavigateToOnclick(redirectPath)
 
   useEffect(() => {

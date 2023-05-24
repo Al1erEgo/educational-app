@@ -3,11 +3,11 @@ import { FC } from 'react'
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Space, Tooltip } from 'antd'
 
-import { PackCardType, PackModalsHandlersType } from '../../types'
+import { CardsModalsHandlersType, PackCardType } from '../../types'
 
 type PackTableActionsType = {
   card: PackCardType
-} & Partial<PackModalsHandlersType>
+} & Partial<CardsModalsHandlersType>
 export const PackTableActions: FC<PackTableActionsType> = ({
   card,
   deleteCardModal,

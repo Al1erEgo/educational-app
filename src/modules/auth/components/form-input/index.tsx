@@ -1,24 +1,24 @@
-import { FC, PropsWithChildren } from 'react'
+import { FC } from 'react'
 
 import { Form, Input } from 'antd'
 import { Control, Controller, FieldError } from 'react-hook-form'
 
+import { getValidationStatus } from '../../../../utils'
 import { inputs } from '../../constants'
 
 type FormInputType = {
   name: keyof typeof inputs
   control: Control<any>
-  error?: FieldError | undefined
+  error?: FieldError
 }
 
-export const FormInput: FC<PropsWithChildren<FormInputType>> = ({ name, control, error }) => {
+export const FormInput: FC<FormInputType> = ({ name, control, error }) => {
   const { type, placeholder, rules, autoComplete } = inputs[name]
 
-  const validateStatus = error ? 'error' : ''
-  const help = error ? error.message : undefined
+  const validationStatus = getValidationStatus(error)
 
   return (
-    <Form.Item validateStatus={validateStatus} help={help}>
+    <Form.Item validateStatus={validationStatus} help={error?.message}>
       <Controller
         name={name}
         control={control}
