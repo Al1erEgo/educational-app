@@ -1,7 +1,7 @@
 import { redirect } from 'react-router-dom'
 
-import { authMutations } from '../constants'
-import { CustomMutationTriggerType } from '../types'
+import { authMutations } from '@/modules/auth/constants'
+import { CustomMutationTriggerType } from '@/modules/auth/types'
 
 type MutationType = keyof typeof authMutations
 

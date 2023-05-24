@@ -7,9 +7,12 @@ import {
   PacksFilter,
   PacksSlider,
   PacksTable,
-} from '../../components'
-import { usePacksData } from '../../hooks'
-import { StyledCardsTitleButton, StyledCardsToolbar } from '../../styles'
+} from '@/modules/cards/components'
+import { usePacksData } from '@/modules/cards/hooks'
+import {
+  StyledCardsTitleButton,
+  StyledCardsToolbar,
+} from '@/modules/cards/styles'
 
 export const Packs = () => {
   const [

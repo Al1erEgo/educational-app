@@ -2,15 +2,15 @@ import React, { useState } from 'react'
 
 import { Select } from 'antd'
 
-import { SELECT_OPTIONS } from '../../constants'
-import { StyledModalWrapper } from '../../styles'
+import { ModalCardForm } from '@/modules/cards/components'
+import { SELECT_OPTIONS } from '@/modules/cards/constants'
+import { StyledModalWrapper } from '@/modules/cards/styles'
 import {
   CardsModalBaseType,
   ModalCardsFormat,
   PackModalCardPayloadType,
-} from '../../types'
-import { getInitModalCardType } from '../../utils'
-import { ModalCardForm } from '../modal-card-form'
+} from '@/modules/cards/types'
+import { getInitModalCardType } from '@/modules/cards/utils'
 
 export const ModalCard = <T extends PackModalCardPayloadType>({
   payload,

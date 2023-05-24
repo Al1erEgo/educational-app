@@ -3,7 +3,7 @@ import { FC } from 'react'
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Space, Tooltip } from 'antd'
 
-import { CardsModalsHandlersType, PackCardType } from '../../types'
+import { CardsModalsHandlersType, PackCardType } from '@/modules/cards/types'
 
 type PackTableActionsType = {
   card: PackCardType

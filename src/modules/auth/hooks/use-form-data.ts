@@ -1,9 +1,9 @@
 import { FieldValues } from 'react-hook-form'
 
-import { FormType } from '../types'
-
 import { useAuthMutation, UseMutationReturnType } from './use-auth-mutation'
 import { useFormWithValidation } from './use-authform'
+
+import { FormType } from '@/modules/auth/types'
 
 //TODO type
 
@@ -15,7 +15,8 @@ type UseFormDataType = <T extends FieldValues>(
  A hook that returns the necessary form data and functions required for form submission and validation.
  @template T - The type of form data.
  @param {FormType} formType - A string representing the type of form.
- @returns {Array} - An array containing the necessary form data and functions required for form submission and validation.
+ @returns {Array} - An array containing the necessary form data and functions required for form submission and
+    validation.
  */
 export const useFormData = <T extends FieldValues>(formType: FormType): any => {
   // Get necessary form data and functions using the useFormWithValidation hook

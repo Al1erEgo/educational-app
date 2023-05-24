@@ -3,7 +3,7 @@ import React, { FC } from 'react'
 import { Form, Input } from 'antd'
 import { Control, Controller } from 'react-hook-form'
 
-import { getModalCardFormControllerName } from '../../utils'
+import { getModalCardFormControllerName } from '@/modules/cards/utils'
 
 type ModalFormInputType = {
   name: string

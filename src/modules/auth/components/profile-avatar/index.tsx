@@ -4,11 +4,12 @@ import { Avatar, Upload } from 'antd'
 import { RcFile } from 'antd/es/upload'
 import { UploadRequestOption } from 'rc-upload/lib/interface'
 
-import { ErrorMessageHandler } from '../../../../components'
-import { useAuthMeUpdateMutation } from '../../api'
-import { StyledAvatarGroup } from '../../pages/profile/styles'
-import { getBase64 } from '../../utils'
 import { ProfileAvatarImage } from '../profile-avatar-image'
+
+import { ErrorMessageHandler } from '@/components'
+import { useAuthMeUpdateMutation } from '@/modules/auth/api'
+import { StyledAvatarGroup } from '@/modules/auth/pages/profile/styles'
+import { getBase64 } from '@/modules/auth/utils'
 
 type ProfileAvatarType = {
   avatar?: string

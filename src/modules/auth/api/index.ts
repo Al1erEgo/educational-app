@@ -13,8 +13,7 @@ import {
   SetNewPasswordResponseType,
   UpdateRequestType,
   UpdateResponseType,
-} from '../types'
-
+} from '@/modules/auth/types'
 import { rootApi } from '@/store'
 
 export const authApi = rootApi.injectEndpoints({

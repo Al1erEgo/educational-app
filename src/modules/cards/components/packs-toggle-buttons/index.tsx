@@ -2,11 +2,11 @@ import { FC } from 'react'
 
 import { Space } from 'antd'
 
-import { ALL_BUTTON_NAME, MY_BUTTON_NAME } from '../../constants'
-import { StyledCardsText } from '../../styles'
-import { HandleToggleButtonType } from '../../types'
-
 import { StyledPacksToggleButtonWrapper, StyledToggleButton } from './styles'
+
+import { ALL_BUTTON_NAME, MY_BUTTON_NAME } from '@/modules/cards/constants'
+import { StyledCardsText } from '@/modules/cards/styles'
+import { HandleToggleButtonType } from '@/modules/cards/types'
 
 type PacksButtonsContainerProps = {
   activeButton: string

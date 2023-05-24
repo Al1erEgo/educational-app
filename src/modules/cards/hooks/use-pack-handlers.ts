@@ -2,7 +2,9 @@ import { Dispatch, SetStateAction } from 'react'
 
 import { useNavigate } from 'react-router-dom'
 
-import { ABSOLUTE_CARD_PATH } from '../constants'
+import { MAIN_PATH } from '@/constants'
+import { ABSOLUTE_CARD_PATH } from '@/modules/cards/constants'
+import { useCardsModals } from '@/modules/cards/hooks/use-cards-modals'
 import {
   ButtonsHandlersType,
   CardsModalsHandlersType,
@@ -10,11 +12,7 @@ import {
   HandleSearchType,
   HandleTableChangeType,
   PackTableParamsType,
-} from '../types'
-
-import { useCardsModals } from './use-cards-modals'
-
-import { MAIN_PATH } from '@/constants'
+} from '@/modules/cards/types'
 
 type UsePackHandlersType = (
   setTableParams: Dispatch<SetStateAction<PackTableParamsType>>,
@@ -35,7 +33,7 @@ export const usePackHandlers: UsePackHandlersType = (
   packName
 ) => {
   const navigate = useNavigate()
-  const { addCard, updateCard, updateCards, deleteCards } = mutations
+  const { updateCards, deleteCards } = mutations
   const modalHandlers = useCardsModals(mutations)
 
   const handleSearch: HandleSearchType = searchValue =>

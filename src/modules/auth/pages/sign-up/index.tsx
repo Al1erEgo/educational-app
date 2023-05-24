@@ -1,11 +1,20 @@
 import { Form } from 'antd'
 
-import { ErrorMessageHandler } from '../../../../components'
-import { ConfirmationMessage, FormButton, FormInput } from '../../components'
-import { ABSOLUTE_AUTH_PATH } from '../../constants'
-import { useFormData } from '../../hooks'
-import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../../styles'
-import { SignUpFormInputs } from '../../types'
+import { ErrorMessageHandler } from '@/components'
+import {
+  ConfirmationMessage,
+  FormButton,
+  FormInput,
+} from '@/modules/auth/components'
+import { ABSOLUTE_AUTH_PATH } from '@/modules/auth/constants'
+import { useFormData } from '@/modules/auth/hooks'
+import {
+  cardHeadStyle,
+  StyledCard,
+  StyledNavLink,
+  StyledP,
+} from '@/modules/auth/styles'
+import { SignUpFormInputs } from '@/modules/auth/types'
 
 export const SignUp = () => {
   const [

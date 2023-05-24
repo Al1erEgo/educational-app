@@ -2,9 +2,8 @@ import {
   DeletedCardsPackRequestType,
   NewCardPacksRequestType,
   UpdateCardsPackRequestType,
-} from '../api'
-
-import { CardsModalsHandlerType } from './cards-modals'
+} from '@/modules/cards/api'
+import { CardsModalsHandlerType } from '@/modules/cards/types/cards-modals'
 
 export type PacksModalPayloadType =
   | NewCardPacksRequestType

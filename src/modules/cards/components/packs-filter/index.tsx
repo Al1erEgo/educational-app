@@ -1,8 +1,7 @@
 import React, { FC } from 'react'
 
-import { HandleClearFiltersType } from '../../types'
-
-import { StyledClearFiltersButton } from './styles'
+import { StyledClearFiltersButton } from '@/modules/cards/components/packs-filter/styles'
+import { HandleClearFiltersType } from '@/modules/cards/types'
 
 type PacksFilterProps = {
   clearFilters: HandleClearFiltersType

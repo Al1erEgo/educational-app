@@ -2,7 +2,7 @@ import { FC } from 'react'
 
 import { Typography } from 'antd'
 
-import { PackTableContentCard } from '../pack-table-content-card'
+import { PackTableContentCard } from '@/modules/cards/components'
 
 const { Text } = Typography
 

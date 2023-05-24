@@ -1,15 +1,15 @@
 import { LogoutOutlined } from '@ant-design/icons'
 
-import { BackToCardsButton } from '../../../cards/components'
-import { ProfileAvatar, ProfileName } from '../../components'
-import { useAuthorised, useAuthMutation } from '../../hooks'
-import { cardHeadStyle, StyledCard } from '../../styles'
-
 import {
   StyledProfileContainer,
-  StyledProfileText,
   StyledProfileLogOutButton,
+  StyledProfileText,
 } from './styles'
+
+import { ProfileAvatar, ProfileName } from '@/modules/auth/components'
+import { useAuthMutation, useAuthorised } from '@/modules/auth/hooks'
+import { cardHeadStyle, StyledCard } from '@/modules/auth/styles'
+import { BackToCardsButton } from '@/modules/cards/components'
 
 export const Profile = () => {
   const { data: userData } = useAuthorised()

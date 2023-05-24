@@ -1,8 +1,10 @@
 import { useState } from 'react'
 
-import { useAuthorised } from '../../auth/hooks'
-import { useCardPacksQuery } from '../api'
-import { MY_BUTTON_NAME } from '../constants'
+import { useAuthorised } from '@/modules/auth/hooks'
+import { useCardPacksQuery } from '@/modules/cards/api'
+import { MY_BUTTON_NAME } from '@/modules/cards/constants'
+import { useCardsMutations } from '@/modules/cards/hooks/use-cards-mutations'
+import { usePacksHandlers } from '@/modules/cards/hooks/use-packs-handlers'
 import {
   CardsModalsHandlersType,
   HandleClearFiltersType,
@@ -11,10 +13,8 @@ import {
   HandleToggleButtonType,
   PacksTableDataType,
   PacksTableParamsType,
-} from '../types'
-import { getPacksTableColumns, getSortingParam } from '../utils'
-
-import { useCardsMutations, usePacksHandlers } from './index'
+} from '@/modules/cards/types'
+import { getPacksTableColumns, getSortingParam } from '@/modules/cards/utils'
 
 type UsePacksDataType = () => [
   { handlePacksSearch: HandlePacksSearchType },

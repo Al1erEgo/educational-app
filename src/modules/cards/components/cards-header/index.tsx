@@ -1,12 +1,12 @@
 import { FC, PropsWithChildren } from 'react'
 
-import { StyledTitle } from '../../styles'
-import { PackTableContentCard } from '../pack-table-content-card'
-
 import {
   StyledCardsHeaderInfoWrapper,
   StyledCardsHeaderWrapper,
 } from './styles'
+
+import { PackTableContentCard } from '@/modules/cards/components'
+import { StyledTitle } from '@/modules/cards/styles'
 
 type PacksHeaderProps = {
   title: string

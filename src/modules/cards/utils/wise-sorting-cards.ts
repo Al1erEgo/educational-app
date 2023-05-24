@@ -1,4 +1,4 @@
-import { CardType } from '../api'
+import { CardType } from '@/modules/cards/api'
 
 type WiseSortingCardsType = (cards: CardType[]) => CardType[]
 

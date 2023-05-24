@@ -1,13 +1,12 @@
 import { SerializedError } from '@reduxjs/toolkit'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
-import { HandleTableChangeType } from '../types'
-
+import { HandleTableChangeType } from '@/modules/cards/types/pack-handlers-functions'
 import {
   PackCardType,
   PackTableColumnsType,
   PackTableParamsType,
-} from './pack-table'
+} from '@/modules/cards/types/pack-table'
 
 export type TableErrorType = FetchBaseQueryError | SerializedError | undefined
 

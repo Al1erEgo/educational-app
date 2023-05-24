@@ -2,10 +2,9 @@ import { FC } from 'react'
 
 import { Rate, Typography } from 'antd'
 
-import { rateDescriptions } from '../../constants'
-import { PackTableContentCard } from '../pack-table-content-card'
-
-import { StyledRateContainer } from './styles'
+import { PackTableContentCard } from '@/modules/cards/components'
+import { StyledRateContainer } from '@/modules/cards/components/learn-card-answer-with-rate/styles'
+import { rateDescriptions } from '@/modules/cards/constants'
 
 const { Text } = Typography
 

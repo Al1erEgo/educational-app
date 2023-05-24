@@ -2,21 +2,20 @@ import { useState } from 'react'
 
 import { useParams, useSearchParams } from 'react-router-dom'
 
-import { useCardsPackQuery } from '../api'
+import { useCardsPackQuery } from '@/modules/cards/api'
+import { useCardsMutations } from '@/modules/cards/hooks/use-cards-mutations'
+import { usePackHandlers } from '@/modules/cards/hooks/use-pack-handlers'
 import {
   ButtonsHandlersType,
   HandleSearchType,
   PackTableParamsType,
   TableDataType,
-} from '../types'
+} from '@/modules/cards/types'
 import {
   getFormattedPackTableData,
   getPackTableColumns,
   getSortingParam,
-} from '../utils'
-
-import { useCardsMutations } from './use-cards-mutations'
-import { usePackHandlers } from './use-pack-handlers'
+} from '@/modules/cards/utils'
 
 type UsePackDataType = () => [
   {

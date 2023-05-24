@@ -3,17 +3,21 @@ import { FC } from 'react'
 import { Form } from 'antd'
 import { useParams } from 'react-router-dom'
 
-import { ErrorMessageHandler } from '../../../../components'
-import { ConfirmationMessage, FormButton, FormInput } from '../../components'
-import { ABSOLUTE_AUTH_PATH } from '../../constants'
-import { useFormData } from '../../hooks'
+import { ErrorMessageHandler } from '@/components'
+import {
+  ConfirmationMessage,
+  FormButton,
+  FormInput,
+} from '@/modules/auth/components'
+import { ABSOLUTE_AUTH_PATH } from '@/modules/auth/constants'
+import { useFormData } from '@/modules/auth/hooks'
 import {
   cardHeadStyle,
   StyledCard,
   StyledNavLink,
   StyledText,
-} from '../../styles'
-import { NewPasswordFormInputs } from '../../types'
+} from '@/modules/auth/styles'
+import { NewPasswordFormInputs } from '@/modules/auth/types'
 
 export const NewPassword: FC = () => {
   const { token } = useParams()

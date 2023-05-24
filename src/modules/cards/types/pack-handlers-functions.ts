@@ -8,9 +8,8 @@ import {
   NewCardRequestType,
   UpdateCardRequestType,
   UpdateCardsPackRequestType,
-} from '../api'
-
-import { PackCardType } from './index'
+} from '@/modules/cards/api'
+import { PackCardType } from '@/modules/cards/types/pack-table'
 
 export type HandlerFunctionDataType =
   | NewCardRequestType

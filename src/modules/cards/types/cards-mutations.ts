@@ -1,6 +1,5 @@
-import { useCardsMutation } from '../hooks'
-
-import { TableErrorType } from './index'
+import { useCardsMutation } from '@/modules/cards/hooks'
+import { TableErrorType } from '@/modules/cards/types/table-data'
 
 export type CardsMutationsObjType = {
   [key: string]: ReturnType<typeof useCardsMutation>

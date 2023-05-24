@@ -1,6 +1,6 @@
-import { PackTableContentCard } from '../components'
-import { StyledRate } from '../styles'
-import { PackTableColumnsType } from '../types'
+import { PackTableContentCard } from '@/modules/cards/components'
+import { StyledRate } from '@/modules/cards/styles'
+import { PackTableColumnsType } from '@/modules/cards/types'
 
 export const packTableColumns: PackTableColumnsType[] = [
   {

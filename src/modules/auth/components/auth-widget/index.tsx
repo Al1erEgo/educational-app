@@ -4,9 +4,6 @@ import { LogoutOutlined } from '@ant-design/icons'
 import { Tooltip } from 'antd'
 import { useLocation } from 'react-router-dom'
 
-import { useAuthMeUpdateMutation } from '../../api'
-import { ABSOLUTE_AUTH_PATH } from '../../constants'
-import { useAuthMutation, useAuthorised } from '../../hooks'
 import { AuthWidgetAvatar } from '../auth-widget-avatar'
 
 import {
@@ -16,6 +13,9 @@ import {
 } from './styles'
 
 import { useNavigateToOnclick } from '@/hooks'
+import { useAuthMeUpdateMutation } from '@/modules/auth/api'
+import { ABSOLUTE_AUTH_PATH } from '@/modules/auth/constants'
+import { useAuthMutation, useAuthorised } from '@/modules/auth/hooks'
 
 export const AuthWidget: FC = () => {
   const { isAuthorised, data: userData } = useAuthorised()
@@ -26,7 +26,7 @@ export const AuthWidget: FC = () => {
 
   const location = useLocation()
 
-  const [trigger, { isLoading }] = useAuthMeUpdateMutation({
+  const [_, { isLoading }] = useAuthMeUpdateMutation({
     fixedCacheKey: 'avatar',
   })
 

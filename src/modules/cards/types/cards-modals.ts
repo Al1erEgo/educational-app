@@ -2,10 +2,12 @@ import {
   DeleteCardRequestType,
   NewCardRequestType,
   UpdateCardRequestType,
-} from '../api'
-
-import { PackModalCardPayloadType } from './pack-modals'
-import { PacksModalPayloadType, PacksModalsHandlersType } from './packs-modals'
+} from '@/modules/cards/api'
+import { PackModalCardPayloadType } from '@/modules/cards/types/pack-modals'
+import {
+  PacksModalPayloadType,
+  PacksModalsHandlersType,
+} from '@/modules/cards/types/packs-modals'
 
 export type CardsModalsOnSubmitType<T> = (payload: T) => void
 

@@ -3,9 +3,8 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { SorterResult } from 'antd/es/table/interface'
 import { TablePaginationConfig } from 'antd/es/table/InternalTable'
 
-import { CardPacksResponseType } from '../api'
-
-import { HandlePacksTableChangeType } from './packs-handler-functions'
+import { CardPacksResponseType } from '@/modules/cards/api'
+import { HandlePacksTableChangeType } from '@/modules/cards/types/packs-handler-functions'
 
 export type PackType = {
   key?: string

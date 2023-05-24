@@ -3,14 +3,13 @@ import { FC, useEffect, useState } from 'react'
 import { CheckOutlined, CloseOutlined, EditOutlined } from '@ant-design/icons'
 import { Form, Space } from 'antd'
 
-import { useFormData } from '../../hooks'
-import { UpdateUserNameType } from '../../types'
-import { StyledUserName } from '../auth-widget/styles'
-import { FormInput } from '../form-input'
-
 import { StyledProfileNameButton } from './styles'
 
 import { ErrorMessageHandler } from '@/components'
+import { FormInput } from '@/modules/auth/components'
+import { StyledUserName } from '@/modules/auth/components/auth-widget/styles'
+import { useFormData } from '@/modules/auth/hooks'
+import { UpdateUserNameType } from '@/modules/auth/types'
 
 type ProfileNamePropsType = {
   userName: string
@@ -19,8 +18,8 @@ type ProfileNamePropsType = {
 export const ProfileName: FC<ProfileNamePropsType> = ({ userName }) => {
   const [
     onSubmit,
-    { handleSubmit, control, errors, setValue, setError, watch },
-    { isLoading: isUpdating, error: updateUserNameError, trigger: trigger },
+    { handleSubmit, control, errors, setValue },
+    { error: updateUserNameError },
   ] = useFormData<UpdateUserNameType>('updateUserName')
 
   console.log(errors)

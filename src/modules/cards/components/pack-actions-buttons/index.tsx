@@ -2,9 +2,8 @@ import { FC } from 'react'
 
 import { Space } from 'antd'
 
-import { ButtonsHandlersType } from '../../types'
-
-import { StyledActionsButton } from './styles'
+import { StyledActionsButton } from '@/modules/cards/components/pack-actions-buttons/styles'
+import { ButtonsHandlersType } from '@/modules/cards/types'
 
 type PackActionButtonsType = {
   isEmptyPack: boolean
