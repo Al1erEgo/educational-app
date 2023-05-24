@@ -22,7 +22,7 @@ export const Profile = () => {
       <BackToCardsButton />
       <StyledCard title={'Personal information'} headStyle={cardHeadStyle}>
         <StyledProfileContainer>
-          <ProfileAvatar avatar={userData.avatar} />
+          <ProfileAvatar avatar={userData?.avatar} />
           <ProfileName userName={userName} />
 
           <StyledProfileText>{userEmail}</StyledProfileText>

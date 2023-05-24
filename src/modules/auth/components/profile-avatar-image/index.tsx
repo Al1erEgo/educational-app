@@ -6,7 +6,7 @@ import { Skeleton } from 'antd'
 import { StyledProfileAvatar } from './styles'
 
 type ProfileAvatarImageType = {
-  avatar: string
+  avatar: string | undefined
   isLoading: boolean
 }
 

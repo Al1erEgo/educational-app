@@ -1,12 +1,12 @@
 import React, { FC } from 'react'
 
 import { LogoutOutlined } from '@ant-design/icons'
+import { Tooltip } from 'antd'
 import { useLocation } from 'react-router-dom'
 
-import { useNavigateToOnclick } from '../../../../hooks'
 import { useAuthMeUpdateMutation } from '../../api'
 import { ABSOLUTE_AUTH_PATH } from '../../constants'
-import { useAuthorised, useAuthMutation } from '../../hooks'
+import { useAuthMutation, useAuthorised } from '../../hooks'
 import { AuthWidgetAvatar } from '../auth-widget-avatar'
 
 import {
@@ -14,6 +14,8 @@ import {
   StyledUserDataWrapper,
   StyledUserName,
 } from './styles'
+
+import { useNavigateToOnclick } from '@/hooks'
 
 export const AuthWidget: FC = () => {
   const { isAuthorised, data: userData } = useAuthorised()
@@ -39,10 +41,14 @@ export const AuthWidget: FC = () => {
     )
   }
 
+  const userName = userData ? userData.name : 'No name'
+
   return (
     <>
       <StyledUserDataWrapper onClick={profileRedirect}>
-        <StyledUserName>{userData ? userData.name : 'No name'}</StyledUserName>
+        <Tooltip title={userName}>
+          <StyledUserName>{userName}</StyledUserName>
+        </Tooltip>
         <AuthWidgetAvatar isLoading={isLoading} avatar={userData?.avatar} />
       </StyledUserDataWrapper>
       <StyledAuthWidgetButton icon={<LogoutOutlined />} onClick={handleLogOut}>
