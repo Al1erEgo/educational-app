@@ -10,7 +10,7 @@ import { FormInput } from '../form-input'
 
 import { StyledProfileNameButton } from './styles'
 
-import { ErrorServerHandler } from '@/components'
+import { ErrorMessageHandler } from '@/components'
 
 type ProfileNamePropsType = {
   userName: string
@@ -56,7 +56,7 @@ export const ProfileName: FC<ProfileNamePropsType> = ({ userName }) => {
           </StyledProfileNameButton>
         </Space.Compact>
       </Form.Item>
-      <ErrorServerHandler serverError={updateUserNameError} />
+      <ErrorMessageHandler serverError={updateUserNameError} />
     </Form>
   ) : (
     <span style={{ marginBottom: '52px' }}>

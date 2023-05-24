@@ -11,7 +11,7 @@ import { getBase64 } from '../../utils'
 import { ProfileAvatarImage } from '../profile-avatar-image'
 
 type ProfileAvatarType = {
-  avatar: string
+  avatar?: string
 }
 
 export const ProfileAvatar: FC<ProfileAvatarType> = ({ avatar }) => {
