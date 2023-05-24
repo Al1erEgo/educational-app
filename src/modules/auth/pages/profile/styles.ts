@@ -1,7 +1,7 @@
 import { Avatar, Button, Typography } from 'antd'
 import styled from 'styled-components'
 
-export const { Text, Paragraph } = Typography
+export const { Text } = Typography
 
 export const StyledProfileContainer = styled.div`
   display: flex;
