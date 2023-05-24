@@ -1,6 +1,5 @@
 import { Form } from 'antd'
 
-import { ErrorServerHandler } from '../../../../components'
 import { FormButton, FormCheckbox, FormInput } from '../../components'
 import { ABSOLUTE_AUTH_PATH } from '../../constants'
 import { useFormData } from '../../hooks'
@@ -8,6 +7,8 @@ import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../../styles'
 import { LoginFormInputs } from '../../types'
 
 import { StyledForgotPasswordLink } from './styles'
+
+import { ErrorServerHandler } from '@/components'
 
 export const SignIn = () => {
   const [onSubmit, { handleSubmit, control, errors }, { isLoading, error }] =

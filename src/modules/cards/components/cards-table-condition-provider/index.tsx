@@ -2,8 +2,9 @@ import React, { FC, PropsWithChildren } from 'react'
 
 import { Skeleton } from 'antd'
 
-import { ErrorServerHandler } from '../../../../components'
 import { TableErrorType } from '../../types'
+
+import { ErrorServerHandler } from '@/components'
 
 type CardsConditionProviderType = {
   error?: TableErrorType

@@ -3,7 +3,8 @@ import React, { FC } from 'react'
 import { Table } from 'antd'
 
 import { useTableResize } from '../../hooks'
-import { CardsConditionProvider } from '../cards-table-condition-provider'
+
+import { CardsConditionProvider } from '@/modules/cards/components'
 
 //TODO fix any
 type CardsTableType = {

@@ -2,7 +2,6 @@ import { Dispatch, SetStateAction } from 'react'
 
 import { useNavigate } from 'react-router-dom'
 
-import { MAIN_PATH } from '../../../constants'
 import { ABSOLUTE_CARD_PATH } from '../constants'
 import {
   ButtonsHandlersType,
@@ -14,6 +13,8 @@ import {
 } from '../types'
 
 import { useCardsModals } from './use-cards-modals'
+
+import { MAIN_PATH } from '@/constants'
 
 type UsePackHandlersType = (
   setTableParams: Dispatch<SetStateAction<PackTableParamsType>>,

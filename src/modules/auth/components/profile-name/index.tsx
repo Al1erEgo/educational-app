@@ -10,6 +10,8 @@ import { FormInput } from '../form-input'
 
 import { StyledProfileNameButton } from './styles'
 
+import { ErrorServerHandler } from '@/components'
+
 type ProfileNamePropsType = {
   userName: string
 }
