@@ -2,7 +2,7 @@ import * as yup from 'yup'
 
 const emailSchema = yup.string().email().required()
 const passwordSchema = yup.string().min(8).required()
-const nameSchema = yup.string().min(1).max(25).required()
+const nameSchema = yup.string().min(1).max(48).required()
 const rememberMeSchema = yup.boolean().default(false)
 
 const commonSchema = yup.object({

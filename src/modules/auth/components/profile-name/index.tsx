@@ -1,18 +1,19 @@
 import { FC, useState } from 'react'
 
-import { ProfileNameEditableSpan } from './profile-name-editable-span/profile-name-editable-span'
-import { ProfileNameInput } from './profile-name-input'
+import { ProfileNameInput } from '../profile-name-input'
 
-type ProfileNamePropsType = {
-  userName: string
-}
+import { ProfileNameEditableSpan } from '@/modules/auth/components/profile-name-editable-span'
+import { ProfileNameBaseType } from '@/modules/auth/types/profile-name'
 
-export const ProfileName: FC<ProfileNamePropsType> = ({ userName }) => {
+export const ProfileName: FC<Omit<ProfileNameBaseType, 'switchEdit'>> = ({ userName }) => {
   const [isEdit, setIsEdit] = useState(false)
 
+  const handleEdit = () => setIsEdit(true)
+  const handleFinish = () => setIsEdit(false)
+
   return isEdit ? (
-    <ProfileNameInput userName={userName} callback={setIsEdit} />
+    <ProfileNameInput userName={userName} switchEdit={handleFinish} />
   ) : (
-    <ProfileNameEditableSpan userName={userName} callback={setIsEdit} />
+    <ProfileNameEditableSpan userName={userName} switchEdit={handleEdit} />
   )
 }

@@ -20,4 +20,5 @@ export const StyledUserName = styled.span`
   border-bottom: 1px dashed #1677ff;
   margin-right: 7px;
   font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
 `

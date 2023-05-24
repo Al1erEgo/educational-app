@@ -5,11 +5,7 @@ import { ProfileAvatar, ProfileName } from '../../components'
 import { useAuthorised, useAuthMutation } from '../../hooks'
 import { cardHeadStyle, StyledCard } from '../../styles'
 
-import {
-  StyledProfileContainer,
-  StyledProfileText,
-  StyledProfileLogOutButton,
-} from './styles'
+import { StyledProfileContainer, StyledProfileText, StyledProfileLogOutButton } from './styles'
 
 export const Profile = () => {
   const { data: userData } = useAuthorised()
