@@ -1,24 +1,8 @@
-import {
-  DeletedCardsPackRequestType,
-  NewCardPacksRequestType,
-  UpdateCardsPackRequestType,
-} from '../api'
-
-import { CardsModalsHandlerType } from './cards-modals'
+import { NewCardPacksRequestType, UpdateCardsPackRequestType } from '../api'
 
 export type PacksModalPayloadType =
   | NewCardPacksRequestType
   | UpdateCardsPackRequestType
-
-export type PacksModalsHandlersType = {
-  addPackModal: CardsModalsHandlerType<NewCardPacksRequestType>
-  updatePackModal: CardsModalsHandlerType<UpdateCardsPackRequestType>
-  deletePackModal: CardsModalsHandlerType<
-    DeletedCardsPackRequestType & {
-      name?: string
-    }
-  >
-}
 
 export type ModalPackFormDataType = {
   name?: string

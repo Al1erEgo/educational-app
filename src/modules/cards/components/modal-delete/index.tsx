@@ -15,8 +15,8 @@ export const ModalDelete: FC<ModalDeleteType> = ({
   redirect,
 }) => {
   const handleDelete = async () => {
-    await onSubmit(payload)
     onCancel()
+    await onSubmit(payload)
     redirect?.()
   }
 
