@@ -13,7 +13,7 @@ import { StyledProfileNameButton } from './styles'
 import { ErrorMessageHandler } from '@/components'
 
 type ProfileNamePropsType = {
-  userName: string
+  userName?: string
 }
 
 export const ProfileName: FC<ProfileNamePropsType> = ({ userName }) => {
@@ -23,7 +23,6 @@ export const ProfileName: FC<ProfileNamePropsType> = ({ userName }) => {
     { isLoading: isUpdating, error: updateUserNameError, trigger: trigger },
   ] = useFormData<UpdateUserNameType>('updateUserName')
 
-  console.log(errors)
   const [isEdit, setIsEdit] = useState(false)
 
   const editNameSubmit = () => {
