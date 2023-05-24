@@ -13,9 +13,13 @@ export type CardsModalBaseType<T> = {
   payload: T
   onSubmit: CardsModalsOnSubmitType<T>
   onCancel: () => void
+  redirect?: () => void
 }
 
-export type CardsModalsHandlerType<T> = CardsModalsOnSubmitType<T>
+export type CardsModalsHandlerType<T> = (
+  payload: T,
+  redirect?: () => void
+) => void
 
 export type CardsModalPayloadType =
   | PackModalCardPayloadType

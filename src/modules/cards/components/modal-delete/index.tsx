@@ -12,10 +12,12 @@ export const ModalDelete: FC<ModalDeleteType> = ({
   payload,
   onSubmit,
   onCancel,
+  redirect,
 }) => {
-  const handleDelete = () => {
-    onSubmit(payload)
+  const handleDelete = async () => {
+    await onSubmit(payload)
     onCancel()
+    redirect?.()
   }
 
   return (

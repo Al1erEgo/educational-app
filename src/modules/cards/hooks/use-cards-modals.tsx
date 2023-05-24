@@ -63,7 +63,10 @@ export const useCardsModals: UseCardsModalsType = mutations => {
       ),
     })
   }
-  const deletePackModal = (payload: DeletedCardsPackRequestType) =>
+  const deletePackModal = (
+    payload: DeletedCardsPackRequestType,
+    redirect?: () => void
+  ) =>
     showModal({
       title: 'Delete pack',
       content: (
@@ -71,6 +74,7 @@ export const useCardsModals: UseCardsModalsType = mutations => {
           payload={payload}
           onSubmit={deleteCardsPack.handler}
           onCancel={hideModal}
+          redirect={redirect}
         />
       ),
     })
