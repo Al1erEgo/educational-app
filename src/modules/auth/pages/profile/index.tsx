@@ -14,6 +14,10 @@ import {
 export const Profile = () => {
   const { data: userData } = useAuthorised()
 
+  const userName = userData?.name
+  const avatar = userData?.avatar
+  const email = userData?.email
+
   const [handleLogout, { isLoading: isLoggingOut }] = useAuthMutation('logout')
 
   return (
@@ -21,10 +25,10 @@ export const Profile = () => {
       <BackToCardsButton />
       <StyledCard title={'Personal information'} headStyle={cardHeadStyle}>
         <StyledProfileContainer>
-          <ProfileAvatar avatar={userData?.avatar} />
-          <ProfileName userName={userData?.name} />
+          <ProfileAvatar avatar={avatar} />
+          <ProfileName userName={userName} />
 
-          <StyledProfileText>{userData?.email}</StyledProfileText>
+          <StyledProfileText>{email}</StyledProfileText>
 
           <StyledProfileLogOutButton
             onClick={handleLogout}
