@@ -13,10 +13,7 @@ import {
 
 export const Profile = () => {
   const { data: userData } = useAuthorised()
-
-  const userName = userData?.name
-  const avatar = userData?.avatar
-  const email = userData?.email
+  const { name: userName, avatar, email } = userData ?? {}
 
   const [handleLogout, { isLoading: isLoggingOut }] = useAuthMutation('logout')
 
