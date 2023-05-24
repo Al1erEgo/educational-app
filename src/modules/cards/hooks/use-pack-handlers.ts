@@ -2,9 +2,7 @@ import { Dispatch, SetStateAction } from 'react'
 
 import { useNavigate } from 'react-router-dom'
 
-import { MAIN_PATH } from '@/constants'
-import { ABSOLUTE_CARD_PATH } from '@/modules/cards/constants'
-import { useCardsModals } from '@/modules/cards/hooks/use-cards-modals'
+import { ABSOLUTE_CARD_PATH } from '../constants'
 import {
   ButtonsHandlersType,
   CardsModalsHandlersType,
@@ -12,13 +10,19 @@ import {
   HandleSearchType,
   HandleTableChangeType,
   PackTableParamsType,
-} from '@/modules/cards/types'
+} from '../types'
+
+import { useCardsModals } from './use-cards-modals'
+
+import { MAIN_PATH } from '@/constants'
+import { CardsResponseType } from '@/modules/cards/api'
 
 type UsePackHandlersType = (
   setTableParams: Dispatch<SetStateAction<PackTableParamsType>>,
   mutations: CardsMutationsObjType,
   packId: string,
-  packName: string
+  packName: string,
+  responseData?: CardsResponseType
 ) => {
   handleTableChange: HandleTableChangeType
   handleSearch: HandleSearchType
@@ -30,11 +34,13 @@ export const usePackHandlers: UsePackHandlersType = (
   setTableParams,
   mutations,
   packId,
-  packName
+  packName,
+  responseData
 ) => {
   const navigate = useNavigate()
-  const { updateCards, deleteCards } = mutations
   const modalHandlers = useCardsModals(mutations)
+
+  const handleRedirectToPacks = () => navigate(MAIN_PATH.Cards)
 
   const handleSearch: HandleSearchType = searchValue =>
     setTableParams(prevState => ({ ...prevState, searchValue }))
@@ -54,13 +60,19 @@ export const usePackHandlers: UsePackHandlersType = (
   const handleAddCard = () =>
     modalHandlers.addCardModal({ card: { cardsPack_id: packId || '' } })
 
-  const handleDeletePack = async () => {
-    await deleteCards.handler({ id: packId })
-    navigate(MAIN_PATH.Cards) //можно перенести в хук useHandleAction
+  const handleDeletePack = () => {
+    modalHandlers.deletePackModal({ id: packId }, handleRedirectToPacks)
   }
 
   const handleEditPack = () =>
-    updateCards.handler({ cardsPack: { _id: packId } })
+    modalHandlers.updatePackModal({
+      cardsPack: {
+        _id: packId,
+        name: packName,
+        deckCover: responseData?.packDeckCover,
+        private: responseData?.packPrivate,
+      },
+    })
 
   const handleLearnPack = () =>
     navigate(`${ABSOLUTE_CARD_PATH.Learn}/${packId}?name=${packName}`)

@@ -1,19 +1,19 @@
 import { LogoutOutlined } from '@ant-design/icons'
 
+import { BackToCardsButton } from '../../../cards/components'
+import { ProfileAvatar, ProfileName } from '../../components'
+import { useAuthMutation, useAuthorised } from '../../hooks'
+import { cardHeadStyle, StyledCard } from '../../styles'
+
 import {
   StyledProfileContainer,
   StyledProfileLogOutButton,
   StyledProfileText,
 } from './styles'
 
-import { ProfileAvatar, ProfileName } from '@/modules/auth/components'
-import { useAuthMutation, useAuthorised } from '@/modules/auth/hooks'
-import { cardHeadStyle, StyledCard } from '@/modules/auth/styles'
-import { BackToCardsButton } from '@/modules/cards/components'
-
 export const Profile = () => {
   const { data: userData } = useAuthorised()
-  const { name: userName = '', email: userEmail = '' } = userData ?? {}
+  const { name: userName, avatar, email } = userData ?? {}
 
   const [handleLogout, { isLoading: isLoggingOut }] = useAuthMutation('logout')
 
@@ -22,10 +22,10 @@ export const Profile = () => {
       <BackToCardsButton />
       <StyledCard title={'Personal information'} headStyle={cardHeadStyle}>
         <StyledProfileContainer>
-          <ProfileAvatar avatar={userData?.avatar} />
+          <ProfileAvatar avatar={avatar} />
           <ProfileName userName={userName} />
 
-          <StyledProfileText>{userEmail}</StyledProfileText>
+          <StyledProfileText>{email}</StyledProfileText>
 
           <StyledProfileLogOutButton
             onClick={handleLogout}

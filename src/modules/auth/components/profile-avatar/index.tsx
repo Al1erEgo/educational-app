@@ -4,12 +4,15 @@ import { Avatar, Upload } from 'antd'
 import { RcFile } from 'antd/es/upload'
 import { UploadRequestOption } from 'rc-upload/lib/interface'
 
+import { useAuthMeUpdateMutation } from '../../api'
+import { getBase64 } from '../../utils'
 import { ProfileAvatarImage } from '../profile-avatar-image'
 
 import { ErrorMessageHandler } from '@/components'
-import { useAuthMeUpdateMutation } from '@/modules/auth/api'
-import { StyledAvatarGroup } from '@/modules/auth/pages/profile/styles'
-import { getBase64 } from '@/modules/auth/utils'
+import {
+  StyledAvatarGroup,
+  StyledCloseCircleTwoTone,
+} from '@/modules/auth/components/profile-avatar/styles'
 
 type ProfileAvatarType = {
   avatar?: string
@@ -35,6 +38,10 @@ export const ProfileAvatar: FC<ProfileAvatarType> = ({ avatar }) => {
     }
   }
 
+  const handleDeleteAvatar = () => {
+    trigger({ avatar: ' ' })
+  }
+
   return (
     <>
       <StyledAvatarGroup>
@@ -49,6 +56,7 @@ export const ProfileAvatar: FC<ProfileAvatarType> = ({ avatar }) => {
             icon={<ProfileAvatarImage avatar={avatar} isLoading={isLoading} />}
           />
         </Upload>
+        {avatar && <StyledCloseCircleTwoTone onClick={handleDeleteAvatar} />}
       </StyledAvatarGroup>
       <ErrorMessageHandler serverError={serverError} textError={customError} />
     </>

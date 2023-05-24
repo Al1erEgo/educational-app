@@ -12,7 +12,7 @@ import { useFormData } from '@/modules/auth/hooks'
 import { UpdateUserNameType } from '@/modules/auth/types'
 
 type ProfileNamePropsType = {
-  userName: string
+  userName?: string
 }
 
 export const ProfileName: FC<ProfileNamePropsType> = ({ userName }) => {
@@ -22,7 +22,6 @@ export const ProfileName: FC<ProfileNamePropsType> = ({ userName }) => {
     { error: updateUserNameError },
   ] = useFormData<UpdateUserNameType>('updateUserName')
 
-  console.log(errors)
   const [isEdit, setIsEdit] = useState(false)
 
   const editNameSubmit = () => {

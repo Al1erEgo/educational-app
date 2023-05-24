@@ -63,7 +63,7 @@ export const usePackData: UsePackDataType = () => {
     useCardsMutations(refetchPack)
 
   const { handleTableChange, handleSearch, buttonsHandlers, modalHandlers } =
-    usePackHandlers(setTableParams, mutations, packId, packName)
+    usePackHandlers(setTableParams, mutations, packId, packName, responseData)
 
   const isDataLoading = isInitialLoading || isFetching || mutationsLoading
   const serverError = cardsPackQueryError || mutationsError

@@ -1,4 +1,4 @@
-import { Avatar, Button, Typography } from 'antd'
+import { Button, Typography } from 'antd'
 import styled from 'styled-components'
 
 export const { Text } = Typography
@@ -8,10 +8,6 @@ export const StyledProfileContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-`
-
-export const StyledAvatarGroup = styled(Avatar.Group)`
-  margin-bottom: 1.7rem;
 `
 
 export const StyledProfileText = styled(Text)`
