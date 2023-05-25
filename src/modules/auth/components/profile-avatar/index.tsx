@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
 
-import { Avatar, Upload } from 'antd'
+import { Avatar, Tooltip, Upload } from 'antd'
 import { RcFile } from 'antd/es/upload'
 import { UploadRequestOption } from 'rc-upload/lib/interface'
 
@@ -13,6 +13,7 @@ import {
   StyledAvatarGroup,
   StyledCloseCircleTwoTone,
 } from '@/modules/auth/components/profile-avatar/styles'
+import { PROFILE_AVATAR_TOOLTIP } from '@/modules/auth/constants/profile-avatar'
 
 type ProfileAvatarType = {
   avatar?: string
@@ -50,11 +51,15 @@ export const ProfileAvatar: FC<ProfileAvatarType> = ({ avatar }) => {
           accept="image/*"
           customRequest={handleUploadAvatar}
         >
-          <Avatar
-            shape="square"
-            size={96}
-            icon={<ProfileAvatarImage avatar={avatar} isLoading={isLoading} />}
-          />
+          <Tooltip title={PROFILE_AVATAR_TOOLTIP}>
+            <Avatar
+              shape="square"
+              size={96}
+              icon={
+                <ProfileAvatarImage avatar={avatar} isLoading={isLoading} />
+              }
+            />
+          </Tooltip>
         </Upload>
         {avatar && <StyledCloseCircleTwoTone onClick={handleDeleteAvatar} />}
       </StyledAvatarGroup>

@@ -20,6 +20,7 @@ export const AuthWidgetAvatar: FC<AuthWidgetAvatarType> = ({
   if (isLoading) {
     return <StyledSkeletonAvatar />
   }
+
   if (avatarToShow) {
     return <StyledUserIconWidget src={avatar} />
   }

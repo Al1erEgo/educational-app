@@ -15,4 +15,8 @@ export const StyledCloseCircleTwoTone = styled(CloseCircleTwoTone)`
 export const StyledAvatarGroup = styled(Avatar.Group)`
   margin-bottom: 1.7rem;
   position: relative;
+
+  & :hover {
+    cursor: pointer;
+  }
 `
