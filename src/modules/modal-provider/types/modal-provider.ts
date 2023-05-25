@@ -6,7 +6,9 @@ export type ModalConfig = {
 }
 
 export type ModalContextType = {
-  modalConfig: ModalConfig
   showModal: (config: ModalConfig) => void
   hideModal: () => void
+}
+export type UseCustomModalType = () => ModalContextType & {
+  modalConfig: ModalConfig
 }
