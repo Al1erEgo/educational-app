@@ -13,25 +13,26 @@ export const PackTableActions: FC<PackTableActionsType> = ({
   deleteCardModal,
   updateCardModal,
 }) => {
+  const handleEditCard = () =>
+    updateCardModal?.({
+      card: {
+        _id: card.key,
+        question: card.question,
+        answer: card.answer,
+        questionImg: card.questionImg,
+        answerImg: card.answerImg,
+      },
+    })
+
+  const handleDeleteCard = () => deleteCardModal?.({ id: card.key })
+
   return (
     <Space size="middle">
       <Tooltip title="Edit">
-        <EditOutlined
-          onClick={() =>
-            updateCardModal?.({
-              card: {
-                _id: card.key,
-                question: card.question,
-                answer: card.answer,
-                questionImg: card.questionImg,
-                answerImg: card.answerImg,
-              },
-            })
-          }
-        />
+        <EditOutlined onClick={handleEditCard} />
       </Tooltip>
       <Tooltip title="Delete">
-        <DeleteOutlined onClick={() => deleteCardModal?.({ id: card.key })} />
+        <DeleteOutlined onClick={handleDeleteCard} />
       </Tooltip>
     </Space>
   )
