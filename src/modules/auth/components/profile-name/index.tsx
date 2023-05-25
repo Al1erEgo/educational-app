@@ -13,9 +13,9 @@ export const ProfileName: FC<ProfileNameType> = ({ userName }) => {
   const handleEdit = () => setIsEdit(true)
   const handleFinish = () => setIsEdit(false)
 
-  return isEdit ? (
-    <ProfileNameInput userName={userName} switchEdit={handleFinish} />
-  ) : (
-    <ProfileNameEditableSpan userName={userName} switchEdit={handleEdit} />
-  )
+  if (isEdit) {
+    return <ProfileNameInput userName={userName} switchEdit={handleFinish} />
+  }
+
+  return <ProfileNameEditableSpan userName={userName} switchEdit={handleEdit} />
 }
