@@ -15,6 +15,8 @@ export const useAuthWidgetData = () => {
 
   const location = useLocation()
 
+  const avatar = userData?.avatar
+
   const [_, { isLoading }] = useAuthMeUpdateMutation({
     fixedCacheKey: 'avatar',
   })
@@ -28,10 +30,10 @@ export const useAuthWidgetData = () => {
 
   return {
     handleLogOut,
+    avatar,
     isLoading,
     isAuthorised,
     userName,
-    userData,
     profileRedirect,
     unauthorisedButtonProps,
   }

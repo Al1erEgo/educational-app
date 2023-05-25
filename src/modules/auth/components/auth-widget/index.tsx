@@ -19,9 +19,9 @@ export const AuthWidget: FC = () => {
     isLoading,
     isAuthorised,
     userName,
-    userData,
     profileRedirect,
     unauthorisedButtonProps,
+    avatar,
   } = useAuthWidgetData()
 
   if (!isAuthorised) {
@@ -36,7 +36,7 @@ export const AuthWidget: FC = () => {
         <Tooltip title={userName}>
           <StyledUserName>{userName}</StyledUserName>
         </Tooltip>
-        <AuthWidgetAvatar isLoading={isLoading} avatar={userData?.avatar} />
+        <AuthWidgetAvatar isLoading={isLoading} avatar={avatar} />
       </StyledUserDataWrapper>
       <StyledAuthWidgetButton icon={<LogoutOutlined />} onClick={handleLogOut}>
         Log out
