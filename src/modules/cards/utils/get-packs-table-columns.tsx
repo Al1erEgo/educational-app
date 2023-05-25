@@ -8,7 +8,7 @@ import {
   UpdateCardsPackRequestType,
 } from '@/modules/cards/api'
 import {
-  packsTableRenderActions,
+  PacksTableActions,
   PackTableContentCard,
 } from '@/modules/cards/components'
 import { packsTableColumns } from '@/modules/cards/constants'
@@ -32,13 +32,6 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
   deletePack,
   updatePack
 ) => {
-  const renderActions = packsTableRenderActions({
-    activeButton,
-    userData,
-    deletePack,
-    updatePack,
-  })
-
   return [
     {
       title: 'Cover',
@@ -68,7 +61,15 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
     {
       title: 'Actions',
       dataIndex: 'actions',
-      render: (text: string, pack: PackType) => renderActions(text, pack),
+      render: (text: string, pack: PackType) => (
+        <PacksTableActions
+          pack={pack}
+          activeButton={activeButton}
+          userData={userData}
+          deletePack={deletePack}
+          updatePack={updatePack}
+        />
+      ),
     },
   ]
 }
