@@ -1,4 +1,4 @@
-import { EditOutlined } from '@ant-design/icons'
+import { CheckOutlined, EditOutlined } from '@ant-design/icons'
 import { Button, Space } from 'antd'
 import styled from 'styled-components'
 
@@ -35,4 +35,12 @@ export const StyledEditOutlinedProfileName = styled(EditOutlined)`
   color: blue;
   cursor: pointer;
   font-size: 16px;
+`
+
+export const StyledProfileNameWrapper = styled.span`
+  margin-bottom: 52px;
+`
+
+export const StyledCheckOutlined = styled(CheckOutlined)`
+  color: blue;
 `

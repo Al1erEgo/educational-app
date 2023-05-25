@@ -5,9 +5,7 @@ import { schemaMap } from '../constants'
 import { FormType } from '../types'
 
 //TODO made type
-export const useFormWithValidation = <T extends FieldValues>(
-  formType: FormType
-) => {
+export const useFormWithValidation = <T extends FieldValues>(formType: FormType) => {
   const schema = schemaMap[formType]
   const {
     handleSubmit,
