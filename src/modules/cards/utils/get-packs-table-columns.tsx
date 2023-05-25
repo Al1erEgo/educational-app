@@ -21,16 +21,16 @@ import {
 type GetPacksTableColumnsType = (
   activeButton: string,
   userData: LoginResponseType | undefined,
-  deletePack: CardsModalsHandlerType<
+  deletePackModal: CardsModalsHandlerType<
     DeletedCardsPackRequestType & { name?: string }
   >,
-  updatePack: CardsModalsHandlerType<UpdateCardsPackRequestType>
+  updatePackModal: CardsModalsHandlerType<UpdateCardsPackRequestType>
 ) => PacksTableDataColumnsType[]
 export const getPacksTableColumns: GetPacksTableColumnsType = (
   activeButton,
   userData,
-  deletePack,
-  updatePack
+  deletePackModal,
+  updatePackModal
 ) => {
   return [
     {
@@ -66,8 +66,8 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
           pack={pack}
           activeButton={activeButton}
           userData={userData}
-          deletePack={deletePack}
-          updatePack={updatePack}
+          deletePackModal={deletePackModal}
+          updatePackModal={updatePackModal}
         />
       ),
     },
