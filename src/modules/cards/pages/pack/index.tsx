@@ -6,9 +6,9 @@ import {
   CardsSearch,
   CardsTable,
   PackActionsButtons,
-} from '../../components'
-import { usePackData } from '../../hooks'
-import { StyledCardsToolbar } from '../../styles'
+} from '@/modules/cards/components'
+import { usePackData } from '@/modules/cards/hooks'
+import { StyledCardsToolbar } from '@/modules/cards/styles'
 
 export const Pack: FC = () => {
   const [

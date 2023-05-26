@@ -1,13 +1,18 @@
 import { Form } from 'antd'
 
-import { ErrorMessageHandler } from '../../../../components'
-import { FormButton, FormCheckbox, FormInput } from '../../components'
-import { ABSOLUTE_AUTH_PATH } from '../../constants'
-import { useFormData } from '../../hooks'
-import { cardHeadStyle, StyledCard, StyledNavLink, StyledP } from '../../styles'
-import { LoginFormInputs } from '../../types'
-
 import { StyledForgotPasswordLink } from './styles'
+
+import { ErrorMessageHandler } from '@/components'
+import { FormButton, FormCheckbox, FormInput } from '@/modules/auth/components'
+import { ABSOLUTE_AUTH_PATH } from '@/modules/auth/constants'
+import { useFormData } from '@/modules/auth/hooks'
+import {
+  cardHeadStyle,
+  StyledCard,
+  StyledNavLink,
+  StyledP,
+} from '@/modules/auth/styles'
+import { LoginFormInputs } from '@/modules/auth/types'
 
 export const SignIn = () => {
   const [onSubmit, { handleSubmit, control, errors }, { isLoading, error }] =

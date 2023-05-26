@@ -1,10 +1,10 @@
-import { packMutations } from '../constants'
+import { useCardsMutation } from './use-cards-mutation'
+
+import { packMutations } from '@/modules/cards/constants'
 import {
   CardsMutationsObjType,
   CardsMutationsWithConditionsType,
-} from '../types'
-
-import { useCardsMutation } from './use-cards-mutation'
+} from '@/modules/cards/types'
 
 type UseCardsMutationsType = (
   refetchPack: () => void

@@ -2,7 +2,10 @@ import React, { FC } from 'react'
 
 import { Button, Form } from 'antd'
 
-import { StyledModalButtonsContainer, StyledModalSubmitButton } from './styles'
+import {
+  StyledModalButtonsContainer,
+  StyledModalSubmitButton,
+} from '@/modules/cards/components/modal-buttons/styles'
 
 type ModalButtonsType = {
   onSubmit?: () => void

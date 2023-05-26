@@ -2,9 +2,8 @@ import React, { FC } from 'react'
 
 import { Table } from 'antd'
 
-import { useTableResize } from '../../hooks'
-
 import { CardsConditionProvider } from '@/modules/cards/components'
+import { useTableResize } from '@/modules/cards/hooks'
 
 //TODO fix any
 type CardsTableType = {

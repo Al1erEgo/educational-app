@@ -1,4 +1,7 @@
-import { ModalCardsFormat, PackModalCardPayloadType } from '../types'
+import {
+  ModalCardsFormat,
+  PackModalCardPayloadType,
+} from '@/modules/cards/types'
 
 export const getInitModalCardType = <T extends PackModalCardPayloadType>(
   payload: T

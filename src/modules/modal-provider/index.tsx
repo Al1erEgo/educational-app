@@ -8,7 +8,7 @@ export const ModalProvider: FC<PropsWithChildren> = ({ children }) => {
   const { modalConfig, showModal, hideModal } = useCustomModal()
 
   return (
-    <ModalContext.Provider value={{ modalConfig, showModal, hideModal }}>
+    <ModalContext.Provider value={{ showModal, hideModal }}>
       <Modal
         title={modalConfig.title}
         open={!!modalConfig.title}

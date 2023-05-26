@@ -2,10 +2,10 @@ import React, { FC } from 'react'
 
 import { Table } from 'antd'
 
-import { useTableResize } from '../../hooks'
-import { PacksTableDataType } from '../../types'
-import { getFormattedPacksTableData } from '../../utils'
-import { CardsConditionProvider } from '../index'
+import { CardsConditionProvider } from '@/modules/cards/components'
+import { useTableResize } from '@/modules/cards/hooks'
+import { PacksTableDataType } from '@/modules/cards/types'
+import { getFormattedPacksTableData } from '@/modules/cards/utils'
 
 type PacksTableProps = {
   packsTableData: PacksTableDataType

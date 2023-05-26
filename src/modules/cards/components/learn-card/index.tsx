@@ -5,9 +5,13 @@ import {
   LearnCardAnswerWithRate,
   LearnCardQuestion,
   LearnCardSuccess,
-} from '../../components'
-import { StyledLearnCard, StyledLearnCardButton } from '../../styles'
-import { LearnCardDataType, LearnHandlersType, LearnNames } from '../../types'
+} from '@/modules/cards/components'
+import { StyledLearnCard, StyledLearnCardButton } from '@/modules/cards/styles'
+import {
+  LearnCardDataType,
+  LearnHandlersType,
+  LearnNames,
+} from '@/modules/cards/types'
 
 type LearnCardType = {
   card: LearnCardDataType

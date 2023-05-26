@@ -3,8 +3,8 @@ import { FC } from 'react'
 import { Form, Input } from 'antd'
 import { Control, Controller, FieldError } from 'react-hook-form'
 
-import { getValidationStatus } from '../../../../utils'
-import { inputs } from '../../constants'
+import { inputs } from '@/modules/auth/constants'
+import { getValidationStatus } from '@/utils'
 
 type FormInputType = {
   name: keyof typeof inputs

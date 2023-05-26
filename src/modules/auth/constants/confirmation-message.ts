@@ -1,7 +1,7 @@
-import checkEmailImage from '../../../assets/check-email-image.svg'
-import successRegistrationImage from '../../../assets/success-registration.png'
-
 import { ABSOLUTE_AUTH_PATH } from './index'
+
+import checkEmailImage from '@/assets/check-email-image.svg'
+import successRegistrationImage from '@/assets/success-registration.png'
 
 export const confirmationMessageTimeout = 5000
 

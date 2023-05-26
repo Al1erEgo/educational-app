@@ -1,4 +1,7 @@
-import { ModalCardFormDataType, ModalPackFormDataType } from '../types'
+import {
+  ModalCardFormDataType,
+  ModalPackFormDataType,
+} from '@/modules/cards/types'
 
 export const getModalCardFormControllerName = (
   name: string,

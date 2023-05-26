@@ -1,7 +1,7 @@
 import { FilterValue, SorterResult } from 'antd/es/table/interface'
 import { TablePaginationConfig } from 'antd/es/table/InternalTable'
 
-import { PackType } from './packs-table'
+import { PackType } from '@/modules/cards/types/packs-table'
 
 export type HandlePacksTableChangeType = (
   pagination: TablePaginationConfig,

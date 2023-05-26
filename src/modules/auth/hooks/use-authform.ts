@@ -1,8 +1,8 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { FieldValues, useForm } from 'react-hook-form'
 
-import { schemaMap } from '../constants'
-import { FormType } from '../types'
+import { schemaMap } from '@/modules/auth/constants'
+import { FormType } from '@/modules/auth/types'
 
 //TODO made type
 export const useFormWithValidation = <T extends FieldValues>(formType: FormType) => {

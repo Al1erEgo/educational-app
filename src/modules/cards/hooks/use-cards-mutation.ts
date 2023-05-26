@@ -1,5 +1,5 @@
-import { packMutations } from '../constants'
-import { HandlerFunctionType, TableErrorType } from '../types'
+import { packMutations } from '@/modules/cards/constants'
+import { HandlerFunctionType, TableErrorType } from '@/modules/cards/types'
 
 type UsePackMutationType = (
   mutationType: keyof typeof packMutations,

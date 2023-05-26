@@ -2,7 +2,7 @@ import { FC } from 'react'
 
 import { Image, Typography } from 'antd'
 
-import { PACK_TABLE_IMG_HEIGHT } from '../../constants'
+import { PACK_TABLE_IMG_HEIGHT } from '@/modules/cards/constants'
 
 const { Text } = Typography
 
@@ -10,7 +10,7 @@ type CardsContentCardType = {
   textContent?: string
   imgContent?: string
 }
-export const PackTableContentCard: FC<CardsContentCardType> = ({
+export const CardsTableContentCard: FC<CardsContentCardType> = ({
   textContent,
   imgContent,
 }) => {

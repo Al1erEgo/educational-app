@@ -2,16 +2,20 @@ import React from 'react'
 
 import { Form } from 'antd'
 
-import { MODAL_PACK_FORMAT } from '../../constants'
-import { useCardsModalForm } from '../../hooks'
-import { StyledModalWrapper } from '../../styles'
+import {
+  ModalButtons,
+  ModalFormCheckbox,
+  ModalFormInput,
+  ModalFormUpload,
+} from '@/modules/cards/components'
+import { MODAL_PACK_FORMAT } from '@/modules/cards/constants'
+import { useCardsModalForm } from '@/modules/cards/hooks'
+import { StyledModalWrapper } from '@/modules/cards/styles'
 import {
   CardsModalBaseType,
   ModalPackFormDataType,
   PacksModalPayloadType,
-} from '../../types'
-import { ModalButtons, ModalFormInput, ModalFormUpload } from '../index'
-import { ModalFormCheckbox } from '../modal-form-checkbox'
+} from '@/modules/cards/types'
 
 type ModalPackFormType<T> = CardsModalBaseType<T>
 
@@ -20,7 +24,7 @@ export const ModalPackForm = <T extends PacksModalPayloadType>({
   onSubmit,
   onCancel,
 }: ModalPackFormType<T>) => {
-  const { handleSubmit, control, errors, isDirty, setError, watch } =
+  const { handleSubmit, control, errors, isDirty, setError } =
     useCardsModalForm<T, ModalPackFormDataType>(MODAL_PACK_FORMAT, payload)
 
   const handlePackSubmit = (inputData: ModalPackFormDataType) => {

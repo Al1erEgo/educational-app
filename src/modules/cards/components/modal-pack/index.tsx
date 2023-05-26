@@ -1,8 +1,11 @@
 import React from 'react'
 
-import { StyledModalWrapper } from '../../styles'
-import { CardsModalBaseType, PacksModalPayloadType } from '../../types'
-import { ModalPackForm } from '../modal-pack-form'
+import { ModalPackForm } from '@/modules/cards/components'
+import { StyledModalWrapper } from '@/modules/cards/styles'
+import {
+  CardsModalBaseType,
+  PacksModalPayloadType,
+} from '@/modules/cards/types'
 
 export const ModalPack = <T extends PacksModalPayloadType>({
   payload,

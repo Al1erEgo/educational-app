@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { getTableHeight } from '../utils'
+import { getTableHeight } from '@/modules/cards/utils'
 
 /**
  * A React hook that returns the height of a table based on the current window height.

@@ -2,7 +2,7 @@ import { FC, PropsWithChildren } from 'react'
 
 import { Form } from 'antd'
 
-import { StyledAuthButton } from '../../styles'
+import { StyledAuthButton } from '@/modules/auth/styles'
 
 type FormButtonType = {
   loading: boolean

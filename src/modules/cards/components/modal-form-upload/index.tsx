@@ -11,13 +11,16 @@ import {
 } from 'react-hook-form'
 import { FieldValues } from 'react-hook-form/dist/types'
 
-import { usePreview } from '../../hooks'
-import { ModalCardFormDataType, ModalPackFormDataType } from '../../types'
+import { usePreview } from '@/modules/cards/hooks'
+import {
+  ModalCardFormDataType,
+  ModalPackFormDataType,
+} from '@/modules/cards/types'
 import {
   getBase64,
   getModalCardFormControllerName,
   getModalPackFormControllerName,
-} from '../../utils'
+} from '@/modules/cards/utils'
 
 type ModalFormUploadType = {
   name: string

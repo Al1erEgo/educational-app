@@ -2,11 +2,13 @@ import React, { FC } from 'react'
 
 import { Slider } from 'antd'
 
-import { useSliderKeyUpdater } from '../../hooks'
-import { StyledCardsText } from '../../styles'
-import { HandleSliderChangeType, PacksTableParamsType } from '../../types'
-
-import { StyledPacksSliderWrapper } from './styles'
+import { StyledPacksSliderWrapper } from '@/modules/cards/components/packs-slider/styles'
+import { useSliderKeyUpdater } from '@/modules/cards/hooks'
+import { StyledCardsText } from '@/modules/cards/styles'
+import {
+  HandleSliderChangeType,
+  PacksTableParamsType,
+} from '@/modules/cards/types'
 
 type PacksSliderType = {
   handleSliderChange: HandleSliderChangeType

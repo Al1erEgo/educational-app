@@ -2,16 +2,18 @@ import React from 'react'
 
 import { Form } from 'antd'
 
-import { useCardsModalForm } from '../../hooks'
+import {
+  ModalButtons,
+  ModalFormInput,
+  ModalFormUpload,
+} from '@/modules/cards/components'
+import { useCardsModalForm } from '@/modules/cards/hooks'
 import {
   CardsModalBaseType,
   ModalCardFormDataType,
   ModalCardsFormat,
   PackModalCardPayloadType,
-} from '../../types'
-import { ModalButtons } from '../modal-buttons'
-import { ModalFormInput } from '../modal-form-input'
-import { ModalFormUpload } from '../modal-form-upload'
+} from '@/modules/cards/types'
 
 type ModalCardFormType<T> = CardsModalBaseType<T> & {
   format: ModalCardsFormat

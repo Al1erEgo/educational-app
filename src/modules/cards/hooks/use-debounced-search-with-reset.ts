@@ -1,6 +1,6 @@
 import { ChangeEventHandler, useEffect, useState } from 'react'
 
-import { HandleSearchType } from '../types'
+import { HandleSearchType } from '@/modules/cards/types'
 
 type HandleOnSearchChangeType = ChangeEventHandler<HTMLInputElement>
 
@@ -17,10 +17,12 @@ type UseDebouncedSearchWithResetType = (
  * @typedef {Object} UseDebouncedSearchWithResetReturnType
  * @property {Function} handleOnSearchChange - A function to handle changes in search input.
  * @property {string} localSearchValue - The current local search value.
- * @typedef {function(searchValue: string, onSearch: Function): UseDebouncedSearchWithResetReturnType} UseDebouncedSearchWithResetType
+ * @typedef {function(searchValue: string, onSearch: Function): UseDebouncedSearchWithResetReturnType}
+ *   UseDebouncedSearchWithResetType
  * @param {string} searchValue - The current search value.
  * @param {Function} onSearch - A callback function to handle the search.
- * @returns {UseDebouncedSearchWithResetReturnType} - An object containing the handleOnSearchChange function and the localSearchValue string.
+ * @returns {UseDebouncedSearchWithResetReturnType} - An object containing the handleOnSearchChange function and the
+ *   localSearchValue string.
  */
 
 export const useDebouncedSearchWithReset: UseDebouncedSearchWithResetType = (

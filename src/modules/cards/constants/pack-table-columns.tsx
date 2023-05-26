@@ -1,13 +1,13 @@
-import { PackTableContentCard } from '../components'
-import { StyledRate } from '../styles'
-import { PackTableColumnsType } from '../types'
+import { CardsTableContentCard } from '@/modules/cards/components'
+import { StyledRate } from '@/modules/cards/styles'
+import { PackTableColumnsType } from '@/modules/cards/types'
 
 export const packTableColumns: PackTableColumnsType[] = [
   {
     title: 'Question',
     dataIndex: 'question',
     render: (_, card) => (
-      <PackTableContentCard
+      <CardsTableContentCard
         textContent={card.question}
         imgContent={card.questionImg}
       />
@@ -17,7 +17,7 @@ export const packTableColumns: PackTableColumnsType[] = [
     title: 'Answer',
     dataIndex: 'answer',
     render: (_, card) => (
-      <PackTableContentCard
+      <CardsTableContentCard
         textContent={card.answer}
         imgContent={card.answerImg}
       />

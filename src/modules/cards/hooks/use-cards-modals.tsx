@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { useModalContext } from '../../modal-provider/hooks'
 import {
   DeleteCardRequestType,
   DeletedCardsPackRequestType,
@@ -8,9 +7,13 @@ import {
   NewCardRequestType,
   UpdateCardRequestType,
   UpdateCardsPackRequestType,
-} from '../api'
-import { ModalCard, ModalDelete, ModalPack } from '../components'
-import { CardsModalsHandlersType, CardsMutationsObjType } from '../types'
+} from '@/modules/cards/api'
+import { ModalCard, ModalDelete, ModalPack } from '@/modules/cards/components'
+import {
+  CardsModalsHandlersType,
+  CardsMutationsObjType,
+} from '@/modules/cards/types'
+import { useModalContext } from '@/modules/modal-provider/hooks'
 
 type UseCardsModalsType = (
   mutations: CardsMutationsObjType
@@ -63,7 +66,10 @@ export const useCardsModals: UseCardsModalsType = mutations => {
       ),
     })
   }
-  const deletePackModal = (payload: DeletedCardsPackRequestType) =>
+  const deletePackModal = (
+    payload: DeletedCardsPackRequestType,
+    redirect?: () => void
+  ) =>
     showModal({
       title: 'Delete pack',
       content: (
@@ -71,6 +77,7 @@ export const useCardsModals: UseCardsModalsType = mutations => {
           payload={payload}
           onSubmit={deleteCardsPack.handler}
           onCancel={hideModal}
+          redirect={redirect}
         />
       ),
     })

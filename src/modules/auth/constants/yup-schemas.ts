@@ -1,7 +1,7 @@
 import * as yup from 'yup'
 
-const emailSchema = yup.string().email().required()
-const passwordSchema = yup.string().min(8).required()
+const emailSchema = yup.string().email().max(64).required()
+const passwordSchema = yup.string().min(8).max(64).required()
 const nameSchema = yup
   .string()
   .min(1, 'Name must be at least 1 characters')

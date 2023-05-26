@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { SorterResult } from 'antd/es/table/interface'
 import { TablePaginationConfig } from 'antd/es/table/InternalTable'
 
@@ -6,7 +8,7 @@ export type PackTableColumnsType = {
   dataIndex: string | string[]
   sorter?: boolean
   width?: string
-  render?: (text: string, record: PackCardType) => JSX.Element
+  render?: (text: string, record: PackCardType) => React.ReactElement
 }
 
 export type PackTableParamsType = SorterResult<PackCardType> & {

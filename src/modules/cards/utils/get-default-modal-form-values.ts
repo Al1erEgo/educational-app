@@ -1,4 +1,4 @@
-import { CardsModalPayloadType, ModalCardsFormat } from '../types'
+import { CardsModalPayloadType, ModalCardsFormat } from '@/modules/cards/types'
 
 export const getDefaultModalFormValues = <T extends CardsModalPayloadType>(
   formType: ModalCardsFormat,

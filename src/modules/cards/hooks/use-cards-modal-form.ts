@@ -1,14 +1,14 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { DeepPartial, useForm } from 'react-hook-form'
 
-import { modalSchemaMap } from '../constants'
+import { modalSchemaMap } from '@/modules/cards/constants'
 import {
   CardsModalPayloadType,
   ModalCardFormDataType,
   ModalCardsFormat,
   ModalPackFormDataType,
-} from '../types'
-import { getDefaultModalFormValues } from '../utils'
+} from '@/modules/cards/types'
+import { getDefaultModalFormValues } from '@/modules/cards/utils'
 
 export const useCardsModalForm = <
   T extends CardsModalPayloadType,

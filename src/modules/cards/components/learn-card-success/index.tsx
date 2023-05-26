@@ -2,7 +2,7 @@ import { FC } from 'react'
 
 import { Result } from 'antd'
 
-import { StyledLearnCard, StyledLearnCardButton } from '../../styles'
+import { StyledLearnCard, StyledLearnCardButton } from '@/modules/cards/styles'
 
 type LearnCardSuccessType = {
   handleSuccess: () => void

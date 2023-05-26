@@ -1,12 +1,12 @@
 import { FC, PropsWithChildren } from 'react'
 
-import { StyledTitle } from '../../styles'
-import { PackTableContentCard } from '../pack-table-content-card'
-
 import {
   StyledCardsHeaderInfoWrapper,
   StyledCardsHeaderWrapper,
 } from './styles'
+
+import { CardsTableContentCard } from '@/modules/cards/components'
+import { StyledTitle } from '@/modules/cards/styles'
 
 type PacksHeaderProps = {
   title: string
@@ -21,7 +21,7 @@ export const CardsHeader: FC<PropsWithChildren<PacksHeaderProps>> = ({
     <StyledCardsHeaderWrapper>
       <StyledCardsHeaderInfoWrapper>
         <StyledTitle>{title}</StyledTitle>
-        <PackTableContentCard imgContent={image} />
+        <CardsTableContentCard imgContent={image} />
       </StyledCardsHeaderInfoWrapper>
       {children}
     </StyledCardsHeaderWrapper>
