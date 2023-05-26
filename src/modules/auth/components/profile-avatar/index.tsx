@@ -19,6 +19,7 @@ type ProfileAvatarType = {
   avatar?: string
 }
 
+//TODO вынести логику в хук
 export const ProfileAvatar: FC<ProfileAvatarType> = ({ avatar }) => {
   const [customError, setCustomError] = useState<string>('')
   const [trigger, { isLoading, error: serverError }] = useAuthMeUpdateMutation({

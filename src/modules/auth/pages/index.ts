@@ -1,4 +1,3 @@
-export * from '../components/auth-widget'
 export * from './new-password'
 export * from './profile'
 export * from './sign-in'

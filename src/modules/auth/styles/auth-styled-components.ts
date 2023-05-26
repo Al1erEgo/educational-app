@@ -2,7 +2,7 @@ import { Button, Card, Typography } from 'antd'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
-export const { Text } = Typography
+const { Text } = Typography
 
 export const StyledP = styled.p`
   display: block;
@@ -31,15 +31,14 @@ export const StyledNavLink = styled(NavLink)`
   line-height: 24px;
 `
 
-export const StyledErrorText = styled(Text)`
-  height: 1rem;
-  display: block;
-  text-align: center;
-  color: #ff4c4c;
-  margin-bottom: 1rem;
-`
-
-export const StyledCard = styled(Card)`
+export const StyledCard = styled(Card).attrs({
+  headStyle: {
+    textAlign: 'center',
+    fontWeight: '600',
+    fontSize: '1.5rem',
+    marginBottom: '0.6rem',
+  },
+})`
   width: 100%;
   max-width: 26rem;
   margin: 0 auto;

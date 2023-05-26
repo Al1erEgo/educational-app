@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { StyledErrorText } from '@/modules/auth/styles'
+import { StyledErrorText } from '@/components/error-message-handler/styles'
 import { isErrorHTMLInData, isErrorMessageInData } from '@/utils'
 
 type ErrorServerHandlerType = {

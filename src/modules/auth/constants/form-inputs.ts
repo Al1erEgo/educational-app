@@ -1,4 +1,4 @@
-export const inputs = {
+export const formInputs = {
   email: {
     name: 'email' as const,
     controlName: 'email' as const,

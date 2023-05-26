@@ -15,7 +15,10 @@ import {
 
 import { ProfileNameBaseType } from '@/modules/auth/types/profile-name'
 
-export const ProfileNameInput: FC<ProfileNameBaseType> = ({ userName, switchEdit }) => {
+export const ProfileNameInput: FC<ProfileNameBaseType> = ({
+  userName,
+  switchEdit,
+}) => {
   const [onSubmit, { handleSubmit, control, errors, setValue }] =
     useFormData<UpdateUserNameType>('updateUserName')
 

@@ -19,7 +19,7 @@ export const AuthWidget: FC = () => {
     isLoading,
     isAuthorised,
     userName,
-    profileRedirect,
+    handleProfileRedirect,
     unauthorisedButtonProps,
     avatar,
   } = useAuthWidgetData()
@@ -32,7 +32,7 @@ export const AuthWidget: FC = () => {
 
   return (
     <>
-      <StyledUserDataWrapper onClick={profileRedirect}>
+      <StyledUserDataWrapper onClick={handleProfileRedirect}>
         <Tooltip title={userName}>
           <StyledUserName>{userName}</StyledUserName>
         </Tooltip>

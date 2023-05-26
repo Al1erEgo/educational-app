@@ -9,6 +9,8 @@ import {
 
 import { AuthApiResponseTypes } from './api'
 
+import { authMutations } from '@/modules/auth/constants'
+
 export type CustomMutationTriggerType<T> = MutationTrigger<
   MutationDefinition<
     T,
@@ -24,3 +26,17 @@ export type CustomMutationTriggerType<T> = MutationTrigger<
     'cards'
   >
 >
+
+export type MutationType = keyof typeof authMutations
+
+export type OnSubmitMutationType = <T>(data?: T) => Promise<void>
+
+export type UseMutationReturnType<T> = [
+  OnSubmitMutationType,
+  {
+    trigger: CustomMutationTriggerType<T>
+    isLoading: boolean
+    isSuccess: boolean
+    error: unknown
+  }
+]

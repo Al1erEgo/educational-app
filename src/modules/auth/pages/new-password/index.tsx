@@ -11,12 +11,7 @@ import {
 } from '@/modules/auth/components'
 import { ABSOLUTE_AUTH_PATH } from '@/modules/auth/constants'
 import { useFormData } from '@/modules/auth/hooks'
-import {
-  cardHeadStyle,
-  StyledCard,
-  StyledNavLink,
-  StyledText,
-} from '@/modules/auth/styles'
+import { StyledCard, StyledNavLink, StyledText } from '@/modules/auth/styles'
 import { NewPasswordFormInputs } from '@/modules/auth/types'
 
 export const NewPassword: FC = () => {
@@ -41,7 +36,7 @@ export const NewPassword: FC = () => {
   }
 
   return (
-    <StyledCard title={'Create new Password'} headStyle={cardHeadStyle}>
+    <StyledCard title={'Create new Password'}>
       <Form onFinish={handleSubmit(handleNewPasswordSubmit)}>
         <FormInput name="password" control={control} error={errors.password} />
         <StyledText type="secondary">

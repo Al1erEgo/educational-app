@@ -14,7 +14,7 @@ const commonSchema = yup.object({
   password: passwordSchema,
 })
 
-export const schemaMap = {
+export const formSchemaMap = {
   updateUserName: yup
     .object({
       name: nameSchema,

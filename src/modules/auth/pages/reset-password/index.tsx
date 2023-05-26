@@ -9,7 +9,6 @@ import {
 import { ABSOLUTE_AUTH_PATH } from '@/modules/auth/constants'
 import { useFormData } from '@/modules/auth/hooks'
 import {
-  cardHeadStyle,
   StyledCard,
   StyledNavLink,
   StyledP,
@@ -31,7 +30,7 @@ export const ResetPassword = () => {
   }
 
   return (
-    <StyledCard title={'Forgot your password?'} headStyle={cardHeadStyle}>
+    <StyledCard title={'Forgot your password?'}>
       <Form onFinish={handleSubmit(onSubmit)}>
         <FormInput name="email" control={control} error={errors.email} />
         <StyledText type="secondary">
