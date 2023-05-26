@@ -13,7 +13,7 @@ import {
   DeletedCardsPackRequestType,
   UpdateCardsPackRequestType,
 } from '@/modules/cards/api'
-import { PackTableContentCard } from '@/modules/cards/components'
+import { CardsTableContentCard } from '@/modules/cards/components'
 import { MY_BUTTON_NAME, packsTableColumns } from '@/modules/cards/constants'
 import {
   CardsModalsHandlerType,
@@ -50,7 +50,7 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
       title: 'Cover',
       dataIndex: 'cover',
       render: (_, pack: PackType) => (
-        <PackTableContentCard
+        <CardsTableContentCard
           textContent={'no cover'}
           imgContent={pack.deckCover}
         />

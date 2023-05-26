@@ -5,7 +5,7 @@ import {
   StyledCardsHeaderWrapper,
 } from './styles'
 
-import { PackTableContentCard } from '@/modules/cards/components'
+import { CardsTableContentCard } from '@/modules/cards/components'
 import { StyledTitle } from '@/modules/cards/styles'
 
 type PacksHeaderProps = {
@@ -21,7 +21,7 @@ export const CardsHeader: FC<PropsWithChildren<PacksHeaderProps>> = ({
     <StyledCardsHeaderWrapper>
       <StyledCardsHeaderInfoWrapper>
         <StyledTitle>{title}</StyledTitle>
-        <PackTableContentCard imgContent={image} />
+        <CardsTableContentCard imgContent={image} />
       </StyledCardsHeaderInfoWrapper>
       {children}
     </StyledCardsHeaderWrapper>

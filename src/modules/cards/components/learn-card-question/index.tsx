@@ -2,7 +2,7 @@ import { FC } from 'react'
 
 import { Typography } from 'antd'
 
-import { PackTableContentCard } from '@/modules/cards/components'
+import { CardsTableContentCard } from '@/modules/cards/components'
 
 const { Text } = Typography
 
@@ -21,7 +21,10 @@ export const LearnCardQuestion: FC<LearnCardQuestionType> = ({
     <>
       <div>
         <Text strong>Question: </Text>
-        <PackTableContentCard textContent={question} imgContent={questionImg} />
+        <CardsTableContentCard
+          textContent={question}
+          imgContent={questionImg}
+        />
       </div>
       <Text type="secondary">Количество попыток ответа на вопрос: {shots}</Text>
     </>

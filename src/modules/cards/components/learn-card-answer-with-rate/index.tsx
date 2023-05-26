@@ -2,7 +2,7 @@ import { FC } from 'react'
 
 import { Rate, Typography } from 'antd'
 
-import { PackTableContentCard } from '@/modules/cards/components'
+import { CardsTableContentCard } from '@/modules/cards/components'
 import { StyledRateContainer } from '@/modules/cards/components/learn-card-answer-with-rate/styles'
 import { rateDescriptions } from '@/modules/cards/constants'
 
@@ -26,7 +26,7 @@ export const LearnCardAnswerWithRate: FC<LearnCardAnswerWithRateType> = ({
   if (isShow)
     return (
       <>
-        <PackTableContentCard textContent={answer} imgContent={answerImg} />
+        <CardsTableContentCard textContent={answer} imgContent={answerImg} />
         <StyledRateContainer>
           <Text strong>Rate yourself: </Text>
           <Rate tooltips={rateDescriptions} onChange={setRate} value={rate} />
