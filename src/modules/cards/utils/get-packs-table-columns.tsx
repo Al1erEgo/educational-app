@@ -8,11 +8,10 @@ import {
   UpdateCardsPackRequestType,
 } from '@/modules/cards/api'
 import {
+  CardsTableContentCard,
   PacksTableActions,
- CardsTableContentCard } from '@/modules/cards/components'
+} from '@/modules/cards/components'
 import { packsTableColumns } from '@/modules/cards/constants'
-
-
 import {
   CardsModalsHandlerType,
   PacksTableDataColumnsType,
