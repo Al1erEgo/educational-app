@@ -1,5 +1,3 @@
-import React, { FC } from 'react'
-
 import { InfoCircleTwoTone } from '@ant-design/icons'
 import { Tooltip } from 'antd'
 import { NavLink } from 'react-router-dom'
@@ -7,14 +5,10 @@ import { NavLink } from 'react-router-dom'
 import { PackType } from '@/modules/cards/types'
 
 type PacksLearnActionType = {
-  hasCards: boolean
   pack: PackType
 }
-export const PacksLearnAction: FC<PacksLearnActionType> = ({
-  hasCards,
-  pack,
-}) => {
-  if (hasCards) {
+export const PacksLearnAction = ({ pack }: PacksLearnActionType) => {
+  if (pack?.cardsCount) {
     return (
       <Tooltip title="Learn">
         <NavLink to={`/cards/learn/${pack?._id}?name=${pack?.name}`}>
@@ -24,7 +18,7 @@ export const PacksLearnAction: FC<PacksLearnActionType> = ({
     )
   } else {
     return (
-      <Tooltip title="No cards to learn">
+      <Tooltip title="No pack to learn">
         <InfoCircleTwoTone twoToneColor="lightgrey" />
       </Tooltip>
     )

@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Space, Tooltip } from 'antd'
 
@@ -21,8 +19,6 @@ export const PacksTableActions = ({
   deletePackModal,
   updatePackModal,
 }: PacksTableActionsType) => {
-  const hasCards = pack?.cardsCount ? pack.cardsCount > 0 : false
-
   const isMyButton =
     activeButton === MY_BUTTON_NAME || pack?.user_id === userData?._id
 
@@ -40,11 +36,11 @@ export const PacksTableActions = ({
     deletePackModal?.({ id: pack?._id, name: pack?.name })
 
   if (!isMyButton) {
-    return <PacksLearnAction hasCards={hasCards} pack={pack} />
+    return <PacksLearnAction pack={pack} />
   } else {
     return (
       <Space size="middle">
-        <PacksLearnAction hasCards={hasCards} pack={pack} />
+        <PacksLearnAction pack={pack} />
 
         <Tooltip title="Edit">
           <EditOutlined onClick={handleEdit} />
