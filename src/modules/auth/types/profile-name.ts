@@ -1,4 +1,4 @@
 export type ProfileNameBaseType = {
-  userName: string
+  userName?: string
   switchEdit: () => void
 }
