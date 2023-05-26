@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { SerializedError } from '@reduxjs/toolkit'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { SorterResult } from 'antd/es/table/interface'
@@ -24,7 +26,7 @@ export type PacksTableDataColumnsType = {
   dataIndex: string
   sorter?: boolean
   width?: string
-  render?: (text: string, record: PackType) => JSX.Element
+  render?: (text: string, record: PackType) => React.ReactElement
 }
 
 export type PacksTableParamsType = SorterResult<PackType> & {
