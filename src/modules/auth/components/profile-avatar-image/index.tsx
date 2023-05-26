@@ -5,12 +5,9 @@ import { Skeleton } from 'antd'
 
 import { StyledProfileAvatar } from './styles'
 
-type ProfileAvatarImageType = {
-  avatar: string | undefined
-  isLoading: boolean
-}
+import { ProfileAvatarType } from '@/modules/auth/types/auth-avatar'
 
-export const ProfileAvatarImage: FC<ProfileAvatarImageType> = ({
+export const ProfileAvatarImage: FC<ProfileAvatarType> = ({
   avatar,
   isLoading,
 }) => {
