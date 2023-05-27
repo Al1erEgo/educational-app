@@ -1,5 +1,5 @@
 import { CardType } from '@/modules/cards/api'
-import { TableErrorType } from '@/modules/cards/types/table-data'
+import { TableErrorType } from '@/modules/cards/types/cards-table-data'
 
 export type LearnNames = {
   learnCardButtonName: string

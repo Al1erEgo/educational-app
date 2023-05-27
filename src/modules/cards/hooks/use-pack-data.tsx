@@ -8,8 +8,8 @@ import { usePackHandlers } from '@/modules/cards/hooks/use-pack-handlers'
 import {
   ButtonsHandlersType,
   HandleSearchType,
+  PackTableDataType,
   PackTableParamsType,
-  TableDataType,
 } from '@/modules/cards/types'
 import {
   getFormattedPackTableData,
@@ -26,7 +26,7 @@ type UsePackDataType = () => [
     buttonsHandlers: ButtonsHandlersType
   },
   { handleSearch: HandleSearchType },
-  TableDataType
+  PackTableDataType
 ]
 
 export const usePackData: UsePackDataType = () => {
