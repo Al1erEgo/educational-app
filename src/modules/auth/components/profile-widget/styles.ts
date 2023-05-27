@@ -15,6 +15,7 @@ export const StyledUserDataWrapper = styled.div`
 `
 export const StyledUserName = styled.span`
   max-width: 100px;
+  max-height: 40px;
   overflow: hidden;
   text-overflow: ellipsis;
   border-bottom: 1px dashed #1677ff;

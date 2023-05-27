@@ -7,7 +7,7 @@ import { StyledProfileNameButton } from './styles'
 
 import { ErrorMessageHandler } from '@/components'
 import { FormInput } from '@/modules/auth/components'
-import { StyledUserName } from '@/modules/auth/components/auth-widget/styles'
+import { StyledUserName } from '@/modules/auth/components/profile-widget/styles'
 import { useFormData } from '@/modules/auth/hooks'
 import { UpdateUserNameType } from '@/modules/auth/types'
 

@@ -6,12 +6,12 @@ import { StyledSkeletonAvatar, StyledUserIconWidget } from './styles'
 
 import { getAvatar } from '@/modules/auth/utils/get-avatar'
 
-type AuthWidgetAvatarType = {
+type ProfileWidgetAvatarType = {
   isLoading: boolean
   avatar: string | undefined
 }
 
-export const AuthWidgetAvatar: FC<AuthWidgetAvatarType> = ({
+export const ProfileWidgetAvatar: FC<ProfileWidgetAvatarType> = ({
   isLoading,
   avatar,
 }) => {

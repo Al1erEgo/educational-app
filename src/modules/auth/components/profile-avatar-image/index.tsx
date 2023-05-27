@@ -12,7 +12,10 @@ type ProfileAvatarImageType = {
   isLoading: boolean
 }
 
-export const ProfileAvatarImage: FC<ProfileAvatarImageType> = ({ avatar, isLoading }) => {
+export const ProfileAvatarImage: FC<ProfileAvatarImageType> = ({
+  avatar,
+  isLoading,
+}) => {
   const avatarToShow = getAvatar(avatar)
 
   if (isLoading) {

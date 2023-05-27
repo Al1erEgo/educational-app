@@ -1,4 +1,4 @@
-export * from '../components/auth-widget'
+export * from '../components/profile-widget'
 export * from './new-password'
 export * from './profile'
 export * from './sign-in'
