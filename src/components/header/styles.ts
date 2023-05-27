@@ -17,7 +17,7 @@ export const StyledLogo = styled.img`
   margin-bottom: 15px;
   margin-top: 15px;
 `
-export const StyledAuthWrapper = styled.div`
+export const StyledProfileWidgetWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
