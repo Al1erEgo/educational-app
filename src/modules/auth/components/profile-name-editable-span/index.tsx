@@ -1,11 +1,10 @@
 import React, { FC } from 'react'
 
-import { StyledUserName } from '../auth-widget/styles'
-
 import {
   StyledEditOutlinedProfileName,
   StyledProfileNameWrapper,
 } from '@/modules/auth/components/profile-name/styles'
+import { StyledUserName } from '@/modules/auth/components/profile-widget/styles'
 import { ProfileNameBaseType } from '@/modules/auth/types/profile-name'
 
 export const ProfileNameEditableSpan: FC<ProfileNameBaseType> = ({
