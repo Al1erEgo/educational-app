@@ -6,12 +6,7 @@ import { ErrorMessageHandler } from '@/components'
 import { FormButton, FormCheckbox, FormInput } from '@/modules/auth/components'
 import { ABSOLUTE_AUTH_PATH } from '@/modules/auth/constants'
 import { useFormData } from '@/modules/auth/hooks'
-import {
-  cardHeadStyle,
-  StyledCard,
-  StyledNavLink,
-  StyledP,
-} from '@/modules/auth/styles'
+import { StyledCard, StyledNavLink, StyledP } from '@/modules/auth/styles'
 import { LoginFormInputs } from '@/modules/auth/types'
 
 export const SignIn = () => {
@@ -19,7 +14,7 @@ export const SignIn = () => {
     useFormData<LoginFormInputs>('login')
 
   return (
-    <StyledCard title={'Sign In'} headStyle={cardHeadStyle}>
+    <StyledCard title={'Sign In'}>
       <Form onFinish={handleSubmit(onSubmit)}>
         <FormInput name="email" control={control} error={errors.email} />
         <FormInput name="password" control={control} error={errors.password} />

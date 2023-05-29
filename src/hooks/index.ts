@@ -1,2 +1,2 @@
-export * from './use-main-page'
-export * from './use-navigate-to-onclick'
+export * from './use-default-page'
+export * from './use-navigate-handler'

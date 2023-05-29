@@ -2,7 +2,11 @@ import * as yup from 'yup'
 
 const emailSchema = yup.string().email().max(64).required()
 const passwordSchema = yup.string().min(8).max(64).required()
-const nameSchema = yup.string().min(1).max(48).required()
+const nameSchema = yup
+  .string()
+  .min(1, 'Name must be at least 1 characters')
+  .max(48, 'Name must be at most 48 characters')
+  .required()
 const rememberMeSchema = yup.boolean().default(false)
 
 const commonSchema = yup.object({
@@ -10,7 +14,7 @@ const commonSchema = yup.object({
   password: passwordSchema,
 })
 
-export const schemaMap = {
+export const formSchemaMap = {
   updateUserName: yup
     .object({
       name: nameSchema,

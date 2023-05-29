@@ -3,7 +3,7 @@ import React, { FC } from 'react'
 import { LogoutOutlined } from '@ant-design/icons'
 import { Tooltip } from 'antd'
 
-import { AuthWidgetAvatar } from '../auth-widget-avatar'
+import { ProfileWidgetAvatar } from '../profile-widget-avatar'
 
 import {
   StyledAuthWidgetButton,
@@ -13,13 +13,13 @@ import {
 
 import { useAuthWidgetData } from '@/modules/auth/hooks/use-auth-widget-data'
 
-export const AuthWidget: FC = () => {
+export const ProfileWidget: FC = () => {
   const {
     handleLogOut,
     isLoading,
     isAuthorised,
     userName,
-    profileRedirect,
+    handleProfileRedirect,
     unauthorisedButtonProps,
     avatar,
   } = useAuthWidgetData()
@@ -32,11 +32,11 @@ export const AuthWidget: FC = () => {
 
   return (
     <>
-      <StyledUserDataWrapper onClick={profileRedirect}>
+      <StyledUserDataWrapper onClick={handleProfileRedirect}>
         <Tooltip title={userName}>
           <StyledUserName>{userName}</StyledUserName>
         </Tooltip>
-        <AuthWidgetAvatar isLoading={isLoading} avatar={avatar} />
+        <ProfileWidgetAvatar isLoading={isLoading} avatar={avatar} />
       </StyledUserDataWrapper>
       <StyledAuthWidgetButton icon={<LogoutOutlined />} onClick={handleLogOut}>
         Log out

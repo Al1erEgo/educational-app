@@ -4,17 +4,12 @@ import { Form } from 'antd'
 
 import { StyledCheckEmailImage } from './styles'
 
-import { useNavigateToOnclick } from '@/hooks'
+import { useNavigateHandler } from '@/hooks'
 import {
   confirmationMessagesArguments,
   confirmationMessageTimeout,
 } from '@/modules/auth/constants'
-import {
-  cardHeadStyle,
-  StyledAuthButton,
-  StyledCard,
-  StyledText,
-} from '@/modules/auth/styles'
+import { StyledAuthButton, StyledCard, StyledText } from '@/modules/auth/styles'
 import { ConfirmationMessagesArgumentsType } from '@/modules/auth/types'
 
 type ConfirmationMessageType = {
@@ -29,12 +24,12 @@ export const ConfirmationMessage: FC<ConfirmationMessageType> = ({
   const { title, redirectPath, timer, image, text } =
     confirmationMessagesArguments[variant]
 
-  const redirect = useNavigateToOnclick(redirectPath)
+  const handleRedirect = useNavigateHandler(redirectPath)
 
   useEffect(() => {
     if (timer) {
       let timeOut = setTimeout(() => {
-        redirect()
+        handleRedirect()
       }, confirmationMessageTimeout)
 
       return () => {
@@ -44,11 +39,13 @@ export const ConfirmationMessage: FC<ConfirmationMessageType> = ({
   }, [timer])
 
   return (
-    <StyledCard title={title} headStyle={cardHeadStyle}>
+    <StyledCard title={title}>
       <StyledCheckEmailImage src={image} alt="image" />
       <StyledText type="secondary">{`${text} ${email}`}</StyledText>
       <Form.Item hidden={timer}>
-        <StyledAuthButton onClick={redirect}>Back to login</StyledAuthButton>
+        <StyledAuthButton onClick={handleRedirect}>
+          Back to login
+        </StyledAuthButton>
       </Form.Item>
     </StyledCard>
   )

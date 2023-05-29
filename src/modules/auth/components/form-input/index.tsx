@@ -3,17 +3,17 @@ import { FC } from 'react'
 import { Form, Input } from 'antd'
 import { Control, Controller, FieldError } from 'react-hook-form'
 
-import { inputs } from '@/modules/auth/constants'
+import { formInputs } from '@/modules/auth/constants'
 import { getValidationStatus } from '@/utils'
 
 type FormInputType = {
-  name: keyof typeof inputs
+  name: keyof typeof formInputs
   control: Control<any>
   error?: FieldError
 }
 
 export const FormInput: FC<FormInputType> = ({ name, control, error }) => {
-  const { type, placeholder, rules, autoComplete } = inputs[name]
+  const { type, placeholder, rules, autoComplete } = formInputs[name]
 
   const validationStatus = getValidationStatus(error)
 

@@ -3,10 +3,10 @@ import { FC } from 'react'
 import { Button, Result } from 'antd'
 
 import { MAIN_PATH } from '@/constants'
-import { useNavigateToOnclick } from '@/hooks'
+import { useNavigateHandler } from '@/hooks'
 
 export const Error404: FC = () => {
-  const onClickNavigateToMain = useNavigateToOnclick(MAIN_PATH.Root)
+  const handleNavigateToMainPage = useNavigateHandler(MAIN_PATH.Root)
 
   return (
     <Result
@@ -14,7 +14,7 @@ export const Error404: FC = () => {
       title="404"
       subTitle="Sorry, the page you visited does not exist."
       extra={
-        <Button onClick={onClickNavigateToMain} type="primary">
+        <Button onClick={handleNavigateToMainPage} type="primary">
           Back Home
         </Button>
       }

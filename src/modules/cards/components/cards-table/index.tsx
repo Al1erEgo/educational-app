@@ -1,16 +1,18 @@
-import React, { FC } from 'react'
+import React from 'react'
 
 import { Table } from 'antd'
 
 import { CardsConditionProvider } from '@/modules/cards/components'
 import { useTableResize } from '@/modules/cards/hooks'
+import { PacksTableDataType, PackTableDataType } from '@/modules/cards/types'
 
-//TODO fix any
-type CardsTableType = {
-  tableData: any
+type CardsTableType<T> = {
+  tableData: T
 }
 
-export const CardsTable: FC<CardsTableType> = ({ tableData }) => {
+export const CardsTable = <T extends PackTableDataType | PacksTableDataType>({
+  tableData,
+}: CardsTableType<T>) => {
   const {
     formattedTableData,
     tableColumns,
@@ -19,7 +21,7 @@ export const CardsTable: FC<CardsTableType> = ({ tableData }) => {
     handleTableChange,
     isDataLoading,
     serverError,
-  } = tableData
+  } = tableData as PackTableDataType & PacksTableDataType //заглушка для antd таблицы, не воспринимает conditional type
 
   const tableHeight = useTableResize()
 

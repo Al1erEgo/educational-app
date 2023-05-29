@@ -11,7 +11,13 @@ type UseDefaultPageType = (
   defaultPage: React.ReactElement
 }
 
-//get two routes, returns Navigation to route, depends on authorisation
+/**
+ * A hook that returns the Navigate to route component based on the authorization status.
+ *
+ * @param {string} userRoute - The route for authorized users.
+ * @param {string} guestRoute - The route for guest users.
+ * @returns {Object} An object containing the default page component.
+ */
 export const useDefaultPage: UseDefaultPageType = (userRoute, guestRoute) => {
   const { isAuthorised } = useAuthorised()
 

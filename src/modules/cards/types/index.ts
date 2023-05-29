@@ -1,4 +1,4 @@
-export * from './table-data'
+export * from './cards-table-data'
 export * from './learn'
 export * from './pack-table'
 export * from './cards-mutations'

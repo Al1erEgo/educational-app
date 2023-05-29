@@ -3,7 +3,7 @@ import { LogoutOutlined } from '@ant-design/icons'
 import { BackToCardsButton } from '../../../cards/components'
 import { ProfileAvatar, ProfileName } from '../../components'
 import { useAuthMutation, useAuthorised } from '../../hooks'
-import { cardHeadStyle, StyledCard } from '../../styles'
+import { StyledCard } from '../../styles'
 
 import {
   StyledProfileContainer,
@@ -20,7 +20,7 @@ export const Profile = () => {
   return (
     <>
       <BackToCardsButton />
-      <StyledCard title={'Personal information'} headStyle={cardHeadStyle}>
+      <StyledCard title={'Personal information'}>
         <StyledProfileContainer>
           <ProfileAvatar avatar={avatar} />
           <ProfileName userName={userName} />
