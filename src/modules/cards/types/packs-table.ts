@@ -24,6 +24,7 @@ export type PacksTableDataColumnsType = {
   dataIndex: string
   sorter?: boolean
   width?: string
+  ellipsis?: boolean
   render?: (text: string, record: PackType) => React.ReactElement
 }
 
