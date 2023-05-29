@@ -1,18 +1,10 @@
 import React from 'react'
 
-import { SerializedError } from '@reduxjs/toolkit'
-import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { SorterResult } from 'antd/es/table/interface'
 import { TablePaginationConfig } from 'antd/es/table/InternalTable'
 
-import { HandleTableChangeType } from '@/modules/cards/types/pack-handlers-functions'
-import {
-  PackCardType,
-  PackTableColumnsType,
-  PackTableParamsType,
-} from '@/modules/cards/types/pack-table'
+import { BaseTableDataType } from '@/modules/cards/types/cards-table-data'
 import { HandlePacksTableChangeType } from '@/modules/cards/types/packs-handler-functions'
-import { TableErrorType } from '@/modules/cards/types/table-data'
 
 export type PackType = {
   key?: string
@@ -43,48 +35,13 @@ export type PacksTableParamsType = SorterResult<PackType> & {
   activeButton: string
 }
 
-export type PacksTableErrorType =
-  | FetchBaseQueryError
-  | SerializedError
-  | undefined
-
-/*export type PacksTableDataType = {
- isPacksDataLoading: boolean
- handlePacksTableChange: HandlePacksTableChangeType
- packsTableParams: PacksTableParamsType
- data: CardPacksResponseType | undefined
- packsTableColumns: PacksTableDataColumnsType[]
- serverError: PacksTableErrorType
- }*/
-
-export type PacksTableDataType = {
-  isDataLoading: boolean
+export type PacksTableDataType = BaseTableDataType & {
   handleTableChange: HandlePacksTableChangeType
   tableParams: PacksTableParamsType
   formattedTableData: PackType[] | undefined
   tableColumns: PacksTableDataColumnsType[]
-  elementsCount: number
-  serverError: PacksTableErrorType
-}
-
-type TableDataType = {
-  isDataLoading: boolean
-  handleTableChange: HandleTableChangeType
-  tableParams: PackTableParamsType
-  formattedTableData: PackCardType[] | undefined
-  tableColumns: PackTableColumnsType[]
-  elementsCount: number
-  serverError: TableErrorType
-}
-
-export type CardsTableDataType = {
-  isDataLoading: boolean
-  handleTableChange: HandleTableChangeType & HandlePacksTableChangeType
-  tableParams: PackTableParamsType & PacksTableParamsType
-  formattedTableData: (PackCardType[] | undefined) & (PackType[] | undefined)
-  tableColumns: PackTableColumnsType[] & PacksTableDataColumnsType[]
-  elementsCount: number
-  serverError: TableErrorType & PacksTableErrorType
+  minCardsCount: number
+  maxCardsCount: number
 }
 
 export type HandleSliderChangeType = (value: number | [number, number]) => void
