@@ -40,7 +40,7 @@ export const usePacksData: UsePacksDataType = () => {
     },
     field: '',
     order: null,
-    searchValue: '',
+    searchValue: localStorage.getItem('searchValue') || '',
     minCardsCount: undefined,
     maxCardsCount: undefined,
     activeButton: 'All',

@@ -1,5 +1,7 @@
 import React, { useCallback } from 'react'
 
+import { useSearchParams } from 'react-router-dom'
+
 import { useCardsModals } from '@/modules/cards/hooks/use-cards-modals'
 import {
   CardsModalsHandlersType,
@@ -30,8 +32,13 @@ export const usePacksHandlers: UsePacksHandlersType = (
 ) => {
   const modalHandlers = useCardsModals(mutations)
 
-  const handlePacksSearch: HandlePacksSearchType = searchValue =>
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  const handlePacksSearch: HandlePacksSearchType = searchValue => {
     setTableParams(prevState => ({ ...prevState, searchValue }))
+    setSearchParams({ search: searchValue })
+    localStorage.setItem('searchValue', searchValue)
+  }
 
   const handleTableChange: HandlePacksTableChangeType = (
     pagination,
