@@ -38,9 +38,6 @@ export const usePacksData: UsePacksDataType = () => {
   const searchValue = searchParams.get('search')
   const pagination = JSON.parse(searchParams.get('pagination') || '{}')
 
-  console.log('searchValue', searchValue)
-  console.log('pagination', pagination)
-
   const [tableParams, setTableParams] = useState<PacksTableParamsType>({
     pagination:
       pagination.current && pagination.pageSize
