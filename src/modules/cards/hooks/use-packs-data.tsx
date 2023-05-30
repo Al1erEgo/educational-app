@@ -5,6 +5,7 @@ import { useCardPacksQuery } from '@/modules/cards/api'
 import { MY_BUTTON_NAME } from '@/modules/cards/constants'
 import { useCardsMutations } from '@/modules/cards/hooks/use-cards-mutations'
 import { usePacksHandlers } from '@/modules/cards/hooks/use-packs-handlers'
+import { usePacksSearchParams } from '@/modules/cards/hooks/use-packs-search-params'
 import {
   CardsModalsHandlersType,
   HandleClearFiltersType,
@@ -33,18 +34,26 @@ export const usePacksData: UsePacksDataType = () => {
   const { data: userData } = useAuthorised()
   const user_id = userData?._id
 
+  const { searchParams, setSearchValue, setPagination } = usePacksSearchParams()
+  const searchValue = searchParams.get('search')
+  const pagination = JSON.parse(searchParams.get('pagination') || '{}')
+
+  console.log('searchValue', searchValue)
+  console.log('pagination', pagination)
+
   const [tableParams, setTableParams] = useState<PacksTableParamsType>({
-    pagination: {
-      current: 1,
-      pageSize: 10,
-    },
+    pagination:
+      pagination.current && pagination.pageSize
+        ? pagination
+        : { current: 1, pageSize: 10 },
     field: '',
     order: null,
-    searchValue: localStorage.getItem('searchValue') || '',
+    searchValue: searchValue || '',
     minCardsCount: undefined,
     maxCardsCount: undefined,
     activeButton: 'All',
   })
+
   const {
     data: data,
     refetch: refetchPacks,
@@ -75,7 +84,11 @@ export const usePacksData: UsePacksDataType = () => {
     handleToggleButton,
     handleClearFilters,
     modalHandlers,
-  } = usePacksHandlers(setTableParams, mutations)
+  } = usePacksHandlers(
+    setTableParams,
+    { setSearchValue, setPagination },
+    mutations
+  )
 
   const tableColumns = getPacksTableColumns(
     tableParams.activeButton,
