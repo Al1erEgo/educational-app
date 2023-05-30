@@ -38,10 +38,11 @@ export const StyledEditOutlinedProfileName = styled(EditOutlined)`
 `
 
 export const StyledProfileNameWrapper = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 52px;
   width: 200px;
-  overflow: hidden;
-  text-overflow: ellipsis;
 `
 
 export const StyledCheckOutlined = styled(CheckOutlined)`

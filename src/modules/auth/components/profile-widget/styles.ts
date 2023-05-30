@@ -3,6 +3,8 @@ import styled from 'styled-components'
 
 type UserNameProps = {
   fontSize?: 'big' | 'normal'
+  wordBreak?: 'break-all'
+  border?: 'none'
 }
 
 export const StyledAuthWidgetButton = styled(Button)`
@@ -16,15 +18,15 @@ export const StyledUserDataWrapper = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  margin-left: 20px;
 `
 export const StyledUserName = styled.span<UserNameProps>`
-  font-size: ${props => (props.fontSize === 'big' ? 120 : 80)}%;
-  max-width: 100px;
-  max-height: 40px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  border-bottom: 1px dashed #1677ff;
+  font-size: ${props => (props.fontSize === 'big' ? 16 : 12)}px;
+  border-bottom: ${props =>
+    props.border === 'none' ? 'none' : '1px dashed #1677ff'};
   margin-right: 7px;
   font-family: 'Montserrat', sans-serif;
   cursor: pointer;
+  text-align: center;
+  word-break: ${props => props.wordBreak};
 `
