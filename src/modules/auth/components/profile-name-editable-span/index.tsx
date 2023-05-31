@@ -1,9 +1,6 @@
 import React, { FC } from 'react'
 
-import {
-  StyledEditOutlinedProfileName,
-  StyledProfileNameWrapper,
-} from '@/modules/auth/components/profile-name/styles'
+import { StyledProfileNameWrapper } from '@/modules/auth/components/profile-name/styles'
 import { StyledUserName } from '@/modules/auth/components/profile-widget/styles'
 import { ProfileNameBaseType } from '@/modules/auth/types/profile-name'
 
@@ -13,10 +10,14 @@ export const ProfileNameEditableSpan: FC<ProfileNameBaseType> = ({
 }) => {
   return (
     <StyledProfileNameWrapper>
-      <StyledUserName fontSize={'big'} onClick={switchEdit}>
+      <StyledUserName
+        fontSize={'big'}
+        wordBreak={'break-all'}
+        border={'none'}
+        onClick={switchEdit}
+      >
         {userName}
       </StyledUserName>
-      <StyledEditOutlinedProfileName onClick={switchEdit} />
     </StyledProfileNameWrapper>
   )
 }

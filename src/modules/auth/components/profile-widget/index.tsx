@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 
 import { LogoutOutlined } from '@ant-design/icons'
-import { Tooltip } from 'antd'
 
 import { ProfileWidgetAvatar } from '../profile-widget-avatar'
 
@@ -33,9 +32,7 @@ export const ProfileWidget: FC = () => {
   return (
     <>
       <StyledUserDataWrapper onClick={handleProfileRedirect}>
-        <Tooltip title={userName}>
-          <StyledUserName>{userName}</StyledUserName>
-        </Tooltip>
+        <StyledUserName>{userName}</StyledUserName>
         <ProfileWidgetAvatar isLoading={isLoading} avatar={avatar} />
       </StyledUserDataWrapper>
       <StyledAuthWidgetButton icon={<LogoutOutlined />} onClick={handleLogOut}>
