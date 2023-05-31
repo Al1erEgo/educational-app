@@ -1,15 +1,19 @@
-# Cards education app
+# Educational App
 
-Application wich helps you to make learning process comfortable and easy.
-This app provides you ability to create your own packs of question-answer cards in text or image format or use shared
-library of packs created by another users.
+A cutting-edge application designed to revolutionize the learning experience. This app offers a seamless and
+user-friendly interface, allowing you to effortlessly create custom packs of question-answer cards in various formats,
+including text and images. Alternatively, you can explore a vast library of packs curated by fellow users.
 
 ## Features
 
-- Full authorisation flow - register, login, change and restore password via email.
-- Search and filter existed packs and cards.
-- Create packs and cards, include your own, special, private packs.
-- Learn everything using answer-question cards and rate yourself.
+- Streamlined Authorization Process: Effortlessly register, log in, and manage your password through email.
+- Advanced Search and Filtering: Easily find and access existing packs and cards using powerful search and filtering
+  options.
+- Personalized Learning Experience: Tailor your learning journey by creating exclusive packs customized to your specific
+  needs.
+- Interactive Question-Answer Cards: Master any subject through engaging question-answer cards that promote active
+  learning.
+- Self-Assessment: Evaluate your progress and understanding with built-in self-assessment features.
 
 ## Techs
 
@@ -27,9 +31,9 @@ Application uses a number of open source projects to work properly:
 - ESLint
 - Prettier
 
-## Launch
+## Getting Started
 
-Clone the project and run those commands
+To get started, clone the project repository and execute the following commands:
 
 ```
 $ yarn install
