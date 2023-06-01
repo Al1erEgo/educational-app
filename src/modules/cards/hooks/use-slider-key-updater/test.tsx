@@ -47,8 +47,8 @@ describe('useSliderKeyEffect_function', () => {
     field: '',
     order: null,
     searchValue: '',
-    minCardsCount: 2,
-    maxCardsCount: 8,
+    minSliderValue: 2,
+    maxSliderValue: 8,
     activeButton: 'All',
   }
 

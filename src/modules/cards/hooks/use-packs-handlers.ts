@@ -40,6 +40,8 @@ export const usePacksHandlers: UsePacksHandlersType = (
 ) => {
   const modalHandlers = useCardsModals(mutations)
 
+  debugger
+
   const handlePacksSearch: HandlePacksSearchType = searchValue => {
     setTableParams(prevState => ({ ...prevState, searchValue }))
     searchParams.setSearchValue(searchValue)
@@ -64,8 +66,8 @@ export const usePacksHandlers: UsePacksHandlersType = (
     if (Array.isArray(value)) {
       setTableParams(prevState => ({
         ...prevState,
-        minCardsCount: value[0],
-        maxCardsCount: value[1],
+        minSliderValue: value[0],
+        maxSliderValue: value[1],
       }))
     }
     searchParams.setSliderChanged(value as [number, number])
@@ -82,8 +84,8 @@ export const usePacksHandlers: UsePacksHandlersType = (
       order: null,
       sortPacks: '',
       searchValue: '',
-      minCardsCount: undefined,
-      maxCardsCount: undefined,
+      minSliderValue: undefined,
+      maxSliderValue: undefined,
     }))
     searchParams.setSearchValue('')
     searchParams.setPagination({})

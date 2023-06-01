@@ -8,17 +8,17 @@ import { PacksTableParamsType } from '@/modules/cards/types'
  the key used by a slider component to force a re-render based on changes to the
  minimum and maximum count values, as well as when those values are reset to their default state.
 
- @param {number} minCardsCount - The minimum number of cards that can be selected.
- @param {number} maxCardsCount - The maximum number of cards that can be selected.
- @param {object} state - The state object that contains the minCardsCount and
+ @param minCardsCount
+ @param maxCardsCount
+ @param {object} tableParams - The state object that contains the minCardsCount and
  maxCardsCount properties.
 
  @return {number} - The current value of the sliderKey state variable.
  */
 export const useSliderKeyUpdater = (
-  minCardsCount: number,
-  maxCardsCount: number,
-  state: PacksTableParamsType
+  minCardsCount: number | undefined,
+  maxCardsCount: number | undefined,
+  tableParams: PacksTableParamsType
 ) => {
   /**
    * The current slider key.
@@ -26,21 +26,23 @@ export const useSliderKeyUpdater = (
    */
   const [sliderKey, setSliderKey] = useState(0)
 
+  debugger
+
   /**
    * Updates the slider key whenever the minimum or maximum card count changes.
    */
-  useEffect(() => {
-    setSliderKey(prevState => prevState + 1)
-  }, [minCardsCount, maxCardsCount])
+  /* useEffect(() => {
+	 setSliderKey(prevState => prevState + 1)
+	 }, [minCardsCount, maxCardsCount])*/
 
   /**
    * Resets the slider key to 0 if the minimum and maximum card counts are both null.
    */
   useEffect(() => {
-    if (!state.minCardsCount && !state.maxCardsCount) {
+    if (!tableParams.minSliderValue && !tableParams.maxSliderValue) {
       setSliderKey(prevState => prevState + 1)
     }
-  }, [state.minCardsCount, state.maxCardsCount])
+  }, [tableParams.minSliderValue, tableParams.maxSliderValue])
 
   return sliderKey
 }
