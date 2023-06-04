@@ -14,7 +14,7 @@ import {
   PacksTableParamsType,
 } from '@/modules/cards/types'
 
-type SearchParamsType = {
+type SearchActionsType = {
   setSearchValue: (searchValue: string) => void
   setPagination: (pagination: TablePaginationConfig) => void
   setSliderChanged: (
@@ -26,7 +26,7 @@ type SearchParamsType = {
 
 type UsePacksHandlersType = (
   setTableParams: React.Dispatch<React.SetStateAction<PacksTableParamsType>>,
-  searchParams: SearchParamsType,
+  searchActions: SearchActionsType,
   mutations: CardsMutationsObjType,
   tableParams: PacksTableParamsType
 ) => {
@@ -40,7 +40,7 @@ type UsePacksHandlersType = (
 
 export const usePacksHandlers: UsePacksHandlersType = (
   setTableParams,
-  searchParams,
+  searchActions,
   mutations,
   tableParams
 ) => {
@@ -48,7 +48,7 @@ export const usePacksHandlers: UsePacksHandlersType = (
 
   const handlePacksSearch: HandlePacksSearchType = searchValue => {
     setTableParams(prevState => ({ ...prevState, searchValue }))
-    searchParams.setSearchValue(searchValue)
+    searchActions.setSearchValue(searchValue)
   }
 
   const handleTableChange: HandlePacksTableChangeType = (
@@ -63,7 +63,7 @@ export const usePacksHandlers: UsePacksHandlersType = (
       pagination,
       ...sorter,
     }))
-    searchParams.setPagination({ current, pageSize })
+    searchActions.setPagination({ current, pageSize })
   }
 
   const handleSliderChange: HandleSliderChangeType = value => {
@@ -74,7 +74,7 @@ export const usePacksHandlers: UsePacksHandlersType = (
         maxSlider: value[1],
       }))
     }
-    searchParams.setSliderChanged(value as [number, number])
+    searchActions.setSliderChanged(value as [number, number])
   }
 
   const handleClearFilters: HandleClearFiltersType = () => {
@@ -92,8 +92,8 @@ export const usePacksHandlers: UsePacksHandlersType = (
       maxSlider: undefined,
     }))
 
-    searchParams.setToggleButton(tableParams.activeButton)
-    searchParams.clearParams()
+    searchActions.setToggleButton(tableParams.activeButton)
+    searchActions.clearParams()
   }
   const handleToggleButton: HandleToggleButtonType = buttonName => {
     setTableParams(prevState => ({
@@ -101,7 +101,7 @@ export const usePacksHandlers: UsePacksHandlersType = (
       activeButton: buttonName,
     }))
     handleClearFilters()
-    searchParams.setToggleButton(buttonName)
+    searchActions.setToggleButton(buttonName)
   }
 
   return {

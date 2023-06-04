@@ -34,14 +34,7 @@ export const usePacksData: UsePacksDataType = () => {
   const { data: userData } = useAuthorised()
   const user_id = userData?._id
 
-  const {
-    searchParams,
-    setSearchValue,
-    setPagination,
-    setSliderChanged,
-    setToggleButton,
-    clearParams,
-  } = usePacksSearchParams()
+  const { searchParams, searchActions } = usePacksSearchParams()
 
   const searchValueParams = searchParams.get('search')
   const paginationParams = JSON.parse(searchParams.get('pagination') || '{}')
@@ -92,18 +85,7 @@ export const usePacksData: UsePacksDataType = () => {
     handleToggleButton,
     handleClearFilters,
     modalHandlers,
-  } = usePacksHandlers(
-    setTableParams,
-    {
-      setSearchValue,
-      setPagination,
-      setSliderChanged,
-      setToggleButton,
-      clearParams,
-    },
-    mutations,
-    tableParams
-  )
+  } = usePacksHandlers(setTableParams, searchActions, mutations, tableParams)
 
   const tableColumns = getPacksTableColumns(
     tableParams.activeButton,
