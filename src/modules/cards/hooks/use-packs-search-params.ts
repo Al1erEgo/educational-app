@@ -37,7 +37,7 @@ export const usePacksSearchParams = () => {
   const setToggleButton = (buttonName: string) => {
     const params = new URLSearchParams(searchParams.toString())
 
-    params.set('activeButton', buttonName)
+    params.set('showPacks', buttonName)
 
     setSearchParams(params)
   }

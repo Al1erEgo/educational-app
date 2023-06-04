@@ -47,7 +47,7 @@ export const usePacksData: UsePacksDataType = () => {
   const paginationParams = JSON.parse(searchParams.get('pagination') || '{}')
   const minSliderParams = searchParams.get('minCardsCount')
   const maxSliderParams = searchParams.get('maxCardsCount')
-  const activeButtonParams = searchParams.get('activeButton')
+  const activeButtonParams = searchParams.get('showPacks')
 
   const [tableParams, setTableParams] = useState<PacksTableParamsType>({
     pagination:
