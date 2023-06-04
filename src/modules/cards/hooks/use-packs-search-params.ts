@@ -42,16 +42,12 @@ export const usePacksSearchParams = () => {
     setSearchParams(params)
   }
 
-  const searchActions = {
+  return {
+    searchParams,
     setSearchValue,
     setPagination,
     setSliderChanged,
     setToggleButton,
     clearParams,
-  }
-
-  return {
-    searchParams,
-    ...searchActions,
   }
 }
