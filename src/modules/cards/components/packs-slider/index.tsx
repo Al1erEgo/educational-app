@@ -12,30 +12,28 @@ import {
 
 type PacksSliderType = {
   handleSliderChange: HandleSliderChangeType
-  minCardsCount?: number
-  maxCardsCount?: number
+  minCardsCount: number | undefined
+  maxCardsCount: number | undefined
   tableParams: PacksTableParamsType
   isLoading: boolean
-  minSliderValue?: number
-  maxSliderValue?: number
+  minSliderUserValue: number | undefined
+  maxSliderUserValue: number | undefined
 }
 
 export const PacksSlider: FC<PacksSliderType> = ({
-  minCardsCount = 0,
-  maxCardsCount = 110,
-  handleSliderChange,
   tableParams,
+  minSliderUserValue,
+  maxSliderUserValue,
+  minCardsCount = minSliderUserValue as number,
+  maxCardsCount = maxSliderUserValue as number,
+  handleSliderChange,
   isLoading,
-  minSliderValue,
-  maxSliderValue,
 }) => {
   const sliderKey = useSliderKeyUpdater(
     minCardsCount,
     maxCardsCount,
     tableParams
   )
-
-  debugger
 
   return (
     <StyledPacksSliderWrapper>
@@ -44,8 +42,8 @@ export const PacksSlider: FC<PacksSliderType> = ({
         key={sliderKey}
         range={{ draggableTrack: false }}
         defaultValue={[minCardsCount, maxCardsCount]}
-        min={minSliderValue}
-        max={maxSliderValue}
+        min={minSliderUserValue}
+        max={maxSliderUserValue}
         step={1}
         onAfterChange={handleSliderChange}
         disabled={minCardsCount === maxCardsCount || isLoading}

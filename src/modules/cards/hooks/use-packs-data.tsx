@@ -34,27 +34,32 @@ export const usePacksData: UsePacksDataType = () => {
   const { data: userData } = useAuthorised()
   const user_id = userData?._id
 
-  const { searchParams, setSearchValue, setPagination, setSliderChanged } =
-    usePacksSearchParams()
+  const {
+    searchParams,
+    setSearchValue,
+    setPagination,
+    setSliderChanged,
+    setToggleButton,
+    clearParams,
+  } = usePacksSearchParams()
 
-  debugger
-
-  const searchValue = searchParams.get('search')
-  const pagination = JSON.parse(searchParams.get('pagination') || '{}')
-  const minSliderCardsCount = searchParams.get('minCardsCount')
-  const maxSliderCardsCount = searchParams.get('maxCardsCount')
+  const searchValueParams = searchParams.get('search')
+  const paginationParams = JSON.parse(searchParams.get('pagination') || '{}')
+  const minSliderParams = searchParams.get('minCardsCount')
+  const maxSliderParams = searchParams.get('maxCardsCount')
+  const activeButtonParams = searchParams.get('activeButton')
 
   const [tableParams, setTableParams] = useState<PacksTableParamsType>({
     pagination:
-      pagination.current && pagination.pageSize
-        ? pagination
+      paginationParams.current && paginationParams.pageSize
+        ? paginationParams
         : { current: 1, pageSize: 10 },
     field: '',
     order: null,
-    searchValue: searchValue || '',
-    minSliderValue: minSliderCardsCount ? +minSliderCardsCount : undefined,
-    maxSliderValue: maxSliderCardsCount ? +maxSliderCardsCount : undefined,
-    activeButton: 'All',
+    searchValue: searchValueParams || '',
+    minSlider: minSliderParams ? +minSliderParams : undefined,
+    maxSlider: maxSliderParams ? +maxSliderParams : undefined,
+    activeButton: activeButtonParams || 'All',
   })
 
   const {
@@ -69,8 +74,8 @@ export const usePacksData: UsePacksDataType = () => {
     sortPacks: getSortingParam(tableParams),
     user_id: tableParams.activeButton === MY_BUTTON_NAME ? user_id : undefined,
     packName: tableParams.searchValue || undefined,
-    min: tableParams.minSliderValue,
-    max: tableParams.maxSliderValue,
+    min: tableParams.minSlider,
+    max: tableParams.maxSlider,
   })
 
   const [mutations, actionsLoading, actionsError] =
@@ -89,8 +94,15 @@ export const usePacksData: UsePacksDataType = () => {
     modalHandlers,
   } = usePacksHandlers(
     setTableParams,
-    { setSearchValue, setPagination, setSliderChanged },
-    mutations
+    {
+      setSearchValue,
+      setPagination,
+      setSliderChanged,
+      setToggleButton,
+      clearParams,
+    },
+    mutations,
+    tableParams
   )
 
   const tableColumns = getPacksTableColumns(
@@ -101,8 +113,8 @@ export const usePacksData: UsePacksDataType = () => {
   )
 
   const elementsCount = data?.cardPacksTotalCount || 0
-  const minSliderValue = data?.minCardsCount || 0
-  const maxSliderValue = data?.maxCardsCount || 0
+  const minSliderUserValue = data?.minCardsCount
+  const maxSliderUserValue = data?.maxCardsCount
 
   const formattedTableData = getFormattedPacksTableData(data)
 
@@ -116,8 +128,8 @@ export const usePacksData: UsePacksDataType = () => {
       elementsCount,
       tableColumns,
       serverError,
-      minSliderValue,
-      maxSliderValue,
+      minSliderUserValue,
+      maxSliderUserValue,
     },
     { handleSliderChange },
     { handleToggleButton },

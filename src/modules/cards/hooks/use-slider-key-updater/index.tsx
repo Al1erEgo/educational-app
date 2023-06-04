@@ -26,23 +26,21 @@ export const useSliderKeyUpdater = (
    */
   const [sliderKey, setSliderKey] = useState(0)
 
-  debugger
-
   /**
    * Updates the slider key whenever the minimum or maximum card count changes.
    */
-  /* useEffect(() => {
-	 setSliderKey(prevState => prevState + 1)
-	 }, [minCardsCount, maxCardsCount])*/
+  useEffect(() => {
+    setSliderKey(prevState => prevState + 1)
+  }, [minCardsCount, maxCardsCount])
 
   /**
    * Resets the slider key to 0 if the minimum and maximum card counts are both null.
    */
   useEffect(() => {
-    if (!tableParams.minSliderValue && !tableParams.maxSliderValue) {
+    if (!tableParams.minSlider && !tableParams.maxSlider) {
       setSliderKey(prevState => prevState + 1)
     }
-  }, [tableParams.minSliderValue, tableParams.maxSliderValue])
+  }, [tableParams.minSlider, tableParams.maxSlider])
 
   return sliderKey
 }

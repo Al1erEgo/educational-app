@@ -4,6 +4,9 @@ import { useSearchParams } from 'react-router-dom'
 export const usePacksSearchParams = () => {
   const [searchParams, setSearchParams] = useSearchParams({})
 
+  const clearParams = () => {
+    setSearchParams(new URLSearchParams({}))
+  }
   const setSearchValue = (searchValue: string) => {
     const params = new URLSearchParams(searchParams.toString())
 
@@ -20,7 +23,9 @@ export const usePacksSearchParams = () => {
     setSearchParams(params)
   }
 
-  const setSliderChanged = (sliderValues: [number, number]) => {
+  const setSliderChanged = (
+    sliderValues: [number | undefined, number | undefined]
+  ) => {
     const params = new URLSearchParams(searchParams.toString())
 
     params.set('minCardsCount', String(sliderValues[0]))
@@ -29,10 +34,20 @@ export const usePacksSearchParams = () => {
     setSearchParams(params)
   }
 
+  const setToggleButton = (buttonName: string) => {
+    const params = new URLSearchParams(searchParams.toString())
+
+    params.set('activeButton', buttonName)
+
+    setSearchParams(params)
+  }
+
   const searchActions = {
     setSearchValue,
     setPagination,
     setSliderChanged,
+    setToggleButton,
+    clearParams,
   }
 
   return {

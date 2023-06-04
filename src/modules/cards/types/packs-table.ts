@@ -31,8 +31,8 @@ export type PacksTableDataColumnsType = {
 export type PacksTableParamsType = SorterResult<PackType> & {
   pagination?: TablePaginationConfig
   searchValue: string
-  minSliderValue: number | undefined
-  maxSliderValue: number | undefined
+  minSlider: number | undefined
+  maxSlider: number | undefined
   activeButton: string
 }
 
@@ -41,8 +41,8 @@ export type PacksTableDataType = BaseTableDataType & {
   tableParams: PacksTableParamsType
   formattedTableData: PackType[] | undefined
   tableColumns: PacksTableDataColumnsType[]
-  minSliderValue: number | undefined
-  maxSliderValue: number | undefined
+  minSliderUserValue: number | undefined
+  maxSliderUserValue: number | undefined
 }
 
 export type HandleSliderChangeType = (value: number | [number, number]) => void
