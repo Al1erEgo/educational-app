@@ -78,7 +78,6 @@ export const usePacksHandlers: UsePacksHandlersType = (
   }
 
   const handleClearFilters: HandleClearFiltersType = () => {
-    searchParams.clearParams()
     setTableParams(prevState => ({
       ...prevState,
       pagination: {
@@ -92,7 +91,9 @@ export const usePacksHandlers: UsePacksHandlersType = (
       minSlider: undefined,
       maxSlider: undefined,
     }))
+
     searchParams.setToggleButton(tableParams.activeButton)
+    searchParams.clearParams()
   }
   const handleToggleButton: HandleToggleButtonType = buttonName => {
     setTableParams(prevState => ({
