@@ -1,25 +1,22 @@
 import React from 'react'
 
-import { Route, Routes, useResolvedPath } from 'react-router-dom'
+import { Navigate, Route, Routes, useResolvedPath } from 'react-router-dom'
 
 import { NewPassword, Profile, ResetPassword, SignIn, SignUp } from './pages'
 
 import { Error404 } from '@/components'
-import { useDefaultPage } from '@/hooks'
 import { AuthProvider, GuestProvider } from '@/modules/auth/components'
 import { AUTH_PATH } from '@/modules/auth/constants'
 
 export const Auth = () => {
   const path = useResolvedPath('')
 
-  const { defaultPage } = useDefaultPage(
-    `${path.pathname}${AUTH_PATH.Profile}`,
-    `${path.pathname}${AUTH_PATH.SignIn}`
-  )
-
   return (
     <Routes>
-      <Route path={AUTH_PATH.Root} element={defaultPage} />
+      <Route
+        path={AUTH_PATH.Root}
+        element={<Navigate to={`${path.pathname}${AUTH_PATH.Profile}`} />}
+      />
       <Route element={<AuthProvider />}>
         <Route path={AUTH_PATH.Profile} element={<Profile />} />
       </Route>
