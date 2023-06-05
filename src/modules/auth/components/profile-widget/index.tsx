@@ -18,7 +18,7 @@ export const ProfileWidget: FC = () => {
     isLoading,
     isAuthorised,
     userName,
-    handleProfileRedirect,
+    handleRedirectToProfile,
     unauthorisedButtonProps,
     avatar,
   } = useAuthWidgetData()
@@ -31,7 +31,7 @@ export const ProfileWidget: FC = () => {
 
   return (
     <>
-      <StyledUserDataWrapper onClick={handleProfileRedirect}>
+      <StyledUserDataWrapper onClick={handleRedirectToProfile}>
         <StyledUserName>{userName}</StyledUserName>
         <ProfileWidgetAvatar isLoading={isLoading} avatar={avatar} />
       </StyledUserDataWrapper>

@@ -16,7 +16,6 @@ type ProfileAvatarType = {
   avatar?: string
 }
 
-//TODO вынести логику в хук
 export const ProfileAvatar: FC<ProfileAvatarType> = ({ avatar }) => {
   const {
     handleDeleteAvatar,

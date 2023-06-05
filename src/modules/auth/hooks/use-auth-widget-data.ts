@@ -9,9 +9,9 @@ import { useAuthorised } from '@/modules/auth/hooks/use-authorised'
 export const useAuthWidgetData = () => {
   const { isAuthorised, data: userData } = useAuthorised()
   const [handleLogOut] = useAuthMutation('logout')
-  const handleProfileRedirect = useNavigateHandler(ABSOLUTE_AUTH_PATH.Profile)
-  const handleSignInRedirect = useNavigateHandler(ABSOLUTE_AUTH_PATH.SignIn)
-  const handleSignUpRedirect = useNavigateHandler(ABSOLUTE_AUTH_PATH.SignUp)
+  const handleRedirectToProfile = useNavigateHandler(ABSOLUTE_AUTH_PATH.Profile)
+  const handleRedirectToSignIn = useNavigateHandler(ABSOLUTE_AUTH_PATH.SignIn)
+  const handleRedirectToSignUp = useNavigateHandler(ABSOLUTE_AUTH_PATH.SignUp)
 
   const location = useLocation()
 
@@ -23,8 +23,8 @@ export const useAuthWidgetData = () => {
 
   const unauthorisedButtonProps =
     location.pathname === '/auth/sign-up'
-      ? { children: 'Sign in', onClick: handleSignInRedirect }
-      : { children: 'Sign up', onClick: handleSignUpRedirect }
+      ? { children: 'Sign in', onClick: handleRedirectToSignIn }
+      : { children: 'Sign up', onClick: handleRedirectToSignUp }
 
   const userName = userData ? userData.name : 'No name'
 
@@ -34,7 +34,7 @@ export const useAuthWidgetData = () => {
     isLoading,
     isAuthorised,
     userName,
-    handleProfileRedirect,
+    handleRedirectToProfile,
     unauthorisedButtonProps,
   }
 }

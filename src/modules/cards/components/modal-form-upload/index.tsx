@@ -19,7 +19,6 @@ import {
 import {
   getBase64,
   getModalCardFormControllerName,
-  getModalPackFormControllerName,
 } from '@/modules/cards/utils'
 
 type ModalFormUploadType = {
@@ -42,12 +41,15 @@ export const ModalFormUpload: FC<ModalFormUploadType> = ({
   error,
   setError,
 }) => {
-  const uploadControllerName =
-    name === 'Question' || name === 'Answer'
-      ? getModalCardFormControllerName(name, 'Img')
-      : getModalPackFormControllerName('deck', name)
+  const uploadControllerName = getModalCardFormControllerName(
+    name,
+    'deck',
+    'Img'
+  )
+
   const { preview, handlePreview } = usePreview()
 
+  //TODO вынести в отдельный файл?
   const getDefaultImage = (img: string): UploadFile<any>[] => {
     if (img) {
       return [{ url: img } as UploadFile<any>]
@@ -93,7 +95,7 @@ export const ModalFormUpload: FC<ModalFormUploadType> = ({
             listType="picture"
             onChange={e => handleUploadChange(e, field)}
             onPreview={() => handlePreview(field.value)}
-            beforeUpload={() => false}
+            beforeUpload={() => false} //plug
           >
             {!field.value && (
               <Button icon={<UploadOutlined />}>Upload {name} image</Button>

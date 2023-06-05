@@ -5,7 +5,7 @@ import { useFormWithValidation } from './use-authform'
 import { useAuthMutation } from '@/modules/auth/hooks/use-auth-mutation'
 import { FormType } from '@/modules/auth/types'
 
-//TODO remove any
+//TODO убрать any
 /**
  A hook that returns the necessary form data and functions required for form submission and validation.
  @template T - The type of form data.

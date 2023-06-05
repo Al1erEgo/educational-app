@@ -1,7 +1,11 @@
-export type GetTableHeightType = (windowInnerHeight: number) => number
+type GetTableHeightType = (windowInnerHeight: number) => number
+
+const MIN_TABLE_HEIGHT = 100
+
+const TABLE_OFFSET = 400
 
 export const getTableHeight: GetTableHeightType = windowInnerHeight => {
-  const tableHeight = windowInnerHeight - 400
+  const tableHeight = windowInnerHeight - TABLE_OFFSET
 
-  return tableHeight > 100 ? tableHeight : 100
+  return tableHeight > MIN_TABLE_HEIGHT ? tableHeight : MIN_TABLE_HEIGHT
 }
