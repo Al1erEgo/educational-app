@@ -9,6 +9,3 @@ export const store = configureStore({
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware().concat(rootApi.middleware),
 })
-
-// @ts-ignore
-window.store = store

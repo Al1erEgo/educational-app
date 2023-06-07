@@ -4,6 +4,7 @@ type FormInputs = {
   error?: string
 }
 
+// TODO it's bad to have spaces in the object key name
 export type SignUpFormInputs = FormInputs & {
   'confirm password': string
 }

@@ -12,6 +12,7 @@ import {
 import { StyledAuthButton, StyledCard, StyledText } from '@/modules/auth/styles'
 import { ConfirmationMessagesArgumentsType } from '@/modules/auth/types'
 
+// TODO it's better to use word Props for types like this one. example ConfirmationMessageProps
 type ConfirmationMessageType = {
   variant: keyof ConfirmationMessagesArgumentsType
   email?: string

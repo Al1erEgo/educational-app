@@ -2,6 +2,7 @@ type ErrorMessageInData = {
   status: number
   data: { error: string }
 }
+// TODO rename to isErrorTypeMessage
 export const isErrorMessageInData = (
   error: unknown
 ): error is ErrorMessageInData => {

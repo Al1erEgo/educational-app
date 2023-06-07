@@ -5,6 +5,7 @@ import { Button, Result } from 'antd'
 import { MAIN_PATH } from '@/constants'
 import { useNavigateHandler } from '@/hooks'
 
+// TODO: move this component to pages folder
 export const Error404: FC = () => {
   const handleNavigateToMainPage = useNavigateHandler(MAIN_PATH.Root)
 

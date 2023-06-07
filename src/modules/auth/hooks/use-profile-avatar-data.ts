@@ -6,6 +6,7 @@ import { UploadRequestOption } from 'rc-upload/lib/interface'
 import { useAuthMeUpdateMutation } from '@/modules/auth/api'
 import { getBase64 } from '@/modules/auth/utils'
 
+// TODO move components related hooks to components folders
 export const useProfileAvatarData = () => {
   const [customError, setCustomError] = useState<string>('')
   const [trigger, { isLoading, error: serverError }] = useAuthMeUpdateMutation({

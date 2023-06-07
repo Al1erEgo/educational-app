@@ -12,6 +12,8 @@ import {
  @returns {ModalContextType} An object containing the current modal configuration,
  as well as functions to show and hide the modal.
  */
+
+// TODO check is refactor with config === null works or not
 export const useCustomModal: UseCustomModalType = () => {
   const [modalConfig, setModalConfig] = useState<ModalConfig>({
     title: '',

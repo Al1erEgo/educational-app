@@ -7,6 +7,7 @@ import { ProfileNameBaseType } from '@/modules/auth/types/profile-name'
 
 type ProfileNameType = Omit<ProfileNameBaseType, 'switchEdit'>
 
+// TODO rename EditableProfileName
 export const ProfileName: FC<ProfileNameType> = ({ userName }) => {
   const [isEdit, setIsEdit] = useState(false)
 

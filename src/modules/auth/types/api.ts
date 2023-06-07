@@ -1,3 +1,4 @@
+//TODO rename filename by type of objects, it should be not about places where it was used. example: auth-dtos
 type UserEntityType = {
   _id: string
   email: string

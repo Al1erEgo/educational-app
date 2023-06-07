@@ -8,6 +8,8 @@ type ErrorServerHandlerType = {
   textError?: string
 }
 
+// TODO: remove Handler form name of component
+
 export const ErrorMessageHandler: FC<ErrorServerHandlerType> = ({
   serverError,
   textError,

@@ -1,5 +1,6 @@
 import { rootApi } from '@/store'
 
+// TODO: rename file to cardsApi, do not delete index file also
 export const cardsApi = rootApi.injectEndpoints({
   endpoints: builder => ({
     cardPacks: builder.query<CardPacksResponseType, CardPacksRequestType>({

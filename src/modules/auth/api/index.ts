@@ -16,6 +16,7 @@ import {
 } from '@/modules/auth/types'
 import { rootApi } from '@/store'
 
+// TODO: rename file to authApi, do not delete index file also
 export const authApi = rootApi.injectEndpoints({
   endpoints: builder => ({
     register: builder.mutation<RegisterResponseType, RegisterRequestType>({

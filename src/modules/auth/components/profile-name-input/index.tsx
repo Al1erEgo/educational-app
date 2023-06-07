@@ -15,6 +15,7 @@ import {
 
 import { ProfileNameBaseType } from '@/modules/auth/types/profile-name'
 
+// TODO move this code back to ProfileName (EditableProfileName) component
 export const ProfileNameInput: FC<ProfileNameBaseType> = ({
   userName,
   switchEdit,

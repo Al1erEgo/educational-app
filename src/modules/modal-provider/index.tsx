@@ -4,6 +4,7 @@ import { Modal } from 'antd'
 
 import { ModalContext, useCustomModal } from './hooks'
 
+// TODO move this component to global providers folder
 export const ModalProvider: FC<PropsWithChildren> = ({ children }) => {
   const { modalConfig, showModal, hideModal } = useCustomModal()
 

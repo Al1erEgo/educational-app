@@ -14,6 +14,7 @@ import { useFormData } from '@/modules/auth/hooks'
 import { StyledCard, StyledNavLink, StyledText } from '@/modules/auth/styles'
 import { NewPasswordFormInputs } from '@/modules/auth/types'
 
+// TODO rename all pages components: add suffix PAGE
 export const NewPassword: FC = () => {
   const { token } = useParams()
   const [
@@ -38,6 +39,7 @@ export const NewPassword: FC = () => {
   return (
     <StyledCard title={'Create new Password'}>
       <Form onFinish={handleSubmit(handleNewPasswordSubmit)}>
+        {/* TODO {...formInputsConfigs['password']} */}
         <FormInput name="password" control={control} error={errors.password} />
         <StyledText type="secondary">
           Create new password and we will send you further instructions to email
