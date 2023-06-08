@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useAuthorised } from '@/modules/auth/hooks'
 import { useCardPacksQuery } from '@/modules/cards/api'
@@ -34,25 +34,28 @@ export const usePacksData: UsePacksDataType = () => {
   const { data: userData } = useAuthorised()
   const user_id = userData?._id
 
-  const { searchParams, searchActions } = usePacksSearchParams()
+  const { searchParams, setSearchParams } = usePacksSearchParams()
 
-  const searchValueParams = searchParams.get('search')
-  const paginationParams = JSON.parse(searchParams.get('pagination') || '{}')
-  const minSliderParams = searchParams.get('minCardsCount')
-  const maxSliderParams = searchParams.get('maxCardsCount')
-  const activeButtonParams = searchParams.get('showPacks')
+  const {
+    searchValueParams,
+    paginationCurrentPageParams,
+    paginationPageSizeParams,
+    minSliderParams,
+    maxSliderParams,
+    activeButtonParams,
+  } = searchParams
 
   const [tableParams, setTableParams] = useState<PacksTableParamsType>({
-    pagination:
-      paginationParams.current && paginationParams.pageSize
-        ? paginationParams
-        : { current: 1, pageSize: 10 },
+    pagination: {
+      current: paginationCurrentPageParams || 1,
+      pageSize: paginationPageSizeParams || 10,
+    },
     field: '',
     order: null,
-    searchValue: searchValueParams || '',
-    minSlider: minSliderParams ? +minSliderParams : undefined,
-    maxSlider: maxSliderParams ? +maxSliderParams : undefined,
-    activeButton: activeButtonParams || 'All',
+    searchValue: searchValueParams,
+    minSlider: minSliderParams,
+    maxSlider: maxSliderParams,
+    activeButton: activeButtonParams,
   })
 
   const {
@@ -85,7 +88,7 @@ export const usePacksData: UsePacksDataType = () => {
     handleToggleButton,
     handleClearFilters,
     modalHandlers,
-  } = usePacksHandlers(setTableParams, searchActions, mutations, tableParams)
+  } = usePacksHandlers(setTableParams, mutations, tableParams, setSearchParams)
 
   const tableColumns = getPacksTableColumns(
     tableParams.activeButton,
@@ -99,6 +102,10 @@ export const usePacksData: UsePacksDataType = () => {
   const maxSliderUserValue = data?.maxCardsCount
 
   const formattedTableData = getFormattedPacksTableData(data)
+
+  useEffect(() => {
+    setSearchParams(tableParams)
+  }, [tableParams])
 
   return [
     { handlePacksSearch },

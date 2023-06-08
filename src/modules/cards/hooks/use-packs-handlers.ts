@@ -26,9 +26,9 @@ type SearchActionsType = {
 
 type UsePacksHandlersType = (
   setTableParams: React.Dispatch<React.SetStateAction<PacksTableParamsType>>,
-  searchActions: SearchActionsType,
   mutations: CardsMutationsObjType,
-  tableParams: PacksTableParamsType
+  tableParams: PacksTableParamsType,
+  setSearchParams: any
 ) => {
   handleTableChange: HandlePacksTableChangeType
   handlePacksSearch: HandlePacksSearchType
@@ -40,15 +40,15 @@ type UsePacksHandlersType = (
 
 export const usePacksHandlers: UsePacksHandlersType = (
   setTableParams,
-  searchActions,
   mutations,
-  tableParams
+  tableParams,
+  setSearchParams
 ) => {
   const modalHandlers = useCardsModals(mutations)
 
   const handlePacksSearch: HandlePacksSearchType = searchValue => {
     setTableParams(prevState => ({ ...prevState, searchValue }))
-    searchActions.setSearchValue(searchValue)
+    //searchActions.setSearchValue(searchValue)
   }
 
   const handleTableChange: HandlePacksTableChangeType = (
@@ -63,7 +63,7 @@ export const usePacksHandlers: UsePacksHandlersType = (
       pagination,
       ...sorter,
     }))
-    searchActions.setPagination({ current, pageSize })
+    //searchActions.setPagination({ current, pageSize })
   }
 
   const handleSliderChange: HandleSliderChangeType = value => {
@@ -74,7 +74,7 @@ export const usePacksHandlers: UsePacksHandlersType = (
         maxSlider: value[1],
       }))
     }
-    searchActions.setSliderChanged(value as [number, number])
+    //searchActions.setSliderChanged(value as [number, number])
   }
 
   const handleClearFilters: HandleClearFiltersType = () => {
@@ -92,16 +92,16 @@ export const usePacksHandlers: UsePacksHandlersType = (
       maxSlider: undefined,
     }))
 
-    searchActions.setToggleButton(tableParams.activeButton)
-    searchActions.clearParams()
+    //searchActions.clearParams()
   }
   const handleToggleButton: HandleToggleButtonType = buttonName => {
     setTableParams(prevState => ({
       ...prevState,
       activeButton: buttonName,
     }))
+
     handleClearFilters()
-    searchActions.setToggleButton(buttonName)
+    //searchActions.setToggleButton(buttonName)
   }
 
   return {
