@@ -49,7 +49,6 @@ export const ModalFormUpload: FC<ModalFormUploadType> = ({
 
   const { preview, handlePreview } = usePreview()
 
-  //TODO вынести в отдельный файл?
   const getDefaultImage = (img: string): UploadFile<any>[] => {
     if (img) {
       return [{ url: img } as UploadFile<any>]

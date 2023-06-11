@@ -12,8 +12,6 @@ export const StyledTitle = styled(Title).attrs({
   width: fit-content;
 `
 
-//TODO проверить надо ли оставить лоадинг условие
-//TODO перенести в tyles.ts рядом с index.tsx в Packs
 export const StyledCardsTitleButton = styled(Button).attrs(props => ({
   type: 'primary',
   htmlType: 'submit',
