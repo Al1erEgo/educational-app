@@ -12,8 +12,8 @@ import {
 
 type PacksSliderType = {
   handleSliderChange: HandleSliderChangeType
-  minCardsCount: number
-  maxCardsCount: number
+  minCardsCount: number | undefined
+  maxCardsCount: number | undefined
   tableParams: PacksTableParamsType
   isLoading: boolean
   minSliderUserValue: number | undefined
@@ -24,8 +24,8 @@ export const PacksSlider: FC<PacksSliderType> = ({
   tableParams,
   minSliderUserValue,
   maxSliderUserValue,
-  minCardsCount = 0,
-  maxCardsCount = 110,
+  minCardsCount = minSliderUserValue || 0,
+  maxCardsCount = maxSliderUserValue || 0,
   handleSliderChange,
   isLoading,
 }) => {

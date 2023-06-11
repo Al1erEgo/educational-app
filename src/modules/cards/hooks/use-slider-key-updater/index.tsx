@@ -36,11 +36,11 @@ export const useSliderKeyUpdater = (
   /**
    * Resets the slider key to 0 if the minimum and maximum card counts are both null.
    */
-  useEffect(() => {
-    if (!tableParams.minSlider && !tableParams.maxSlider) {
-      setSliderKey(prevState => prevState + 1)
-    }
-  }, [tableParams.minSlider, tableParams.maxSlider])
+  /*  useEffect(() => {
+	 if (!tableParams.minSlider && !tableParams.maxSlider) {
+	 setSliderKey(prevState => prevState + 1)
+	 }
+	 }, [tableParams.minSlider, tableParams.maxSlider])*/
 
   return sliderKey
 }

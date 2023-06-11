@@ -1,7 +1,5 @@
 import React from 'react'
 
-import { TablePaginationConfig } from 'antd/es/table/InternalTable'
-
 import { useCardsModals } from '@/modules/cards/hooks/use-cards-modals'
 import {
   CardsModalsHandlersType,
@@ -14,21 +12,9 @@ import {
   PacksTableParamsType,
 } from '@/modules/cards/types'
 
-type SearchActionsType = {
-  setSearchValue: (searchValue: string) => void
-  setPagination: (pagination: TablePaginationConfig) => void
-  setSliderChanged: (
-    sliderValues: [number | undefined, number | undefined]
-  ) => void
-  setToggleButton: (buttonName: string) => void
-  clearParams: () => void
-}
-
 type UsePacksHandlersType = (
   setTableParams: React.Dispatch<React.SetStateAction<PacksTableParamsType>>,
-  mutations: CardsMutationsObjType,
-  tableParams: PacksTableParamsType,
-  setSearchParams: any
+  mutations: CardsMutationsObjType
 ) => {
   handleTableChange: HandlePacksTableChangeType
   handlePacksSearch: HandlePacksSearchType
@@ -40,15 +26,12 @@ type UsePacksHandlersType = (
 
 export const usePacksHandlers: UsePacksHandlersType = (
   setTableParams,
-  mutations,
-  tableParams,
-  setSearchParams
+  mutations
 ) => {
   const modalHandlers = useCardsModals(mutations)
 
   const handlePacksSearch: HandlePacksSearchType = searchValue => {
     setTableParams(prevState => ({ ...prevState, searchValue }))
-    //searchActions.setSearchValue(searchValue)
   }
 
   const handleTableChange: HandlePacksTableChangeType = (
@@ -56,14 +39,11 @@ export const usePacksHandlers: UsePacksHandlersType = (
     filters,
     sorter
   ) => {
-    const { current, pageSize } = pagination
-
     setTableParams(prevState => ({
       ...prevState,
       pagination,
       ...sorter,
     }))
-    //searchActions.setPagination({ current, pageSize })
   }
 
   const handleSliderChange: HandleSliderChangeType = value => {
@@ -74,7 +54,6 @@ export const usePacksHandlers: UsePacksHandlersType = (
         maxSlider: value[1],
       }))
     }
-    //searchActions.setSliderChanged(value as [number, number])
   }
 
   const handleClearFilters: HandleClearFiltersType = () => {
@@ -91,8 +70,6 @@ export const usePacksHandlers: UsePacksHandlersType = (
       minSlider: undefined,
       maxSlider: undefined,
     }))
-
-    //searchActions.clearParams()
   }
   const handleToggleButton: HandleToggleButtonType = buttonName => {
     setTableParams(prevState => ({
@@ -101,7 +78,6 @@ export const usePacksHandlers: UsePacksHandlersType = (
     }))
 
     handleClearFilters()
-    //searchActions.setToggleButton(buttonName)
   }
 
   return {
