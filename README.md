@@ -48,4 +48,7 @@ $ yarn dev
 
 ## Screenshots:
 
-![alt text](https://drive.google.com/file/d/1Bs3wz7jXeH7WVTlpxpqLnzcw1Jn5Mn0s/view?usp=drive_link)
+<a href="https://ibb.co/DCZ97YT"><img src="https://i.ibb.co/DCZ97YT/1.jpg" alt="1" border="0"></a><a href="https://ibb.co/BnKsspZ"><img src="https://i.ibb.co/BnKsspZ/2.jpg" alt="2" border="0"></a>
+<a href="https://ibb.co/D1RSX7P"><img src="https://i.ibb.co/D1RSX7P/3.jpg" alt="3" border="0"></a> <a href="https://ibb.co/bQ7NLJk"><img src="https://i.ibb.co/bQ7NLJk/4.jpg" alt="4" border="0"></a>
+<a href="https://ibb.co/WsqR0sm"><img src="https://i.ibb.co/WsqR0sm/5.jpg" alt="5" border="0"></a> <a href="https://ibb.co/31FtwgH"><img src="https://i.ibb.co/31FtwgH/6.jpg" alt="6" border="0"></a>
+
