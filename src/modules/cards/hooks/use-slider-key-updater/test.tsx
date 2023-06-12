@@ -39,19 +39,6 @@ jest.mock('react', () => {
 })
 
 describe('useSliderKeyEffect_function', () => {
-  const state = {
-    pagination: {
-      current: 1,
-      pageSize: 10,
-    },
-    field: '',
-    order: null,
-    searchValue: '',
-    minSlider: 2,
-    maxSlider: 8,
-    activeButton: 'All',
-  }
-
   beforeEach(() => {
     const mockSetState = jest.fn()
 
@@ -61,7 +48,7 @@ describe('useSliderKeyEffect_function', () => {
   test('returns correct sliderKey when minCount and maxCount are valid', () => {
     const minCount = 1
     const maxCount = 10
-    const sliderKey = useSliderKeyUpdater(minCount, maxCount, state)
+    const sliderKey = useSliderKeyUpdater(minCount, maxCount)
 
     expect(sliderKey).toBe(0)
   })
@@ -69,12 +56,12 @@ describe('useSliderKeyEffect_function', () => {
   test('returns new sliderKey when minCount is changed', () => {
     const minCount = 1
     const maxCount = 10
-    const sliderKey = useSliderKeyUpdater(minCount, maxCount, state)
+    const sliderKey = useSliderKeyUpdater(minCount, maxCount)
     const newMinCount = 2
     const mockSetState1 = jest.fn()
 
     ;(useState as jest.Mock).mockReturnValue([sliderKey + 1, mockSetState1])
-    const newSliderKey = useSliderKeyUpdater(newMinCount, maxCount, state)
+    const newSliderKey = useSliderKeyUpdater(newMinCount, maxCount)
 
     expect(newSliderKey).toBe(sliderKey + 1)
   })
@@ -82,7 +69,7 @@ describe('useSliderKeyEffect_function', () => {
   test('returns correct sliderKey when minCount is negative', () => {
     const minCount = -1
     const maxCount = 10
-    const sliderKey = useSliderKeyUpdater(minCount, maxCount, state)
+    const sliderKey = useSliderKeyUpdater(minCount, maxCount)
 
     expect(sliderKey).toBe(0)
   })
@@ -90,7 +77,7 @@ describe('useSliderKeyEffect_function', () => {
   test('returns correct sliderKey when maxCount is negative', () => {
     const minCount = 1
     const maxCount = -10
-    const sliderKey = useSliderKeyUpdater(minCount, maxCount, state)
+    const sliderKey = useSliderKeyUpdater(minCount, maxCount)
 
     expect(sliderKey).toBe(0)
   })
@@ -98,13 +85,13 @@ describe('useSliderKeyEffect_function', () => {
   test('returns new sliderKey when both minCount and maxCount are changed', () => {
     const minCount = 1
     const maxCount = 10
-    const sliderKey = useSliderKeyUpdater(minCount, maxCount, state)
+    const sliderKey = useSliderKeyUpdater(minCount, maxCount)
     const newMinCount = 2
     const newMaxCount = 12
     const mockSetState1 = jest.fn()
 
     ;(useState as jest.Mock).mockReturnValue([sliderKey + 1, mockSetState1])
-    const newSliderKey = useSliderKeyUpdater(newMinCount, newMaxCount, state)
+    const newSliderKey = useSliderKeyUpdater(newMinCount, newMaxCount)
 
     expect(newSliderKey).toBe(sliderKey + 1)
   })

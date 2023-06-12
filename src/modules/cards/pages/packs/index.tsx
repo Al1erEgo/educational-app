@@ -51,7 +51,6 @@ export const Packs = () => {
           isLoading={isDataLoading}
         />
         <PacksSlider
-          tableParams={tableParams}
           handleSliderChange={handleSliderChange}
           isLoading={isDataLoading}
           minCardsCount={tableParams.minSlider}

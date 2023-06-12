@@ -5,23 +5,18 @@ import { Slider } from 'antd'
 import { StyledPacksSliderWrapper } from '@/modules/cards/components/packs-slider/styles'
 import { useSliderKeyUpdater } from '@/modules/cards/hooks'
 import { StyledCardsText } from '@/modules/cards/styles'
-import {
-  HandleSliderChangeType,
-  PacksTableParamsType,
-} from '@/modules/cards/types'
+import { HandleSliderChangeType } from '@/modules/cards/types'
 
 type PacksSliderType = {
   handleSliderChange: HandleSliderChangeType
   minCardsCount: number | undefined
   maxCardsCount: number | undefined
-  tableParams: PacksTableParamsType
   isLoading: boolean
   minSliderUserValue: number | undefined
   maxSliderUserValue: number | undefined
 }
 
 export const PacksSlider: FC<PacksSliderType> = ({
-  tableParams,
   minSliderUserValue,
   maxSliderUserValue,
   minCardsCount = minSliderUserValue || 0,
@@ -29,11 +24,7 @@ export const PacksSlider: FC<PacksSliderType> = ({
   handleSliderChange,
   isLoading,
 }) => {
-  const sliderKey = useSliderKeyUpdater(
-    minCardsCount,
-    maxCardsCount,
-    tableParams
-  )
+  const sliderKey = useSliderKeyUpdater(minCardsCount, maxCardsCount)
 
   return (
     <StyledPacksSliderWrapper>
