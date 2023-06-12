@@ -40,13 +40,13 @@ $ yarn install
 $ yarn dev
 ```
 
-## Developers Team:
+## Developers Team
 
 - [Aleksey Kriuchkov](https://github.com/AlekseyKriuchkov)
 - [Aleksey Piskus](https://github.com/Al1erEgo)
 - [Svetlana Levkovskaya](https://github.com/SvetlanaLevkovskaya)
 
-## Screenshots:
+## Screenshots
 
 <a href="https://ibb.co/DCZ97YT"><img src="https://i.ibb.co/DCZ97YT/1.jpg" alt="1" border="0"></a><a href="https://ibb.co/BnKsspZ"><img src="https://i.ibb.co/BnKsspZ/2.jpg" alt="2" border="0"></a>
 <a href="https://ibb.co/D1RSX7P"><img src="https://i.ibb.co/D1RSX7P/3.jpg" alt="3" border="0"></a> <a href="https://ibb.co/bQ7NLJk"><img src="https://i.ibb.co/bQ7NLJk/4.jpg" alt="4" border="0"></a>
