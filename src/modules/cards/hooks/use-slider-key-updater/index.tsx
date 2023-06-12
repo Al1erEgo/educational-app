@@ -2,13 +2,12 @@ import { useEffect, useState } from 'react'
 
 /**
  A custom hook that updates the sliderKey state variable whenever minCount,
- maxCount, or state.minCardsCount/state.maxCardsCount change. This hook updates
+ maxCount. This hook updates
  the key used by a slider component to force a re-render based on changes to the
- minimum and maximum count values, as well as when those values are reset to their default state.
+ minimum and maximum count values.
 
  @param minCardsCount
  @param maxCardsCount
- maxCardsCount properties.
 
  @return {number} - The current value of the sliderKey state variable.
  */
