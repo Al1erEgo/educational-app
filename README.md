@@ -46,3 +46,6 @@ $ yarn dev
 - [Aleksey Piskus](https://github.com/Al1erEgo)
 - [Svetlana Levkovskaya](https://github.com/SvetlanaLevkovskaya)
 
+## Screenshots:
+
+![alt text](https://drive.google.com/file/d/1Bs3wz7jXeH7WVTlpxpqLnzcw1Jn5Mn0s/view?usp=drive_link)
