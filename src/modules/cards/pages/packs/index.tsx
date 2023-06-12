@@ -24,8 +24,10 @@ export const Packs = () => {
     { modalHandlers },
   ] = usePacksData()
 
-  const { isDataLoading, tableParams, minSliderUserValue, maxSliderUserValue } =
+  const { isDataLoading, tableParams, minCardsCountValue, maxCardsCountValue } =
     tableData
+
+  debugger
 
   return (
     <>
@@ -53,10 +55,10 @@ export const Packs = () => {
         <PacksSlider
           handleSliderChange={handleSliderChange}
           isLoading={isDataLoading}
-          minCardsCount={tableParams.minSlider}
-          maxCardsCount={tableParams.maxSlider}
-          minSliderUserValue={minSliderUserValue}
-          maxSliderUserValue={maxSliderUserValue}
+          minSlider={tableParams.minSlider}
+          maxSlider={tableParams.maxSlider}
+          minCardsCountValue={minCardsCountValue}
+          maxCardsCountValue={maxCardsCountValue}
         />
         <PacksFilter clearFilters={handleClearFilters} />
       </StyledCardsToolbar>

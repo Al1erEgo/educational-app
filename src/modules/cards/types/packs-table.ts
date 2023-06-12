@@ -41,8 +41,8 @@ export type PacksTableDataType = BaseTableDataType & {
   tableParams: PacksTableParamsType
   formattedTableData: PackType[] | undefined
   tableColumns: PacksTableDataColumnsType[]
-  minSliderUserValue: number | undefined
-  maxSliderUserValue: number | undefined
+  minCardsCountValue: number | undefined
+  maxCardsCountValue: number | undefined
 }
 
 export type HandleSliderChangeType = (value: number | [number, number]) => void

@@ -6,14 +6,14 @@ import { useEffect, useState } from 'react'
  the key used by a slider component to force a re-render based on changes to the
  minimum and maximum count values.
 
- @param minCardsCount
- @param maxCardsCount
+ @param minSlider
+ @param maxSlider
 
  @return {number} - The current value of the sliderKey state variable.
  */
 export const useSliderKeyUpdater = (
-  minCardsCount: number | undefined,
-  maxCardsCount: number | undefined
+  minSlider: number | undefined,
+  maxSlider: number | undefined
 ) => {
   /**
    * The current slider key.
@@ -21,12 +21,16 @@ export const useSliderKeyUpdater = (
    */
   const [sliderKey, setSliderKey] = useState(0)
 
+  debugger
+  console.log('minSliderSliderKey', minSlider)
+  console.log('maxSliderSliderKey', maxSlider)
+
   /**
    * Updates the slider key whenever the minimum or maximum card count changes.
    */
   useEffect(() => {
     setSliderKey(prevState => prevState + 1)
-  }, [minCardsCount, maxCardsCount])
+  }, [minSlider, maxSlider])
 
   return sliderKey
 }

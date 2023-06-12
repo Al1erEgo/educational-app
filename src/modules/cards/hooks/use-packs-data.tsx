@@ -34,6 +34,8 @@ export const usePacksData: UsePacksDataType = () => {
   const { data: userData } = useAuthorised()
   const user_id = userData?._id
 
+  debugger
+
   const { searchParams, setSearchParams } = usePacksSearchParams()
 
   const {
@@ -74,6 +76,9 @@ export const usePacksData: UsePacksDataType = () => {
     max: tableParams.maxSlider,
   })
 
+  console.log('tableParams.minSlider', tableParams.minSlider)
+  console.log('tableParams.maxSlider', tableParams.maxSlider)
+
   const [mutations, actionsLoading, actionsError] =
     useCardsMutations(refetchPacks)
 
@@ -98,8 +103,11 @@ export const usePacksData: UsePacksDataType = () => {
   )
 
   const elementsCount = data?.cardPacksTotalCount || 0
-  const minSliderUserValue = data?.minCardsCount
-  const maxSliderUserValue = data?.maxCardsCount
+  const minCardsCountValue = data?.minCardsCount
+  const maxCardsCountValue = data?.maxCardsCount
+
+  console.log('minCardsCountValue', minCardsCountValue)
+  console.log('maxCardsCountValue', maxCardsCountValue)
 
   const formattedTableData = getFormattedPacksTableData(data)
 
@@ -117,8 +125,8 @@ export const usePacksData: UsePacksDataType = () => {
       elementsCount,
       tableColumns,
       serverError,
-      minSliderUserValue,
-      maxSliderUserValue,
+      minCardsCountValue,
+      maxCardsCountValue,
     },
     { handleSliderChange },
     { handleToggleButton },
