@@ -32,7 +32,7 @@ export const useCardsModalForm = <
     watch,
   } = useForm<D>({
     mode: 'all',
-    resolver: yupResolver(schema),
+    resolver: yupResolver<D>(schema),
     defaultValues,
   })
 

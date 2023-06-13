@@ -1,9 +1,7 @@
-import { FieldValues } from 'react-hook-form'
-
 import { useFormWithValidation } from './use-authform'
 
 import { useAuthMutation } from '@/modules/auth/hooks/use-auth-mutation'
-import { FormType } from '@/modules/auth/types'
+import { FormInputsTypes, FormType } from '@/modules/auth/types'
 
 //TODO убрать any
 /**
@@ -13,7 +11,9 @@ import { FormType } from '@/modules/auth/types'
  @returns {Array} - An array containing the necessary form data and functions required for form submission and
  validation.
  */
-export const useFormData = <T extends FieldValues>(formType: FormType): any => {
+export const useFormData = <T extends FormInputsTypes>(
+  formType: FormType
+): any => {
   const { handleSubmit, control, setError, errors, watch, setValue } =
     useFormWithValidation<T>(formType)
   const [onSubmit, { trigger, isLoading, isSuccess, error }] =

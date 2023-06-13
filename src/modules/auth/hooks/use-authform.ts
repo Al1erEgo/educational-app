@@ -1,8 +1,8 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { FieldValues, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
 import { formSchemaMap } from '@/modules/auth/constants'
-import { FormType } from '@/modules/auth/types'
+import { FormInputsTypes, FormType } from '@/modules/auth/types'
 
 /**
  * A hook that provides form validation functionality using Yup schema.
@@ -17,7 +17,7 @@ import { FormType } from '@/modules/auth/types'
  * @property {Function} watch - A function to watch form field values.
  * @property {Function} setValue - A function to set form field values.
  */
-export const useFormWithValidation = <T extends FieldValues>(
+export const useFormWithValidation = <T extends FormInputsTypes>(
   formType: FormType
 ) => {
   const schema = formSchemaMap[formType]
@@ -30,7 +30,7 @@ export const useFormWithValidation = <T extends FieldValues>(
     setValue,
   } = useForm<T>({
     mode: 'all',
-    resolver: yupResolver(schema),
+    resolver: yupResolver<T>(schema),
   })
 
   return { handleSubmit, control, errors, setError, watch, setValue }
