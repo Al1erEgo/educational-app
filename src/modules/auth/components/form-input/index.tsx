@@ -25,17 +25,9 @@ export const FormInput: FC<FormInputType> = ({ name, control, error }) => {
         rules={rules}
         render={({ field }) =>
           type === 'password' ? (
-            <Input.Password
-              {...field}
-              placeholder={placeholder}
-              autoComplete={autoComplete}
-            />
+            <Input.Password {...field} placeholder={placeholder} autoComplete={autoComplete} />
           ) : (
-            <Input
-              {...field}
-              placeholder={placeholder}
-              autoComplete={autoComplete}
-            />
+            <Input {...field} placeholder={placeholder} autoComplete={autoComplete} />
           )
         }
       />

@@ -3,17 +3,15 @@ import { FC } from 'react'
 import { Checkbox, Form } from 'antd'
 import { Control, Controller } from 'react-hook-form'
 
+import { LoginFormInputs } from '@/modules/auth/types'
+
 type FormCheckboxType = {
-  name: string
-  control: Control
+  name: 'rememberMe'
+  control: Control<LoginFormInputs>
   defaultValue: boolean
 }
 
-export const FormCheckbox: FC<FormCheckboxType> = ({
-  name,
-  control,
-  defaultValue,
-}) => {
+export const FormCheckbox: FC<FormCheckboxType> = ({ name, control, defaultValue }) => {
   return (
     <Form.Item>
       <Controller

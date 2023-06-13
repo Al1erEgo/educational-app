@@ -1,14 +1,14 @@
-import { useLocation } from 'react-router-dom'
+import { redirect, useLocation } from 'react-router-dom'
 
 import { useNavigateHandler } from '@/hooks'
-import { useAuthMeUpdateMutation } from '@/modules/auth/api'
+import { useAuthMeLogOutMutation, useAuthMeUpdateMutation } from '@/modules/auth/api'
 import { ABSOLUTE_AUTH_PATH } from '@/modules/auth/constants'
-import { useAuthMutation } from '@/modules/auth/hooks/use-auth-mutation'
 import { useAuthorised } from '@/modules/auth/hooks/use-authorised'
+import { OnSubmitMutationType } from '@/modules/auth/types'
 
 export const useAuthWidgetData = () => {
   const { isAuthorised, data: userData } = useAuthorised()
-  const [handleLogOut] = useAuthMutation('logout')
+  const [trigger] = useAuthMeLogOutMutation()
   const handleRedirectToProfile = useNavigateHandler(ABSOLUTE_AUTH_PATH.Profile)
   const handleRedirectToSignIn = useNavigateHandler(ABSOLUTE_AUTH_PATH.SignIn)
   const handleRedirectToSignUp = useNavigateHandler(ABSOLUTE_AUTH_PATH.SignUp)
@@ -27,6 +27,15 @@ export const useAuthWidgetData = () => {
       : { children: 'Sign up', onClick: handleRedirectToSignUp }
 
   const userName = userData ? userData.name : 'No name'
+
+  const handleLogOut: OnSubmitMutationType = async () => {
+    try {
+      await trigger().unwrap()
+      redirect(ABSOLUTE_AUTH_PATH.SignIn)
+    } catch (e: unknown) {
+      return
+    }
+  }
 
   return {
     handleLogOut,

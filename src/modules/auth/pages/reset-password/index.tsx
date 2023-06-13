@@ -1,41 +1,41 @@
+import { yupResolver } from '@hookform/resolvers/yup'
 import { Form } from 'antd'
+import { useForm } from 'react-hook-form'
+import * as yup from 'yup'
 
 import { ErrorMessageHandler } from '@/components'
-import {
-  ConfirmationMessage,
-  FormButton,
-  FormInput,
-} from '@/modules/auth/components'
-import { ABSOLUTE_AUTH_PATH } from '@/modules/auth/constants'
-import { useFormData } from '@/modules/auth/hooks'
-import {
-  StyledCard,
-  StyledNavLink,
-  StyledP,
-  StyledText,
-} from '@/modules/auth/styles'
+import { useRequestPasswordResetMutation } from '@/modules/auth/api'
+import { ConfirmationMessage, FormButton, FormInput } from '@/modules/auth/components'
+import { ABSOLUTE_AUTH_PATH, emailSchema } from '@/modules/auth/constants'
+import { StyledCard, StyledNavLink, StyledP, StyledText } from '@/modules/auth/styles'
 import { ResetPasswordFormInputs } from '@/modules/auth/types'
 
 export const ResetPassword = () => {
-  const [
-    onSubmit,
-    { handleSubmit, watch, control, errors },
-    { isLoading, isSuccess, error },
-  ] = useFormData<ResetPasswordFormInputs>('resetPassword')
+  const [onSubmit, { isLoading, isSuccess, error }] = useRequestPasswordResetMutation()
+
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+    watch,
+  } = useForm<ResetPasswordFormInputs>({
+    mode: 'all',
+    resolver: yupResolver(
+      yup.object({
+        email: emailSchema,
+      })
+    ),
+  })
 
   if (isSuccess) {
-    return (
-      <ConfirmationMessage variant={'resetPassword'} email={watch().email} />
-    )
+    return <ConfirmationMessage variant={'resetPassword'} email={watch().email} />
   }
 
   return (
     <StyledCard title={'Forgot your password?'}>
       <Form onFinish={handleSubmit(onSubmit)}>
         <FormInput name="email" control={control} error={errors.email} />
-        <StyledText type="secondary">
-          Enter your email address and we will send you further instructions
-        </StyledText>
+        <StyledText type="secondary">Enter your email address and we will send you further instructions</StyledText>
 
         <ErrorMessageHandler serverError={error} />
 
@@ -43,9 +43,7 @@ export const ResetPassword = () => {
       </Form>
       <StyledP>Did you remember your password?</StyledP>
 
-      <StyledNavLink to={ABSOLUTE_AUTH_PATH.SignIn}>
-        Try logging in
-      </StyledNavLink>
+      <StyledNavLink to={ABSOLUTE_AUTH_PATH.SignIn}>Try logging in</StyledNavLink>
     </StyledCard>
   )
 }

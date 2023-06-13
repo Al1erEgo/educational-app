@@ -1,21 +1,30 @@
 import { LogoutOutlined } from '@ant-design/icons'
+import { redirect } from 'react-router-dom'
 
 import { BackToCardsButton } from '../../../cards/components'
 import { ProfileAvatar, ProfileName } from '../../components'
-import { useAuthMutation, useAuthorised } from '../../hooks'
+import { useAuthorised } from '../../hooks'
 import { StyledCard } from '../../styles'
 
-import {
-  StyledProfileContainer,
-  StyledProfileLogOutButton,
-  StyledProfileText,
-} from './styles'
+import { StyledProfileContainer, StyledProfileLogOutButton, StyledProfileText } from './styles'
+
+import { useAuthMeLogOutMutation } from '@/modules/auth/api'
+import { ABSOLUTE_AUTH_PATH } from '@/modules/auth/constants'
 
 export const Profile = () => {
   const { data: userData } = useAuthorised()
   const { name: userName, avatar, email } = userData ?? {}
 
-  const [handleLogout, { isLoading: isLoggingOut }] = useAuthMutation('logout')
+  const [trigger, { isLoading: isLoggingOut }] = useAuthMeLogOutMutation()
+
+  const handleLogout = async () => {
+    try {
+      await trigger().unwrap()
+      redirect(ABSOLUTE_AUTH_PATH.SignIn)
+    } catch (e: unknown) {
+      return
+    }
+  }
 
   return (
     <>
@@ -27,11 +36,7 @@ export const Profile = () => {
 
           <StyledProfileText>{email}</StyledProfileText>
 
-          <StyledProfileLogOutButton
-            onClick={handleLogout}
-            loading={isLoggingOut}
-            icon={<LogoutOutlined />}
-          >
+          <StyledProfileLogOutButton onClick={handleLogout} loading={isLoggingOut} icon={<LogoutOutlined />}>
             Log out
           </StyledProfileLogOutButton>
         </StyledProfileContainer>
