@@ -5,27 +5,33 @@ import { Slider } from 'antd'
 import { StyledPacksSliderWrapper } from '@/modules/cards/components/packs-slider/styles'
 import { useSliderKeyUpdater } from '@/modules/cards/hooks'
 import { StyledCardsText } from '@/modules/cards/styles'
-import {
-  HandleSliderChangeType,
-  PacksTableParamsType,
-} from '@/modules/cards/types'
+import { HandleSliderChangeType } from '@/modules/cards/types'
 
 type PacksSliderType = {
   handleSliderChange: HandleSliderChangeType
-  minCardsCount?: number
-  maxCardsCount?: number
-  state: PacksTableParamsType
+  minSlider: number | undefined
+  maxSlider: number | undefined
   isLoading: boolean
+  minCardsCountValue: number | undefined
+  maxCardsCountValue: number | undefined
 }
 
 export const PacksSlider: FC<PacksSliderType> = ({
-  minCardsCount = 0,
-  maxCardsCount = 110,
+  minCardsCountValue,
+  maxCardsCountValue,
+  minSlider = minCardsCountValue || 0,
+  maxSlider = maxCardsCountValue || 0,
   handleSliderChange,
-  state,
   isLoading,
 }) => {
-  const sliderKey = useSliderKeyUpdater(minCardsCount, maxCardsCount, state)
+  const sliderKey = useSliderKeyUpdater(minSlider, maxSlider)
+
+  debugger
+
+  console.log('minSliderPacksSlider', minSlider)
+  console.log('maxSliderPacksSlider', maxSlider)
+  console.log('minCardsCountValuePacksSlider', minCardsCountValue)
+  console.log('maxCardsCountValuePacksSlider', maxCardsCountValue)
 
   return (
     <StyledPacksSliderWrapper>
@@ -33,12 +39,12 @@ export const PacksSlider: FC<PacksSliderType> = ({
       <Slider
         key={sliderKey}
         range={{ draggableTrack: false }}
-        defaultValue={[minCardsCount, maxCardsCount]}
-        min={minCardsCount}
-        max={maxCardsCount}
+        defaultValue={[minSlider, maxSlider]}
+        min={minCardsCountValue}
+        max={maxCardsCountValue}
         step={1}
         onAfterChange={handleSliderChange}
-        disabled={minCardsCount === maxCardsCount || isLoading}
+        disabled={minSlider === maxSlider || isLoading}
       />
     </StyledPacksSliderWrapper>
   )

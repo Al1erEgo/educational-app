@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 
 import { useCardsModals } from '@/modules/cards/hooks/use-cards-modals'
 import {
@@ -30,8 +30,9 @@ export const usePacksHandlers: UsePacksHandlersType = (
 ) => {
   const modalHandlers = useCardsModals(mutations)
 
-  const handlePacksSearch: HandlePacksSearchType = searchValue =>
+  const handlePacksSearch: HandlePacksSearchType = searchValue => {
     setTableParams(prevState => ({ ...prevState, searchValue }))
+  }
 
   const handleTableChange: HandlePacksTableChangeType = (
     pagination,
@@ -45,15 +46,15 @@ export const usePacksHandlers: UsePacksHandlersType = (
     }))
   }
 
-  const handleSliderChange: HandleSliderChangeType = useCallback(value => {
+  const handleSliderChange: HandleSliderChangeType = value => {
     if (Array.isArray(value)) {
       setTableParams(prevState => ({
         ...prevState,
-        minCardsCount: value[0],
-        maxCardsCount: value[1],
+        minSlider: value[0],
+        maxSlider: value[1],
       }))
     }
-  }, [])
+  }
 
   const handleClearFilters: HandleClearFiltersType = () => {
     setTableParams(prevState => ({
@@ -66,8 +67,8 @@ export const usePacksHandlers: UsePacksHandlersType = (
       order: null,
       sortPacks: '',
       searchValue: '',
-      minCardsCount: undefined,
-      maxCardsCount: undefined,
+      minSlider: undefined,
+      maxSlider: undefined,
     }))
   }
   const handleToggleButton: HandleToggleButtonType = buttonName => {
@@ -75,6 +76,7 @@ export const usePacksHandlers: UsePacksHandlersType = (
       ...prevState,
       activeButton: buttonName,
     }))
+
     handleClearFilters()
   }
 
