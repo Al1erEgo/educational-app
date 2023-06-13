@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useAuthorised } from '@/modules/auth/hooks'
 import { useCardPacksQuery } from '@/modules/cards/api'
 import { MY_BUTTON_NAME } from '@/modules/cards/constants'
 import { useCardsMutations } from '@/modules/cards/hooks/use-cards-mutations'
 import { usePacksHandlers } from '@/modules/cards/hooks/use-packs-handlers'
+import { usePacksSearchParams } from '@/modules/cards/hooks/use-packs-search-params'
 import {
   CardsModalsHandlersType,
   HandleClearFiltersType,
@@ -33,18 +34,32 @@ export const usePacksData: UsePacksDataType = () => {
   const { data: userData } = useAuthorised()
   const user_id = userData?._id
 
+  debugger
+
+  const { searchParams, setSearchParams } = usePacksSearchParams()
+
+  const {
+    searchValueParams,
+    paginationCurrentPageParams,
+    paginationPageSizeParams,
+    minSliderParams,
+    maxSliderParams,
+    activeButtonParams,
+  } = searchParams
+
   const [tableParams, setTableParams] = useState<PacksTableParamsType>({
     pagination: {
-      current: 1,
-      pageSize: 10,
+      current: paginationCurrentPageParams || 1,
+      pageSize: paginationPageSizeParams || 10,
     },
     field: '',
     order: null,
-    searchValue: '',
-    minCardsCount: undefined,
-    maxCardsCount: undefined,
-    activeButton: 'All',
+    searchValue: searchValueParams,
+    minSlider: minSliderParams,
+    maxSlider: maxSliderParams,
+    activeButton: activeButtonParams,
   })
+
   const {
     data: data,
     refetch: refetchPacks,
@@ -57,9 +72,12 @@ export const usePacksData: UsePacksDataType = () => {
     sortPacks: getSortingParam(tableParams),
     user_id: tableParams.activeButton === MY_BUTTON_NAME ? user_id : undefined,
     packName: tableParams.searchValue || undefined,
-    min: tableParams.minCardsCount,
-    max: tableParams.maxCardsCount,
+    min: tableParams.minSlider,
+    max: tableParams.maxSlider,
   })
+
+  console.log('tableParams.minSlider', tableParams.minSlider)
+  console.log('tableParams.maxSlider', tableParams.maxSlider)
 
   const [mutations, actionsLoading, actionsError] =
     useCardsMutations(refetchPacks)
@@ -85,10 +103,17 @@ export const usePacksData: UsePacksDataType = () => {
   )
 
   const elementsCount = data?.cardPacksTotalCount || 0
-  const minCardsCount = data?.minCardsCount || 0
-  const maxCardsCount = data?.maxCardsCount || 0
+  const minCardsCountValue = data?.minCardsCount
+  const maxCardsCountValue = data?.maxCardsCount
+
+  console.log('minCardsCountValue', minCardsCountValue)
+  console.log('maxCardsCountValue', maxCardsCountValue)
 
   const formattedTableData = getFormattedPacksTableData(data)
+
+  useEffect(() => {
+    setSearchParams(tableParams)
+  }, [tableParams])
 
   return [
     { handlePacksSearch },
@@ -100,8 +125,8 @@ export const usePacksData: UsePacksDataType = () => {
       elementsCount,
       tableColumns,
       serverError,
-      minCardsCount,
-      maxCardsCount,
+      minCardsCountValue,
+      maxCardsCountValue,
     },
     { handleSliderChange },
     { handleToggleButton },

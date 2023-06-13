@@ -24,14 +24,15 @@ export type PacksTableDataColumnsType = {
   dataIndex: string
   sorter?: boolean
   width?: string
+  ellipsis?: boolean
   render?: (text: string, record: PackType) => React.ReactElement
 }
 
 export type PacksTableParamsType = SorterResult<PackType> & {
   pagination?: TablePaginationConfig
   searchValue: string
-  minCardsCount: number | undefined
-  maxCardsCount: number | undefined
+  minSlider: number | undefined
+  maxSlider: number | undefined
   activeButton: string
 }
 
@@ -40,8 +41,8 @@ export type PacksTableDataType = BaseTableDataType & {
   tableParams: PacksTableParamsType
   formattedTableData: PackType[] | undefined
   tableColumns: PacksTableDataColumnsType[]
-  minCardsCount: number
-  maxCardsCount: number
+  minCardsCountValue: number | undefined
+  maxCardsCountValue: number | undefined
 }
 
 export type HandleSliderChangeType = (value: number | [number, number]) => void
