@@ -17,13 +17,10 @@ export const Profile = () => {
 
   const [trigger, { isLoading: isLoggingOut }] = useAuthMeLogOutMutation()
 
+  debugger
   const handleLogout = async () => {
-    try {
-      await trigger().unwrap()
-      redirect(ABSOLUTE_AUTH_PATH.SignIn)
-    } catch (e: unknown) {
-      return
-    }
+    await trigger().unwrap()
+    redirect(ABSOLUTE_AUTH_PATH.SignIn)
   }
 
   return (

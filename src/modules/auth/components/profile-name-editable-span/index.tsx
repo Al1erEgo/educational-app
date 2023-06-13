@@ -7,7 +7,7 @@ import { ProfileNameBaseType } from '@/modules/auth/types/profile-name'
 export const ProfileNameEditableSpan: FC<ProfileNameBaseType> = ({ userName, switchEdit }) => {
   return (
     <StyledProfileNameWrapper>
-      <StyledUserName fontSize={'big'} wordBreak={'break-all'} border={'none'} onClick={switchEdit}>
+      <StyledUserName fontSize={'big'} wordbreak={'break-all'} border={'none'} onClick={switchEdit}>
         {userName}
       </StyledUserName>
     </StyledProfileNameWrapper>
