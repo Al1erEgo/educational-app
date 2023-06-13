@@ -33,7 +33,7 @@ export const ProfileNameInput: FC<ProfileNameBaseType> = ({ userName, switchEdit
       name: userName,
     },
     resolver: yupResolver(
-      yup.object({
+      yup.object<UpdateUserNameType, any>({
         name: nameSchema,
       })
     ),

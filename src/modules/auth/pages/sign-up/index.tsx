@@ -20,7 +20,7 @@ export const SignUp = () => {
   } = useForm<SignUpFormInputs>({
     mode: 'all',
     resolver: yupResolver(
-      yup.object({
+      yup.object<SignUpFormInputs, any>({
         email: emailSchema,
         password: passwordSchema,
         'confirm password': confirmPasswordSchema,

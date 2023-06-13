@@ -24,7 +24,7 @@ export const SignIn = () => {
   } = useForm<LoginFormInputs>({
     mode: 'all',
     resolver: yupResolver(
-      yup.object({
+      yup.object<LoginFormInputs, any>({
         email: emailSchema,
         password: passwordSchema,
         rememberMe: rememberMeSchema,

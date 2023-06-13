@@ -25,7 +25,7 @@ export const NewPassword: FC = () => {
   } = useForm<NewPasswordFormInputs>({
     mode: 'all',
     resolver: yupResolver(
-      yup.object({
+      yup.object<NewPasswordFormInputs, any>({
         password: passwordSchema,
       })
     ),

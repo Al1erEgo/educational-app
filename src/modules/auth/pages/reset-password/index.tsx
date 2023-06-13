@@ -21,7 +21,7 @@ export const ResetPassword = () => {
   } = useForm<ResetPasswordFormInputs>({
     mode: 'all',
     resolver: yupResolver(
-      yup.object({
+      yup.object<ResetPasswordFormInputs, any>({
         email: emailSchema,
       })
     ),
