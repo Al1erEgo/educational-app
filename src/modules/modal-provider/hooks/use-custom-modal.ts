@@ -1,10 +1,6 @@
 import { useState } from 'react'
 
-import {
-  ModalConfig,
-  ModalContextType,
-  UseCustomModalType,
-} from '@/modules/modal-provider/types'
+import { ModalConfig, ModalContextType, UseCustomModalType } from '@/modules/modal-provider/types'
 
 /**
  A custom React hook for managing modal state.
@@ -13,7 +9,6 @@ import {
  as well as functions to show and hide the modal.
  */
 
-// TODO check is refactor with config === null works or not
 export const useCustomModal: UseCustomModalType = () => {
   const [modalConfig, setModalConfig] = useState<ModalConfig>({
     title: '',

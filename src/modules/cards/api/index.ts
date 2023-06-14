@@ -1,6 +1,5 @@
 import { rootApi } from '@/store'
 
-// TODO: rename file to cardsApi, do not delete index file also
 export const cardsApi = rootApi.injectEndpoints({
   endpoints: builder => ({
     cardPacks: builder.query<CardPacksResponseType, CardPacksRequestType>({
@@ -71,10 +70,7 @@ export const cardsApi = rootApi.injectEndpoints({
       }),
       invalidatesTags: ['packs', 'pack'],
     }),
-    updateCardGrade: builder.mutation<
-      UpdateCardGradeResponseType,
-      UpdateCardGradeRequestType
-    >({
+    updateCardGrade: builder.mutation<UpdateCardGradeResponseType, UpdateCardGradeRequestType>({
       query: (requestData: UpdateCardGradeRequestType) => ({
         url: 'cards/grade',
         method: 'PUT',
