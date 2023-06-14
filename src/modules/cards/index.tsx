@@ -7,7 +7,6 @@ import { Learn, Pack, Packs } from './pages'
 
 import { Error404 } from '@/components'
 
-//TODO rename file to routes.tsx and rename component to CardsRoutes
 export const Cards = () => {
   const path = useResolvedPath('')
 
