@@ -1,9 +1,8 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 
 import { Slider } from 'antd'
 
 import { StyledPacksSliderWrapper } from '@/modules/cards/components/packs-slider/styles'
-import { useSliderKeyUpdater } from '@/modules/cards/hooks'
 import { StyledCardsText } from '@/modules/cards/styles'
 import { HandleSliderChangeType } from '@/modules/cards/types'
 
@@ -17,34 +16,39 @@ type PacksSliderType = {
 }
 
 export const PacksSlider: FC<PacksSliderType> = ({
-  minCardsCountValue,
-  maxCardsCountValue,
-  minSlider = minCardsCountValue || 0,
-  maxSlider = maxCardsCountValue || 0,
+  minCardsCountValue = 0,
+  maxCardsCountValue = 0,
+  minSlider,
+  maxSlider,
   handleSliderChange,
   isLoading,
 }) => {
-  const sliderKey = useSliderKeyUpdater(minSlider, maxSlider)
+  const [sliderValue, setSliderValue] = useState<[number, number] | undefined>()
 
-  debugger
+  const handleChange = (value: [number, number] | undefined) => {
+    setSliderValue(value)
+  }
 
-  console.log('minSliderPacksSlider', minSlider)
-  console.log('maxSliderPacksSlider', maxSlider)
-  console.log('minCardsCountValuePacksSlider', minCardsCountValue)
-  console.log('maxCardsCountValuePacksSlider', maxCardsCountValue)
+  useEffect(() => {
+    setSliderValue([
+      minSlider || minCardsCountValue,
+      maxSlider || maxCardsCountValue,
+    ])
+  }, [minSlider, maxSlider, minCardsCountValue, maxCardsCountValue])
 
   return (
     <StyledPacksSliderWrapper>
       <StyledCardsText>Number of cards</StyledCardsText>
       <Slider
-        key={sliderKey}
         range={{ draggableTrack: false }}
-        defaultValue={[minSlider, maxSlider]}
+        defaultValue={[minCardsCountValue, maxCardsCountValue]}
         min={minCardsCountValue}
         max={maxCardsCountValue}
+        value={sliderValue}
         step={1}
+        onChange={handleChange}
         onAfterChange={handleSliderChange}
-        disabled={minSlider === maxSlider || isLoading}
+        disabled={minCardsCountValue === maxCardsCountValue || isLoading}
       />
     </StyledPacksSliderWrapper>
   )
