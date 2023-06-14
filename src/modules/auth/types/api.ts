@@ -11,13 +11,9 @@ type UserEntityType = {
   __v: number
 }
 
-type ValidationBaseDataType = {
+export type RegisterRequestType = {
   email: string
   password: string
-}
-
-export type RegisterRequestType = ValidationBaseDataType & {
-  'confirm password': string
 }
 
 export type RegisterResponseType = {
@@ -25,7 +21,7 @@ export type RegisterResponseType = {
   error?: string
 }
 
-export type LoginRequestType = ValidationBaseDataType & {
+export type LoginRequestType = RegisterRequestType & {
   rememberMe: boolean
 }
 

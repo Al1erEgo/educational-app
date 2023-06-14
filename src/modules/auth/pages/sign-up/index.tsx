@@ -13,7 +13,7 @@ import { StyledCard, StyledNavLink, StyledP } from '@/modules/auth/styles'
 import { SignUpFormInputs } from '@/modules/auth/types'
 
 export const SignUpPage = () => {
-  const [onSubmit, { isLoading, isSuccess, error }] = useRegisterMutation()
+  const [trigger, { isLoading, isSuccess, error }] = useRegisterMutation()
 
   const {
     handleSubmit,
@@ -25,10 +25,17 @@ export const SignUpPage = () => {
       yup.object<SignUpFormInputs, any>({
         email: emailSchema,
         password: passwordSchema,
-        'confirm password': confirmPasswordSchema,
+        confirmPassword: confirmPasswordSchema,
       })
     ),
   })
+
+  const onSubmit = async (data: SignUpFormInputs) => {
+    trigger({
+      email: data.email,
+      password: data.password,
+    })
+  }
 
   if (isSuccess) {
     return (
@@ -47,7 +54,7 @@ export const SignUpPage = () => {
       <Form onFinish={handleSubmit(onSubmit)}>
         <FormInput name="email" control={control} error={errors.email} />
         <FormInput name="password" control={control} error={errors.password} />
-        <FormInput name="confirm password" control={control} error={errors['confirm password']} />
+        <FormInput name="confirmPassword" control={control} error={errors.confirmPassword} />
         <ErrorMessage serverError={error} />
         <FormButton loading={isLoading}>Sign Up</FormButton>
       </Form>

@@ -5,7 +5,7 @@ type FormInputs = {
 }
 
 export type SignUpFormInputs = FormInputs & {
-  'confirm password': string
+  confirmPassword: string
 }
 
 export type LoginFormInputs = FormInputs & {
