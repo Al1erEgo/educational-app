@@ -5,7 +5,6 @@ import { formSchemaMap } from '@/modules/auth/constants'
 import { useAuthMutation } from '@/modules/auth/hooks/use-auth-mutation'
 import { FormType } from '@/modules/auth/types'
 
-//TODO убрать any
 /**
  A hook that returns the necessary form data and functions required for form submission and validation.
  @template T - The type of form data.
@@ -14,10 +13,8 @@ import { FormType } from '@/modules/auth/types'
  validation.
  */
 export const useFormData = <T extends FieldValues>(formType: FormType): any => {
-  const { handleSubmit, control, setError, errors, watch, setValue } =
-    useFormWithValidation<T>(formType)
-  const [onSubmit, { trigger, isLoading, isSuccess, error }] =
-    useAuthMutation(formType)
+  const { handleSubmit, control, setError, errors, watch, setValue } = useFormWithValidation<T>(formType)
+  const [onSubmit, { trigger, isLoading, isSuccess, error }] = useAuthMutation(formType)
 
   return [
     onSubmit,

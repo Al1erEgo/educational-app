@@ -5,8 +5,6 @@ import successRegistrationImage from '@/assets/success-registration.png'
 
 export const confirmationMessageTimeout = 5000
 
-// TODO rename confirmationMessagesData or confirmationMessagesContent...
-// TODO or remove this object at all
 export const confirmationMessagesArguments = {
   resetPassword: {
     title: 'Check Email',

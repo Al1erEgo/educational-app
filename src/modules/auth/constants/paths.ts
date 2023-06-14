@@ -1,6 +1,5 @@
 import { MAIN_PATH } from '@/constants'
 
-// TODO change to const object (or at least change all places to enums)
 export enum AUTH_PATH {
   Root = '/',
   Profile = '/profile',
