@@ -27,8 +27,6 @@ export const Packs = () => {
   const { isDataLoading, tableParams, minCardsCountValue, maxCardsCountValue } =
     tableData
 
-  debugger
-
   return (
     <>
       <CardsHeader title={'Packs list'}>
