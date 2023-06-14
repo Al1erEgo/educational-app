@@ -6,7 +6,6 @@ import { ABSOLUTE_AUTH_PATH } from '@/modules/auth/constants'
 import { useAuthMutation } from '@/modules/auth/hooks/use-auth-mutation'
 import { useAuthorised } from '@/modules/auth/hooks/use-authorised'
 
-// TODO move to component folder
 export const useAuthWidgetData = () => {
   const { isAuthorised, data: userData } = useAuthorised()
   const [handleLogOut] = useAuthMutation('logout')
