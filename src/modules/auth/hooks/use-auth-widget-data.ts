@@ -1,8 +1,9 @@
 import { redirect, useLocation } from 'react-router-dom'
 
+import { MAIN_PATH } from '@/constants'
 import { useDoNavigate } from '@/hooks'
 import { useAuthMeLogOutMutation, useAuthMeUpdateMutation } from '@/modules/auth/api'
-import { ABSOLUTE_AUTH_PATH } from '@/modules/auth/constants'
+import { AUTH_PATH } from '@/modules/auth/constants'
 import { useAuthorised } from '@/modules/auth/hooks/use-authorised'
 
 type OnSubmitMutationType = <T>(data?: T) => Promise<void>
@@ -10,9 +11,9 @@ type OnSubmitMutationType = <T>(data?: T) => Promise<void>
 export const useAuthWidgetData = () => {
   const { isAuthorised, data: userData } = useAuthorised()
   const [trigger] = useAuthMeLogOutMutation()
-  const handleRedirectToProfile = useDoNavigate(ABSOLUTE_AUTH_PATH.Profile)
-  const handleRedirectToSignIn = useDoNavigate(ABSOLUTE_AUTH_PATH.SignIn)
-  const handleRedirectToSignUp = useDoNavigate(ABSOLUTE_AUTH_PATH.SignUp)
+  const handleRedirectToProfile = useDoNavigate(`${MAIN_PATH.Auth}${AUTH_PATH.Profile}`)
+  const handleRedirectToSignIn = useDoNavigate(`${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`)
+  const handleRedirectToSignUp = useDoNavigate(`${MAIN_PATH.Auth}${AUTH_PATH.SignUp}`)
 
   const location = useLocation()
 
@@ -32,7 +33,7 @@ export const useAuthWidgetData = () => {
   const handleLogOut: OnSubmitMutationType = async () => {
     try {
       await trigger().unwrap()
-      redirect(ABSOLUTE_AUTH_PATH.SignIn)
+      redirect(`${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`)
     } catch (e: unknown) {
       return
     }

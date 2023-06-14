@@ -8,8 +8,9 @@ import { StyledCard } from '../../styles'
 
 import { StyledProfileContainer, StyledProfileLogOutButton, StyledProfileText } from './styles'
 
+import { MAIN_PATH } from '@/constants'
 import { useAuthMeLogOutMutation } from '@/modules/auth/api'
-import { ABSOLUTE_AUTH_PATH } from '@/modules/auth/constants'
+import { AUTH_PATH } from '@/modules/auth/constants'
 
 export const Profile = () => {
   const { data: userData } = useAuthorised()
@@ -19,7 +20,7 @@ export const Profile = () => {
 
   const handleLogout = async () => {
     await trigger().unwrap()
-    redirect(ABSOLUTE_AUTH_PATH.SignIn)
+    redirect(`${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`)
   }
 
   return (

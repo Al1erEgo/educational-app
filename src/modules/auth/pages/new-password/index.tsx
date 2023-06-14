@@ -6,10 +6,12 @@ import { useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 import * as yup from 'yup'
 
+import successRegistrationImage from '@/assets/success-registration.png'
 import { ErrorMessage } from '@/components'
+import { MAIN_PATH } from '@/constants'
 import { useSetNewPasswordMutation } from '@/modules/auth/api'
 import { ConfirmationMessage, FormButton, FormInput } from '@/modules/auth/components'
-import { ABSOLUTE_AUTH_PATH, passwordSchema } from '@/modules/auth/constants'
+import { AUTH_PATH, passwordSchema } from '@/modules/auth/constants'
 import { StyledCard, StyledNavLink, StyledText } from '@/modules/auth/styles'
 import { NewPasswordFormInputs } from '@/modules/auth/types'
 
@@ -41,7 +43,15 @@ export const NewPassword: FC = () => {
   }
 
   if (isSuccess) {
-    return <ConfirmationMessage variant={'newPassword'} />
+    return (
+      <ConfirmationMessage
+        title={'Success!'}
+        text={'Your password has been successfully changed, please go to login!'}
+        redirectPath={`${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`}
+        image={successRegistrationImage}
+        timer={true}
+      />
+    )
   }
 
   return (
@@ -52,7 +62,7 @@ export const NewPassword: FC = () => {
         <ErrorMessage serverError={error} />
         <FormButton loading={isLoading}>Create new Password</FormButton>
       </Form>
-      <StyledNavLink to={ABSOLUTE_AUTH_PATH.ResetPassword}>Back to Send Email form</StyledNavLink>
+      <StyledNavLink to={`${MAIN_PATH.Auth}${AUTH_PATH.ResetPassword}`}>Back to Send Email form</StyledNavLink>
     </StyledCard>
   )
 }

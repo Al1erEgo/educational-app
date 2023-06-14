@@ -3,10 +3,12 @@ import { Form } from 'antd'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
+import checkEmailImage from '@/assets/check-email-image.svg'
 import { ErrorMessage } from '@/components'
+import { MAIN_PATH } from '@/constants'
 import { useRequestPasswordResetMutation } from '@/modules/auth/api'
 import { ConfirmationMessage, FormButton, FormInput } from '@/modules/auth/components'
-import { ABSOLUTE_AUTH_PATH, emailSchema } from '@/modules/auth/constants'
+import { AUTH_PATH, emailSchema } from '@/modules/auth/constants'
 import { StyledCard, StyledNavLink, StyledP, StyledText } from '@/modules/auth/styles'
 import { ResetPasswordFormInputs } from '@/modules/auth/types'
 
@@ -28,7 +30,15 @@ export const ResetPassword = () => {
   })
 
   if (isSuccess) {
-    return <ConfirmationMessage variant={'resetPassword'} email={watch().email} />
+    return (
+      <ConfirmationMessage
+        title={'Check Email'}
+        text={'We’ve sent an Email with instructions to'}
+        redirectPath={`${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`}
+        image={checkEmailImage}
+        email={watch().email}
+      />
+    )
   }
 
   return (
@@ -43,7 +53,7 @@ export const ResetPassword = () => {
       </Form>
       <StyledP>Did you remember your password?</StyledP>
 
-      <StyledNavLink to={ABSOLUTE_AUTH_PATH.SignIn}>Try logging in</StyledNavLink>
+      <StyledNavLink to={`${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`}>Try logging in</StyledNavLink>
     </StyledCard>
   )
 }

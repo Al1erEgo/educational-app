@@ -3,10 +3,12 @@ import { Form } from 'antd'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
+import successRegistrationImage from '@/assets/success-registration.png'
 import { ErrorMessage } from '@/components'
+import { MAIN_PATH } from '@/constants'
 import { useRegisterMutation } from '@/modules/auth/api'
 import { ConfirmationMessage, FormButton, FormInput } from '@/modules/auth/components'
-import { ABSOLUTE_AUTH_PATH, confirmPasswordSchema, emailSchema, passwordSchema } from '@/modules/auth/constants'
+import { AUTH_PATH, confirmPasswordSchema, emailSchema, passwordSchema } from '@/modules/auth/constants'
 import { StyledCard, StyledNavLink, StyledP } from '@/modules/auth/styles'
 import { SignUpFormInputs } from '@/modules/auth/types'
 
@@ -29,7 +31,15 @@ export const SignUp = () => {
   })
 
   if (isSuccess) {
-    return <ConfirmationMessage variant={'signUp'} />
+    return (
+      <ConfirmationMessage
+        title={'Success!'}
+        text={'We’ve successfully registered you, please go through the authorization'}
+        redirectPath={`${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`}
+        image={successRegistrationImage}
+        timer={true}
+      />
+    )
   }
 
   return (
@@ -42,7 +52,7 @@ export const SignUp = () => {
         <FormButton loading={isLoading}>Sign Up</FormButton>
       </Form>
       <StyledP>Already have an account?</StyledP>
-      <StyledNavLink to={ABSOLUTE_AUTH_PATH.SignIn}>Sign In</StyledNavLink>
+      <StyledNavLink to={`${MAIN_PATH.Auth}${AUTH_PATH.SignIn}`}>Sign In</StyledNavLink>
     </StyledCard>
   )
 }

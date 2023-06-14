@@ -10,7 +10,7 @@ import { ErrorMessage } from '@/components'
 import { MAIN_PATH } from '@/constants'
 import { useLoginMutation } from '@/modules/auth/api'
 import { FormButton, FormCheckbox, FormInput } from '@/modules/auth/components'
-import { ABSOLUTE_AUTH_PATH, emailSchema, passwordSchema, rememberMeSchema } from '@/modules/auth/constants'
+import { AUTH_PATH, emailSchema, passwordSchema, rememberMeSchema } from '@/modules/auth/constants'
 import { StyledCard, StyledNavLink, StyledP } from '@/modules/auth/styles'
 import { LoginFormInputs, LoginRequestType } from '@/modules/auth/types'
 
@@ -43,7 +43,9 @@ export const SignIn = () => {
         <FormInput name="email" control={control} error={errors.email} />
         <FormInput name="password" control={control} error={errors.password} />
         <FormCheckbox name="rememberMe" control={control} defaultValue={false} />
-        <StyledForgotPasswordLink to={ABSOLUTE_AUTH_PATH.ResetPassword}>Forgot password?</StyledForgotPasswordLink>
+        <StyledForgotPasswordLink to={`${MAIN_PATH.Auth}${AUTH_PATH.ResetPassword}`}>
+          Forgot password?
+        </StyledForgotPasswordLink>
 
         <ErrorMessage serverError={error} />
 
@@ -51,7 +53,7 @@ export const SignIn = () => {
       </Form>
       <StyledP>Have no account?</StyledP>
 
-      <StyledNavLink to={ABSOLUTE_AUTH_PATH.SignUp}>Sign Up</StyledNavLink>
+      <StyledNavLink to={`${MAIN_PATH.Auth}${AUTH_PATH.SignUp}`}>Sign Up</StyledNavLink>
     </StyledCard>
   )
 }

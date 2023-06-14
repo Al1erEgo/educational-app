@@ -16,6 +16,10 @@ export const StyledLogo = styled.img`
   margin-left: 10%;
   margin-bottom: 15px;
   margin-top: 15px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `
 export const StyledProfileWidgetWrapper = styled.div`
   display: flex;

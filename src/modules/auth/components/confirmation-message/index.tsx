@@ -5,18 +5,27 @@ import { Form } from 'antd'
 import { StyledCheckEmailImage } from './styles'
 
 import { useDoNavigate } from '@/hooks'
-import { confirmationMessagesArguments, confirmationMessageTimeout } from '@/modules/auth/constants'
 import { StyledAuthButton, StyledCard, StyledText } from '@/modules/auth/styles'
-import { ConfirmationMessagesArgumentsType } from '@/modules/auth/types'
 
 type ConfirmationMessageProps = {
-  variant: keyof ConfirmationMessagesArgumentsType
+  title: string
+  redirectPath: string
+  text: string
+  image: string
+  timer?: boolean
   email?: string
 }
 
-export const ConfirmationMessage: FC<ConfirmationMessageProps> = ({ variant, email }) => {
-  const { title, redirectPath, timer, image, text } = confirmationMessagesArguments[variant]
+const confirmationMessageTimeout = 5000
 
+export const ConfirmationMessage: FC<ConfirmationMessageProps> = ({
+  title,
+  redirectPath,
+  timer,
+  image,
+  text,
+  email,
+}) => {
   const handleRedirect = useDoNavigate(redirectPath)
 
   useEffect(() => {
