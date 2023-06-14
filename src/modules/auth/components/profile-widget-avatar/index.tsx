@@ -4,7 +4,7 @@ import { UserOutlined } from '@ant-design/icons'
 
 import { StyledSkeletonAvatar, StyledUserIconWidget } from './styles'
 
-import { ProfileAvatarProps } from '@/modules/auth/types/auth-avatar'
+import { ProfileAvatarProps } from '@/modules/auth/types/profile-avatar-props'
 import { getAvatar } from '@/modules/auth/utils/get-avatar'
 
 export const ProfileWidgetAvatar: FC<ProfileAvatarProps> = ({ isLoading, avatar }) => {

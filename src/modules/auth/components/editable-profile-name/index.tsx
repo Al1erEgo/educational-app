@@ -18,9 +18,10 @@ import {
 import { StyledUserName } from '@/modules/auth/components/profile-widget/styles'
 import { nameSchema } from '@/modules/auth/constants'
 import { UpdateUserNameType } from '@/modules/auth/types'
-import { ProfileNameBaseProps } from '@/modules/auth/types/profile-name'
 
-type EditableProfileNameProps = Omit<ProfileNameBaseProps, 'switchEdit'>
+type EditableProfileNameProps = {
+  userName?: string
+}
 
 export const EditableProfileName: FC<EditableProfileNameProps> = ({ userName }) => {
   const [isEdit, setIsEdit] = useState(false)

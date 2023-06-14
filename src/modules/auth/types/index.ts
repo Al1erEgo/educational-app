@@ -1,4 +1,3 @@
-export * from './api'
-export * from './auth-avatar'
-export * from './auth-forms'
-export * from './profile-name'
+export * from './api-dtos'
+export * from './profile-avatar-props'
+export * from './auth-forms-inputs'
