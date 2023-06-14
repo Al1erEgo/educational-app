@@ -13,19 +13,17 @@ import {
  as well as functions to show and hide the modal.
  */
 export const useCustomModal: UseCustomModalType = () => {
-  const [modalConfig, setModalConfig] = useState<ModalConfig>({
-    title: '',
-    content: null,
-  })
+  const [modalConfig, setModalConfig] = useState<ModalConfig>()
   const showModal = (config: ModalConfig) => {
     setModalConfig(config)
   }
   const hideModal = () => {
-    setModalConfig({
-      title: '',
-      content: null,
-    })
+    setModalConfig(undefined)
   }
 
-  return { modalConfig, showModal, hideModal }
+  return {
+    modalConfig: modalConfig ?? { title: '', content: null },
+    showModal,
+    hideModal,
+  }
 }
