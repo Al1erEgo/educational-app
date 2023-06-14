@@ -7,6 +7,7 @@ import {
   ButtonsHandlersType,
   CardsModalsHandlersType,
   CardsMutationsObjType,
+  CardsResponseType,
   HandleSearchType,
   HandleTableChangeType,
   PackTableParamsType,
@@ -15,7 +16,6 @@ import {
 import { useCardsModals } from './use-cards-modals'
 
 import { MAIN_PATH } from '@/constants'
-import { CardsResponseType } from '@/modules/cards/api'
 
 type UsePackHandlersType = (
   setTableParams: Dispatch<SetStateAction<PackTableParamsType>>,

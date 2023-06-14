@@ -1,4 +1,4 @@
-import { NewCardRequestType, UpdateCardRequestType } from '@/modules/cards/api'
+import { NewCardRequestType, UpdateCardRequestType } from '@/modules/cards/types/api-dtos'
 
 export type PackModalCardPayloadType = NewCardRequestType | UpdateCardRequestType
 

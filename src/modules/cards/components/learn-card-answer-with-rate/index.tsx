@@ -4,7 +4,6 @@ import { Rate, Typography } from 'antd'
 
 import { CardsTableContentCard } from '@/modules/cards/components'
 import { StyledRateContainer } from '@/modules/cards/components/learn-card-answer-with-rate/styles'
-import { rateDescriptions } from '@/modules/cards/constants'
 
 const { Text } = Typography
 
@@ -15,6 +14,8 @@ type LearnCardAnswerWithRateProps = {
   rate: number
   setRate: (value: number | ((prevState: number) => number)) => void
 }
+
+export const rateDescriptions = ['terrible', 'bad', 'normal', 'good', 'wonderful']
 
 export const LearnCardAnswerWithRate: FC<LearnCardAnswerWithRateProps> = ({
   answer,

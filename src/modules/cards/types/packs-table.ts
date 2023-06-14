@@ -4,7 +4,7 @@ import { SorterResult } from 'antd/es/table/interface'
 import { TablePaginationConfig } from 'antd/es/table/InternalTable'
 
 import { BaseTableDataType } from '@/modules/cards/types/cards-table-data'
-import { HandlePacksTableChangeType } from '@/modules/cards/types/packs-handler-functions'
+import { HandlePacksTableChangeType } from '@/modules/cards/types/packs-handlers'
 
 export type PackType = {
   key?: string
@@ -44,7 +44,3 @@ export type PacksTableDataType = BaseTableDataType & {
   minCardsCountValue: number | undefined
   maxCardsCountValue: number | undefined
 }
-
-export type HandleSliderChangeType = (value: number | [number, number]) => void
-export type HandleToggleButtonType = (buttonName: string) => void
-export type HandleClearFiltersType = () => void

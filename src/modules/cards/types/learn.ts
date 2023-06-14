@@ -1,4 +1,4 @@
-import { CardType } from '@/modules/cards/api'
+import { CardType } from '@/modules/cards/types/api-dtos'
 import { TableErrorType } from '@/modules/cards/types/cards-table-data'
 
 export type LearnNames = {

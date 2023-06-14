@@ -1,9 +1,8 @@
 import React, { FC } from 'react'
 
-import { DeleteCardRequestType, DeletedCardsPackRequestType } from '@/modules/cards/api'
 import { ModalButtons } from '@/modules/cards/components'
 import { StyledModalWrapper } from '@/modules/cards/styles'
-import { CardsModalBaseProps } from '@/modules/cards/types'
+import { CardsModalBaseProps, DeleteCardRequestType, DeletedCardsPackRequestType } from '@/modules/cards/types'
 
 type ModalDeleteProps =
   | CardsModalBaseProps<DeletedCardsPackRequestType & { name?: string }>

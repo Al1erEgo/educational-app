@@ -3,12 +3,18 @@ import React from 'react'
 import { Form } from 'antd'
 
 import { ModalButtons, ModalFormCheckbox, ModalFormInput, ModalFormUpload } from '@/modules/cards/components'
-import { MODAL_PACK_FORMAT } from '@/modules/cards/constants'
 import { useCardsModalForm } from '@/modules/cards/hooks'
 import { StyledModalWrapper } from '@/modules/cards/styles'
-import { CardsModalBaseProps, ModalPackFormDataType, PacksModalPayloadType } from '@/modules/cards/types'
+import {
+  CardsModalBaseProps,
+  ModalCardsFormat,
+  ModalPackFormDataType,
+  PacksModalPayloadType,
+} from '@/modules/cards/types'
 
 type ModalPackFormProps<T> = CardsModalBaseProps<T>
+
+const MODAL_PACK_FORMAT = ModalCardsFormat.IMGPACK
 
 export const ModalPackForm = <T extends PacksModalPayloadType>({
   payload,

@@ -3,10 +3,15 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 
 import { LoginResponseType } from '@/modules/auth/types'
-import { DeletedCardsPackRequestType, UpdateCardsPackRequestType } from '@/modules/cards/api'
 import { CardsTableContentCard, PacksTableActions } from '@/modules/cards/components'
 import { packsTableColumns } from '@/modules/cards/constants'
-import { CardsModalsHandlerType, PacksTableDataColumnsType, PackType } from '@/modules/cards/types'
+import {
+  CardsModalsHandlerType,
+  DeletedCardsPackRequestType,
+  PacksTableDataColumnsType,
+  PackType,
+  UpdateCardsPackRequestType,
+} from '@/modules/cards/types'
 
 type GetPacksTableColumnsType = (
   activeButton: string,

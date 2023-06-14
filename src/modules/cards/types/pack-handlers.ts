@@ -8,10 +8,10 @@ import {
   NewCardRequestType,
   UpdateCardRequestType,
   UpdateCardsPackRequestType,
-} from '@/modules/cards/api'
+} from '@/modules/cards/types/api-dtos'
 import { PackCardType } from '@/modules/cards/types/pack-table'
 
-export type HandlerFunctionDataType =
+type HandlerFunctionDataType =
   | NewCardRequestType
   | DeleteCardRequestType
   | UpdateCardRequestType
@@ -28,5 +28,9 @@ export type HandleTableChangeType = (
 ) => void
 
 export type HandleSearchType = (searchValue: string) => void
+
+export type HandleSliderChangeType = (value: number | [number, number]) => void
+export type HandleToggleButtonType = (buttonName: string) => void
+export type HandleClearFiltersType = () => void
 
 export type ButtonsHandlersType = { [key: string]: () => void }

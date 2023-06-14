@@ -1,5 +1,4 @@
-import { CardsResponseType } from '@/modules/cards/api'
-import { PackCardType } from '@/modules/cards/types'
+import { CardsResponseType, PackCardType } from '@/modules/cards/types'
 
 type getFormattedTableDataType = (tableData: CardsResponseType | undefined) => PackCardType[] | undefined
 

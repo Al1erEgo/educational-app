@@ -1,15 +1,19 @@
-import { DeleteCardRequestType, UpdateCardRequestType } from '@/modules/cards/api'
 import { PackTableActions } from '@/modules/cards/components'
 import { packTableColumns } from '@/modules/cards/constants'
-import { CardsModalsHandlerType, PackTableColumnsType } from '@/modules/cards/types'
+import {
+  CardsModalsHandlerType,
+  DeleteCardRequestType,
+  PackTableColumnsType,
+  UpdateCardRequestType,
+} from '@/modules/cards/types'
 
-type GetTableColumnsType = (
+type GetPackTableColumnsType = (
   isMine: boolean,
   deleteCardModal: CardsModalsHandlerType<DeleteCardRequestType>,
   updateCard: CardsModalsHandlerType<UpdateCardRequestType>
 ) => PackTableColumnsType[]
 
-export const getPackTableColumns: GetTableColumnsType = (isMine, deleteCardModal, updateCardModal) => {
+export const getPackTableColumns: GetPackTableColumnsType = (isMine, deleteCardModal, updateCardModal) => {
   if (isMine) {
     return [
       ...packTableColumns,

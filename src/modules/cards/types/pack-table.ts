@@ -4,7 +4,7 @@ import { SorterResult } from 'antd/es/table/interface'
 import { TablePaginationConfig } from 'antd/es/table/InternalTable'
 
 import { BaseTableDataType } from '@/modules/cards/types/cards-table-data'
-import { HandleTableChangeType } from '@/modules/cards/types/pack-handlers-functions'
+import { HandleTableChangeType } from '@/modules/cards/types/pack-handlers'
 
 export type PackTableDataType = BaseTableDataType & {
   handleTableChange: HandleTableChangeType
