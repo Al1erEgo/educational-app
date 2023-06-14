@@ -6,7 +6,7 @@ export const CARD_PATH = {
   Packs: '/packs',
   Pack: '/pack/:packId',
   Error: '*',
-  // Pack2: id => `/pack/${id}`, TODO: use dynamic routes paths if you want
+  // Pack2: id => `/pack/${id}`,
 } as const
 
 export const ABSOLUTE_CARD_PATH = {
