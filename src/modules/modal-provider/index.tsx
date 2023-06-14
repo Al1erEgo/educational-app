@@ -10,13 +10,7 @@ export const ModalProvider: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <ModalContext.Provider value={{ showModal, hideModal }}>
-      <Modal
-        title={modalConfig.title}
-        open={!!modalConfig.title}
-        footer={null}
-        onCancel={hideModal}
-        destroyOnClose
-      >
+      <Modal title={modalConfig.title} open={!!modalConfig.title} footer={null} onCancel={hideModal} destroyOnClose>
         {modalConfig.content}
       </Modal>
       {children}
