@@ -6,22 +6,14 @@ export const packTableColumns: PackTableColumnsType[] = [
   {
     title: 'Question',
     dataIndex: 'question',
-    render: (_, card) => (
-      <CardsTableContentCard
-        textContent={card.question}
-        imgContent={card.questionImg}
-      />
-    ),
+    ellipsis: true,
+    render: (_, card) => <CardsTableContentCard textContent={card.question} imgContent={card.questionImg} />,
   },
   {
     title: 'Answer',
     dataIndex: 'answer',
-    render: (_, card) => (
-      <CardsTableContentCard
-        textContent={card.answer}
-        imgContent={card.answerImg}
-      />
-    ),
+    ellipsis: true,
+    render: (_, card) => <CardsTableContentCard textContent={card.answer} imgContent={card.answerImg} />,
   },
   {
     title: 'LastUpdated',

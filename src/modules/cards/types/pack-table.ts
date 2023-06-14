@@ -16,6 +16,7 @@ export type PackTableDataType = BaseTableDataType & {
 export type PackTableColumnsType = {
   title: string
   dataIndex: string | string[]
+  ellipsis?: boolean
   sorter?: boolean
   width?: string
   render?: (text: string, record: PackCardType) => React.ReactElement

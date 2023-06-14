@@ -3,27 +3,15 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 
 import { LoginResponseType } from '@/modules/auth/types'
-import {
-  DeletedCardsPackRequestType,
-  UpdateCardsPackRequestType,
-} from '@/modules/cards/api'
-import {
-  CardsTableContentCard,
-  PacksTableActions,
-} from '@/modules/cards/components'
+import { DeletedCardsPackRequestType, UpdateCardsPackRequestType } from '@/modules/cards/api'
+import { CardsTableContentCard, PacksTableActions } from '@/modules/cards/components'
 import { packsTableColumns } from '@/modules/cards/constants'
-import {
-  CardsModalsHandlerType,
-  PacksTableDataColumnsType,
-  PackType,
-} from '@/modules/cards/types'
+import { CardsModalsHandlerType, PacksTableDataColumnsType, PackType } from '@/modules/cards/types'
 
 type GetPacksTableColumnsType = (
   activeButton: string,
   userData: LoginResponseType | undefined,
-  deletePackModal: CardsModalsHandlerType<
-    DeletedCardsPackRequestType & { name?: string }
-  >,
+  deletePackModal: CardsModalsHandlerType<DeletedCardsPackRequestType & { name?: string }>,
   updatePackModal: CardsModalsHandlerType<UpdateCardsPackRequestType>
 ) => PacksTableDataColumnsType[]
 export const getPacksTableColumns: GetPacksTableColumnsType = (
@@ -36,12 +24,7 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
     {
       title: 'Cover',
       dataIndex: 'cover',
-      render: (_, pack: PackType) => (
-        <CardsTableContentCard
-          textContent={'no cover'}
-          imgContent={pack.deckCover}
-        />
-      ),
+      render: (_, pack: PackType) => <CardsTableContentCard textContent={'no cover'} imgContent={pack.deckCover} />,
     },
     {
       title: 'Name',
@@ -49,11 +32,7 @@ export const getPacksTableColumns: GetPacksTableColumnsType = (
       sorter: true,
       ellipsis: true,
       render: (text: string, pack: PackType) => (
-        <NavLink
-          to={`/cards/pack/${pack?._id}?name=${pack?.name}&own=${
-            pack?.user_id === userData?._id
-          }`}
-        >
+        <NavLink to={`/cards/pack/${pack?._id}?name=${pack?.name}&own=${pack?.user_id === userData?._id}`}>
           {text}
         </NavLink>
       ),
