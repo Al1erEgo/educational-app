@@ -31,7 +31,6 @@ export const NewPassword: FC = () => {
   return (
     <StyledCard title={'Create new Password'}>
       <Form onFinish={handleSubmit(handleNewPasswordSubmit)}>
-        {/* TODO {...formInputsConfigs['password']} */}
         <FormInput name="password" control={control} error={errors.password} />
         <StyledText type="secondary">Create new password and we will send you further instructions to email</StyledText>
         <ErrorMessageHandler serverError={error} />

@@ -4,7 +4,6 @@ type FormInputs = {
   error?: string
 }
 
-// TODO it's bad to have spaces in the object key name
 export type SignUpFormInputs = FormInputs & {
   'confirm password': string
 }
@@ -19,9 +18,4 @@ export type NewPasswordFormInputs = Omit<FormInputs, 'email'>
 
 export type UpdateUserNameType = { name: string }
 
-export type FormType =
-  | 'updateUserName'
-  | 'signup'
-  | 'login'
-  | 'resetPassword'
-  | 'newPassword'
+export type FormType = 'updateUserName' | 'signup' | 'login' | 'resetPassword' | 'newPassword'
