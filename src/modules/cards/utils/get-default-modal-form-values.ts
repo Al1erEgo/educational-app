@@ -1,9 +1,6 @@
 import { CardsModalPayloadType, ModalCardsFormat } from '@/modules/cards/types'
 
-export const getDefaultModalFormValues = <T extends CardsModalPayloadType>(
-  formType: ModalCardsFormat,
-  payload: T
-) => {
+export const getDefaultModalFormValues = <T extends CardsModalPayloadType>(formType: ModalCardsFormat, payload: T) => {
   if (formType === ModalCardsFormat.IMG && 'card' in payload) {
     return {
       questionImg: payload.card.questionImg || '',

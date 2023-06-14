@@ -1,13 +1,6 @@
-import {
-  ModalCardFormDataType,
-  ModalPackFormDataType,
-} from '@/modules/cards/types'
+import { ModalCardFormDataType, ModalPackFormDataType } from '@/modules/cards/types'
 
-export const getModalCardFormControllerName = (
-  name: string,
-  prefix: string = '',
-  suffix: string = ''
-) => {
+export const getModalCardFormControllerName = (name: string, prefix: string = '', suffix: string = '') => {
   if (name === 'Question' || name === 'Answer') {
     return (name.toLowerCase() + suffix) as keyof ModalCardFormDataType
   }

@@ -5,8 +5,4 @@ export type CardsMutationsObjType = {
   [key: string]: ReturnType<typeof useCardsMutation>
 }
 
-export type CardsMutationsWithConditionsType = [
-  CardsMutationsObjType,
-  boolean,
-  TableErrorType
-]
+export type CardsMutationsWithConditionsType = [CardsMutationsObjType, boolean, TableErrorType]
