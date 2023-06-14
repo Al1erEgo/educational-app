@@ -14,7 +14,7 @@ import { AUTH_PATH, emailSchema, passwordSchema, rememberMeSchema } from '@/modu
 import { StyledCard, StyledNavLink, StyledP } from '@/modules/auth/styles'
 import { LoginFormInputs, LoginRequestType } from '@/modules/auth/types'
 
-export const SignIn = () => {
+export const SignInPage = () => {
   const [trigger, { isLoading, error }] = useLoginMutation()
 
   const {

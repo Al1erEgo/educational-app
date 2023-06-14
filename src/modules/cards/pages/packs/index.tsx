@@ -4,7 +4,7 @@ import { CardsHeader, CardsSearch, CardsTable, PacksButton, PacksFilter, PacksSl
 import { usePacksData } from '@/modules/cards/hooks'
 import { StyledCardsTitleButton, StyledCardsToolbar } from '@/modules/cards/styles'
 
-export const Packs = () => {
+export const PacksPage = () => {
   const [
     { handlePacksSearch },
     tableData,

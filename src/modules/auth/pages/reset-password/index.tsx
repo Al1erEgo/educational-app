@@ -12,7 +12,7 @@ import { AUTH_PATH, emailSchema } from '@/modules/auth/constants'
 import { StyledCard, StyledNavLink, StyledP, StyledText } from '@/modules/auth/styles'
 import { ResetPasswordFormInputs } from '@/modules/auth/types'
 
-export const ResetPassword = () => {
+export const ResetPasswordPage = () => {
   const [onSubmit, { isLoading, isSuccess, error }] = useRequestPasswordResetMutation()
 
   const {

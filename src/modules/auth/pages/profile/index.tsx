@@ -12,7 +12,7 @@ import { useAuthorised } from '@/modules'
 import { useAuthMeLogOutMutation } from '@/modules/auth/api'
 import { AUTH_PATH } from '@/modules/auth/constants'
 
-export const Profile = () => {
+export const ProfilePage = () => {
   const { data: userData } = useAuthorised()
   const { name: userName, avatar, email } = userData ?? {}
 

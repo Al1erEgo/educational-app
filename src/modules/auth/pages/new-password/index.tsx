@@ -15,7 +15,7 @@ import { AUTH_PATH, passwordSchema } from '@/modules/auth/constants'
 import { StyledCard, StyledNavLink, StyledText } from '@/modules/auth/styles'
 import { NewPasswordFormInputs } from '@/modules/auth/types'
 
-export const NewPassword: FC = () => {
+export const NewPasswordPage: FC = () => {
   const { token } = useParams()
   const [onSubmit, { isLoading, error, isSuccess }] = useSetNewPasswordMutation()
 

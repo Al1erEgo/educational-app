@@ -2,11 +2,11 @@ import React from 'react'
 
 import { Navigate, Route, Routes, useResolvedPath } from 'react-router-dom'
 
-import { NewPassword, Profile, ResetPassword, SignIn, SignUp } from '../pages'
+import { NewPasswordPage, ProfilePage, ResetPasswordPage, SignInPage, SignUpPage } from '../pages'
 
 import { AuthProvider, GuestProvider } from '@/modules/auth/components'
 import { AUTH_PATH } from '@/modules/auth/constants'
-import { Error404 } from '@/pages'
+import { Error404Page } from '@/pages'
 
 export const AuthRoutes = () => {
   const path = useResolvedPath('')
@@ -15,15 +15,15 @@ export const AuthRoutes = () => {
     <Routes>
       <Route path={AUTH_PATH.Root} element={<Navigate to={`${path.pathname}${AUTH_PATH.Profile}`} />} />
       <Route element={<AuthProvider />}>
-        <Route path={AUTH_PATH.Profile} element={<Profile />} />
+        <Route path={AUTH_PATH.Profile} element={<ProfilePage />} />
       </Route>
       <Route element={<GuestProvider />}>
-        <Route path={AUTH_PATH.SignIn} element={<SignIn />} />
-        <Route path={AUTH_PATH.SignUp} element={<SignUp />} />
-        <Route path={AUTH_PATH.NewPassword} element={<NewPassword />} />
-        <Route path={AUTH_PATH.ResetPassword} element={<ResetPassword />} />
+        <Route path={AUTH_PATH.SignIn} element={<SignInPage />} />
+        <Route path={AUTH_PATH.SignUp} element={<SignUpPage />} />
+        <Route path={AUTH_PATH.NewPassword} element={<NewPasswordPage />} />
+        <Route path={AUTH_PATH.ResetPassword} element={<ResetPasswordPage />} />
       </Route>
-      <Route path={AUTH_PATH.Error} element={<Error404 />} />
+      <Route path={AUTH_PATH.Error} element={<Error404Page />} />
     </Routes>
   )
 }

@@ -12,7 +12,7 @@ import { AUTH_PATH, confirmPasswordSchema, emailSchema, passwordSchema } from '@
 import { StyledCard, StyledNavLink, StyledP } from '@/modules/auth/styles'
 import { SignUpFormInputs } from '@/modules/auth/types'
 
-export const SignUp = () => {
+export const SignUpPage = () => {
   const [onSubmit, { isLoading, isSuccess, error }] = useRegisterMutation()
 
   const {

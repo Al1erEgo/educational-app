@@ -4,7 +4,7 @@ import { BackToCardsButton, LearnCard } from '@/modules/cards/components'
 import { useLearnData } from '@/modules/cards/hooks'
 import { StyledTitle } from '@/modules/cards/styles'
 
-export const Learn: FC = () => {
+export const LearnPage: FC = () => {
   const [names, cardHandlers, card] = useLearnData()
 
   return (

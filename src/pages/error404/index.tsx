@@ -5,7 +5,7 @@ import { Button, Result } from 'antd'
 import { MAIN_PATH } from '@/constants'
 import { useDoNavigate } from '@/hooks'
 
-export const Error404: FC = () => {
+export const Error404Page: FC = () => {
   const handleNavigateToMainPage = useDoNavigate(MAIN_PATH.Root)
 
   return (

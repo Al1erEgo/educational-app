@@ -4,7 +4,7 @@ import { BackToCardsButton, CardsHeader, CardsSearch, CardsTable, PackActionsBut
 import { usePackData } from '@/modules/cards/hooks'
 import { StyledCardsToolbar } from '@/modules/cards/styles'
 
-export const Pack: FC = () => {
+export const PackPage: FC = () => {
   const [{ packName, packDeckCover, isEmptyPack, isOwnPack, buttonsHandlers }, { handleSearch }, tableData] =
     usePackData()
 
