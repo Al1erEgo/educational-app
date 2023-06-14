@@ -4,7 +4,7 @@ type ErrorHTMLInData = {
   error: string
   data: string
 }
-export const isErrorHTMLInData = (error: unknown): error is ErrorHTMLInData => {
+export const isErrorTypeHTML = (error: unknown): error is ErrorHTMLInData => {
   return (
     typeof error === 'object' &&
     error != null &&

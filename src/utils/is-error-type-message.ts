@@ -2,9 +2,7 @@ type ErrorMessageInData = {
   status: number
   data: { error: string }
 }
-export const isErrorMessageInData = (
-  error: unknown
-): error is ErrorMessageInData => {
+export const isErrorTypeMessage = (error: unknown): error is ErrorMessageInData => {
   return (
     typeof error === 'object' &&
     error != null &&
