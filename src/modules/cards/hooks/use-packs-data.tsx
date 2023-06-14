@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { useAuthorised } from '@/modules/auth/hooks'
+import { useAuthorised } from '@/modules'
 import { useCardPacksQuery } from '@/modules/cards/api'
 import { MY_BUTTON_NAME } from '@/modules/cards/constants'
 import { useCardsMutations } from '@/modules/cards/hooks/use-cards-mutations'

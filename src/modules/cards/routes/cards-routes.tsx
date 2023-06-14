@@ -2,12 +2,12 @@ import React from 'react'
 
 import { Navigate, Route, Routes, useResolvedPath } from 'react-router-dom'
 
-import { CARD_PATH } from './constants'
-import { Learn, Pack, Packs } from './pages'
+import { CARD_PATH } from '../constants'
+import { Learn, Pack, Packs } from '../pages'
 
 import { Error404 } from '@/pages'
 
-export const Cards = () => {
+export const CardsRoutes = () => {
   const path = useResolvedPath('')
 
   return (

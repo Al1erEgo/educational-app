@@ -2,9 +2,9 @@ import { redirect, useLocation } from 'react-router-dom'
 
 import { MAIN_PATH } from '@/constants'
 import { useDoNavigate } from '@/hooks'
+import { useAuthorised } from '@/modules'
 import { useAuthMeLogOutMutation, useAuthMeUpdateMutation } from '@/modules/auth/api'
 import { AUTH_PATH } from '@/modules/auth/constants'
-import { useAuthorised } from '@/modules/auth/hooks/use-authorised'
 
 type OnSubmitMutationType = <T>(data?: T) => Promise<void>
 

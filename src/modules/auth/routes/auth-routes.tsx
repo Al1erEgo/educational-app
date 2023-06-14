@@ -2,13 +2,13 @@ import React from 'react'
 
 import { Navigate, Route, Routes, useResolvedPath } from 'react-router-dom'
 
-import { NewPassword, Profile, ResetPassword, SignIn, SignUp } from './pages'
+import { NewPassword, Profile, ResetPassword, SignIn, SignUp } from '../pages'
 
 import { AuthProvider, GuestProvider } from '@/modules/auth/components'
 import { AUTH_PATH } from '@/modules/auth/constants'
 import { Error404 } from '@/pages'
 
-export const Auth = () => {
+export const AuthRoutes = () => {
   const path = useResolvedPath('')
 
   return (

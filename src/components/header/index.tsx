@@ -3,12 +3,13 @@ import { FC } from 'react'
 import { StyledHeader, StyledLogo, StyledProfileWidgetWrapper } from './styles'
 
 import logo from '@/assets/incubator-logo.png'
+import { MAIN_PATH } from '@/constants'
 import { useDoNavigate } from '@/hooks'
-import { ProfileWidget } from '@/modules/auth/components'
-import { ABSOLUTE_CARD_PATH } from '@/modules/cards/constants'
+import { ProfileWidget } from '@/modules'
+import { CARD_PATH } from '@/modules/cards/constants'
 
 export const Header: FC = () => {
-  const handleGoToCardsRedirect = useDoNavigate(ABSOLUTE_CARD_PATH.Packs)
+  const handleGoToCardsRedirect = useDoNavigate(`${MAIN_PATH.Cards}${CARD_PATH.Packs}`)
 
   return (
     <StyledHeader>

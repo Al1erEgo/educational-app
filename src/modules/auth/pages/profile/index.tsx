@@ -3,12 +3,12 @@ import { redirect } from 'react-router-dom'
 
 import { BackToCardsButton } from '../../../cards/components'
 import { EditableProfileName, ProfileAvatar } from '../../components'
-import { useAuthorised } from '../../hooks'
 import { StyledCard } from '../../styles'
 
 import { StyledProfileContainer, StyledProfileLogOutButton, StyledProfileText } from './styles'
 
 import { MAIN_PATH } from '@/constants'
+import { useAuthorised } from '@/modules'
 import { useAuthMeLogOutMutation } from '@/modules/auth/api'
 import { AUTH_PATH } from '@/modules/auth/constants'
 

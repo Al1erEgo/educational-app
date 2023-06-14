@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from 'react'
 
 import { useNavigate } from 'react-router-dom'
 
-import { ABSOLUTE_CARD_PATH } from '../constants'
+import { CARD_PATH } from '../constants'
 import {
   ButtonsHandlersType,
   CardsModalsHandlersType,
@@ -62,7 +62,7 @@ export const usePackHandlers: UsePackHandlersType = (setTableParams, mutations, 
       },
     })
 
-  const handleLearnPack = () => navigate(`${ABSOLUTE_CARD_PATH.Learn}/${packId}?name=${packName}`)
+  const handleLearnPack = () => navigate(`${MAIN_PATH.Cards}${CARD_PATH.Learn}/${packId}?name=${packName}`)
 
   const buttonsHandlers = {
     handleAddCard,
