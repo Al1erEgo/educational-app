@@ -5,6 +5,7 @@ import { MAIN_PATH } from '@/constants'
 import { Auth, Cards, ModalProvider } from '@/modules'
 import { useAuthMeQuery } from '@/modules/auth/api/auth-api'
 import { AuthProvider } from '@/modules/auth/components'
+import { ModalProvider } from '@/providers'
 import { Error404 } from '@/pages'
 import { GlobalStyle, ModuleContainer } from '@/styles'
 

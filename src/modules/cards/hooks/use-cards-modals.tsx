@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { useModalContext } from '@/hooks'
 import {
   DeleteCardRequestType,
   DeletedCardsPackRequestType,
@@ -9,8 +10,10 @@ import {
   UpdateCardsPackRequestType,
 } from '@/modules/cards/api'
 import { ModalCard, ModalDelete, ModalPack } from '@/modules/cards/components'
-import { CardsModalsHandlersType, CardsMutationsObjType } from '@/modules/cards/types'
-import { useModalContext } from '@/modules/modal-provider/hooks'
+import {
+  CardsModalsHandlersType,
+  CardsMutationsObjType,
+} from '@/modules/cards/types'
 
 type UseCardsModalsType = (mutations: CardsMutationsObjType) => CardsModalsHandlersType
 export const useCardsModals: UseCardsModalsType = mutations => {
