@@ -5,25 +5,17 @@ import { Form } from 'antd'
 import { StyledCheckEmailImage } from './styles'
 
 import { useNavigateHandler } from '@/hooks'
-import {
-  confirmationMessagesArguments,
-  confirmationMessageTimeout,
-} from '@/modules/auth/constants'
+import { confirmationMessagesArguments, confirmationMessageTimeout } from '@/modules/auth/constants'
 import { StyledAuthButton, StyledCard, StyledText } from '@/modules/auth/styles'
 import { ConfirmationMessagesArgumentsType } from '@/modules/auth/types'
 
-// TODO it's better to use word Props for types like this one. example ConfirmationMessageProps
 type ConfirmationMessageType = {
   variant: keyof ConfirmationMessagesArgumentsType
   email?: string
 }
 
-export const ConfirmationMessage: FC<ConfirmationMessageType> = ({
-  variant,
-  email,
-}) => {
-  const { title, redirectPath, timer, image, text } =
-    confirmationMessagesArguments[variant]
+export const ConfirmationMessage: FC<ConfirmationMessageType> = ({ variant, email }) => {
+  const { title, redirectPath, timer, image, text } = confirmationMessagesArguments[variant]
 
   const handleRedirect = useNavigateHandler(redirectPath)
 
@@ -44,9 +36,7 @@ export const ConfirmationMessage: FC<ConfirmationMessageType> = ({
       <StyledCheckEmailImage src={image} alt="image" />
       <StyledText type="secondary">{`${text} ${email}`}</StyledText>
       <Form.Item hidden={timer}>
-        <StyledAuthButton onClick={handleRedirect}>
-          Back to login
-        </StyledAuthButton>
+        <StyledAuthButton onClick={handleRedirect}>Back to login</StyledAuthButton>
       </Form.Item>
     </StyledCard>
   )

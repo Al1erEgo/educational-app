@@ -8,7 +8,6 @@ import { getValidationStatus } from '@/utils'
 
 type FormInputType = {
   name: keyof typeof formInputs
-  // TODO type Control
   control: Control<any>
   error?: FieldError
 }
@@ -26,17 +25,9 @@ export const FormInput: FC<FormInputType> = ({ name, control, error }) => {
         rules={rules}
         render={({ field }) =>
           type === 'password' ? (
-            <Input.Password
-              {...field}
-              placeholder={placeholder}
-              autoComplete={autoComplete}
-            />
+            <Input.Password {...field} placeholder={placeholder} autoComplete={autoComplete} />
           ) : (
-            <Input
-              {...field}
-              placeholder={placeholder}
-              autoComplete={autoComplete}
-            />
+            <Input {...field} placeholder={placeholder} autoComplete={autoComplete} />
           )
         }
       />

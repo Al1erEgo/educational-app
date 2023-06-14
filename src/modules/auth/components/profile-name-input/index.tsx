@@ -15,13 +15,8 @@ import {
 
 import { ProfileNameBaseType } from '@/modules/auth/types/profile-name'
 
-// TODO move this code back to ProfileName (EditableProfileName) component
-export const ProfileNameInput: FC<ProfileNameBaseType> = ({
-  userName,
-  switchEdit,
-}) => {
-  const [onSubmit, { handleSubmit, control, errors, setValue }] =
-    useFormData<UpdateUserNameType>('updateUserName')
+export const ProfileNameInput: FC<ProfileNameBaseType> = ({ userName, switchEdit }) => {
+  const [onSubmit, { handleSubmit, control, errors, setValue }] = useFormData<UpdateUserNameType>('updateUserName')
 
   const handleNameSubmit = () => {
     switchEdit()

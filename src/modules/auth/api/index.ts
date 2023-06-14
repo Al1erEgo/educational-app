@@ -16,7 +16,6 @@ import {
 } from '@/modules/auth/types'
 import { rootApi } from '@/store'
 
-// TODO: rename file to authApi, do not delete index file also
 export const authApi = rootApi.injectEndpoints({
   endpoints: builder => ({
     register: builder.mutation<RegisterResponseType, RegisterRequestType>({
@@ -63,9 +62,7 @@ export const authApi = rootApi.injectEndpoints({
         try {
           const { data } = await queryFulfilled
 
-          dispatch(
-            authApi.util.upsertQueryData('authMe', 'auth', data.updatedUser)
-          )
+          dispatch(authApi.util.upsertQueryData('authMe', 'auth', data.updatedUser))
         } catch (e) {
           return
         }
@@ -80,25 +77,18 @@ export const authApi = rootApi.injectEndpoints({
       invalidatesTags: ['authMe'],
     }),
 
-    requestPasswordReset: builder.mutation<
-      PasswordResetResponseType,
-      PasswordResetRequestType
-    >({
+    requestPasswordReset: builder.mutation<PasswordResetResponseType, PasswordResetRequestType>({
       query: (requestData: PasswordResetRequestType) => ({
         url: 'auth/forgot',
         method: 'POST',
         body: {
           email: requestData.email,
-          message:
-            'password recovery link: <a href="http://localhost:5173/#/auth/set-new-password/$token$">link</a>',
+          message: 'password recovery link: <a href="http://localhost:5173/#/auth/set-new-password/$token$">link</a>',
         },
       }),
     }),
 
-    setNewPassword: builder.mutation<
-      SetNewPasswordResponseType,
-      SetNewPasswordRequestType
-    >({
+    setNewPassword: builder.mutation<SetNewPasswordResponseType, SetNewPasswordRequestType>({
       query: (requestData: SetNewPasswordRequestType) => ({
         url: 'auth/set-new-password',
         method: 'POST',
