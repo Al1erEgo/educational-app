@@ -2,9 +2,8 @@ import { FC, PropsWithChildren, useState } from 'react'
 
 import { Modal } from 'antd'
 
-import { ModalContext } from './hooks'
-
-import { ModalConfig } from '@/modules/modal-provider/types'
+import { ModalContext } from '@/hooks'
+import { ModalConfig } from '@/types'
 
 export const ModalProvider: FC<PropsWithChildren> = ({ children }) => {
   const [modalConfig, setModalConfig] = useState<ModalConfig | null>()

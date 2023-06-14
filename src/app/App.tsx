@@ -2,9 +2,10 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 
 import { Error404, Header, Loader } from '@/components'
 import { MAIN_PATH } from '@/constants'
-import { Auth, Cards, ModalProvider } from '@/modules'
+import { Auth, Cards } from '@/modules'
 import { useAuthMeQuery } from '@/modules/auth/api'
 import { AuthProvider } from '@/modules/auth/components'
+import { ModalProvider } from '@/providers'
 import { GlobalStyle, ModuleContainer } from '@/styles'
 
 export const App = () => {

@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react'
 
-import { ModalContextType } from '@/modules/modal-provider/types'
+import { ModalContextType } from '@/types'
 
 /**
  A context object for managing modal state and providing it to child components.

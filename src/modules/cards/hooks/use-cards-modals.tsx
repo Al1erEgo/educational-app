@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { useModalContext } from '@/hooks'
 import {
   DeleteCardRequestType,
   DeletedCardsPackRequestType,
@@ -13,7 +14,6 @@ import {
   CardsModalsHandlersType,
   CardsMutationsObjType,
 } from '@/modules/cards/types'
-import { useModalContext } from '@/modules/modal-provider/hooks'
 
 type UseCardsModalsType = (
   mutations: CardsMutationsObjType
