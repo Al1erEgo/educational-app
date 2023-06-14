@@ -24,21 +24,14 @@ type UsePacksHandlersType = (
   modalHandlers: CardsModalsHandlersType
 }
 
-export const usePacksHandlers: UsePacksHandlersType = (
-  setTableParams,
-  mutations
-) => {
+export const usePacksHandlers: UsePacksHandlersType = (setTableParams, mutations) => {
   const modalHandlers = useCardsModals(mutations)
 
   const handlePacksSearch: HandlePacksSearchType = searchValue => {
     setTableParams(prevState => ({ ...prevState, searchValue }))
   }
 
-  const handleTableChange: HandlePacksTableChangeType = (
-    pagination,
-    filters,
-    sorter
-  ) => {
+  const handleTableChange: HandlePacksTableChangeType = (pagination, filters, sorter) => {
     setTableParams(prevState => ({
       ...prevState,
       pagination,

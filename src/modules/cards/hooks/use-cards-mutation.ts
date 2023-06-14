@@ -10,10 +10,7 @@ type UsePackMutationType = (
   error: TableErrorType
 }
 
-export const useCardsMutation: UsePackMutationType = (
-  mutationType,
-  refetch
-) => {
+export const useCardsMutation: UsePackMutationType = (mutationType, refetch) => {
   const { mutation, isRefetch } = packMutations[mutationType]
   const [trigger, { isLoading, error }] = mutation()
 

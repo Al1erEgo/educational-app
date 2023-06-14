@@ -1,6 +1,11 @@
 import { createContext, useContext } from 'react'
 
-import { ModalContextType } from '@/types'
+import { ModalConfig } from '@/types'
+
+type ModalContextType = {
+  showModal: (config: ModalConfig) => void
+  hideModal: () => void
+}
 
 /**
  A context object for managing modal state and providing it to child components.
