@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 import * as yup from 'yup'
 
-import { ErrorMessageHandler } from '@/components'
+import { ErrorMessage } from '@/components'
 import { useSetNewPasswordMutation } from '@/modules/auth/api'
 import { ConfirmationMessage, FormButton, FormInput } from '@/modules/auth/components'
 import { ABSOLUTE_AUTH_PATH, passwordSchema } from '@/modules/auth/constants'
@@ -49,7 +49,7 @@ export const NewPassword: FC = () => {
       <Form onFinish={handleSubmit(handleNewPasswordSubmit)}>
         <FormInput name="password" control={control} error={errors.password} />
         <StyledText type="secondary">Create new password and we will send you further instructions to email</StyledText>
-        <ErrorMessageHandler serverError={error} />
+        <ErrorMessage serverError={error} />
         <FormButton loading={isLoading}>Create new Password</FormButton>
       </Form>
       <StyledNavLink to={ABSOLUTE_AUTH_PATH.ResetPassword}>Back to Send Email form</StyledNavLink>

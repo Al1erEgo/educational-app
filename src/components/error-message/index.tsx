@@ -1,17 +1,14 @@
 import { FC } from 'react'
 
-import { StyledErrorText } from '@/components/error-message-handler/styles'
+import { StyledErrorText } from '@/components/error-message/styles'
 import { isErrorHTMLInData, isErrorMessageInData } from '@/utils'
 
-type ErrorServerHandlerType = {
+type ErrorServerProps = {
   serverError: unknown
   textError?: string
 }
 
-export const ErrorMessageHandler: FC<ErrorServerHandlerType> = ({
-  serverError,
-  textError,
-}) => {
+export const ErrorMessage: FC<ErrorServerProps> = ({ serverError, textError }) => {
   let errorMessage = ''
 
   if (isErrorHTMLInData(serverError)) {

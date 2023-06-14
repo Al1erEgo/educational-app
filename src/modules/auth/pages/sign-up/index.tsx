@@ -3,7 +3,7 @@ import { Form } from 'antd'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
-import { ErrorMessageHandler } from '@/components'
+import { ErrorMessage } from '@/components'
 import { useRegisterMutation } from '@/modules/auth/api'
 import { ConfirmationMessage, FormButton, FormInput } from '@/modules/auth/components'
 import { ABSOLUTE_AUTH_PATH, confirmPasswordSchema, emailSchema, passwordSchema } from '@/modules/auth/constants'
@@ -38,7 +38,7 @@ export const SignUp = () => {
         <FormInput name="email" control={control} error={errors.email} />
         <FormInput name="password" control={control} error={errors.password} />
         <FormInput name="confirm password" control={control} error={errors['confirm password']} />
-        <ErrorMessageHandler serverError={error} />
+        <ErrorMessage serverError={error} />
         <FormButton loading={isLoading}>Sign Up</FormButton>
       </Form>
       <StyledP>Already have an account?</StyledP>

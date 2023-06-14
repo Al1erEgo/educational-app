@@ -4,19 +4,16 @@ import { Navigate, Route, Routes, useResolvedPath } from 'react-router-dom'
 
 import { NewPassword, Profile, ResetPassword, SignIn, SignUp } from './pages'
 
-import { Error404 } from '@/components'
 import { AuthProvider, GuestProvider } from '@/modules/auth/components'
 import { AUTH_PATH } from '@/modules/auth/constants'
+import { Error404 } from '@/pages'
 
 export const Auth = () => {
   const path = useResolvedPath('')
 
   return (
     <Routes>
-      <Route
-        path={AUTH_PATH.Root}
-        element={<Navigate to={`${path.pathname}${AUTH_PATH.Profile}`} />}
-      />
+      <Route path={AUTH_PATH.Root} element={<Navigate to={`${path.pathname}${AUTH_PATH.Profile}`} />} />
       <Route element={<AuthProvider />}>
         <Route path={AUTH_PATH.Profile} element={<Profile />} />
       </Route>

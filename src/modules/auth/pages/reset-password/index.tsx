@@ -3,7 +3,7 @@ import { Form } from 'antd'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
-import { ErrorMessageHandler } from '@/components'
+import { ErrorMessage } from '@/components'
 import { useRequestPasswordResetMutation } from '@/modules/auth/api'
 import { ConfirmationMessage, FormButton, FormInput } from '@/modules/auth/components'
 import { ABSOLUTE_AUTH_PATH, emailSchema } from '@/modules/auth/constants'
@@ -37,7 +37,7 @@ export const ResetPassword = () => {
         <FormInput name="email" control={control} error={errors.email} />
         <StyledText type="secondary">Enter your email address and we will send you further instructions</StyledText>
 
-        <ErrorMessageHandler serverError={error} />
+        <ErrorMessage serverError={error} />
 
         <FormButton loading={isLoading}>Send Instructions</FormButton>
       </Form>

@@ -3,10 +3,10 @@ import { FC } from 'react'
 import { Button, Result } from 'antd'
 
 import { MAIN_PATH } from '@/constants'
-import { useNavigateHandler } from '@/hooks'
+import { useDoNavigate } from '@/hooks'
 
 export const Error404: FC = () => {
-  const handleNavigateToMainPage = useNavigateHandler(MAIN_PATH.Root)
+  const handleNavigateToMainPage = useDoNavigate(MAIN_PATH.Root)
 
   return (
     <Result

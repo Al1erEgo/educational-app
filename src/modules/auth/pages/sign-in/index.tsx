@@ -6,7 +6,7 @@ import * as yup from 'yup'
 
 import { StyledForgotPasswordLink } from './styles'
 
-import { ErrorMessageHandler } from '@/components'
+import { ErrorMessage } from '@/components'
 import { MAIN_PATH } from '@/constants'
 import { useLoginMutation } from '@/modules/auth/api'
 import { FormButton, FormCheckbox, FormInput } from '@/modules/auth/components'
@@ -45,7 +45,7 @@ export const SignIn = () => {
         <FormCheckbox name="rememberMe" control={control} defaultValue={false} />
         <StyledForgotPasswordLink to={ABSOLUTE_AUTH_PATH.ResetPassword}>Forgot password?</StyledForgotPasswordLink>
 
-        <ErrorMessageHandler serverError={error} />
+        <ErrorMessage serverError={error} />
 
         <FormButton loading={isLoading}>Sign In</FormButton>
       </Form>
