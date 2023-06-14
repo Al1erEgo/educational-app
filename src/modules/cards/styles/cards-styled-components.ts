@@ -1,6 +1,6 @@
 import { Button, Rate, Typography } from 'antd'
 import Title from 'antd/es/typography/Title'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 
 const { Text } = Typography
 

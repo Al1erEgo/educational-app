@@ -6,13 +6,11 @@ import { CardsConditionProvider } from '@/modules/cards/components'
 import { useTableResize } from '@/modules/cards/hooks'
 import { PacksTableDataType, PackTableDataType } from '@/modules/cards/types'
 
-type CardsTableType<T> = {
+type CardsTableProps<T> = {
   tableData: T
 }
 
-export const CardsTable = <T extends PackTableDataType | PacksTableDataType>({
-  tableData,
-}: CardsTableType<T>) => {
+export const CardsTable = <T extends PackTableDataType | PacksTableDataType>({ tableData }: CardsTableProps<T>) => {
   const {
     formattedTableData,
     tableColumns,

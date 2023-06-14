@@ -6,7 +6,7 @@ import { PacksLearnAction } from '@/modules/cards/components'
 import { MY_BUTTON_NAME } from '@/modules/cards/constants'
 import { CardsModalsHandlersType, PackType } from '@/modules/cards/types'
 
-type PacksTableActionsType = {
+type PacksTableActionsProps = {
   pack: PackType
   activeButton: string
   userData: LoginResponseType | undefined
@@ -18,9 +18,8 @@ export const PacksTableActions = ({
   userData,
   deletePackModal,
   updatePackModal,
-}: PacksTableActionsType) => {
-  const isMyButton =
-    activeButton === MY_BUTTON_NAME || pack?.user_id === userData?._id
+}: PacksTableActionsProps) => {
+  const isMyButton = activeButton === MY_BUTTON_NAME || pack?.user_id === userData?._id
 
   const handleEdit = () =>
     updatePackModal?.({
@@ -32,8 +31,7 @@ export const PacksTableActions = ({
       },
     })
 
-  const handleDelete = () =>
-    deletePackModal?.({ id: pack?._id, name: pack?.name })
+  const handleDelete = () => deletePackModal?.({ id: pack?._id, name: pack?.name })
 
   if (!isMyButton) {
     return <PacksLearnAction pack={pack} />

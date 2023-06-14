@@ -1,18 +1,8 @@
 import React from 'react'
 
-import {
-  CardsHeader,
-  CardsSearch,
-  CardsTable,
-  PacksButton,
-  PacksFilter,
-  PacksSlider,
-} from '@/modules/cards/components'
+import { CardsHeader, CardsSearch, CardsTable, PacksButton, PacksFilter, PacksSlider } from '@/modules/cards/components'
 import { usePacksData } from '@/modules/cards/hooks'
-import {
-  StyledCardsTitleButton,
-  StyledCardsToolbar,
-} from '@/modules/cards/styles'
+import { StyledCardsTitleButton, StyledCardsToolbar } from '@/modules/cards/styles'
 
 export const Packs = () => {
   const [
@@ -24,16 +14,12 @@ export const Packs = () => {
     { modalHandlers },
   ] = usePacksData()
 
-  const { isDataLoading, tableParams, minCardsCountValue, maxCardsCountValue } =
-    tableData
+  const { isDataLoading, tableParams, minCardsCountValue, maxCardsCountValue } = tableData
 
   return (
     <>
       <CardsHeader title={'Packs list'}>
-        <StyledCardsTitleButton
-          disabled={isDataLoading}
-          onClick={() => modalHandlers.addPackModal({ cardsPack: {} })}
-        >
+        <StyledCardsTitleButton disabled={isDataLoading} onClick={() => modalHandlers.addPackModal({ cardsPack: {} })}>
           Add New Pack
         </StyledCardsTitleButton>
       </CardsHeader>

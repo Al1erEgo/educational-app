@@ -8,9 +8,5 @@ import { useAuthorised } from '@/modules/auth/hooks'
 export const GuestProvider: FC = () => {
   const { isAuthorised } = useAuthorised()
 
-  return isAuthorised ? (
-    <Navigate to={ABSOLUTE_AUTH_PATH.Profile} />
-  ) : (
-    <Outlet />
-  )
+  return isAuthorised ? <Navigate to={ABSOLUTE_AUTH_PATH.Profile} /> : <Outlet />
 }

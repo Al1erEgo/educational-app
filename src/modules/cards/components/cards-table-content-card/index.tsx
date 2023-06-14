@@ -6,14 +6,11 @@ import { PACK_TABLE_IMG_HEIGHT } from '@/modules/cards/constants'
 
 const { Text } = Typography
 
-type CardsContentCardType = {
+type CardsContentCardProps = {
   textContent?: string
   imgContent?: string
 }
-export const CardsTableContentCard: FC<CardsContentCardType> = ({
-  textContent,
-  imgContent,
-}) => {
+export const CardsTableContentCard: FC<CardsContentCardProps> = ({ textContent, imgContent }) => {
   if (imgContent)
     return (
       <div>

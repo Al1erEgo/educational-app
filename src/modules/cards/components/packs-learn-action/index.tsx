@@ -4,10 +4,10 @@ import { NavLink } from 'react-router-dom'
 
 import { PackType } from '@/modules/cards/types'
 
-type PacksLearnActionType = {
+type PacksLearnActionProps = {
   pack: PackType
 }
-export const PacksLearnAction = ({ pack }: PacksLearnActionType) => {
+export const PacksLearnAction = ({ pack }: PacksLearnActionProps) => {
   if (pack?.cardsCount) {
     return (
       <Tooltip title="Learn">

@@ -8,7 +8,7 @@ import { rateDescriptions } from '@/modules/cards/constants'
 
 const { Text } = Typography
 
-type LearnCardAnswerWithRateType = {
+type LearnCardAnswerWithRateProps = {
   answer?: string
   answerImg?: string
   isShow: boolean
@@ -16,7 +16,7 @@ type LearnCardAnswerWithRateType = {
   setRate: (value: number | ((prevState: number) => number)) => void
 }
 
-export const LearnCardAnswerWithRate: FC<LearnCardAnswerWithRateType> = ({
+export const LearnCardAnswerWithRate: FC<LearnCardAnswerWithRateProps> = ({
   answer,
   answerImg,
   isShow,

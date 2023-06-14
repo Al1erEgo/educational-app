@@ -30,26 +30,15 @@ type UsePackHandlersType = (
   modalHandlers: CardsModalsHandlersType
 }
 
-export const usePackHandlers: UsePackHandlersType = (
-  setTableParams,
-  mutations,
-  packId,
-  packName,
-  responseData
-) => {
+export const usePackHandlers: UsePackHandlersType = (setTableParams, mutations, packId, packName, responseData) => {
   const navigate = useNavigate()
   const modalHandlers = useCardsModals(mutations)
 
   const handleRedirectToPacks = () => navigate(MAIN_PATH.Cards)
 
-  const handleSearch: HandleSearchType = searchValue =>
-    setTableParams(prevState => ({ ...prevState, searchValue }))
+  const handleSearch: HandleSearchType = searchValue => setTableParams(prevState => ({ ...prevState, searchValue }))
 
-  const handleTableChange: HandleTableChangeType = (
-    pagination,
-    filters,
-    sorter
-  ) => {
+  const handleTableChange: HandleTableChangeType = (pagination, filters, sorter) => {
     setTableParams(prevState => ({
       ...prevState,
       pagination,
@@ -57,8 +46,7 @@ export const usePackHandlers: UsePackHandlersType = (
     }))
   }
 
-  const handleAddCard = () =>
-    modalHandlers.addCardModal({ card: { cardsPack_id: packId || '' } })
+  const handleAddCard = () => modalHandlers.addCardModal({ card: { cardsPack_id: packId || '' } })
 
   const handleDeletePack = () => {
     modalHandlers.deletePackModal({ id: packId }, handleRedirectToPacks)
@@ -74,8 +62,7 @@ export const usePackHandlers: UsePackHandlersType = (
       },
     })
 
-  const handleLearnPack = () =>
-    navigate(`${ABSOLUTE_CARD_PATH.Learn}/${packId}?name=${packName}`)
+  const handleLearnPack = () => navigate(`${ABSOLUTE_CARD_PATH.Learn}/${packId}?name=${packName}`)
 
   const buttonsHandlers = {
     handleAddCard,

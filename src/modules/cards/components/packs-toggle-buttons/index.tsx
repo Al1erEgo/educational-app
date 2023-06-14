@@ -8,16 +8,12 @@ import { ALL_BUTTON_NAME, MY_BUTTON_NAME } from '@/modules/cards/constants'
 import { StyledCardsText } from '@/modules/cards/styles'
 import { HandleToggleButtonType } from '@/modules/cards/types'
 
-type PacksButtonsContainerProps = {
+type PacksButtonsProps = {
   activeButton: string
   handleToggleButton: HandleToggleButtonType
   isLoading: boolean
 }
-export const PacksButton: FC<PacksButtonsContainerProps> = ({
-  activeButton,
-  handleToggleButton,
-  isLoading,
-}) => {
+export const PacksButton: FC<PacksButtonsProps> = ({ activeButton, handleToggleButton, isLoading }) => {
   return (
     <StyledPacksToggleButtonWrapper>
       <StyledCardsText>Show packs</StyledCardsText>

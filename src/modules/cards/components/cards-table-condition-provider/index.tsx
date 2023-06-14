@@ -5,13 +5,13 @@ import { Skeleton } from 'antd'
 import { ErrorMessage } from '@/components'
 import { TableErrorType } from '@/modules/cards/types'
 
-type CardsConditionProviderType = {
+type CardsConditionProviderProps = {
   error?: TableErrorType
   isLoading?: boolean
   type: 'card' | 'table'
 }
 
-export const CardsConditionProvider: FC<PropsWithChildren<CardsConditionProviderType>> = ({
+export const CardsConditionProvider: FC<PropsWithChildren<CardsConditionProviderProps>> = ({
   children,
   isLoading,
   error,

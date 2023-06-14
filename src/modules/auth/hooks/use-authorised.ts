@@ -1,4 +1,4 @@
-import { authApi } from '../api'
+import { authApi } from '@/modules/auth/api'
 
 /**
  * A hook that provides authorization information.

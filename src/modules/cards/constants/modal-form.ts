@@ -14,17 +14,9 @@ export type ModalPackSchema = {
 }
 
 const imgRules = yup.string().required('Image required!')
-const textRules = yup
-  .string()
-  .min(1)
-  .max(1000)
-  .required('Input should be filled in!')
+const textRules = yup.string().min(1).max(1000).required('Input should be filled in!')
 const imgNameRules = yup.string()
-const textNameRules = yup
-  .string()
-  .min(1)
-  .max(100)
-  .required('Input should be filled in!')
+const textNameRules = yup.string().min(1).max(100).required('Input should be filled in!')
 
 export const modalSchemaMap = {
   img: yup.object<ModalCardSchema>({

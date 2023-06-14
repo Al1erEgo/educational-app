@@ -6,7 +6,7 @@ import { StyledPacksSliderWrapper } from '@/modules/cards/components/packs-slide
 import { StyledCardsText } from '@/modules/cards/styles'
 import { HandleSliderChangeType } from '@/modules/cards/types'
 
-type PacksSliderType = {
+type PacksSliderProps = {
   handleSliderChange: HandleSliderChangeType
   minSlider: number | undefined
   maxSlider: number | undefined
@@ -15,7 +15,7 @@ type PacksSliderType = {
   maxCardsCountValue: number | undefined
 }
 
-export const PacksSlider: FC<PacksSliderType> = ({
+export const PacksSlider: FC<PacksSliderProps> = ({
   minCardsCountValue = 0,
   maxCardsCountValue = 0,
   minSlider,
@@ -30,10 +30,7 @@ export const PacksSlider: FC<PacksSliderType> = ({
   }
 
   useEffect(() => {
-    setSliderValue([
-      minSlider || minCardsCountValue,
-      maxSlider || maxCardsCountValue,
-    ])
+    setSliderValue([minSlider || minCardsCountValue, maxSlider || maxCardsCountValue])
   }, [minSlider, maxSlider, minCardsCountValue, maxCardsCountValue])
 
   return (

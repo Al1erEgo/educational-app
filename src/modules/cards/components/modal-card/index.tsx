@@ -5,21 +5,15 @@ import { Select } from 'antd'
 import { ModalCardForm } from '@/modules/cards/components'
 import { SELECT_OPTIONS } from '@/modules/cards/constants'
 import { StyledModalWrapper } from '@/modules/cards/styles'
-import {
-  CardsModalBaseType,
-  ModalCardsFormat,
-  PackModalCardPayloadType,
-} from '@/modules/cards/types'
+import { CardsModalBaseProps, ModalCardsFormat, PackModalCardPayloadType } from '@/modules/cards/types'
 import { getInitModalCardType } from '@/modules/cards/utils'
 
 export const ModalCard = <T extends PackModalCardPayloadType>({
   payload,
   onSubmit,
   onCancel,
-}: CardsModalBaseType<T>) => {
-  const [format, setFormat] = useState<ModalCardsFormat>(
-    getInitModalCardType(payload)
-  )
+}: CardsModalBaseProps<T>) => {
+  const [format, setFormat] = useState<ModalCardsFormat>(getInitModalCardType(payload))
 
   return (
     <StyledModalWrapper>
@@ -30,12 +24,7 @@ export const ModalCard = <T extends PackModalCardPayloadType>({
         onChange={setFormat}
         options={SELECT_OPTIONS}
       />
-      <ModalCardForm
-        format={format}
-        payload={payload}
-        onSubmit={onSubmit}
-        onCancel={onCancel}
-      />
+      <ModalCardForm format={format} payload={payload} onSubmit={onSubmit} onCancel={onCancel} />
     </StyledModalWrapper>
   )
 }

@@ -1,6 +1,6 @@
 import { CheckOutlined, EditOutlined } from '@ant-design/icons'
 import { Button, Space } from 'antd'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 
 export const StyledProfileNameCloseButton = styled(Button).attrs({
   danger: true,

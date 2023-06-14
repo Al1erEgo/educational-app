@@ -1,22 +1,14 @@
 import React, { FC } from 'react'
 
-import {
-  DeleteCardRequestType,
-  DeletedCardsPackRequestType,
-} from '@/modules/cards/api'
+import { DeleteCardRequestType, DeletedCardsPackRequestType } from '@/modules/cards/api'
 import { ModalButtons } from '@/modules/cards/components'
 import { StyledModalWrapper } from '@/modules/cards/styles'
-import { CardsModalBaseType } from '@/modules/cards/types'
+import { CardsModalBaseProps } from '@/modules/cards/types'
 
-type ModalDeleteType =
-  | CardsModalBaseType<DeletedCardsPackRequestType & { name?: string }>
-  | CardsModalBaseType<DeleteCardRequestType>
-export const ModalDelete: FC<ModalDeleteType> = ({
-  payload,
-  onSubmit,
-  onCancel,
-  redirect,
-}) => {
+type ModalDeleteProps =
+  | CardsModalBaseProps<DeletedCardsPackRequestType & { name?: string }>
+  | CardsModalBaseProps<DeleteCardRequestType>
+export const ModalDelete: FC<ModalDeleteProps> = ({ payload, onSubmit, onCancel, redirect }) => {
   const handleDelete = async () => {
     onCancel()
     await onSubmit(payload)
@@ -25,16 +17,9 @@ export const ModalDelete: FC<ModalDeleteType> = ({
 
   return (
     <StyledModalWrapper>
-      <p>
-        Are you sure you want to delete the{' '}
-        {'name' in payload ? <strong>{payload.name}</strong> : 'card'}?
-      </p>
+      <p>Are you sure you want to delete the {'name' in payload ? <strong>{payload.name}</strong> : 'card'}?</p>
 
-      <ModalButtons
-        submitButtonName={'Delete'}
-        onSubmit={handleDelete}
-        onCancel={onCancel}
-      />
+      <ModalButtons submitButtonName={'Delete'} onSubmit={handleDelete} onCancel={onCancel} />
     </StyledModalWrapper>
   )
 }

@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 
 export const StyledArrowImg = styled.img`
   margin-right: 0.5rem;

@@ -5,13 +5,13 @@ import { Control, Controller } from 'react-hook-form'
 
 import { LoginFormInputs } from '@/modules/auth/types'
 
-type FormCheckboxType = {
+type FormCheckboxProps = {
   name: 'rememberMe'
   control: Control<LoginFormInputs>
   defaultValue: boolean
 }
 
-export const FormCheckbox: FC<FormCheckboxType> = ({ name, control, defaultValue }) => {
+export const FormCheckbox: FC<FormCheckboxProps> = ({ name, control, defaultValue }) => {
   return (
     <Form.Item>
       <Controller

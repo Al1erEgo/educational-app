@@ -1,4 +1,4 @@
-export type ProfileNameBaseType = {
+export type ProfileNameBaseProps = {
   userName?: string
   switchEdit: () => void
 }

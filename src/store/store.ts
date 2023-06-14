@@ -6,8 +6,7 @@ export const store = configureStore({
   reducer: {
     [rootApi.reducerPath]: rootApi.reducer,
   },
-  middleware: getDefaultMiddleware =>
-    getDefaultMiddleware().concat(rootApi.middleware),
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(rootApi.middleware),
 })
 
 // @ts-ignore

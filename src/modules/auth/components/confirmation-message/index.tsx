@@ -9,12 +9,12 @@ import { confirmationMessagesArguments, confirmationMessageTimeout } from '@/mod
 import { StyledAuthButton, StyledCard, StyledText } from '@/modules/auth/styles'
 import { ConfirmationMessagesArgumentsType } from '@/modules/auth/types'
 
-type ConfirmationMessageType = {
+type ConfirmationMessageProps = {
   variant: keyof ConfirmationMessagesArgumentsType
   email?: string
 }
 
-export const ConfirmationMessage: FC<ConfirmationMessageType> = ({ variant, email }) => {
+export const ConfirmationMessage: FC<ConfirmationMessageProps> = ({ variant, email }) => {
   const { title, redirectPath, timer, image, text } = confirmationMessagesArguments[variant]
 
   const handleRedirect = useDoNavigate(redirectPath)

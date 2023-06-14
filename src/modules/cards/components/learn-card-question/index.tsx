@@ -6,25 +6,18 @@ import { CardsTableContentCard } from '@/modules/cards/components'
 
 const { Text } = Typography
 
-type LearnCardQuestionType = {
+type LearnCardQuestionProps = {
   question?: string
   questionImg?: string
   shots?: number
 }
 
-export const LearnCardQuestion: FC<LearnCardQuestionType> = ({
-  question,
-  questionImg,
-  shots,
-}) => {
+export const LearnCardQuestion: FC<LearnCardQuestionProps> = ({ question, questionImg, shots }) => {
   return (
     <>
       <div>
         <Text strong>Question: </Text>
-        <CardsTableContentCard
-          textContent={question}
-          imgContent={questionImg}
-        />
+        <CardsTableContentCard textContent={question} imgContent={questionImg} />
       </div>
       <Text type="secondary">Количество попыток ответа на вопрос: {shots}</Text>
     </>

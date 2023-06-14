@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 
 export const StyledPacksSliderWrapper = styled.div`
   width: 25%;

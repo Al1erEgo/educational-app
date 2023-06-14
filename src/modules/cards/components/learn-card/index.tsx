@@ -7,40 +7,26 @@ import {
   LearnCardSuccess,
 } from '@/modules/cards/components'
 import { StyledLearnCard, StyledLearnCardButton } from '@/modules/cards/styles'
-import {
-  LearnCardDataType,
-  LearnHandlersType,
-  LearnNames,
-} from '@/modules/cards/types'
+import { LearnCardDataType, LearnHandlersType, LearnNames } from '@/modules/cards/types'
 
-type LearnCardType = {
+type LearnCardProps = {
   card: LearnCardDataType
   cardHandlers: LearnHandlersType
   names: LearnNames
 }
 
-export const LearnCard: FC<LearnCardType> = ({ card, cardHandlers, names }) => {
-  const { learnCardButtonHandler, handleNavigateToCards, setRate } =
-    cardHandlers
+export const LearnCard: FC<LearnCardProps> = ({ card, cardHandlers, names }) => {
+  const { learnCardButtonHandler, handleNavigateToCards, setRate } = cardHandlers
   const { cardData, rate, showAnswer, isLoading, isSuccess, serverError } = card
   const { learnCardButtonName } = names
   const { question, questionImg, answer, answerImg, shots } = cardData || {}
 
-  if (isSuccess)
-    return <LearnCardSuccess handleSuccess={handleNavigateToCards} />
+  if (isSuccess) return <LearnCardSuccess handleSuccess={handleNavigateToCards} />
 
   return (
     <StyledLearnCard>
-      <CardsConditionProvider
-        type="card"
-        isLoading={isLoading}
-        error={serverError}
-      >
-        <LearnCardQuestion
-          shots={shots}
-          question={question}
-          questionImg={questionImg}
-        />
+      <CardsConditionProvider type="card" isLoading={isLoading} error={serverError}>
+        <LearnCardQuestion shots={shots} question={question} questionImg={questionImg} />
         <LearnCardAnswerWithRate
           answer={answer}
           answerImg={answerImg}
@@ -48,9 +34,7 @@ export const LearnCard: FC<LearnCardType> = ({ card, cardHandlers, names }) => {
           rate={rate}
           setRate={setRate}
         />
-        <StyledLearnCardButton onClick={learnCardButtonHandler}>
-          {learnCardButtonName}
-        </StyledLearnCardButton>
+        <StyledLearnCardButton onClick={learnCardButtonHandler}>{learnCardButtonName}</StyledLearnCardButton>
       </CardsConditionProvider>
     </StyledLearnCard>
   )

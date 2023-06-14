@@ -1,5 +1,5 @@
 import { Skeleton } from 'antd'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 
 export const StyledUserIconWidget = styled.img.attrs({
   alt: 'avatar',

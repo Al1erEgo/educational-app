@@ -3,17 +3,13 @@ import React from 'react'
 import { Checkbox, Form } from 'antd'
 import { Control, Controller } from 'react-hook-form'
 
-type ModalFormCheckboxType = {
+type ModalFormCheckboxProps = {
   name: string
   control: Control
   defaultValue: boolean
 }
 
-export const ModalFormCheckbox: React.FC<ModalFormCheckboxType> = ({
-  name,
-  control,
-  defaultValue,
-}) => {
+export const ModalFormCheckbox: React.FC<ModalFormCheckboxProps> = ({ name, control, defaultValue }) => {
   return (
     <Form.Item>
       <Controller

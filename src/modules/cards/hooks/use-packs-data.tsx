@@ -15,11 +15,7 @@ import {
   PacksTableDataType,
   PacksTableParamsType,
 } from '@/modules/cards/types'
-import {
-  getFormattedPacksTableData,
-  getPacksTableColumns,
-  getSortingParam,
-} from '@/modules/cards/utils'
+import { getFormattedPacksTableData, getPacksTableColumns, getSortingParam } from '@/modules/cards/utils'
 
 type UsePacksDataType = () => [
   { handlePacksSearch: HandlePacksSearchType },
@@ -74,8 +70,7 @@ export const usePacksData: UsePacksDataType = () => {
     max: tableParams.maxSlider,
   })
 
-  const [mutations, actionsLoading, actionsError] =
-    useCardsMutations(refetchPacks)
+  const [mutations, actionsLoading, actionsError] = useCardsMutations(refetchPacks)
 
   const isDataLoading = isPacksLoading || isPacksFetching || actionsLoading
 

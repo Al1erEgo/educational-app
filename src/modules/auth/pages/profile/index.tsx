@@ -2,7 +2,7 @@ import { LogoutOutlined } from '@ant-design/icons'
 import { redirect } from 'react-router-dom'
 
 import { BackToCardsButton } from '../../../cards/components'
-import { ProfileAvatar, ProfileName } from '../../components'
+import { EditableProfileName, ProfileAvatar } from '../../components'
 import { useAuthorised } from '../../hooks'
 import { StyledCard } from '../../styles'
 
@@ -28,7 +28,7 @@ export const Profile = () => {
       <StyledCard title={'Personal information'}>
         <StyledProfileContainer>
           <ProfileAvatar avatar={avatar} />
-          <ProfileName userName={userName} />
+          <EditableProfileName userName={userName} />
 
           <StyledProfileText>{email}</StyledProfileText>
 

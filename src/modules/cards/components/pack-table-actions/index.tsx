@@ -5,14 +5,10 @@ import { Space, Tooltip } from 'antd'
 
 import { CardsModalsHandlersType, PackCardType } from '@/modules/cards/types'
 
-type PackTableActionsType = {
+type PackTableActionsProps = {
   card: PackCardType
 } & Partial<CardsModalsHandlersType>
-export const PackTableActions: FC<PackTableActionsType> = ({
-  card,
-  deleteCardModal,
-  updateCardModal,
-}) => {
+export const PackTableActions: FC<PackTableActionsProps> = ({ card, deleteCardModal, updateCardModal }) => {
   const handleEditCard = () =>
     updateCardModal?.({
       card: {

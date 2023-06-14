@@ -5,13 +5,10 @@ import { Skeleton } from 'antd'
 
 import { StyledProfileAvatar } from './styles'
 
-import { ProfileAvatarType } from '@/modules/auth/types/auth-avatar'
+import { ProfileAvatarProps } from '@/modules/auth/types/auth-avatar'
 import { getAvatar } from '@/modules/auth/utils'
 
-export const ProfileAvatarImage: FC<ProfileAvatarType> = ({
-  avatar,
-  isLoading,
-}) => {
+export const ProfileAvatarImage: FC<ProfileAvatarProps> = ({ avatar, isLoading }) => {
   const avatarToShow = getAvatar(avatar)
 
   if (isLoading) {

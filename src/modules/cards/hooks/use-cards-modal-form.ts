@@ -19,10 +19,7 @@ export const useCardsModalForm = <
 ) => {
   const schema = modalSchemaMap[formType]
 
-  const defaultValues = getDefaultModalFormValues<T>(
-    formType,
-    payload
-  ) as DeepPartial<D>
+  const defaultValues = getDefaultModalFormValues<T>(formType, payload) as DeepPartial<D>
 
   const {
     handleSubmit,

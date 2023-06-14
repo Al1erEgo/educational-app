@@ -1,14 +1,9 @@
 import { useCardsMutation } from './use-cards-mutation'
 
 import { packMutations } from '@/modules/cards/constants'
-import {
-  CardsMutationsObjType,
-  CardsMutationsWithConditionsType,
-} from '@/modules/cards/types'
+import { CardsMutationsObjType, CardsMutationsWithConditionsType } from '@/modules/cards/types'
 
-type UseCardsMutationsType = (
-  refetchPack: () => void
-) => CardsMutationsWithConditionsType
+type UseCardsMutationsType = (refetchPack: () => void) => CardsMutationsWithConditionsType
 
 export const useCardsMutations: UseCardsMutationsType = refetchPack => {
   const mutations: CardsMutationsObjType = {}
@@ -17,14 +12,7 @@ export const useCardsMutations: UseCardsMutationsType = refetchPack => {
     mutations[name] = useCardsMutation(name, refetchPack)
   })
 
-  const {
-    addCard,
-    deleteCard,
-    updateCard,
-    addCardsPack,
-    updateCardsPack,
-    deleteCardsPack,
-  } = mutations
+  const { addCard, deleteCard, updateCard, addCardsPack, updateCardsPack, deleteCardsPack } = mutations
 
   const mutationsError =
     addCard.error ||

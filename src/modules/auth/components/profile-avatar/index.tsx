@@ -8,11 +8,11 @@ import { ErrorMessage } from '@/components'
 import { StyledAvatarGroup, StyledCloseCircleTwoTone } from '@/modules/auth/components/profile-avatar/styles'
 import { useProfileAvatarData } from '@/modules/auth/hooks/use-profile-avatar-data'
 
-type ProfileAvatarType = {
+type ProfileAvatarProps = {
   avatar?: string
 }
 
-export const ProfileAvatar: FC<ProfileAvatarType> = ({ avatar }) => {
+export const ProfileAvatar: FC<ProfileAvatarProps> = ({ avatar }) => {
   const { handleDeleteAvatar, handleUploadAvatar, customError, isLoading, serverError } = useProfileAvatarData()
 
   return (

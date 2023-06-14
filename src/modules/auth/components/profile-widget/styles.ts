@@ -1,5 +1,5 @@
 import { Button } from 'antd'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 
 type UserNameProps = {
   fontSize?: 'big' | 'normal'

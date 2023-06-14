@@ -1,6 +1,6 @@
 import { CloseCircleTwoTone } from '@ant-design/icons'
 import { Avatar } from 'antd'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 
 export const StyledCloseCircleTwoTone = styled(CloseCircleTwoTone)`
   position: absolute;

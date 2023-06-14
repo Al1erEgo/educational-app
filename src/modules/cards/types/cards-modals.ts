@@ -12,21 +12,16 @@ import { PacksModalPayloadType } from './packs-modals'
 
 export type CardsModalsOnSubmitType<T> = (payload: T) => void
 
-export type CardsModalBaseType<T> = {
+export type CardsModalBaseProps<T> = {
   payload: T
   onSubmit: CardsModalsOnSubmitType<T>
   onCancel: () => void
   redirect?: () => void
 }
 
-export type CardsModalsHandlerType<T> = (
-  payload: T,
-  redirect?: () => void
-) => void
+export type CardsModalsHandlerType<T> = (payload: T, redirect?: () => void) => void
 
-export type CardsModalPayloadType =
-  | PackModalCardPayloadType
-  | PacksModalPayloadType
+export type CardsModalPayloadType = PackModalCardPayloadType | PacksModalPayloadType
 
 export type CardsModalsHandlersType = {
   addCardModal: CardsModalsHandlerType<NewCardRequestType>

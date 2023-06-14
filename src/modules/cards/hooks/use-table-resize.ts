@@ -9,9 +9,7 @@ import { getTableHeight } from '@/modules/cards/utils'
  */
 
 export const useTableResize = () => {
-  const [tableHeight, setTableHeight] = useState(
-    getTableHeight(window.innerHeight)
-  )
+  const [tableHeight, setTableHeight] = useState(getTableHeight(window.innerHeight))
 
   const handleResize = () => {
     setTableHeight(getTableHeight(window.innerHeight))

@@ -15,15 +15,8 @@ type CardsSearchProps = CardsSearchWrapperProps & {
   placeholder: string
   disabled?: boolean
 }
-export const CardsSearch: FC<CardsSearchProps> = ({
-  size = 'small',
-  onSearch,
-  searchValue,
-  placeholder,
-  disabled,
-}) => {
-  const { handleOnSearchChange, localSearchValue } =
-    useDebouncedSearchWithReset(searchValue, onSearch)
+export const CardsSearch: FC<CardsSearchProps> = ({ size = 'small', onSearch, searchValue, placeholder, disabled }) => {
+  const { handleOnSearchChange, localSearchValue } = useDebouncedSearchWithReset(searchValue, onSearch)
 
   return (
     <StyledCardsSearchWrapper size={size}>

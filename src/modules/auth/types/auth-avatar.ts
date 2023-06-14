@@ -1,4 +1,4 @@
-export type ProfileAvatarType = {
+export type ProfileAvatarProps = {
   isLoading: boolean
   avatar: string | undefined
 }
