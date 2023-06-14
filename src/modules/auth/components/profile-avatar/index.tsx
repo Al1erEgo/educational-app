@@ -4,9 +4,10 @@ import { Avatar, Tooltip, Upload } from 'antd'
 
 import { ProfileAvatarImage } from '../profile-avatar-image'
 
+import { useProfileAvatarData } from './hook'
+import { StyledAvatarGroup, StyledCloseCircleTwoTone } from './styles'
+
 import { ErrorMessage } from '@/components'
-import { StyledAvatarGroup, StyledCloseCircleTwoTone } from '@/modules/auth/components/profile-avatar/styles'
-import { useProfileAvatarData } from '@/modules/auth/hooks/use-profile-avatar-data'
 
 type ProfileAvatarProps = {
   avatar?: string

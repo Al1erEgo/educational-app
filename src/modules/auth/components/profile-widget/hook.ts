@@ -8,7 +8,7 @@ import { AUTH_PATH } from '@/modules/auth/constants'
 
 type OnSubmitMutationType = <T>(data?: T) => Promise<void>
 
-export const useAuthWidgetData = () => {
+export const useProfileWidgetData = () => {
   const { isAuthorised, data: userData } = useAuthorised()
   const [trigger] = useAuthMeLogOutMutation()
   const handleRedirectToProfile = useDoNavigate(`${MAIN_PATH.Auth}${AUTH_PATH.Profile}`)

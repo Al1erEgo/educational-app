@@ -4,13 +4,12 @@ import { LogoutOutlined } from '@ant-design/icons'
 
 import { ProfileWidgetAvatar } from '../profile-widget-avatar'
 
+import { useProfileWidgetData } from './hook'
 import { StyledAuthWidgetButton, StyledUserDataWrapper, StyledUserName } from './styles'
-
-import { useAuthWidgetData } from '@/modules/auth/hooks/use-auth-widget-data'
 
 export const ProfileWidget: FC = () => {
   const { handleLogOut, isLoading, isAuthorised, userName, handleRedirectToProfile, unauthorisedButtonProps, avatar } =
-    useAuthWidgetData()
+    useProfileWidgetData()
 
   if (!isAuthorised) {
     return <StyledAuthWidgetButton type={'primary'} {...unauthorisedButtonProps} />
