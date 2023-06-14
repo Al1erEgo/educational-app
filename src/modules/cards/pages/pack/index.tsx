@@ -1,21 +1,12 @@
 import { FC } from 'react'
 
-import {
-  BackToCardsButton,
-  CardsHeader,
-  CardsSearch,
-  CardsTable,
-  PackActionsButtons,
-} from '@/modules/cards/components'
+import { BackToCardsButton, CardsHeader, CardsSearch, CardsTable, PackActionsButtons } from '@/modules/cards/components'
 import { usePackData } from '@/modules/cards/hooks'
 import { StyledCardsToolbar } from '@/modules/cards/styles'
 
 export const Pack: FC = () => {
-  const [
-    { packName, packDeckCover, isEmptyPack, isOwnPack, buttonsHandlers },
-    { handleSearch },
-    tableData,
-  ] = usePackData()
+  const [{ packName, packDeckCover, isEmptyPack, isOwnPack, buttonsHandlers }, { handleSearch }, tableData] =
+    usePackData()
 
   return (
     <>

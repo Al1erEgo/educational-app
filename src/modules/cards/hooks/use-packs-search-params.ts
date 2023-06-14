@@ -7,8 +7,7 @@ export const usePacksSearchParams = () => {
 
   const customSetSearchParams = (tableParams: PacksTableParamsType) => {
     const params = new URLSearchParams()
-    const { searchValue, pagination, minSlider, maxSlider, activeButton } =
-      tableParams
+    const { searchValue, pagination, minSlider, maxSlider, activeButton } = tableParams
 
     searchValue && params.set('search', searchValue)
     pagination?.current && params.set('currentPage', String(pagination.current))
@@ -23,11 +22,9 @@ export const usePacksSearchParams = () => {
   }
 
   const searchValueParams = searchParams.get('search') || ''
-  const paginationCurrentPageParams =
-    Number(searchParams.get('currentPage')) || undefined
+  const paginationCurrentPageParams = Number(searchParams.get('currentPage')) || undefined
 
-  const paginationPageSizeParams =
-    Number(searchParams.get('pageSize')) || undefined
+  const paginationPageSizeParams = Number(searchParams.get('pageSize')) || undefined
 
   const minSliderParams = Number(searchParams.get('minSlider')) || undefined
   const maxSliderParams = Number(searchParams.get('maxSlider')) || undefined
