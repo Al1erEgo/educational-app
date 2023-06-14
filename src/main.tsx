@@ -7,8 +7,6 @@ import { HashRouter } from 'react-router-dom'
 import { App } from './app/App'
 import { store } from './store'
 
-// TODO: move providers to APP
-
 createRoot(document.getElementById('root') as HTMLElement).render(
   <Provider store={store}>
     <HashRouter>
