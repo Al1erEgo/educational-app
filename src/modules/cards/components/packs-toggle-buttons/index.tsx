@@ -4,6 +4,7 @@ import { Space } from 'antd'
 
 import { StyledPacksToggleButtonWrapper, StyledToggleButton } from './styles'
 
+import { ALL_BUTTON_NAME, MY_BUTTON_NAME } from '@/modules/cards/constants'
 import { StyledCardsText } from '@/modules/cards/styles'
 import { HandleToggleButtonType } from '@/modules/cards/types'
 
@@ -12,9 +13,6 @@ type PacksButtonsProps = {
   handleToggleButton: HandleToggleButtonType
   isLoading: boolean
 }
-
-const MY_BUTTON_NAME = 'My'
-const ALL_BUTTON_NAME = 'All'
 
 export const PacksButton: FC<PacksButtonsProps> = ({ activeButton, handleToggleButton, isLoading }) => {
   return (
